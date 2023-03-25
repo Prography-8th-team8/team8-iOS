@@ -8,7 +8,8 @@ target 'CAKK' do
   # Pods for CAKK
 
   # Conventions
-  pod 'SwiftLint', '~> 0.50.3'
+  pod 'SwiftLint',  '~> 0.50.3'
+  pod 'R.swift',    '~> 7.3.0'
 
 end
 
