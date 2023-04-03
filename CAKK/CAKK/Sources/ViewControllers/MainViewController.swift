@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import SnapKit
+import NMapsMap
+import Then
 
 final class MainViewController: UIViewController {
   
@@ -16,6 +19,12 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
   
   // MARK: - UI
+  
+  private let naverMapView = NMFNaverMapView(frame: .zero)
+  
+  private let refreshButton = RefreshButton()
+  
+  private let bottomSheetView = BottonSheetView()
   
   // MARK: - LifeCycle
   
@@ -37,5 +46,23 @@ final class MainViewController: UIViewController {
     view.backgroundColor = .systemBackground
   }
   
-  private func setupLayouts() { }
+  private func setupLayouts() {
+    view.addSubview(naverMapView)
+    naverMapView.snp.makeConstraints {
+      $0.top.left.right.equalToSuperview()
+      $0.height.equalTo(view.frame.height * 0.6)
+    }
+    
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+      $0.centerX.equalToSuperview()
+    }
+    
+    view.addSubview(bottomSheetView)
+    bottomSheetView.snp.makeConstraints {
+      $0.left.right.bottom.equalToSuperview()
+      $0.height.equalTo(view.frame.height * 0.5)
+    }
+  }
 }
