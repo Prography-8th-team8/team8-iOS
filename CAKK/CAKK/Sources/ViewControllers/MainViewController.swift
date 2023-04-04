@@ -34,7 +34,7 @@ final class MainViewController: UIViewController {
       }
     }
     var yPosition: Double {
-      (1.0 - self.ratio) * UIScreen.main.bounds.height
+      (1.0 - self.ratio) * UIScreen.main.bounds.height + SafeAreaGuide.top
     }
   }
   
@@ -59,10 +59,6 @@ final class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    
-//    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//      self.bottomSheetMode = .full
-//    }
   }
   
   // MARK: - Public
@@ -97,8 +93,6 @@ final class MainViewController: UIViewController {
     view.addSubview(bottomSheetView)
     bottomSheetView.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()
-//      $0.left.right.equalToSuperview()
-//      $0.bottom.equalToSuperview().offset(200)
       $0.top.equalToSuperview().offset(bottomSheetMode.yPosition)
     }
   }
@@ -123,9 +117,10 @@ final class MainViewController: UIViewController {
       recognizer.setTranslation(.zero, in: bottomSheetView)
     }
     
-    UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut,
+    UIView.animate(withDuration: 0, delay: 0, options: .allowUserInteraction,
                    animations: bottomSheetView.layoutIfNeeded)
     
+    guard recognizer.state == .ended else { return }
     didEndPan(recognizer)
   }
   
@@ -134,26 +129,21 @@ final class MainViewController: UIViewController {
   }
   
   private func didEndPan(_ recognizer: UIPanGestureRecognizer) {
-    guard recognizer.state == .ended else { return }
     let isDownDirection = recognizer.velocity(in: self.bottomSheetView).y >= 0
-    
-    UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction,
+    UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction,
                    animations: { [weak self] in
       guard let self else { return }
-      self.bottomSheetMode = isDownDirection ? BottonSheetMode.middle : .full
-      self.bottomSheetView.layoutIfNeeded()
+      self.bottomSheetMode = isDownDirection ? .middle : .full
+      self.view.layoutIfNeeded()
     })
   }
   
   private func updateBottonSheetConstraint(withOffset offset: Double) {
-    bottomSheetView.snp.remakeConstraints {
-      $0.left.right.bottom.equalToSuperview()
+    bottomSheetView.snp.updateConstraints {
       $0.top.equalToSuperview().offset(offset)
     }
-//      bottomSheetView.snp.updateConstraints {
-//        $0.top.equalToSuperview().offset(offset)
-//      }
   }
+  
 }
 
 // MARK: - UITableViewDataSource
