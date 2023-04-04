@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 final class BottonSheetView: UIView {
   
@@ -14,24 +16,36 @@ final class BottonSheetView: UIView {
   enum Metric {
     static let cornerRadius = 16.f
     
-    static let barViewWidth = 30.f
-    static let barViewHeight = 3.f
+    static let headerViewHeight = 124.f
+    
+    static let barViewSize = CGSize(width: 30.f, height: 3.f)
     static let barViewTopInset = 20.f
+    
+    static let locationLabelFontSize = 16.f
+    static let numberOfCakeshopsLabelFontSize = 14.f
     
     static let labelsStackViewSpacing = 8.f
     static let labelsStackViewLeadingInset = 16.f
     static let labelsStackViewTopInset = 55.f
     
     static let changeLocationButtonCornerRadius = 24.f
-    static let changeLocationButtonSize = 48.f
+    static let changeLocationButtonSize = CGSize(width: 48.f, height: 48.f)
     static let changeLocationButtonTopInset = 40.f
     static let changeLocationButtonTrailingInset = 16.f
     static let changeLocationButtonFontSize = 12.f
+    
+    static let cakeTableViewItemSpacing = 10.f
   }
   
   // MARK: - Properties
   
   // MARK: - UI
+  
+  let cakeTableView = UITableView(frame: .zero, style: .grouped).then {
+    $0.registerCell(cellClass: CakeListCell.self)
+  }
+  
+  private let headerView = UIView()
   
   private let barView = UIView().then {
     $0.backgroundColor = .black
@@ -40,12 +54,12 @@ final class BottonSheetView: UIView {
   
   private let locationsLabel = UILabel().then {
     $0.text = "은평, 마포, 서대문"
-    $0.font = .systemFont(ofSize: 16, weight: .bold)
+    $0.font = .systemFont(ofSize: Metric.locationLabelFontSize, weight: .bold)
   }
   
   private let numberOfCakeshopsLabel = UILabel().then {
     $0.text = "0개의 케이크샵"
-    $0.font = .systemFont(ofSize: 14)
+    $0.font = .systemFont(ofSize: Metric.numberOfCakeshopsLabelFontSize)
   }
   
   private lazy var labelsStack = UIStackView(
@@ -68,6 +82,10 @@ final class BottonSheetView: UIView {
     $0.layer.cornerRadius = Metric.changeLocationButtonCornerRadius
   }
   
+  private let lineView = UIView().then {
+    $0.backgroundColor = .lightGray
+  }
+  
   // MARK: - LifeCycle
   
   override init(frame: CGRect) {
@@ -86,33 +104,52 @@ final class BottonSheetView: UIView {
   private func setup() {
     setupLayout()
     setupViewStyle()
-    backgroundColor = .systemBlue
   }
   
   private func setupViewStyle() {
+    backgroundColor = .white
     layer.cornerRadius = Metric.cornerRadius
   }
   
   private func setupLayout() {
-    addSubview(barView)
+    addSubview(headerView)
+    headerView.snp.makeConstraints {
+      $0.top.leading.trailing.equalToSuperview()
+      $0.height.equalTo(Metric.headerViewHeight)
+    }
+    
+    headerView.addSubview(barView)
     barView.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.top.equalToSuperview().inset(Metric.barViewTopInset)
-      $0.width.equalTo(Metric.barViewWidth)
-      $0.height.equalTo(Metric.barViewHeight)
+      $0.size.equalTo(Metric.barViewSize)
     }
     
-    addSubview(labelsStack)
+    headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.labelsStackViewLeadingInset)
       $0.top.equalToSuperview().inset(Metric.labelsStackViewTopInset)
     }
     
-    addSubview(changeLocationButton)
+    headerView.addSubview(changeLocationButton)
     changeLocationButton.snp.makeConstraints {
-      $0.width.height.equalTo(Metric.changeLocationButtonSize)
+      $0.size.equalTo(Metric.changeLocationButtonSize)
       $0.top.equalToSuperview().inset(Metric.changeLocationButtonTopInset)
       $0.trailing.equalToSuperview().inset(Metric.changeLocationButtonTrailingInset)
+    }
+    
+    addSubview(cakeTableView)
+    cakeTableView.snp.makeConstraints {
+      $0.top.equalTo(headerView.snp.bottom)
+      $0.leading.trailing.equalToSuperview()
+      $0.bottom.equalToSuperview()
+    }
+    
+    addSubview(lineView)
+    lineView.snp.makeConstraints {
+      $0.leading.trailing.equalToSuperview()
+      $0.height.equalTo(1)
+      $0.bottom.equalTo(cakeTableView.snp.top)
     }
   }
 }

@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 final class RefreshButton: UIButton {
   
   // MARK: - Constants
   
   enum Metric {
-    static let cornerRadius = 20.f
+    static let cornerRadius = 22.f
     
     static let refreshImageViewVerticalInset = 12.f
     static let refreshImageViewLeftInset = 16.f
