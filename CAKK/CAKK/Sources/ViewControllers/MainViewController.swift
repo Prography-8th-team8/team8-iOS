@@ -137,8 +137,9 @@ final class MainViewController: UIViewController {
     guard recognizer.state == .ended else { return }
     let isDownDirection = recognizer.velocity(in: self.bottomSheetView).y >= 0
     
-    UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction,
-                   animations: {
+    UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction,
+                   animations: { [weak self] in
+      guard let self else { return }
       self.bottomSheetMode = isDownDirection ? BottonSheetMode.middle : .full
       self.bottomSheetView.layoutIfNeeded()
     })
