@@ -1,5 +1,5 @@
 //
-//  RefreshButton.swift
+//  CapsuleStyleButton.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class RefreshButton: UIButton {
+final class CapsuleStyleButton: UIButton {
   
   // MARK: - Constants
   
@@ -27,54 +27,59 @@ final class RefreshButton: UIButton {
   
   // MARK: - UI
   
-  private let refreshImageView = UIImageView().then {
+  private let iconImageView = UIImageView().then {
     $0.tintColor = .white
-    $0.image = UIImage(systemName: "arrow.clockwise")
   }
   
-  private let refreshLabel = UILabel().then {
+  private let buttonLabel = UILabel().then {
     $0.text = "새로 고침"
     $0.textColor = .white
     $0.font = .preferredFont(forTextStyle: .body)
   }
   
   // MARK: - LifeCycle
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setup()
+
+  init(iconImage: UIImage, text: String) {
+    super.init(frame: .zero)
+    setup(iconImage, text)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   // MARK: - Public
   
   // MARK: - Private
   
-  private func setup() {
+  private func setup(_ iconImage: UIImage, _ text: String) {
     setupLayout()
     setupViewStyle()
+    setupComponent(iconImage, text)
   }
   
   private func setupViewStyle() {
     backgroundColor = .black
     layer.cornerRadius = Metric.cornerRadius
   }
+
+  private func setupComponent(_ iconImage: UIImage, _ text: String) {
+    buttonLabel.text = text
+    iconImageView.image = iconImage
+  }
   
   private func setupLayout() {
-    addSubview(refreshImageView)
-    refreshImageView.snp.makeConstraints {
+    addSubview(iconImageView)
+    iconImageView.snp.makeConstraints {
       $0.top.bottom.equalToSuperview().inset(Metric.refreshImageViewVerticalInset)
       $0.left.equalToSuperview().inset(Metric.refreshImageViewLeftInset)
     }
     
-    addSubview(refreshLabel)
-    refreshLabel.snp.makeConstraints {
+    addSubview(buttonLabel)
+    buttonLabel.snp.makeConstraints {
       $0.centerY.equalToSuperview()
       $0.right.equalToSuperview().inset(Metric.refreshLabelRightInset)
-      $0.left.equalTo(refreshImageView.snp.right).offset(Metric.refreshLabelSpacing)
+      $0.left.equalTo(iconImageView.snp.right).offset(Metric.refreshLabelSpacing)
     }
   }
 }

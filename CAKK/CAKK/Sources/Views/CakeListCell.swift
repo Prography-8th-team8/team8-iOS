@@ -20,7 +20,9 @@ final class CakeListCell: UITableViewCell {
     static let shopNameLabelFontSize = 16.f
     static let districtLocationLabelFontSize = 12.f
     static let detailLocationLabelFontSize = 14.f
-    
+
+    static let containerViewCornerRadius = 16.f
+
     static let labelsStackViewWidth = 124.f
     static let labelsStackInset = 20.f
     static let labelsStackSpacing = 6.f
@@ -28,6 +30,7 @@ final class CakeListCell: UITableViewCell {
     static let detailLocationLabelTopOffset = 12.f
     static let detailLocationLabelTrailingInset = 20.f
 
+    static let categoryStackViewSpacing = 8.f
     static let categoryStackViewInset = 20.f
   }
   
@@ -36,7 +39,7 @@ final class CakeListCell: UITableViewCell {
   // MARK: - UI
   
   private let containerView = UIView().then {
-    $0.layer.cornerRadius = 16
+    $0.layer.cornerRadius = Metric.containerViewCornerRadius
     $0.backgroundColor = .systemGray6
   }
   
@@ -75,7 +78,7 @@ final class CakeListCell: UITableViewCell {
 
   private let categoryStackView = UIStackView().then {
     $0.axis = .horizontal
-    $0.spacing = 8
+    $0.spacing = Metric.categoryStackViewSpacing
   }
   
   // MARK: - LifeCycle

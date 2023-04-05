@@ -20,6 +20,8 @@ final class MainViewController: UIViewController {
     
     static let cakelistTableViewHeight = (140 + 16).f
     static let naverMapViewHeightRatio = 0.6
+
+    static let seeLocationButtonBottomInset = 28.f
   }
   
   enum BottonSheetMode {
@@ -44,6 +46,7 @@ final class MainViewController: UIViewController {
   var bottomSheetMode: BottonSheetMode = .middle {
     didSet {
       updateBottonSheetConstraint(withOffset: bottomSheetMode.yPosition)
+      updateSeeLocationHiddenState(with: bottomSheetMode)
     }
   }
   
@@ -51,7 +54,11 @@ final class MainViewController: UIViewController {
   
   private let naverMapView = NMFNaverMapView(frame: .zero)
   
-  private let refreshButton = RefreshButton()
+  private let refreshButton = CapsuleStyleButton(iconImage: UIImage(systemName: "arrow.clockwise")!, text: "새로 고침")
+  private let seeLocationButton = CapsuleStyleButton(iconImage: UIImage(systemName: "map")!, text: "지도 보기").then {
+    $0.isHidden = true
+    $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
+  }
   
   private let bottomSheetView = BottonSheetView()
   
@@ -95,6 +102,12 @@ final class MainViewController: UIViewController {
     bottomSheetView.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()
       $0.top.equalToSuperview().offset(bottomSheetMode.yPosition)
+    }
+
+    view.addSubview(seeLocationButton)
+    seeLocationButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalToSuperview().inset(Metric.seeLocationButtonBottomInset)
     }
   }
   
@@ -144,7 +157,24 @@ final class MainViewController: UIViewController {
       $0.top.equalToSuperview().offset(offset)
     }
   }
-  
+
+  private func updateSeeLocationHiddenState(with bottomSheetMode: BottonSheetMode) {
+    switch bottomSheetMode {
+    case .full:
+      seeLocationButton.fadeIn()
+    case .middle:
+      seeLocationButton.fadeOut()
+    }
+  }
+
+  @objc private func seeLocation() {
+    UIView.animate(withDuration: 0.5, delay: 0, options: .allowUserInteraction,
+                   animations: { [weak self] in
+      self?.bottomSheetMode = .middle
+      self?.view.layoutIfNeeded()
+    })
+  }
+
 }
 
 // MARK: - UITableViewDataSource
