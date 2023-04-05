@@ -19,10 +19,16 @@ final class CakeListCell: UITableViewCell {
     
     static let shopNameLabelFontSize = 16.f
     static let districtLocationLabelFontSize = 12.f
+    static let detailLocationLabelFontSize = 14.f
     
     static let labelsStackViewWidth = 124.f
     static let labelsStackInset = 20.f
     static let labelsStackSpacing = 6.f
+
+    static let detailLocationLabelTopOffset = 12.f
+    static let detailLocationLabelTrailingInset = 20.f
+
+    static let categoryStackViewInset = 20.f
   }
   
   // MARK: - Properties
@@ -44,6 +50,7 @@ final class CakeListCell: UITableViewCell {
     $0.backgroundColor = .lightGray
     $0.snp.makeConstraints { make in
       make.width.equalTo(1)
+      make.height.equalTo(12)
     }
   }
   
@@ -55,10 +62,20 @@ final class CakeListCell: UITableViewCell {
   private lazy var labelsStack = UIStackView(
     arrangedSubviews: [shopNameLabel, labelDividerView, districtLocationLabel]
   ).then {
-    $0.alignment = .fill
+    $0.alignment = .center
     $0.spacing = Metric.labelsStackSpacing
     $0.distribution = .equalSpacing
     $0.axis = .horizontal
+  }
+
+  private let detailLocationLabel = UILabel().then {
+    $0.text = "서울 은평구 갈현로 36길 6-4 101호 동그리케이크"
+    $0.font = .systemFont(ofSize: Metric.detailLocationLabelFontSize)
+  }
+
+  private let categoryStackView = UIStackView().then {
+    $0.axis = .horizontal
+    $0.spacing = 8
   }
   
   // MARK: - LifeCycle
@@ -66,6 +83,10 @@ final class CakeListCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     setup()
+
+    ["레터링", "캐릭터", "기타"].forEach {
+      addCategoryView(of: $0)
+    }
   }
   
   required init?(coder: NSCoder) {
@@ -73,6 +94,12 @@ final class CakeListCell: UITableViewCell {
   }
   
   // MARK: - Public
+
+  func configreFirstCellTopPadding() {
+    containerView.snp.updateConstraints {
+      $0.top.equalToSuperview().inset(15)
+    }
+  }
   
   // MARK: - Private
   
@@ -96,5 +123,38 @@ final class CakeListCell: UITableViewCell {
     labelsStack.snp.makeConstraints {
       $0.top.left.equalToSuperview().inset(Metric.labelsStackInset)
     }
+
+    containerView.addSubview(detailLocationLabel)
+    detailLocationLabel.snp.makeConstraints {
+      $0.top.equalTo(labelsStack.snp.bottom).offset(Metric.detailLocationLabelTopOffset)
+      $0.left.equalTo(labelsStack)
+      $0.right.equalToSuperview().inset(Metric.detailLocationLabelTrailingInset)
+    }
+
+    containerView.addSubview(categoryStackView)
+    categoryStackView.snp.makeConstraints {
+      $0.left.bottom.equalToSuperview().inset(Metric.categoryStackViewInset)
+    }
+  }
+
+  private func addCategoryView(of category: String) {
+    let categoryView = UIView().then {
+      $0.layer.cornerRadius = 14
+      $0.layer.borderWidth = 1
+      $0.layer.borderColor = UIColor.systemGray4.cgColor
+    }
+
+    let categoryLabel = UILabel().then {
+      $0.font = .systemFont(ofSize: 12)
+      $0.text = category
+    }
+
+    categoryView.addSubview(categoryLabel)
+    categoryLabel.snp.makeConstraints {
+      $0.top.bottom.equalToSuperview().inset(8)
+      $0.leading.trailing.equalToSuperview().inset(10)
+    }
+
+    categoryStackView.addArrangedSubview(categoryView)
   }
 }

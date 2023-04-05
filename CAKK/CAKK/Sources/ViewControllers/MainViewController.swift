@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
     static let refreshButtonOffset = 16.f
     
     static let cakelistTableViewHeight = (140 + 16).f
+    static let naverMapViewHeightRatio = 0.6
   }
   
   enum BottonSheetMode {
@@ -81,7 +82,7 @@ final class MainViewController: UIViewController {
     view.addSubview(naverMapView)
     naverMapView.snp.makeConstraints {
       $0.top.left.right.equalToSuperview()
-      $0.height.equalTo(view.frame.height * 0.6)
+      $0.height.equalTo(view.frame.height * Metric.naverMapViewHeightRatio)
     }
     
     view.addSubview(refreshButton)
@@ -155,6 +156,12 @@ extension MainViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(cellClass: CakeListCell.self, for: indexPath)
+
+    // 첫번째 셀의 top padding 만 좀 더 크게 해주기 위한 logic
+    if indexPath == IndexPath(row: 0, section: 0) {
+      cell.configreFirstCellTopPadding()
+    }
+
     return cell
   }
   
