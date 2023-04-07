@@ -13,6 +13,14 @@
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
 		8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E192F29CEDD5000CFF157 /* Assets.xcassets */; };
 		8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */; };
+		B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */; };
+		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
+		B46F9DC829DACC8500113979 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* BottomSheetView.swift */; };
+		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
+		B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */; };
+		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
+		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
+		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
 		C22922FA8C8219A5F0773CB8 /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,15 @@
 		8E9E193229CEDD5000CFF157 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
+		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DC729DACC8500113979 /* BottomSheetView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
+		B4D1051D29E004CB00629C1D /* APIKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
+		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		FA186ECD8D0556A62647C120 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,6 +62,9 @@
 		8E32CE9B29CEE2DF00905FD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B46F9DC729DACC8500113979 /* BottomSheetView.swift */,
+				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -59,6 +79,9 @@
 		8E32CE9E29CEE5F100905FD6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */,
+				B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */,
+				B46F9DCB29DAE51100113979 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -106,6 +129,7 @@
 				8E32CE9C29CEE30A00905FD6 /* Services */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
+				B4D1051829DFF6D400629C1D /* ViewModels */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
 				8E32CE9E29CEE5F100905FD6 /* Utils */,
 				8E32CE9F29CEE63800905FD6 /* SupportingFiles */,
@@ -119,6 +143,7 @@
 				8E9E192F29CEDD5000CFF157 /* Assets.xcassets */,
 				8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */,
 				8E9E193429CEDD5000CFF157 /* Info.plist */,
+				B4D1051D29E004CB00629C1D /* APIKeys.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -136,6 +161,23 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B46F9DCB29DAE51100113979 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */,
+				B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */,
+				B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B4D1051829DFF6D400629C1D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		C6D3D3CA626E37FD40B6895E /* Frameworks */ = {
@@ -290,8 +332,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
+				B46F9DC829DACC8500113979 /* BottomSheetView.swift in Sources */,
+				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
+				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
+				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,
 				8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */,
+				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
+				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
+				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,
+				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +361,7 @@
 /* Begin XCBuildConfiguration section */
 		8E9E193529CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4D1051D29E004CB00629C1D /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -372,6 +423,7 @@
 		};
 		8E9E193629CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4D1051D29E004CB00629C1D /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -431,9 +483,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
@@ -450,6 +503,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prography.CAKK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -462,9 +516,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
@@ -481,6 +536,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prography.CAKK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
