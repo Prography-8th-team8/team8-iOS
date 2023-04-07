@@ -42,6 +42,7 @@ final class BottonSheetView: UIView {
   // MARK: - UI
   
   let cakeTableView = UITableView(frame: .zero, style: .plain).then {
+    $0.bounces = false
     $0.registerCell(cellClass: CakeListCell.self)
     $0.separatorStyle = .none
   }
