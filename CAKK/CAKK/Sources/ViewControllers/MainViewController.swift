@@ -52,7 +52,9 @@ final class MainViewController: UIViewController {
   
   // MARK: - UI
   
-  private let naverMapView = NMFNaverMapView(frame: .zero)
+  private let naverMapView = NMFNaverMapView(frame: .zero).then {
+    $0.showZoomControls = false
+  }
   
   private let refreshButton = CapsuleStyleButton(iconImage: UIImage(systemName: "arrow.clockwise")!, text: "새로 고침")
   private let seeLocationButton = CapsuleStyleButton(iconImage: UIImage(systemName: "map")!, text: "지도 보기").then {
