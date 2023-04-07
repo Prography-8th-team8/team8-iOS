@@ -83,7 +83,7 @@ final class MainViewController: UIViewController {
     setupLayouts()
     setupTableView()
     
-    setupGesture()
+    setupGestures()
   }
   
   private func setupBaseView() {
@@ -121,79 +121,67 @@ final class MainViewController: UIViewController {
     bottomSheetView.cakeTableView.delegate = self
   }
   
-  private func setupGesture() {
-    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
-    bottomSheetView.addGestureRecognizer(panGesture)
+  // MARK: - Bottom Sheet Animation
+  
+  private func setupGestures() {
+    let headerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(headerDidPan))
+    bottomSheetView.addGestureRecognizer(headerPanGesture)
+    
     bottomSheetView.cakeTableView.panGestureRecognizer.addTarget(
       self, 
       action: #selector(tableViewDidPan)
     )
   }
   
-  @objc private func didPan(_ recognizer: UIPanGestureRecognizer) {
-    let translationY = recognizer.translation(in: bottomSheetView).y
-    let minY = bottomSheetView.frame.minY
-    let offset = translationY + minY
+  @objc private func headerDidPan(_ recognizer: UIPanGestureRecognizer) {
+    didPan(recognizer, standardView: bottomSheetView)
     
-    if isValid(yPosition: offset) {
-      updateBottonSheetConstraint(withOffset: offset)
-      recognizer.setTranslation(.zero, in: bottomSheetView)
-    }
-    
-    UIView.animate(withDuration: 0, delay: 0, options: .allowUserInteraction,
-                   animations: bottomSheetView.layoutIfNeeded)
-    
-    guard recognizer.state == .ended else { return }
-    didEndPan(recognizer)
-  }
-  
-  private func isValid(yPosition: Double) -> Bool {
-    (BottonSheetMode.full.yPosition...BottonSheetMode.middle.yPosition).contains(yPosition)
-  }
-  
-  private func didEndPan(_ recognizer: UIPanGestureRecognizer) {
-    let isDownDirection = recognizer.velocity(in: self.bottomSheetView).y >= 0
-    bottomSheetMode = isDownDirection ? .middle : .full
-    
-    UIView.animateWithDamping { [weak self] in
-      self?.view.layoutIfNeeded()
+    if recognizer.state == .ended {
+      didEndPan(recognizer, standardView: bottomSheetView.cakeTableView)
     }
   }
   
   @objc private func tableViewDidPan(_ recognizer: UIPanGestureRecognizer) {
     guard (bottomSheetMode == .full && bottomSheetView.cakeTableView.contentOffset.y == 0)
-          || isTableViewPanning else {
+            || isTableViewPanning else {
       return
     }
     
     isTableViewPanning = true
-    
     bottomSheetView.cakeTableView.contentOffset.y = 0
-    let translationY = recognizer.translation(in: bottomSheetView.cakeTableView).y
-    let minY = bottomSheetView.frame.minY
-    let offset = translationY + minY
     
-    if isValid(yPosition: offset) {
-      updateBottonSheetConstraint(withOffset: offset)
-      recognizer.setTranslation(.zero, in: bottomSheetView)
+    didPan(recognizer, standardView: bottomSheetView.cakeTableView)
+    
+    if recognizer.state == .ended {
+      didEndPan(recognizer, standardView: bottomSheetView.cakeTableView) 
+      isTableViewPanning = false
     }
+  }
+
+  private func didPan(_ recognizer: UIPanGestureRecognizer, standardView: UIView) {
+    let translationY = recognizer.translation(in: standardView).y
+    let bottomSheetMinY = bottomSheetView.frame.minY
+    let offset = translationY + bottomSheetMinY
+    
+    guard isValidToPan(yPosition: offset) else { return }
+    updateBottonSheetConstraint(withOffset: offset)
+    recognizer.setTranslation(.zero, in: bottomSheetView)
     
     UIView.animate(withDuration: 0, delay: 0, options: .allowUserInteraction,
                    animations: bottomSheetView.layoutIfNeeded)
-    
-    guard recognizer.state == .ended else { return }
-    print("✨tableView Pan ended!!")
-    self.tableViewDidEndPan(recognizer)
-    self.isTableViewPanning = false
   }
   
-  private func tableViewDidEndPan(_ recognizer: UIPanGestureRecognizer) {
-    let isDownDirection = recognizer.velocity(in: self.bottomSheetView.cakeTableView).y >= 0
-    self.bottomSheetMode = isDownDirection ? .middle : .full
+  private func isValidToPan(yPosition: Double) -> Bool {
+    (BottonSheetMode.full.yPosition...BottonSheetMode.middle.yPosition).contains(yPosition)
+  }
+  
+  private func didEndPan(_ recognizer: UIPanGestureRecognizer, standardView: UIView) {
+    let isDownDirection = recognizer.velocity(in: standardView).y >= 0
+    bottomSheetMode = isDownDirection ? .middle : .full
     
     UIView.animateWithDamping { [weak self] in
-        self?.view.layoutIfNeeded() 
-      }
+      self?.view.layoutIfNeeded()
+    }
   }
   
   private func updateBottonSheetConstraint(withOffset offset: Double) {
