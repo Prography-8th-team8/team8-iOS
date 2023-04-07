@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
     static let refreshButtonOffset = 16.f
     
     static let cakelistTableViewHeight = (140 + 16).f
-    static let naverMapViewHeightRatio = 0.6
+    static let naverMapViewHeightRatio = 0.65
 
     static let seeLocationButtonBottomInset = 28.f
   }

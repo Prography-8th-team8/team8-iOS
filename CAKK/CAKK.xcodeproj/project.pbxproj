@@ -36,7 +36,7 @@
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
-		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC729DACC8500113979 /* BottomSheetView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */,
-				B46F9DCB29DAE51100113979 /* Extensions */,
 				B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */,
+				B46F9DCB29DAE51100113979 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -128,6 +128,7 @@
 				8E32CE9C29CEE30A00905FD6 /* Services */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
+				B4D1051829DFF6D400629C1D /* ViewModels */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
 				8E32CE9E29CEE5F100905FD6 /* Utils */,
 				8E32CE9F29CEE63800905FD6 /* SupportingFiles */,
@@ -168,6 +169,13 @@
 				B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B4D1051829DFF6D400629C1D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		C6D3D3CA626E37FD40B6895E /* Frameworks */ = {
