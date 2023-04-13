@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 import SnapKit
 import Then
@@ -44,12 +45,9 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
   
-  var bottomSheetMode: BottonSheetMode = .middle {
-    didSet {
-      updateBottonSheetConstraint(withOffset: bottomSheetMode.yPosition)
-      updateSeeLocationHiddenState(with: bottomSheetMode)
-    }
-  }
+  @Published var bottomSheetMode: BottonSheetMode = .middle
+
+  private var cancellableBag = Set<AnyCancellable>()
   
   // MARK: - UI
   
@@ -58,7 +56,7 @@ final class MainViewController: UIViewController {
   }
   
   private let refreshButton = CapsuleStyleButton(iconImage: UIImage(systemName: "arrow.clockwise")!, text: "새로 고침")
-  private let seeLocationButton = CapsuleStyleButton(iconImage: UIImage(systemName: "map")!, text: "지도 보기").then {
+  private lazy var seeLocationButton = CapsuleStyleButton(iconImage: UIImage(systemName: "map")!, text: "지도 보기").then {
     $0.isHidden = true
     $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
   }
@@ -72,6 +70,7 @@ final class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind()
   }
   
   // MARK: - Public
@@ -119,6 +118,12 @@ final class MainViewController: UIViewController {
   private func setupTableView() {
     bottomSheetView.cakeTableView.dataSource = self
     bottomSheetView.cakeTableView.delegate = self
+  }
+
+  // MARK: - Bind
+
+  private func bind() {
+    bindBottomSheetMode()
   }
   
   // MARK: - Bottom Sheet Animation
@@ -188,6 +193,20 @@ final class MainViewController: UIViewController {
     bottomSheetView.snp.updateConstraints {
       $0.top.equalToSuperview().offset(offset)
     }
+  }
+
+  func bindBottomSheetMode() {
+    $bottomSheetMode
+      .sink { [weak self] bottomSheetMode in
+        guard let self else { return }
+        self.updateBottonSheetConstraint(withOffset: bottomSheetMode.yPosition)
+        self.updateSeeLocationHiddenState(with: bottomSheetMode)
+        self.bottomSheetView.cakeTableView.isScrollEnabled = bottomSheetMode == .full
+        if bottomSheetMode == .middle {
+          self.bottomSheetView.cakeTableView.scrollToTop()
+        }
+      }
+      .store(in: &cancellableBag)
   }
 
   private func updateSeeLocationHiddenState(with bottomSheetMode: BottonSheetMode) {
