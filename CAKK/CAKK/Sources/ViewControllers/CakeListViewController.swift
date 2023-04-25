@@ -28,7 +28,6 @@ final class CakeListViewController: UIViewController {
     
     static let changeLocationButtonCornerRadius = 24.f
     static let changeLocationButtonSize = CGSize(width: 48.f, height: 48.f)
-//    static let changeLocationButtonTopInset = 24.f
     static let changeLocationButtonTrailingInset = 16.f
     static let changeLocationButtonFontSize = 12.f
     
@@ -124,7 +123,6 @@ final class CakeListViewController: UIViewController {
     changeLocationButton.snp.makeConstraints {
       $0.size.equalTo(Metric.changeLocationButtonSize)
       $0.centerY.equalTo(labelsStack.snp.centerY)
-//      $0.top.equalToSuperview().inset(Metric.changeLocationButtonTopInset)
       $0.trailing.equalToSuperview().inset(Metric.changeLocationButtonTrailingInset)
     }
     

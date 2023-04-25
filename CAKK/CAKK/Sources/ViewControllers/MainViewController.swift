@@ -97,23 +97,8 @@ final class MainViewController: UIViewController {
     }
   }
 
-  /**
-  private func updateSeeLocationHiddenState(with bottomSheetMode: BottonSheetMode) {
-    switch bottomSheetMode {
-    case .full:
-      seeLocationButton.fadeIn()
-    default:
-      seeLocationButton.fadeOut()
-    }
-  }
-   */
-
   @objc private func seeLocation() {
     bottomSheetView.move(to: .half)
-//    bottomSheetMode = .middle
-//    UIView.animateWithDamping { [weak self] in
-//      self?.view.layoutIfNeeded()
-//    }
   }
 
 }
