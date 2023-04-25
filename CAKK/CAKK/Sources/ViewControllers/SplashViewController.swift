@@ -25,6 +25,8 @@ class SplashViewController: UIViewController {
     static let descriptionLabelBottomMargin = 24.f
     static let gridAnimationSpacing = -18.f
     static let logoStackViewSpacing = 20.f
+
+    static let descriptionLabelFontSize = 16.f
     static let descriptionLabelInset = 12.f
   }
   
@@ -49,7 +51,7 @@ class SplashViewController: UIViewController {
     $0.layer.cornerRadius = 20
   }
   private var descriptionLabel = UILabel().then {
-    $0.font = .systemFont(ofSize: 16, weight: .bold)
+    $0.font = .pretendard(size: Metric.descriptionLabelFontSize, weight: .bold)
     $0.text = Constants.description
     $0.textColor = .white
   }
