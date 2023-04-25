@@ -17,16 +17,15 @@ class SplashViewController: UIViewController {
   
   enum Constants {
     static let splashDuration = 2.f
-    
     static let description = "위치 기반 스마트한 케이크샵 검색"
-    
-    // TODO: - 실제 애니메이션 제작 되면 cake_run 애니메이션 파일 삭제 필요.
-    static let mockAnimationName = "cake_run"
+    static let animationName = "grid_animation"
   }
 
   enum Metric {
-    static let animationViewSize = CGSize(width: 220, height: 220)
     static let descriptionLabelBottomMargin = 24.f
+    static let gridAnimationSpacing = -18.f
+    static let logoStackViewSpacing = 20.f
+    static let descriptionLabelInset = 12.f
   }
   
   
@@ -35,13 +34,28 @@ class SplashViewController: UIViewController {
   
   // MARK: - UI
   
-  private var animationView = LottieAnimationView(name: Constants.mockAnimationName).then {
-    $0.loopMode = .loop
+  private var gridAnimations = [LottieAnimationView]()
+  private var animationStackView = UIStackView().then {
+    $0.spacing = Metric.gridAnimationSpacing
+    $0.axis = .vertical
+    $0.distribution = .fillEqually
+  }
+  private var logoStackView = UIStackView().then {
+    $0.axis = .vertical
+    $0.spacing = Metric.logoStackViewSpacing
+  }
+  private var descriptionContainerView = UIView().then {
+    $0.backgroundColor = .white.withAlphaComponent(0.2)
+    $0.layer.cornerRadius = 20
   }
   private var descriptionLabel = UILabel().then {
     $0.font = .systemFont(ofSize: 16, weight: .bold)
     $0.text = Constants.description
     $0.textColor = .white
+  }
+  private var logoImageView = UIImageView().then {
+    $0.image = R.image.logo()
+    $0.contentMode = .scaleAspectFill
   }
   
   
@@ -54,20 +68,32 @@ class SplashViewController: UIViewController {
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    animationView.stop()
+    stopAnimations()
   }
   
   
   // MARK: - Public
   
   public func startSplash(completion: @escaping () -> Void) {
-    animationView.play()
+    playAnimations()
     
     DispatchQueue.main.asyncAfter(
       deadline: .now() + Constants.splashDuration,
       execute: .init(block: {
         completion()
       }))
+  }
+  
+  public func playAnimations() {
+    gridAnimations.forEach { animationView in
+      animationView.play()
+    }
+  }
+  
+  public func stopAnimations() {
+    gridAnimations.forEach { animationView in
+      animationView.stop()
+    }
   }
   
   
@@ -79,27 +105,59 @@ class SplashViewController: UIViewController {
   }
   
   private func setupLayout() {
-    setupAnimationLayout()
+    setupAnimationStackViewLayout()
+    setupAnimationViewLayout()
+    
+    setupLogoStackViewLayout()
+    setupLogoImageViewLayout()
+    
+    setupDescriptionContainerViewLayout()
     setupDescriptionLabelLayout()
   }
   
-  private func setupAnimationLayout() {
-    view.addSubview(animationView)
-    animationView.snp.makeConstraints {
-      $0.center.equalToSuperview()
-      $0.width.equalTo(Metric.animationViewSize.width)
-      $0.height.equalTo(Metric.animationViewSize.height)
+  private func setupAnimationStackViewLayout() {
+    view.addSubview(animationStackView)
+    animationStackView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
     }
+  }
+  
+  private func setupAnimationViewLayout() {
+    /// 애니메이션 가로 비율이 더 길어서 가로로 여러번 붙여 그리드 사이즈 문제 해결
+    for _ in 0...5 {
+      let animationView =  LottieAnimationView(name: Constants.animationName)
+      animationView.contentMode = .scaleAspectFill
+      animationView.loopMode = .loop
+      gridAnimations.append(animationView)
+    }
+    
+    gridAnimations.forEach { animationView in
+      animationStackView.addArrangedSubview(animationView)
+    }
+  }
+  
+  private func setupLogoStackViewLayout() {
+    view.addSubview(logoStackView)
+    logoStackView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
+  }
+  
+  private func setupLogoImageViewLayout() {
+    logoStackView.addArrangedSubview(logoImageView)
+  }
+  
+  private func setupDescriptionContainerViewLayout() {
+    logoStackView.addArrangedSubview(descriptionContainerView)
   }
   
   private func setupDescriptionLabelLayout() {
-    view.addSubview(descriptionLabel)
+    descriptionContainerView.addSubview(descriptionLabel)
     descriptionLabel.snp.makeConstraints {
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Metric.descriptionLabelBottomMargin)
-      $0.centerX.equalToSuperview()
+      $0.edges.equalToSuperview().inset(Metric.descriptionLabelInset)
     }
   }
-  
+
   private func setupView() {
     setupBaseView()
   }

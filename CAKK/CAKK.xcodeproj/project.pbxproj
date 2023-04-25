@@ -13,9 +13,10 @@
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
 		8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E192F29CEDD5000CFF157 /* Assets.xcassets */; };
 		8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */; };
+		8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */; };
+		8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */; };
+		8EB7B79429F7A02400D3F5BF /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79329F7A02400D3F5BF /* APIKeys.xcconfig */; };
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
-		8EC8F62929E039CC003F032E /* cake_run.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8F62829E039CC003F032E /* cake_run.json */; };
-		8EC8F62B29E03ACB003F032E /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8F62A29E03ACB003F032E /* APIKeys.xcconfig */; };
 		B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */; };
 		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
 		B46F9DC829DACC8500113979 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* BottomSheetView.swift */; };
@@ -38,9 +39,10 @@
 		8E9E192F29CEDD5000CFF157 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9E193229CEDD5000CFF157 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = grid_animation.json; sourceTree = "<group>"; };
+		8EB7B79329F7A02400D3F5BF /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		8EC8F62829E039CC003F032E /* cake_run.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cake_run.json; sourceTree = "<group>"; };
-		8EC8F62A29E03ACB003F032E /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
 		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */,
+				8EB7B79329F7A02400D3F5BF /* APIKeys.xcconfig */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -136,8 +139,8 @@
 				8E32CE9C29CEE30A00905FD6 /* Services */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
-				B4D1051829DFF6D400629C1D /* ViewModels */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
+				8EB7B78529F6920900D3F5BF /* Components */,
 				8E32CE9E29CEE5F100905FD6 /* Utils */,
 				8E32CE9F29CEE63800905FD6 /* SupportingFiles */,
 			);
@@ -150,8 +153,8 @@
 				8E9E192F29CEDD5000CFF157 /* Assets.xcassets */,
 				8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */,
 				8E9E193429CEDD5000CFF157 /* Info.plist */,
-				8EC8F62829E039CC003F032E /* cake_run.json */,
-				8EC8F62A29E03ACB003F032E /* APIKeys.xcconfig */,
+				8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */,
+				8EB7B78929F6AC2F00D3F5BF /* LottieAnimations */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -172,6 +175,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		8EB7B78529F6920900D3F5BF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8EB7B78929F6AC2F00D3F5BF /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 		B46F9DCB29DAE51100113979 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,13 +199,6 @@
 				B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B4D1051829DFF6D400629C1D /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		C6D3D3CA626E37FD40B6895E /* Frameworks */ = {
@@ -216,6 +227,7 @@
 			buildPhases = (
 				11A400219A23A8911158B287 /* [CP] Check Pods Manifest.lock */,
 				8E32CE9D29CEE58C00905FD6 /* SwiftLint */,
+				8EB7B78C29F6CAC400D3F5BF /* r.swift */,
 				8E9E191F29CEDD4F00CFF157 /* Sources */,
 				8E9E192029CEDD4F00CFF157 /* Frameworks */,
 				8E9E192129CEDD4F00CFF157 /* Resources */,
@@ -268,9 +280,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EC8F62B29E03ACB003F032E /* APIKeys.xcconfig in Resources */,
+				8EB7B79429F7A02400D3F5BF /* APIKeys.xcconfig in Resources */,
+				8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */,
 				8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */,
-				8EC8F62929E039CC003F032E /* cake_run.json in Resources */,
 				8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */,
 				8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */,
 			);
@@ -336,6 +348,26 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		8EB7B78C29F6CAC400D3F5BF /* r.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = r.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -344,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
+				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
 				B46F9DC829DACC8500113979 /* BottomSheetView.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,

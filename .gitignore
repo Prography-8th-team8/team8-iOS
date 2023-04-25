@@ -91,3 +91,11 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+
+# NaverMap API Key
+APIKeys.xcconfig
+
+
+# R.swift
+R.generated.swift
