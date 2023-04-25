@@ -28,7 +28,7 @@ target 'CAKK' do
   pod 'NMapsMap',   '~> 3.16.2'
 
   # UI
-  pod 'BottomSheetView', '~> 0.1.3'
+  pod 'BottomSheetView', '~> 0.1.2'
 
 
 end
