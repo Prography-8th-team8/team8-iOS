@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.4)
+  - BottomSheetView (0.1.0)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
   - NMapsGeometry (1.0.1)
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.6.4)
+  - BottomSheetView
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
   - NMapsMap (~> 3.16.2)
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BottomSheetView
     - Kingfisher
     - lottie-ios
     - NMapsGeometry
@@ -34,6 +37,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  BottomSheetView: 95b54ef4467d262c59bd32f17688e126725e8bf8
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
@@ -43,6 +47,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 95b35fe5ae64aa3d0d53b8c0ad0edd620cc8a280
+PODFILE CHECKSUM: 95733002660d509ef3f0503976aefe10469b2b39
 
 COCOAPODS: 1.11.3

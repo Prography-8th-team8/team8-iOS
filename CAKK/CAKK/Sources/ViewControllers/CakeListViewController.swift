@@ -1,5 +1,5 @@
 //
-//  BottomSheetView.swift
+//  CakeListViewController.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
@@ -9,28 +9,26 @@ import UIKit
 import SnapKit
 import Then
 
-final class BottonSheetView: UIView {
+final class CakeListViewController: UIViewController {
   
   // MARK: - Constants
   
   enum Metric {
     static let cornerRadius = 16.f
     
-    static let headerViewHeight = 124.f
-    
-    static let barViewSize = CGSize(width: 30.f, height: 3.f)
-    static let barViewTopInset = 20.f
+    static let headerViewHeight = 100.f
+    static let cakelistTableViewHeight = (140 + 16).f
     
     static let locationLabelFontSize = 16.f
     static let numberOfCakeshopsLabelFontSize = 14.f
     
     static let labelsStackViewSpacing = 8.f
     static let labelsStackViewLeadingInset = 16.f
-    static let labelsStackViewTopInset = 55.f
+    static let labelsStackViewTopInset = 24.f
     
     static let changeLocationButtonCornerRadius = 24.f
     static let changeLocationButtonSize = CGSize(width: 48.f, height: 48.f)
-    static let changeLocationButtonTopInset = 40.f
+//    static let changeLocationButtonTopInset = 24.f
     static let changeLocationButtonTrailingInset = 16.f
     static let changeLocationButtonFontSize = 12.f
     
@@ -48,11 +46,6 @@ final class BottonSheetView: UIView {
   }
   
   private let headerView = UIView()
-  
-  private let barView = UIView().then {
-    $0.backgroundColor = .black
-    $0.isUserInteractionEnabled = false
-  }
   
   private let locationsLabel = UILabel().then {
     $0.text = "은평, 마포, 서대문"
@@ -87,46 +80,40 @@ final class BottonSheetView: UIView {
   private let lineView = UIView().then {
     $0.backgroundColor = .lightGray
   }
-  
+
   // MARK: - LifeCycle
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
     setup()
   }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  // MARK: - Public
+
   
   // MARK: - Private
   
   private func setup() {
     setupLayout()
     setupViewStyle()
+    setupTableView()
   }
   
   private func setupViewStyle() {
-    backgroundColor = .white
-    layer.cornerRadius = Metric.cornerRadius
+    view.backgroundColor = .white
+    view.layer.cornerRadius = Metric.cornerRadius
+  }
+
+  private func setupTableView() {
+    cakeTableView.dataSource = self
+    cakeTableView.delegate = self
   }
   
   private func setupLayout() {
-    addSubview(headerView)
+    view.addSubview(headerView)
     headerView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.headerViewHeight)
     }
-    
-    headerView.addSubview(barView)
-    barView.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.top.equalToSuperview().inset(Metric.barViewTopInset)
-      $0.size.equalTo(Metric.barViewSize)
-    }
-    
+
     headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.labelsStackViewLeadingInset)
@@ -136,22 +123,51 @@ final class BottonSheetView: UIView {
     headerView.addSubview(changeLocationButton)
     changeLocationButton.snp.makeConstraints {
       $0.size.equalTo(Metric.changeLocationButtonSize)
-      $0.top.equalToSuperview().inset(Metric.changeLocationButtonTopInset)
+      $0.centerY.equalTo(labelsStack.snp.centerY)
+//      $0.top.equalToSuperview().inset(Metric.changeLocationButtonTopInset)
       $0.trailing.equalToSuperview().inset(Metric.changeLocationButtonTrailingInset)
     }
     
-    addSubview(cakeTableView)
+    view.addSubview(cakeTableView)
     cakeTableView.snp.makeConstraints {
       $0.top.equalTo(headerView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalToSuperview()
     }
-    
-    addSubview(lineView)
+
+    view.addSubview(lineView)
     lineView.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(1)
       $0.bottom.equalTo(cakeTableView.snp.top)
     }
+  }
+}
+
+// MARK: - UITableViewDataSource
+
+extension CakeListViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 20
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(cellClass: CakeListCell.self, for: indexPath)
+
+    // 첫번째 셀의 top padding 만 좀 더 크게 해주기 위한 logic
+    if indexPath == IndexPath(row: 0, section: 0) {
+      cell.configreFirstCellTopPadding()
+    }
+
+    return cell
+  }
+}
+
+
+// MARK: - UITableViewDelegate
+
+extension CakeListViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return Metric.cakelistTableViewHeight
   }
 }
