@@ -21,7 +21,7 @@ final class MainViewController: UIViewController {
   enum Metric {
     static let refreshButtonOffset = 16.f
     
-    static let naverMapViewHeightRatio = 0.65
+    static let naverMapViewHeightRatio = 0.6
 
     static let seeLocationButtonBottomInset = 28.f
   }
@@ -75,13 +75,19 @@ final class MainViewController: UIViewController {
       parentViewController: self,
       contentViewController: cakeListViewController
     )
+    bottomSheetView.snp.makeConstraints {
+      $0.top.equalTo(naverMapView.snp.bottom)
+        .inset(10)
+        .priority(.low)
+    }
   }
   
   private func setupLayouts() {
     view.addSubview(naverMapView)
     naverMapView.snp.makeConstraints {
       $0.top.left.right.equalToSuperview()
-      $0.height.equalTo(view.frame.height * Metric.naverMapViewHeightRatio)
+      $0.height.greaterThanOrEqualTo(view.frame.height * Metric.naverMapViewHeightRatio)
+        .priority(.required)
     }
     
     view.addSubview(refreshButton)
