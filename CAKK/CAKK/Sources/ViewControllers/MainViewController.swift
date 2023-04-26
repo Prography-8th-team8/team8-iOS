@@ -108,3 +108,14 @@ final class MainViewController: UIViewController {
   }
 
 }
+
+
+// MARK: - Preview
+
+import SwiftUI
+
+struct ViewControllerPreView: PreviewProvider {
+  static var previews: some View {
+    MainViewController().toPreview()
+  }
+}
