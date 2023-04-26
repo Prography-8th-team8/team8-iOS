@@ -168,3 +168,17 @@ class SplashViewController: UIViewController {
     view.backgroundColor = UIColor(named: "AccentColor")
   }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct SplashViewPreview: PreviewProvider {
+  static var previews: some View {
+    UIViewPreview {
+      let splashViewController = SplashViewController()
+      return splashViewController.view
+    }
+    .ignoresSafeArea()
+  }
+}
+#endif
