@@ -26,6 +26,9 @@ target 'CAKK' do
 
   # Map
   pod 'NMapsMap',   '~> 3.16.2'
+  
+  # UI
+  pod 'BottomSheetView', :git => 'git@github.com:qwerty3345/BottomSheetView.git'
 
 
 end

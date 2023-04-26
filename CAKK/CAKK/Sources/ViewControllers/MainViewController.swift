@@ -13,6 +13,8 @@ import Then
 
 import NMapsMap
 
+import BottomSheetView
+
 final class MainViewController: UIViewController {
   
   // MARK: - Constants
