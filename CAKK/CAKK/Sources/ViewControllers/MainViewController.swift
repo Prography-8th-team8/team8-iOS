@@ -18,10 +18,16 @@ final class MainViewController: UIViewController {
   
   // MARK: - Constants
   
+  enum Constants {
+    static let refreshButtonText: String = "새로 고침"
+    static let seeLocationButtonText: String = "지도 보기"
+  }
+  
   enum Metric {
     static let refreshButtonOffset = 16.f
     
     static let naverMapViewHeightRatio = 0.6
+    static let naverMapBottomInset = 10.f
 
     static let seeLocationButtonBottomInset = 28.f
   }
@@ -38,8 +44,14 @@ final class MainViewController: UIViewController {
     $0.showZoomControls = false
   }
   
-  private let refreshButton = CapsuleStyleButton(iconImage: UIImage(systemName: "arrow.clockwise")!, text: "새로 고침")
-  private lazy var seeLocationButton = CapsuleStyleButton(iconImage: UIImage(systemName: "map")!, text: "지도 보기").then {
+  private let refreshButton = CapsuleStyleButton(
+    iconImage: UIImage(systemName: "arrow.clockwise")!,
+    text: Constants.refreshButtonText
+  )
+  private lazy var seeLocationButton = CapsuleStyleButton(
+    iconImage: UIImage(systemName: "map")!,
+    text: Constants.seeLocationButtonText
+  ).then {
     $0.isHidden = true
     $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
   }
@@ -77,7 +89,7 @@ final class MainViewController: UIViewController {
     )
     bottomSheetView.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
-        .inset(10)
+        .inset(Metric.naverMapBottomInset)
         .priority(.low)
     }
   }
