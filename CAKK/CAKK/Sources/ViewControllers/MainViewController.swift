@@ -10,7 +10,6 @@ import Combine
 
 import SnapKit
 import Then
-import BottomSheetView
 
 import NMapsMap
 
@@ -26,10 +25,12 @@ final class MainViewController: UIViewController {
   enum Metric {
     static let refreshButtonOffset = 16.f
     
-    static let naverMapViewHeightRatio = 0.6
+    static let naverMapViewHeightRatio = 0.5
     static let naverMapBottomInset = 10.f
 
     static let seeLocationButtonBottomInset = 28.f
+    
+    static let bottomSheetTipModeHeight = 58.f
   }
 
   
@@ -83,6 +84,15 @@ final class MainViewController: UIViewController {
   }
 
   private func setupBottomSheet() {
+    bottomSheetView.layout = BottomSheetLayout(
+      half: .fractional(0.5),
+      tip: .absolute(
+        0
+//        CakeListViewController.Metric.headerViewHeight +
+//        Metric.bottomSheetTipModeHeight
+      )
+    )
+                                               
     bottomSheetView.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
