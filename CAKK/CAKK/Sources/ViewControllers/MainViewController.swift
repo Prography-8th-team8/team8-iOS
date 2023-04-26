@@ -86,11 +86,7 @@ final class MainViewController: UIViewController {
   private func setupBottomSheet() {
     bottomSheetView.layout = BottomSheetLayout(
       half: .fractional(0.5),
-      tip: .absolute(
-        0
-//        CakeListViewController.Metric.headerViewHeight +
-//        Metric.bottomSheetTipModeHeight
-      )
+      tip: .absolute(CakeListViewController.Metric.headerViewHeight)
     )
                                                
     bottomSheetView.configure(
