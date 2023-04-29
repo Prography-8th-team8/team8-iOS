@@ -14,8 +14,6 @@ final class CapsuleStyleButton: UIButton {
   // MARK: - Constants
   
   enum Metric {
-    static let cornerRadius = 22.f
-    
     static let refreshImageViewVerticalInset = 12.f
     static let refreshImageViewLeftInset = 16.f
     
@@ -47,6 +45,11 @@ final class CapsuleStyleButton: UIButton {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    configureCornerRadius()
+  }
 
   // MARK: - Public
   
@@ -60,7 +63,6 @@ final class CapsuleStyleButton: UIButton {
   
   private func setupViewStyle() {
     backgroundColor = .black
-    layer.cornerRadius = Metric.cornerRadius
   }
 
   private func setupComponent(_ iconImage: UIImage, _ text: String) {
@@ -81,5 +83,9 @@ final class CapsuleStyleButton: UIButton {
       $0.right.equalToSuperview().inset(Metric.refreshLabelRightInset)
       $0.left.equalTo(iconImageView.snp.right).offset(Metric.refreshLabelSpacing)
     }
+  }
+  
+  private func configureCornerRadius() {
+    layer.cornerRadius = frame.height / 2
   }
 }

@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (5.6.4)
-  - BottomSheetView (0.1.2)
+  - BottomSheetView (0.1.3)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
   - NMapsGeometry (1.0.1)
@@ -13,7 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.6.4)
-  - BottomSheetView (~> 0.1.2)
+  - "BottomSheetView (from `git@github.com:qwerty3345/BottomSheetView.git`)"
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
   - NMapsMap (~> 3.16.2)
@@ -25,7 +25,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - BottomSheetView
     - Kingfisher
     - lottie-ios
     - NMapsGeometry
@@ -35,9 +34,18 @@ SPEC REPOS:
     - SwiftLint
     - Then
 
+EXTERNAL SOURCES:
+  BottomSheetView:
+    :git: "git@github.com:qwerty3345/BottomSheetView.git"
+
+CHECKOUT OPTIONS:
+  BottomSheetView:
+    :commit: 28a6c94b93059cb1a2696bfe99cc4a231abf4314
+    :git: "git@github.com:qwerty3345/BottomSheetView.git"
+
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  BottomSheetView: 1c34b7549e5b3033d3f489277260e3cca3824faa
+  BottomSheetView: 6f86bd37f569752fc66d90db4376f06f4779e410
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
@@ -47,6 +55,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: e4c5b918db83bf6f9552f530782c38c1fa815047
+PODFILE CHECKSUM: e55a78cf1f95a97ea5baa3d54b5e4c9de46b21d9
 
 COCOAPODS: 1.11.3
