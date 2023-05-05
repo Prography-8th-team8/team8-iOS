@@ -10,6 +10,7 @@
 		8E02B77A2A054BC2003AE7AF /* RegionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPicker.swift */; };
 		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
 		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
+		8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
 		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
@@ -52,6 +53,7 @@
 		8E02B7792A054BC2003AE7AF /* RegionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPicker.swift; sourceTree = "<group>"; };
 		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
 				B46F9DC729DACC8500113979 /* CakeListViewController.swift */,
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
+				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
+				8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */,
 				8E02B77A2A054BC2003AE7AF /* RegionPicker.swift in Sources */,
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
