@@ -11,6 +11,8 @@
 		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
 		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
 		8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */; };
+		8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */; };
+		8E02B7842A057F3B003AE7AF /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* RegionModel.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
 		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
@@ -54,6 +56,8 @@
 		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		8E02B7832A057F3B003AE7AF /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				B46F9DC729DACC8500113979 /* CakeListViewController.swift */,
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
 				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
+				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 		8E9E193D29CEDDE700CFF157 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8E02B7832A057F3B003AE7AF /* RegionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
 				B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */,
+				8E02B7842A057F3B003AE7AF /* RegionModel.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
@@ -465,6 +472,7 @@
 				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
 				8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */,
 				8E37755129F7CFAD00166198 /* ChipView.swift in Sources */,
+				8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */,
 				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
 				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,

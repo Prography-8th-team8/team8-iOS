@@ -35,14 +35,14 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   
   // MARK: - Views
   
-  private let titleLabel = UILabel().then {
+  public let titleLabel = UILabel().then {
     $0.font = .pretendard(size: Metric.titleFontSize, weight: .regular)
     $0.textColor = .black
     $0.numberOfLines = 2
     $0.textAlignment = .left
   }
   
-  private let numberOfRegionsLabel = UILabel().then {
+  public let numberOfRegionsLabel = UILabel().then {
     $0.font = .pretendard(size: Metric.numberOfRegionsFontSize, weight: .bold)
     $0.textColor = .black
     $0.textAlignment = .right
@@ -51,8 +51,8 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   
   // MARK: - LifeCycles
   
-  init() {
-    super.init(frame: .zero)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     setup()
   }
   
@@ -63,10 +63,10 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   
   // MARK: - Publics
   
-  public func configure(title: String, numberOfRegions: Int, color: UIColor) {
-    self.title = title
-    self.numberOfRegions = numberOfRegions
-    self.color = color
+  public func configure(_ item: RegionModel) {
+    self.title = item.regionName
+    self.numberOfRegions = item.numberOfRegions
+    self.color = item.color
     
     configureView()
   }
@@ -134,10 +134,12 @@ struct RegionPickerPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
       let regionPicker = RegionPickerCollectionCell()
-      regionPicker.configure(
-        title: "도봉 강북 성북 노원",
+      regionPicker.configure(.init(
+        regionName: "도봉 강북 성북 노원",
         numberOfRegions: 43,
-        color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1))
+        color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1)
+      ))
+      
       return regionPicker
     }
     .frame(width: 170, height: 120)

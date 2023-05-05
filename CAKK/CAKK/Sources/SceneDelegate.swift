@@ -28,15 +28,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     
     // 루트뷰를 메인뷰로 설정
-    let mainViewController = MainViewController()
-    window.rootViewController = mainViewController
+    let viewModel = OnboardingViewModel()
+    let onboardingViewController = OnboardingViewController(viewModel: viewModel)
+    window.rootViewController = onboardingViewController
     self.window = window
     window.makeKeyAndVisible()
     
     // 스플래시 시작
     let splashViewController = SplashViewController()
     splashViewController.modalPresentationStyle = .overCurrentContext // splashViewController.view.alpha = 0 했을 시에 배경이 검정색이 아닌 투명으로 보여주기 위함
-    mainViewController.present(splashViewController, animated: false)
+    onboardingViewController.present(splashViewController, animated: false)
     
     splashViewController.startSplash {
       UIView.animate(withDuration: Constants.splashFadeOutDuration) {
