@@ -137,10 +137,15 @@ class OnboardingViewController: UIViewController {
   
   private func setupView() {
     setupBaseView()
+    setupCollectionView()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .white
+  }
+  
+  private func setupCollectionView() {
+    collectionView.delegate = self
   }
   
   private func dataSource() -> OnboardingViewModel.DataSource {
@@ -157,7 +162,23 @@ class OnboardingViewController: UIViewController {
       
       return dataSource
   }
+  
+  private func presentMainView() {
+    let vc = MainViewController()
+    vc.modalPresentationStyle = .fullScreen
+    present(vc, animated: true)
+  }
 }
+
+
+// MARK: - Extensions
+
+extension OnboardingViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    presentMainView()
+  }
+}
+
 
 
 #if canImport(SwiftUI) && DEBUG
