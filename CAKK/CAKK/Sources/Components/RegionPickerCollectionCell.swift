@@ -1,5 +1,5 @@
 //
-//  RegionPicker.swift
+//  RegionPickerCollectionCell.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/05/05.
@@ -10,9 +10,11 @@ import UIKit
 import SnapKit
 import Then
 
-class RegionPicker: UIControl {
+class RegionPickerCollectionCell: UICollectionViewCell {
   
   // MARK: - Constants
+  
+  static let identifier = String(describing: RegionPickerCollectionCell.self)
   
   enum Metric {
     static let verticalPadding = 24.f
@@ -26,9 +28,9 @@ class RegionPicker: UIControl {
   
   // MARK: - Properties
   
-  private var title: String
-  private var numberOfRegions: Int
-  private var color: UIColor
+  private var title: String = ""
+  private var numberOfRegions: Int = 0
+  private var color: UIColor = R.color.fuschia100()!
   
   
   // MARK: - Views
@@ -49,14 +51,8 @@ class RegionPicker: UIControl {
   
   // MARK: - LifeCycles
   
-  init(title: String,
-       numberOfRegions: Int,
-       color: UIColor) {
-    self.title = title
-    self.numberOfRegions = numberOfRegions
-    self.color = color
+  init() {
     super.init(frame: .zero)
-    
     setup()
   }
   
@@ -65,11 +61,22 @@ class RegionPicker: UIControl {
   }
   
   
+  // MARK: - Publics
+  
+  public func configure(title: String, numberOfRegions: Int, color: UIColor) {
+    self.title = title
+    self.numberOfRegions = numberOfRegions
+    self.color = color
+    
+    configureView()
+  }
+  
+  
   // MARK: - Privates
   
   private func setup() {
     setupLayout()
-    setupView()
+    configureView()
   }
   
   private func setupLayout() {
@@ -93,24 +100,26 @@ class RegionPicker: UIControl {
     }
   }
   
-  private func setupView() {
-    setupBaseView()
-    setupTitleLabel()
-    setupNumberOfRegionsLabel()
+  private func configureView() {
+    configureBaseView()
+    configureTitleLabel()
+    configureNumberOfRegionsLabel()
   }
   
-  private func setupBaseView() {
-    backgroundColor = color
-    layer.borderWidth = 2
-    layer.borderColor = color.cgColor
-    layer.cornerRadius = Metric.cornerRadius
+  private func configureBaseView() {
+    backgroundColor = .clear
+    
+    contentView.backgroundColor = color
+    contentView.layer.borderWidth = 2
+    contentView.layer.borderColor = color.cgColor
+    contentView.layer.cornerRadius = Metric.cornerRadius
   }
   
-  private func setupTitleLabel() {
+  private func configureTitleLabel() {
     titleLabel.text = title
   }
   
-  private func setupNumberOfRegionsLabel() {
+  private func configureNumberOfRegionsLabel() {
     numberOfRegionsLabel.text = "\(numberOfRegions)개"
   }
 }
@@ -124,8 +133,9 @@ import SwiftUI
 struct RegionPickerPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      let regionPicker = RegionPicker(
-        title: "도봉 강북 성원 노원",
+      let regionPicker = RegionPickerCollectionCell()
+      regionPicker.configure(
+        title: "도봉 강북 성북 노원",
         numberOfRegions: 43,
         color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1))
       return regionPicker
