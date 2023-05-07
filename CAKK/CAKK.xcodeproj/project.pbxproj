@@ -40,6 +40,8 @@
 		B43DA3D229F8ACFA00F1A4B1 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B43DA3D129F8ACFA00F1A4B1 /* APIKeys.xcconfig */; };
 		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
 		B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B452B84C2A075E9700784A17 /* UIView+Shadow.swift */; };
+		B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41C2A079B6E00FB8403 /* NetworkService.swift */; };
+		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
 		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
 		B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeListViewController.swift */; };
 		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
@@ -86,6 +88,8 @@
 		B43DA3D129F8ACFA00F1A4B1 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		B452B84C2A075E9700784A17 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		B455C41C2A079B6E00FB8403 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
 		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC729DACC8500113979 /* CakeListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
