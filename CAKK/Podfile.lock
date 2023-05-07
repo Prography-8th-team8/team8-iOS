@@ -3,6 +3,10 @@ PODS:
   - BottomSheetView (0.1.4)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
+  - Moya/Combine (15.0.0):
+    - Moya/Core
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
   - NMapsGeometry (1.0.1)
   - NMapsMap (3.16.2):
     - NMapsGeometry
@@ -12,10 +16,10 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.6.4)
   - "BottomSheetView (from `git@github.com:qwerty3345/BottomSheetView.git`)"
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
+  - Moya/Combine (~> 15.0.0)
   - NMapsMap (~> 3.16.2)
   - R.swift (~> 7.3.0)
   - SnapKit (~> 5.6.0)
@@ -27,6 +31,7 @@ SPEC REPOS:
     - Alamofire
     - Kingfisher
     - lottie-ios
+    - Moya
     - NMapsGeometry
     - NMapsMap
     - R.swift
@@ -48,6 +53,7 @@ SPEC CHECKSUMS:
   BottomSheetView: 23d2847aef4be5ef76768ce6e9777497cf6df6e1
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: aaa64717249b06ae82c3a3addb3a01f0e33100ab
   R.swift: cef1c530541cb49412752721797f10dae6b32d11
@@ -55,6 +61,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: e55a78cf1f95a97ea5baa3d54b5e4c9de46b21d9
+PODFILE CHECKSUM: 3e9dc5cfb23610d32daff9aabecff98441c029f1
 
 COCOAPODS: 1.11.3
