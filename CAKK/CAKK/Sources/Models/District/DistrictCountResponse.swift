@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DistrictCount: Decodable {
+struct DistrictCountResponse: Decodable {
   let districtCounts: [District: Int]
   
   enum CodingKeys: String, CodingKey {

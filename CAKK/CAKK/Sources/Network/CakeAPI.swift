@@ -65,11 +65,11 @@ extension CakeAPI: TargetType {
   }
   
   /// Moya Provider의 Stub Closure 에서 호출되는 SampleData
+  // TODO: 명세서의 example이 아직 정의되지 않음... / 현재는 예시로 넣어놓은 데이터...
   var sampleData: Data {
     switch self {
     case .fetchCakeShopList:
-      // TODO: Sample Mock Data 제공 (JSON 형태로 필요) _ 아직 백엔드 명세가 나오지 않음...
-      return Data()
+      return SampleData.cakeShopList
     case .fetchDistrictCounts:
       return Data()
     case .fetchCakeShopDetail:

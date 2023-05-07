@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CakeShopList: Decodable {
+struct CakeShopResponse: Decodable {
   let cakeShops: [CakeShop]
   
   enum CodingKeys: String, CodingKey {

@@ -10,7 +10,7 @@ import Combine
 
 protocol NetworkServiceProtocol: AnyObject {
   associatedtype API: TargetType
-  func request<T: Decodable>(_ target: API, type: T.Type) -> AnyPublisher<T, MoyaError>
+  func request<T: Decodable>(_ target: API, type: T.Type) -> AnyPublisher<T, Error>
 }
 
 final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
@@ -39,13 +39,12 @@ final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
   
   // MARK: - Public
   
-  func request<T: Decodable>(_ target: Target, type: T.Type) -> AnyPublisher<T, MoyaError> {
-    provider.requestPublisher(target)
+  func request<T: Decodable>(_ target: Target, type: T.Type) -> AnyPublisher<T, Error> {
+    provider
+      .requestPublisher(target)
       .filterSuccessfulStatusCodes()
-      .compactMap { [weak self] in
-        guard let self else { return nil }
-        return try? self.decoder.decode(T.self, from: $0.data)
-      }
+      .map(\.data)
+      .decode(type: T.self, decoder: decoder)
       .eraseToAnyPublisher()
   }
 }

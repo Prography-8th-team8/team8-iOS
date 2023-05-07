@@ -1,0 +1,124 @@
+{
+  "storeList": [
+    {
+      "id": 1,
+      "createdAt": 1622494800,
+      "modifiedAt": 1622494800,
+      "name": "Cake Shop A",
+      "city": "Seoul",
+      "district": "Jung",
+      "location": "123 A Street",
+      "latitude": 37.564,
+      "longitude": 126.98,
+      "storeTypes": ["LETTERING", "CHARACTER"]
+    },
+    {
+      "id": 2,
+      "createdAt": 1622504800,
+      "modifiedAt": 1622504800,
+      "name": "Cake Shop B",
+      "city": "Seoul",
+      "district": "Gangnam",
+      "location": "456 B Street",
+      "latitude": 37.508,
+      "longitude": 127.039,
+      "storeTypes": ["MEALBOX", "TIARA"]
+    },
+    {
+      "id": 3,
+      "createdAt": 1622514800,
+      "modifiedAt": 1622514800,
+      "name": "Cake Shop C",
+      "city": "Seoul",
+      "district": "Seocho",
+      "location": "789 C Street",
+      "latitude": 37.494,
+      "longitude": 127.027,
+      "storeTypes": ["RICE", "FLOWER"]
+    },
+    {
+      "id": 4,
+      "createdAt": 1622524800,
+      "modifiedAt": 1622524800,
+      "name": "Cake Shop D",
+      "city": "Seoul",
+      "district": "Mapo",
+      "location": "321 D Street",
+      "latitude": 37.550,
+      "longitude": 126.939,
+      "storeTypes": ["PHOTO", "FIGURE"]
+    },
+    {
+      "id": 5,
+      "createdAt": 1622534800,
+      "modifiedAt": 1622534800,
+      "name": "Cake Shop E",
+      "city": "Seoul",
+      "district": "Nowon",
+      "location": "654 E Street",
+      "latitude": 37.652,
+      "longitude": 127.062,
+      "storeTypes": ["LETTERING", "CHARACTER", "MEALBOX"]
+    },
+    {
+      "id": 6,
+      "createdAt": 1622544800,
+      "modifiedAt": 1622544800,
+      "name": "Cake Shop F",
+      "city": "Seoul",
+      "district": "Dongjak",
+      "location": "987 F Street",
+      "latitude": 37.513,
+      "longitude": 126.963,
+      "storeTypes": ["TIARA", "RICE", "FLOWER"]
+    },
+    {
+      "id": 7,
+      "createdAt": 1622554800,
+      "modifiedAt": 1622554800,
+      "name": "Cake Shop G",
+      "city": "Seoul",
+      "district": "Gwanak",
+      "location": "147 G Street",
+      "latitude": 37.48,
+      "longitude": 126.955,
+      "storeTypes": ["PHOTO", "FIGURE", "LETTERING"]
+    },
+    {
+      "id": 8,
+      "createdAt": 1622564800,
+      "modifiedAt": 1622564800,
+      "name": "Cake Shop H",
+      "city": "Seoul",
+      "district": "Yongsan",
+      "location": "258 H Street",
+      "latitude": 37.532,
+      "longitude": 126.975,
+      "storeTypes": ["CHARACTER", "MEALBOX", "TIARA"]
+    },
+    {
+      "id": 9,
+      "createdAt": 1622574800,
+      "modifiedAt": 1622574800,
+      "name": "Cake Shop I",
+      "city": "Seoul",
+      "district": "Seongbuk",
+      "location": "369 I Street",
+      "latitude": 37.593,
+      "longitude": 127.017,
+      "storeTypes": ["RICE", "FLOWER", "PHOTO"]
+    },
+    {
+      "id": 10,
+      "createdAt": 1622584800,
+      "modifiedAt": 1622584800,
+      "name": "Cake Shop J",
+      "city": "Seoul",
+      "district": "Gangbuk",
+      "location": "480 J Street",
+      "latitude": 37.641,
+      "longitude": 127.003,
+      "storeTypes": ["FIGURE", "LETTERING", "CHARACTER"]
+    }
+  ]
+}

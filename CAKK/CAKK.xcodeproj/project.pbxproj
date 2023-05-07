@@ -47,6 +47,8 @@
 		B455C4302A07E93300FB8403 /* CakeShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42F2A07E93300FB8403 /* CakeShopList.swift */; };
 		B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4322A07E99500FB8403 /* CakeShopType.swift */; };
 		B455C4362A07EB2F00FB8403 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4352A07EB2F00FB8403 /* District.swift */; };
+		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
+		B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C43A2A07F12F00FB8403 /* SampleData.swift */; };
 		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
 		B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeListViewController.swift */; };
 		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
@@ -100,6 +102,8 @@
 		B455C42F2A07E93300FB8403 /* CakeShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopList.swift; sourceTree = "<group>"; };
 		B455C4322A07E99500FB8403 /* CakeShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopType.swift; sourceTree = "<group>"; };
 		B455C4352A07EB2F00FB8403 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
+		B455C43A2A07F12F00FB8403 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC729DACC8500113979 /* CakeListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -139,6 +143,7 @@
 			children = (
 				B455C41C2A079B6E00FB8403 /* NetworkService.swift */,
 				B455C41E2A079C4B00FB8403 /* CakeAPI.swift */,
+				B455C4392A07F07F00FB8403 /* Tests */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -293,6 +298,15 @@
 			path = District;
 			sourceTree = "<group>";
 		};
+		B455C4392A07F07F00FB8403 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */,
+				B455C43A2A07F12F00FB8403 /* SampleData.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		B46F9DCB29DAE51100113979 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +415,7 @@
 				8E37754E29F7CA2F00166198 /* Pretendard-ExtraBold.otf in Resources */,
 				8E37754C29F7CA2F00166198 /* Pretendard-Thin.otf in Resources */,
 				8E37754D29F7CA2F00166198 /* Pretendard-Black.otf in Resources */,
+				B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */,
 				8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +510,7 @@
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
 				B455C42E2A07E79400FB8403 /* DistrictCount.swift in Sources */,
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
+				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
