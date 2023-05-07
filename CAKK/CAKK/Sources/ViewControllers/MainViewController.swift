@@ -59,7 +59,9 @@ final class MainViewController: UIViewController {
     $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
   }
 
-  private let bottomSheetView = BottomSheetView()
+  private let bottomSheetView = BottomSheetView().then {
+    $0.addShadow(to: .top)
+  }
   private let cakeListViewController = CakeListViewController()
   
   private var isTableViewPanning: Bool = false
