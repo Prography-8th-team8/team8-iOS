@@ -13,6 +13,13 @@ protocol NetworkServiceProtocol: AnyObject {
   func request<T: Decodable>(_ target: API, type: T.Type) -> AnyPublisher<T, Error>
 }
 
+/// 사용 예시
+///
+/// ```
+/// NetworkService<CakeAPI>(type: .stub)
+///  .request(.fetchCakeShopList(districts: [.gangnam]), type: CakeShopResponse.self)
+///  .sink(receiveCompletion: , receiveValue: )
+/// ```
 final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
   
   enum NetworkServiceType {
@@ -39,6 +46,7 @@ final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
   
   // MARK: - Public
   
+  // Moya + Combine 으로 구현
   func request<T: Decodable>(_ target: Target, type: T.Type) -> AnyPublisher<T, Error> {
     provider
       .requestPublisher(target)

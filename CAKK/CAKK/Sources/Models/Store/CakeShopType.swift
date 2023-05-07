@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CakeShopType: String, Codable {
+enum CakeShopType: String, Decodable {
   case lettering = "LETTERING"
   case character = "CHARACTER"
   case mealbox = "MEALBOX"
