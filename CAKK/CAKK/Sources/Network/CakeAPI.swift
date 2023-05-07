@@ -51,4 +51,13 @@ extension CakeAPI: TargetType {
   var headers: [String: String]? {
     return nil
   }
+  
+  /// Moya Provider의 Stub Closure 에서 호출되는 SampleData
+  var sampleData: Data {
+    switch self {
+    case .fetchCakeList:
+      // TODO: Sample Mock Data 제공 (JSON 형태로 필요)
+      return Data()
+    }
+  }
 }
