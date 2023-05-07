@@ -10,6 +10,7 @@ import Alamofire
 
 enum CakeAPI {
   case fetchCakeShopList(districts: [District])
+  case fetchDistrictCounts
 }
 
 extension CakeAPI: TargetType {
@@ -21,12 +22,16 @@ extension CakeAPI: TargetType {
     switch self {
     case .fetchCakeShopList:
       return "/list"
+    case .fetchDistrictCounts:
+      return "/district/count"
     }
   }
   
   var method: Moya.Method {
     switch self {
     case .fetchCakeShopList:
+      return .get
+    case .fetchDistrictCounts:
       return .get
     }
   }
@@ -39,6 +44,8 @@ extension CakeAPI: TargetType {
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
+    case .fetchDistrictCounts:
+      return .requestPlain
     }
   }
   
@@ -51,6 +58,8 @@ extension CakeAPI: TargetType {
     switch self {
     case .fetchCakeShopList:
       // TODO: Sample Mock Data 제공 (JSON 형태로 필요) _ 아직 백엔드 명세가 나오지 않음...
+      return Data()
+    case .fetchDistrictCounts:
       return Data()
     }
   }
