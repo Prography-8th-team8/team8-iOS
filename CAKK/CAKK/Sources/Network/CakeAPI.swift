@@ -9,42 +9,36 @@ import Moya
 import Alamofire
 
 enum CakeAPI {
-  case fetchCakeList
+  case fetchCakeShopList(districts: [District])
 }
 
 extension CakeAPI: TargetType {
   var baseURL: URL {
-    switch self {
-    case .fetchCakeList:
-      return URL(string: "케이크크 API baseURL")!
-    }
+    return URL(string: "http://15.165.196.34:8080/store")!
   }
   
   var path: String {
     switch self {
-    case .fetchCakeList:
-      return "케이크크 API path 경로"
+    case .fetchCakeShopList:
+      return "/list"
     }
   }
   
   var method: Moya.Method {
     switch self {
-    case .fetchCakeList:
+    case .fetchCakeShopList:
       return .get
     }
   }
   
   var task: Moya.Task {
     switch self {
-    case .fetchCakeList:
-      return .requestPlain
-//      let parameters: Parameters = [:] // TODO: 파라미터 정의
-//      let encoding = URLEncoding( // TODO: Encoding 정의
-//        destination: .queryString,
-//        arrayEncoding: .noBrackets,
-//        boolEncoding: .literal
-//      )
-//      return .requestParameters(parameters: parameters, encoding: encoding)
+    case let .fetchCakeShopList(districts):
+      let parameters: Parameters = [
+        "district": districts.map { $0.rawValue }
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
     }
   }
   
@@ -55,8 +49,8 @@ extension CakeAPI: TargetType {
   /// Moya Provider의 Stub Closure 에서 호출되는 SampleData
   var sampleData: Data {
     switch self {
-    case .fetchCakeList:
-      // TODO: Sample Mock Data 제공 (JSON 형태로 필요)
+    case .fetchCakeShopList:
+      // TODO: Sample Mock Data 제공 (JSON 형태로 필요) _ 아직 백엔드 명세가 나오지 않음...
       return Data()
     }
   }
