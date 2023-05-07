@@ -118,17 +118,19 @@
 			isa = PBXGroup;
 			children = (
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
-				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8E32CE9C29CEE30A00905FD6 /* Services */ = {
+		8E32CE9C29CEE30A00905FD6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B455C41C2A079B6E00FB8403 /* NetworkService.swift */,
+				B455C41E2A079C4B00FB8403 /* CakeAPI.swift */,
 			);
-			path = Services;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8E32CE9E29CEE5F100905FD6 /* Utils */ = {
@@ -183,7 +185,7 @@
 			children = (
 				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
 				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
-				8E32CE9C29CEE30A00905FD6 /* Services */,
+				8E32CE9C29CEE30A00905FD6 /* Network */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
@@ -465,6 +467,7 @@
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
 				8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */,
+				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
@@ -472,6 +475,7 @@
 				8E02B7842A057F3B003AE7AF /* RegionModel.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
+				B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */,
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
