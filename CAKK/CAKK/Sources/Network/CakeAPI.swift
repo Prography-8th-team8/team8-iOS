@@ -11,6 +11,7 @@ import Alamofire
 enum CakeAPI {
   case fetchCakeShopList(districts: [District])
   case fetchDistrictCounts
+  case fetchCakeShopDetail(id: Int)
 }
 
 extension CakeAPI: TargetType {
@@ -24,6 +25,8 @@ extension CakeAPI: TargetType {
       return "/list"
     case .fetchDistrictCounts:
       return "/district/count"
+    case .fetchCakeShopDetail:
+      return "/store"
     }
   }
   
@@ -32,6 +35,8 @@ extension CakeAPI: TargetType {
     case .fetchCakeShopList:
       return .get
     case .fetchDistrictCounts:
+      return .get
+    case .fetchCakeShopDetail:
       return .get
     }
   }
@@ -46,6 +51,12 @@ extension CakeAPI: TargetType {
       return .requestParameters(parameters: parameters, encoding: encoding)
     case .fetchDistrictCounts:
       return .requestPlain
+    case let .fetchCakeShopDetail(id):
+      let parameters: Parameters = [
+        "id": id
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
     }
   }
   
@@ -60,6 +71,8 @@ extension CakeAPI: TargetType {
       // TODO: Sample Mock Data 제공 (JSON 형태로 필요) _ 아직 백엔드 명세가 나오지 않음...
       return Data()
     case .fetchDistrictCounts:
+      return Data()
+    case .fetchCakeShopDetail:
       return Data()
     }
   }
