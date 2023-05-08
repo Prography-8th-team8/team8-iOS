@@ -36,12 +36,27 @@ final class CakeListViewController: UIViewController {
   
   // MARK: - Properties
   
+  static var layout: UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0),
+      heightDimension: .estimated(158))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let group = NSCollectionLayoutGroup.vertical(
+      layoutSize: itemSize,
+      subitems: [item])
+    group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = 12
+    return UICollectionViewCompositionalLayout(section: section)
+  }
+  
   // MARK: - UI
   
-  let cakeTableView = UITableView(frame: .zero, style: .plain).then {
-    $0.bounces = false
-    $0.registerCell(cellClass: CakeListCell.self)
-    $0.separatorStyle = .none
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeListViewController.layout).then {
+    $0.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    $0.backgroundColor = .clear
   }
   
   private let headerView = UIView()
@@ -93,7 +108,7 @@ final class CakeListViewController: UIViewController {
   private func setup() {
     setupLayout()
     setupViewStyle()
-    setupTableView()
+    setupCollectionView()
   }
   
   private func setupViewStyle() {
@@ -101,9 +116,10 @@ final class CakeListViewController: UIViewController {
     view.layer.cornerRadius = Metric.cornerRadius
   }
 
-  private func setupTableView() {
-    cakeTableView.dataSource = self
-    cakeTableView.delegate = self
+  private func setupCollectionView() {
+    collectionView.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    collectionView.dataSource = self
+    collectionView.delegate = self
   }
   
   private func setupLayout() {
@@ -126,8 +142,8 @@ final class CakeListViewController: UIViewController {
       $0.trailing.equalToSuperview().inset(Metric.changeLocationButtonTrailingInset)
     }
     
-    view.addSubview(cakeTableView)
-    cakeTableView.snp.makeConstraints {
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints {
       $0.top.equalTo(headerView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalToSuperview()
@@ -137,26 +153,20 @@ final class CakeListViewController: UIViewController {
     lineView.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(1)
-      $0.bottom.equalTo(cakeTableView.snp.top)
+      $0.bottom.equalTo(collectionView.snp.top)
     }
   }
 }
 
 // MARK: - UITableViewDataSource
 
-extension CakeListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension CakeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 20
   }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(cellClass: CakeListCell.self, for: indexPath)
-
-    // 첫번째 셀의 top padding 만 좀 더 크게 해주기 위한 logic
-    if indexPath == IndexPath(row: 0, section: 0) {
-      cell.configreFirstCellTopPadding()
-    }
-
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeListCell.identifier, for: indexPath) as? CakeListCell else { return .init()}
     return cell
   }
 }
@@ -167,5 +177,17 @@ extension CakeListViewController: UITableViewDataSource {
 extension CakeListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return Metric.cakelistTableViewHeight
+  }
+}
+
+
+// MARK: - Preview
+
+import SwiftUI
+
+struct CakeListViewControllerPreview: PreviewProvider {
+  static var previews: some View {
+    CakeListViewController().toPreview()
+      .ignoresSafeArea()
   }
 }
