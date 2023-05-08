@@ -60,7 +60,10 @@ final class MainViewController: UIViewController {
   }
 
   private let bottomSheetView = BottomSheetView().then {
-    $0.addShadow(to: .top)
+    $0.layer.shadowColor = UIColor.black.cgColor
+    $0.layer.shadowOpacity = 0.1
+    $0.layer.shadowRadius = 20
+    $0.layer.shadowOffset = .zero
   }
   private let cakeListViewController = CakeListViewController()
   
