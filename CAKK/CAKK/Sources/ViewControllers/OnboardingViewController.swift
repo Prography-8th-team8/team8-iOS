@@ -52,7 +52,7 @@ class OnboardingViewController: UIViewController {
   
   public var viewModel: ViewModel!
   
-  private var regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, RegionModel> { cell, _, item in
+  private var regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
     cell.configure(item)
   }
   

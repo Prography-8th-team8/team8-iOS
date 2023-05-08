@@ -63,9 +63,9 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   
   // MARK: - Publics
   
-  public func configure(_ item: RegionModel) {
-    self.title = item.regionName
-    self.numberOfRegions = item.numberOfRegions
+  public func configure(_ item: DistrictSection) {
+    self.title = item.sectionName
+    self.numberOfRegions = item.count
     self.color = item.color
     
     configureView()
@@ -134,11 +134,12 @@ struct RegionPickerPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
       let regionPicker = RegionPickerCollectionCell()
-      regionPicker.configure(.init(
-        regionName: "도봉 강북 성북 노원",
-        numberOfRegions: 43,
-        color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1)
-      ))
+      regionPicker.configure(
+        .init(
+          count: 43,
+          color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1),
+          districts: [.dobong, .gangbuk, .seongbuk, .nowon])
+      )
       
       return regionPicker
     }

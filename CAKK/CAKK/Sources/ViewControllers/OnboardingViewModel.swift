@@ -12,7 +12,7 @@ class OnboardingViewModel: ObservableObject {
   
   // MARK: - Types
   
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, RegionModel>
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
   
   
   // MARK: - Properties
@@ -52,9 +52,9 @@ class OnboardingViewModel: ObservableObject {
   
   public func setupDataSource() {
     let section: [Section] = [.region]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, RegionModel>()
+    var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
     snapshot.appendSections(section)
-    snapshot.appendItems(RegionModel.fakeItems())
+    snapshot.appendItems(DistrictSection.items())
     dataSource.apply(snapshot)
   }
 }
