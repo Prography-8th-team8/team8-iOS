@@ -14,7 +14,7 @@ final class CakeListViewController: UIViewController {
   // MARK: - Constants
   
   enum Metric {
-    static let padding = 16.f
+    static let padding = 20.f
     static let cornerRadius = 16.f
     
     static let headerViewHeight = 100.f
@@ -22,13 +22,12 @@ final class CakeListViewController: UIViewController {
     static let collectionViewCornerRadius = 24.f
     static let collectionViewItemEstimatedHeight = 158.f
     static let collectionViewItemSpacing = 12.f
+    static let collectionViewHorizontalPadding = 16.f
     
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
     
     static let labelsStackViewSpacing = 12.f
-    static let labelsStackViewLeadingInset = 16.f
-    static let labelsStackViewTopInset = 24.f
     
     static let cakeTableViewItemSpacing = 10.f
   }
@@ -113,8 +112,7 @@ final class CakeListViewController: UIViewController {
   private func setupLabelStackLayout() {
     headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
-      $0.leading.equalToSuperview().inset(Metric.labelsStackViewLeadingInset)
-      $0.top.equalToSuperview().inset(Metric.labelsStackViewTopInset)
+      $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
     }
   }
   
@@ -122,7 +120,7 @@ final class CakeListViewController: UIViewController {
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints {
       $0.top.equalTo(headerView.snp.bottom)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.leading.trailing.equalToSuperview().inset(Metric.collectionViewHorizontalPadding)
       $0.bottom.equalToSuperview()
     }
   }

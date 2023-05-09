@@ -122,7 +122,6 @@ struct ChipViewPreview: PreviewProvider {
 
       return chipView
     }
-    .padding()
     .previewLayout(.sizeThatFits)
   }
 }

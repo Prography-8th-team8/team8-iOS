@@ -39,7 +39,9 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
 
   private var cancellableBag = Set<AnyCancellable>()
-
+  static let bottomSheetLayout = BottomSheetLayout(
+    half: .fractional(0.5),
+    tip: .absolute(CakeListViewController.Metric.headerViewHeight))
   
   // MARK: - UI
   
@@ -60,6 +62,7 @@ final class MainViewController: UIViewController {
   }
 
   private let bottomSheetView = BottomSheetView().then {
+    $0.layout = MainViewController.bottomSheetLayout
     $0.layer.shadowColor = UIColor.black.cgColor
     $0.layer.shadowOpacity = 0.1
     $0.layer.shadowRadius = 20
@@ -81,25 +84,65 @@ final class MainViewController: UIViewController {
   // MARK: - Private
   
   private func setup() {
-    setupBaseView()
     setupLayouts()
+    setupView()
+  }
+  
+  private func setupLayouts() {
+    setupNaverMapViewLayout()
+    setupRefreshButtonLayout()
+  }
+  
+  private func setupNaverMapViewLayout() {
+    view.addSubview(naverMapView)
+    naverMapView.snp.makeConstraints {
+      $0.top.left.right.equalToSuperview()
+      $0.height.greaterThanOrEqualTo(view.frame.height * Metric.naverMapViewHeightRatio)
+        .priority(.required)
+    }
+  }
+  
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.refreshButtonOffset)
+      $0.centerX.equalToSuperview()
+    }
+  }
+  
+  private func setupBottomSheetLayout() {
+    
+  }
+  
+  private func setupView() {
+    setupBaseView()
+    setupSeeLocationButton()
+    setupMapView()
     setupBottomSheet()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .systemBackground
   }
-
+  
+  private func setupSeeLocationButton() {
+    view.addSubview(seeLocationButton)
+    seeLocationButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalToSuperview().inset(Metric.seeLocationButtonBottomInset)
+    }
+  }
+  
+  private func setupMapView() {
+    naverMapView.mapView.addCameraDelegate(delegate: self)
+  }
+  
   private func setupBottomSheet() {
-    bottomSheetView.layout = BottomSheetLayout(
-      half: .fractional(0.5),
-      tip: .absolute(CakeListViewController.Metric.headerViewHeight)
-    )
-                                               
     bottomSheetView.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
+    
     bottomSheetView.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
@@ -107,31 +150,18 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupLayouts() {
-    view.addSubview(naverMapView)
-    naverMapView.snp.makeConstraints {
-      $0.top.left.right.equalToSuperview()
-      $0.height.greaterThanOrEqualTo(view.frame.height * Metric.naverMapViewHeightRatio)
-        .priority(.required)
-    }
-    
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.refreshButtonOffset)
-      $0.centerX.equalToSuperview()
-    }
-
-    view.addSubview(seeLocationButton)
-    seeLocationButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.bottom.equalToSuperview().inset(Metric.seeLocationButtonBottomInset)
-    }
-  }
-
   @objc private func seeLocation() {
     bottomSheetView.move(to: .half)
   }
+}
 
+
+// MARK: - MapView Extensions
+
+extension MainViewController: NMFMapViewCameraDelegate {
+//  func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+//    bottomSheetView.move(to: .tip)
+//  }
 }
 
 
