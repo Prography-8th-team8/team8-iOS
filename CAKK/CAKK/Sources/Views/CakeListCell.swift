@@ -33,6 +33,8 @@ final class CakeListCell: UICollectionViewCell {
     static let locationLabelFontSize = 14.f
     static let locationLabelTopPadding = 12.f
     static let locationLabelNumberOfLines = 3
+    
+    static let cakeShopTypeStackViewSpacing = 4.f
   }
   
   // MARK: - Properties
@@ -69,6 +71,20 @@ final class CakeListCell: UICollectionViewCell {
     $0.numberOfLines = Metric.locationLabelNumberOfLines
   }
   
+  private let cakeShopTypeStackView = UIStackView().then {
+    $0.axis = .horizontal
+    $0.spacing = Metric.cakeShopTypeStackViewSpacing
+    $0.alignment = .leading
+  }
+  
+  private let cakeShopTypeSupplementaryChip = LabelChip().then {
+    $0.title = "+3"
+    $0.isBackgroundSynced = false
+    $0.titleColor = .white
+    $0.backgroundColor = .black
+  }
+  
+  
   
   // MARK: - LifeCycle
   
@@ -84,9 +100,6 @@ final class CakeListCell: UICollectionViewCell {
   
   // MARK: - Public
 
-  func configreFirstCellTopPadding() {
-    
-  }
   
   // MARK: - Private
   
@@ -101,6 +114,7 @@ final class CakeListCell: UICollectionViewCell {
     setupStackViewDividerLayout()
     setupDistrictLabelLayout()
     setupLocationLabelLayout()
+    setupCakeShopTypeStackViewLayout()
   }
   
   private func setupHeaderStackViewLayout() {
@@ -134,8 +148,16 @@ final class CakeListCell: UICollectionViewCell {
     }
   }
   
+  private func setupCakeShopTypeStackViewLayout() {
+    contentView.addSubview(cakeShopTypeStackView)
+    cakeShopTypeStackView.snp.makeConstraints {
+      $0.leading.bottom.equalToSuperview().inset(Metric.padding)
+    }
+  }
+  
   private func setupView() {
     setupContentView()
+    setupCakeShopTypeStackView()
   }
   
   private func setupContentView() {
@@ -143,6 +165,16 @@ final class CakeListCell: UICollectionViewCell {
     contentView.layer.cornerRadius = Metric.cornerRadius
     contentView.layer.borderWidth = Metric.borderWidth
     contentView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+  }
+  
+  private func setupCakeShopTypeStackView() {
+    let sampleTypes: [CakeShopType] = [.character, .figure, .flower]
+    sampleTypes.forEach { shopType in
+      let chip = CakeShopTypeChip(shopType)
+      cakeShopTypeStackView.addArrangedSubview(chip)
+    }
+    
+    cakeShopTypeStackView.addArrangedSubview(cakeShopTypeSupplementaryChip)
   }
 }
 
