@@ -47,7 +47,7 @@ extension CakeAPI: TargetType {
     switch self {
     case .fetchCakeShopList(let districts):
       let parameters: Parameters = [
-        "district": districts.map { $0.rawValue }
+        "district": districts.map { $0.rawValue.uppercased() }
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
