@@ -110,14 +110,9 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupBottomSheetLayout() {
-    
-  }
-  
   private func setupView() {
     setupBaseView()
     setupSeeLocationButton()
-    setupMapView()
     setupBottomSheet()
   }
   
@@ -131,10 +126,6 @@ final class MainViewController: UIViewController {
       $0.centerX.equalToSuperview()
       $0.bottom.equalToSuperview().inset(Metric.seeLocationButtonBottomInset)
     }
-  }
-  
-  private func setupMapView() {
-    naverMapView.mapView.addCameraDelegate(delegate: self)
   }
   
   private func setupBottomSheet() {
@@ -153,15 +144,6 @@ final class MainViewController: UIViewController {
   @objc private func seeLocation() {
     bottomSheetView.move(to: .half)
   }
-}
-
-
-// MARK: - MapView Extensions
-
-extension MainViewController: NMFMapViewCameraDelegate {
-//  func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-//    bottomSheetView.move(to: .tip)
-//  }
 }
 
 

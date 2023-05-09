@@ -1,5 +1,5 @@
 //
-//  ChipView.swift
+//  LabelChip.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/04/25.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ChipView: CapsuleView {
+class LabelChip: CapsuleView {
   
   // MARK: - Constants
   
@@ -116,9 +116,9 @@ import SwiftUI
 struct ChipViewPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      let chipView = ChipView()
-      chipView.title = "케이크 카테고리"
-      chipView.titleColor = R.color.iris100()
+      let chipView = LabelChip()
+      chipView.title = "title"
+      chipView.titleColor = .black
 
       return chipView
     }
