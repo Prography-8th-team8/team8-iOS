@@ -9,11 +9,14 @@ import UIKit
 
 class CapsuleView: UIView {
   
-  override var frame: CGRect {
-    didSet {
-      if oldValue != frame {
-        configureCornerRadius()
-      }
+  var oldFrame: CGRect = .zero
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    if oldFrame != frame {
+      configureCornerRadius()
+      oldFrame = frame
     }
   }
   
