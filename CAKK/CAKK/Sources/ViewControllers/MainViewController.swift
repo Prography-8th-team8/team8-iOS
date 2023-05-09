@@ -44,12 +44,13 @@ final class MainViewController: UIViewController {
     tip: .absolute(CakeListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
-    tip: .absolute(0))
+    tip: .absolute(-100)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
   
   // MARK: - UI
   
   private let naverMapView = NMFNaverMapView(frame: .zero).then {
     $0.showZoomControls = false
+    $0.mapView.logoAlign = .leftTop
   }
   
   private let refreshButton = CapsuleStyleButton(
@@ -107,9 +108,7 @@ final class MainViewController: UIViewController {
   private func setupNaverMapViewLayout() {
     view.addSubview(naverMapView)
     naverMapView.snp.makeConstraints {
-      $0.top.left.right.equalToSuperview()
-      $0.height.greaterThanOrEqualTo(view.frame.height * Metric.naverMapViewHeightRatio)
-        .priority(.required)
+      $0.edges.equalToSuperview()
     }
   }
   
@@ -123,13 +122,19 @@ final class MainViewController: UIViewController {
   
   private func setupView() {
     setupBaseView()
+    setupMapView()
     setupSeeLocationButton()
     setupCakeShopListBottomSheet()
+    setupCakeShopListViewController()
     setupCakeShopDetailBottomSheet()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .systemBackground
+  }
+  
+  private func setupMapView() {
+    naverMapView.mapView.addCameraDelegate(delegate: self)
   }
   
   private func setupSeeLocationButton() {
@@ -151,7 +156,9 @@ final class MainViewController: UIViewController {
         .inset(Metric.naverMapBottomInset)
         .priority(.low)
     }
-    
+  }
+  
+  private func setupCakeShopListViewController() {
     cakeListViewController.cakeShopItemSelectAction = { [weak self] in
       self?.showCakeShopDetail()
     }
@@ -174,6 +181,13 @@ final class MainViewController: UIViewController {
   }
 }
 
+// MARK: - MapView Extensions
+
+extension MainViewController: NMFMapViewCameraDelegate {
+  func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+    cakeShopListBottomSheet.move(to: .tip)
+  }
+}
 
 // MARK: - Preview
 
