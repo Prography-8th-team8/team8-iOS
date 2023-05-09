@@ -48,6 +48,7 @@ final class CakeListViewController: UIViewController {
     section.interGroupSpacing = Metric.collectionViewItemSpacing
     return UICollectionViewCompositionalLayout(section: section)
   }
+  public var cakeShopItemSelectAction: () -> Void = { }
   
   // MARK: - UI
   
@@ -150,6 +151,10 @@ extension CakeListViewController: UICollectionViewDelegate, UICollectionViewData
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeListCell.identifier, for: indexPath) as? CakeListCell else { return .init()}
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    cakeShopItemSelectAction()
   }
 }
 

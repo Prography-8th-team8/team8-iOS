@@ -39,9 +39,12 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
 
   private var cancellableBag = Set<AnyCancellable>()
-  static let bottomSheetLayout = BottomSheetLayout(
+  static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
     tip: .absolute(CakeListViewController.Metric.headerViewHeight))
+  static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
+    half: .fractional(0.5),
+    tip: .absolute(0))
   
   // MARK: - UI
   
@@ -61,14 +64,22 @@ final class MainViewController: UIViewController {
     $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
   }
 
-  private let bottomSheetView = BottomSheetView().then {
-    $0.layout = MainViewController.bottomSheetLayout
+  private let cakeShopListBottomSheet = BottomSheetView().then {
+    $0.layout = MainViewController.cakeShopListBottomSheetLayout
     $0.layer.shadowColor = UIColor.black.cgColor
     $0.layer.shadowOpacity = 0.1
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
   private let cakeListViewController = CakeListViewController()
+  
+  private let cakeShopDetailBottomSheet = BottomSheetView().then {
+    $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
+    $0.layer.shadowColor = UIColor.black.cgColor
+    $0.layer.shadowOpacity = 0.1
+    $0.layer.shadowRadius = 20
+    $0.layer.shadowOffset = .zero
+  }
   
   private var isTableViewPanning: Bool = false
 
@@ -113,7 +124,8 @@ final class MainViewController: UIViewController {
   private func setupView() {
     setupBaseView()
     setupSeeLocationButton()
-    setupBottomSheet()
+    setupCakeShopListBottomSheet()
+    setupCakeShopDetailBottomSheet()
   }
   
   private func setupBaseView() {
@@ -128,21 +140,37 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupBottomSheet() {
-    bottomSheetView.configure(
+  private func setupCakeShopListBottomSheet() {
+    cakeShopListBottomSheet.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
     
-    bottomSheetView.snp.makeConstraints {
+    cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
         .priority(.low)
     }
+    
+    cakeListViewController.cakeShopItemSelectAction = { [weak self] in
+      self?.showCakeShopDetail()
+    }
+  }
+  
+  private func setupCakeShopDetailBottomSheet() {
+    cakeShopDetailBottomSheet.configure(
+      parentViewController: self,
+      contentViewController: .init())
+    cakeShopDetailBottomSheet.move(to: .tip)
   }
   
   @objc private func seeLocation() {
-    bottomSheetView.move(to: .half)
+    cakeShopListBottomSheet.move(to: .half)
+  }
+  
+  private func showCakeShopDetail() {
+    cakeShopListBottomSheet.move(to: .tip)
+    cakeShopDetailBottomSheet.move(to: .half)
   }
 }
 
