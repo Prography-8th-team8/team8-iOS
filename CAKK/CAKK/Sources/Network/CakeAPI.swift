@@ -12,6 +12,8 @@ enum CakeAPI {
   case fetchCakeShopList(districts: [District])
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
+  case fetchBlogReviews(cakeShopName: String)
+  case fetchCakeShopImage(id: Int)
 }
 
 extension CakeAPI: TargetType {
@@ -27,36 +29,44 @@ extension CakeAPI: TargetType {
       return "/district/count"
     case .fetchCakeShopDetail:
       return "/store"
+    case .fetchBlogReviews:
+      return "/blog"
+    case .fetchCakeShopImage(id: let id):
+      return "/image/\(id)"
     }
   }
   
   var method: Moya.Method {
     switch self {
-    case .fetchCakeShopList:
-      return .get
-    case .fetchDistrictCounts:
-      return .get
-    case .fetchCakeShopDetail:
+    default:
       return .get
     }
   }
   
   var task: Moya.Task {
     switch self {
-    case let .fetchCakeShopList(districts):
+    case .fetchCakeShopList(let districts):
       let parameters: Parameters = [
-        "district": districts.map { $0.rawValue }
+        "district": districts.map { $0.rawValue.uppercased() }
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
+      
     case .fetchDistrictCounts:
       return .requestPlain
-    case let .fetchCakeShopDetail(id):
-      let parameters: Parameters = [
-        "id": id
-      ]
+      
+    case .fetchCakeShopDetail(let id):
+      let parameters: Parameters = ["id": id]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchBlogReviews(cakeShopName: let name):
+      let parameters: Parameters = ["name": name]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchCakeShopImage:
+      return .requestPlain
     }
   }
   
@@ -73,6 +83,10 @@ extension CakeAPI: TargetType {
     case .fetchDistrictCounts:
       return Data()
     case .fetchCakeShopDetail:
+      return Data()
+    case .fetchBlogReviews:
+      return Data()
+    case .fetchCakeShopImage:
       return Data()
     }
   }
