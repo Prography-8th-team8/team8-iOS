@@ -13,7 +13,7 @@ struct DistrictSection: Hashable {
   var districts: [District]
   
   var sectionName: String {
-    districts.map { $0.rawValue }.joined(separator: " ")
+    districts.map { $0.koreanName }.joined(separator: " ")
   }
 }
 

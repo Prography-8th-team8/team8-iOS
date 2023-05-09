@@ -34,7 +34,7 @@ enum District: String, Decodable {
   case songpa
   case gangdong
   
-  var korean: String {
+  var koreanName: String {
     switch self {
     case .jongno:
       return "종로"
