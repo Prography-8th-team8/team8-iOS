@@ -53,6 +53,7 @@
 		B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeListViewController.swift */; };
 		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
 		B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */; };
+		B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */; };
 		B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */; };
 		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
 		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
@@ -108,6 +109,7 @@
 		B46F9DC729DACC8500113979 /* CakeListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
+		B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
 		B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -232,6 +234,7 @@
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
 				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
 				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
+				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
 				B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */,
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
+				B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
