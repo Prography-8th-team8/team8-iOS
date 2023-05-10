@@ -51,6 +51,8 @@ final class ShopDetailViewController: UIViewController {
     $0.distribution = .fillEqually
   }
   
+  private let callMenuButton = MenuDetailButton(image: R.image.call(), title: "전화하기")
+  
   // MARK: - LifeCycle
   
   init(cakeShop: CakeShop) {
@@ -80,6 +82,7 @@ final class ShopDetailViewController: UIViewController {
     setupScrollViewLayout()
     setupShopImageViewLayout()
     setupTitleViewLayout()
+    setupMenuButtons()
   }
   
   private func setupScrollViewLayout() {
@@ -108,6 +111,15 @@ final class ShopDetailViewController: UIViewController {
     titleStackView.snp.makeConstraints {
       $0.horizontalEdges.equalToSuperview()
       $0.top.equalTo(shopImageView.snp.bottom).offset(40)
+    }
+  }
+  
+  private func setupMenuButtons() {
+    contentView.addSubview(callMenuButton)
+    callMenuButton.snp.makeConstraints {
+      $0.top.equalTo(titleStackView.snp.bottom)
+      $0.width.equalTo(90)
+      $0.height.equalTo(60)
     }
   }
   

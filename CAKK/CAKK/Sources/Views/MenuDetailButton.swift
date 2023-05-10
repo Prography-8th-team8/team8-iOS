@@ -5,4 +5,80 @@
 //  Created by Mason Kim on 2023/05/10.
 //
 
-import Foundation
+import UIKit
+
+import SnapKit
+import Then
+
+final class MenuDetailButton: UIButton {
+  
+  // MARK: - Constants
+  
+  enum Metric { }
+  
+  // MARK: - UI
+  
+  let menuTitleLabel = UILabel().then {
+    $0.font = .pretendard()
+    $0.isUserInteractionEnabled = false
+  }
+  let menuImageView = UIImageView().then {
+    $0.isUserInteractionEnabled = false
+    $0.contentMode = .scaleAspectFit
+  }
+  
+  private lazy var stackView = UIStackView(
+    arrangedSubviews: [menuImageView, menuTitleLabel]
+  ).then {
+    $0.layer.borderColor = UIColor.black.cgColor
+    $0.layer.borderWidth = 1
+    $0.axis = .vertical
+    $0.alignment = .center
+    $0.distribution = .fill
+    $0.spacing = 8
+  }
+  
+  // MARK: - LifeCycle
+  
+  init(image: UIImage?, title: String) {
+    super.init(frame: .zero)
+    setup(image: image, title: title)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Public
+  
+  // MARK: - Private
+  
+  private func setup(image: UIImage?, title: String) {
+    menuTitleLabel.text = title
+    menuImageView.image = image
+    
+    addSubview(stackView)
+    
+    stackView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+  }
+  
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct MenuDetailButtonPreview: PreviewProvider {
+  static var previews: some View {
+    UIViewPreview {
+      let image = UIImage(systemName: "phone")?.withTintColor(.black)
+      return MenuDetailButton(image: image, title: "전화하기")
+    }
+    .padding()
+    .frame(width: 120, height: 90)
+    .border(.black)
+    .previewLayout(.sizeThatFits)
+  }
+}
+#endif
