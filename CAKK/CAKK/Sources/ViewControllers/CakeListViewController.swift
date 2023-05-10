@@ -14,46 +14,62 @@ final class CakeListViewController: UIViewController {
   // MARK: - Constants
   
   enum Metric {
+    static let padding = 20.f
     static let cornerRadius = 16.f
     
     static let headerViewHeight = 100.f
-    static let cakelistTableViewHeight = (140 + 16).f
     
-    static let locationLabelFontSize = 16.f
-    static let numberOfCakeshopsLabelFontSize = 14.f
+    static let collectionViewCornerRadius = 24.f
+    static let collectionViewItemEstimatedHeight = 158.f
+    static let collectionViewItemSpacing = 12.f
+    static let collectionViewHorizontalPadding = 16.f
     
-    static let labelsStackViewSpacing = 8.f
-    static let labelsStackViewLeadingInset = 16.f
-    static let labelsStackViewTopInset = 24.f
+    static let locationLabelFontSize = 18.f
+    static let numberOfCakeShopFontSize = 14.f
     
-    static let changeLocationButtonCornerRadius = 24.f
-    static let changeLocationButtonSize = CGSize(width: 48.f, height: 48.f)
-    static let changeLocationButtonTrailingInset = 16.f
-    static let changeLocationButtonFontSize = 12.f
+    static let labelsStackViewSpacing = 12.f
     
     static let cakeTableViewItemSpacing = 10.f
   }
   
   // MARK: - Properties
   
+  static var layout: UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0),
+      heightDimension: .estimated(Metric.collectionViewItemEstimatedHeight))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let group = NSCollectionLayoutGroup.vertical(
+      layoutSize: itemSize,
+      subitems: [item])
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = Metric.collectionViewItemSpacing
+    return UICollectionViewCompositionalLayout(section: section)
+  }
+  public var cakeShopItemSelectAction: () -> Void = { }
+  
   // MARK: - UI
   
-  let cakeTableView = UITableView(frame: .zero, style: .plain).then {
-    $0.bounces = false
-    $0.registerCell(cellClass: CakeListCell.self)
-    $0.separatorStyle = .none
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeListViewController.layout).then {
+    $0.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    $0.backgroundColor = .clear
+    $0.layer.cornerRadius = Metric.collectionViewCornerRadius
   }
   
   private let headerView = UIView()
   
   private let locationsLabel = UILabel().then {
     $0.text = "은평, 마포, 서대문"
-    $0.font = .systemFont(ofSize: Metric.locationLabelFontSize, weight: .bold)
+    $0.font = .pretendard(size: Metric.locationLabelFontSize, weight: .bold)
+    $0.textColor = .black
   }
   
   private let numberOfCakeshopsLabel = UILabel().then {
     $0.text = "0개의 케이크샵"
-    $0.font = .systemFont(ofSize: Metric.numberOfCakeshopsLabelFontSize)
+    $0.font = .systemFont(ofSize: Metric.numberOfCakeShopFontSize)
+    $0.textColor = .black.withAlphaComponent(0.8)
   }
   
   private lazy var labelsStack = UIStackView(
@@ -64,21 +80,6 @@ final class CakeListViewController: UIViewController {
     $0.spacing = Metric.labelsStackViewSpacing
   }
   
-  private let changeLocationButton = UIButton().then {
-    let attributedTitle = NSAttributedString(
-      string: "지역\n변경",
-      attributes: [.font: UIFont.systemFont(ofSize: Metric.changeLocationButtonFontSize, weight: .medium)]
-    )
-    $0.titleLabel?.numberOfLines = 0
-    $0.setAttributedTitle(attributedTitle, for: .normal)
-    $0.setTitleColor(.white, for: .normal)
-    $0.backgroundColor = .black
-    $0.layer.cornerRadius = Metric.changeLocationButtonCornerRadius
-  }
-  
-  private let lineView = UIView().then {
-    $0.backgroundColor = .lightGray
-  }
 
   // MARK: - LifeCycle
 
@@ -92,80 +93,78 @@ final class CakeListViewController: UIViewController {
   
   private func setup() {
     setupLayout()
-    setupViewStyle()
-    setupTableView()
-  }
-  
-  private func setupViewStyle() {
-    view.backgroundColor = .white
-    view.layer.cornerRadius = Metric.cornerRadius
+    setupView()
   }
 
-  private func setupTableView() {
-    cakeTableView.dataSource = self
-    cakeTableView.delegate = self
+  private func setupLayout() {
+    setupHeaderViewLayout()
+    setupLabelStackLayout()
+    setupCollectionViewLayout()
   }
   
-  private func setupLayout() {
+  private func setupHeaderViewLayout() {
     view.addSubview(headerView)
     headerView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.headerViewHeight)
     }
-
+  }
+  
+  private func setupLabelStackLayout() {
     headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
-      $0.leading.equalToSuperview().inset(Metric.labelsStackViewLeadingInset)
-      $0.top.equalToSuperview().inset(Metric.labelsStackViewTopInset)
+      $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
     }
-    
-    headerView.addSubview(changeLocationButton)
-    changeLocationButton.snp.makeConstraints {
-      $0.size.equalTo(Metric.changeLocationButtonSize)
-      $0.centerY.equalTo(labelsStack.snp.centerY)
-      $0.trailing.equalToSuperview().inset(Metric.changeLocationButtonTrailingInset)
-    }
-    
-    view.addSubview(cakeTableView)
-    cakeTableView.snp.makeConstraints {
+  }
+  
+  private func setupCollectionViewLayout() {
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints {
       $0.top.equalTo(headerView.snp.bottom)
-      $0.leading.trailing.equalToSuperview()
+      $0.leading.trailing.equalToSuperview().inset(Metric.collectionViewHorizontalPadding)
       $0.bottom.equalToSuperview()
     }
-
-    view.addSubview(lineView)
-    lineView.snp.makeConstraints {
-      $0.leading.trailing.equalToSuperview()
-      $0.height.equalTo(1)
-      $0.bottom.equalTo(cakeTableView.snp.top)
-    }
+  }
+  
+  private func setupView() {
+    setupCollectionView()
+  }
+  
+  private func setupBaseView() {
+    view.backgroundColor = .white
+  }
+  
+  private func setupCollectionView() {
+    collectionView.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    collectionView.dataSource = self
+    collectionView.delegate = self
   }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UICollectionView
 
-extension CakeListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension CakeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 20
   }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(cellClass: CakeListCell.self, for: indexPath)
-
-    // 첫번째 셀의 top padding 만 좀 더 크게 해주기 위한 logic
-    if indexPath == IndexPath(row: 0, section: 0) {
-      cell.configreFirstCellTopPadding()
-    }
-
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeListCell.identifier, for: indexPath) as? CakeListCell else { return .init()}
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    cakeShopItemSelectAction()
   }
 }
 
 
-// MARK: - UITableViewDelegate
+// MARK: - Preview
 
-extension CakeListViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return Metric.cakelistTableViewHeight
+import SwiftUI
+
+struct CakeListViewControllerPreview: PreviewProvider {
+  static var previews: some View {
+    CakeListViewController().toPreview()
   }
 }
