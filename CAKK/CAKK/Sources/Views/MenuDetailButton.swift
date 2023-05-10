@@ -49,6 +49,14 @@ final class MenuDetailButton: UIButton {
   
   // MARK: - Public
   
+  func update(image: UIImage?) {
+    menuImageView.image = image
+  }
+  
+  func update(title: String) {
+    menuTitleLabel.text = title
+  }
+  
   // MARK: - Private
   
   private func setup(image: UIImage?, title: String) {
