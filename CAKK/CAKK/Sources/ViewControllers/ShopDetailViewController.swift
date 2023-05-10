@@ -63,6 +63,7 @@ final class ShopDetailViewController: UIViewController {
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
+    $0.addSeparators(color: .lightGray)
   }
   
   // MARK: - LifeCycle

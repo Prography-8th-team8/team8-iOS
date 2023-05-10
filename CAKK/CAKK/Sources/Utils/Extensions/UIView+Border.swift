@@ -15,27 +15,34 @@ extension UIView {
     case left
   }
   
-  func addBorder(edge: BorderEdge, color: UIColor, width: CGFloat = 1.0) {
-    let border = CALayer()
-    border.backgroundColor = color.cgColor
+  func addBorder(to edge: BorderEdge, color: UIColor, width: CGFloat = 1.0) {
+    let borderView = UIView()
+    borderView.translatesAutoresizingMaskIntoConstraints = false
+    borderView.backgroundColor = color
+    addSubview(borderView)
+    
+    let topConstraint = topAnchor.constraint(equalTo: borderView.topAnchor)
+    let rightConstraint = trailingAnchor.constraint(equalTo: borderView.trailingAnchor)
+    let bottomConstraint = bottomAnchor.constraint(equalTo: borderView.bottomAnchor)
+    let leftConstraint = leadingAnchor.constraint(equalTo: borderView.leadingAnchor)
+    let heightConstraint = borderView.heightAnchor.constraint(equalToConstant: width)
+    let widthConstraint = borderView.widthAnchor.constraint(equalToConstant: width)
     
     switch edge {
     case .top:
-      border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: width)
+      NSLayoutConstraint.activate([leftConstraint, topConstraint, rightConstraint, heightConstraint])
     case .right:
-      border.frame = CGRect(x: frame.size.width - width, y: 0, width: width, height: frame.size.height)
+      NSLayoutConstraint.activate([topConstraint, rightConstraint, bottomConstraint, widthConstraint])
     case .bottom:
-      border.frame = CGRect(x: 0, y: frame.size.height - width, width: frame.size.width, height: width)
+      NSLayoutConstraint.activate([rightConstraint, bottomConstraint, leftConstraint, heightConstraint])
     case .left:
-      border.frame = CGRect(x: 0, y: 0, width: width, height: frame.size.height)
+      NSLayoutConstraint.activate([bottomConstraint, leftConstraint, topConstraint, widthConstraint])
     }
-    
-    self.layer.addSublayer(border)
   }
   
-  func addBorders(edges: [BorderEdge], color: UIColor, width: CGFloat = 1.0) {
+  func addBorders(to edges: [BorderEdge], color: UIColor, width: CGFloat = 1.0) {
     edges.forEach {
-      addBorder(edge: $0, color: color, width: width)
+      addBorder(to: $0, color: color, width: width)
     }
   }
 }
