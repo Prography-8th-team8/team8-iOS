@@ -10,7 +10,7 @@
       "location": "123 A Street",
       "latitude": 37.564,
       "longitude": 126.98,
-      "storeTypes": ["LETTERING", "CHARACTER"]
+      "storeTypes": ["LETTERING", "CHARACTER", "MEALBOX", "TIARA", "RICE", "FLOWER"]
     },
     {
       "id": 2,

@@ -24,7 +24,7 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - UI
   
-  private let scrollView = UIScrollView()
+  private let mainScrollView = UIScrollView()
   private let contentView = UIView()
   
   private let shopImageView = UIImageView().then {
@@ -66,6 +66,22 @@ final class ShopDetailViewController: UIViewController {
     $0.addSeparators(color: .gray.withAlphaComponent(0.3))
   }
   
+  private let keywordTitleLabel = UILabel().then {
+    $0.text = "키워드"
+    $0.font = .pretendard(size: 20, weight: .bold)
+  }
+  
+  private let keywordScrollView = UIScrollView().then {
+    $0.showsHorizontalScrollIndicator = false
+    $0.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+  }
+  private let keywordContentStackView = UIStackView().then {
+    $0.axis = .horizontal
+    $0.spacing = 4
+  }
+  
+//  private lazy var detailKeywordView = DetailKeywordView(with: cakeShop.cakeShopTypes)
+  
   // MARK: - LifeCycle
   
   init(cakeShop: CakeShop) {
@@ -95,16 +111,19 @@ final class ShopDetailViewController: UIViewController {
     setupScrollViewLayout()
     setupShopImageViewLayout()
     setupTitleViewLayout()
-    setupMenuButtons()
+    setupMenuButtonStackViewLayout()
+//    setupDetailKeywordViewLayout()
+    setupKeywordTitleLabelLayout()
+    setupKeywordScrollViewLayout()
   }
   
   private func setupScrollViewLayout() {
-    view.addSubview(scrollView)
-    scrollView.snp.makeConstraints {
+    view.addSubview(mainScrollView)
+    mainScrollView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
     
-    scrollView.addSubview(contentView)
+    mainScrollView.addSubview(contentView)
     contentView.snp.makeConstraints {
       $0.edges.equalToSuperview()
       $0.width.equalToSuperview()
@@ -127,7 +146,7 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private func setupMenuButtons() {
+  private func setupMenuButtonStackViewLayout() {
     contentView.addSubview(menuButtonStackView)
     menuButtonStackView.snp.makeConstraints {
       $0.top.equalTo(titleStackView.snp.bottom).offset(32)
@@ -135,9 +154,47 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func setupKeywordTitleLabelLayout() {
+    contentView.addSubview(keywordTitleLabel)
+    keywordTitleLabel.snp.makeConstraints {
+      $0.top.equalTo(menuButtonStackView.snp.bottom).offset(40)
+      $0.leading.equalToSuperview().offset(16)
+    }
+  }
+  
+  private func setupKeywordScrollViewLayout() {
+    contentView.addSubview(keywordScrollView)
+    keywordScrollView.snp.makeConstraints {
+      $0.top.equalTo(keywordTitleLabel.snp.bottom).offset(24)
+      $0.horizontalEdges.equalToSuperview()
+      $0.bottom.equalToSuperview().inset(24)
+    }
+    
+    keywordScrollView.addSubview(keywordContentStackView)
+    keywordContentStackView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+      $0.height.equalToSuperview()
+    }
+  }
+  
   private func setupView() {
     view.backgroundColor = .white
     title = "상세정보"
+    setupCakeShopChips()
+  }
+  
+  private func setupCakeShopChips() {
+    let chipViews = cakeShop.cakeShopTypes.map { _ in
+      let chipView = ChipView()
+      // TODO: ChipView 케이크샵 타입에 따라 색상, 레이블 꾸미기...
+      chipView.title = "케이크 카테고리"
+      chipView.titleColor = R.color.iris100()
+      return chipView
+    }
+    
+    chipViews.forEach {
+      keywordContentStackView.addArrangedSubview($0)
+    }
   }
 }
 

@@ -12,10 +12,6 @@ import Then
 
 final class MenuDetailButton: UIButton {
   
-  // MARK: - Constants
-  
-  enum Metric { }
-  
   // MARK: - UI
   
   let menuTitleLabel = UILabel().then {
