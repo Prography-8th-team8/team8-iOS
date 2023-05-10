@@ -52,6 +52,18 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private let callMenuButton = MenuDetailButton(image: R.image.call(), title: "전화하기")
+  private let bookmarkMenuButton = MenuDetailButton(image: R.image.bookmark(), title: "북마크")
+  private let naviMenuButton = MenuDetailButton(image: R.image.navi(), title: "길 안내")
+  private let shareMenuButton = MenuDetailButton(image: R.image.share(), title: "공유하기")
+  private lazy var menuButtonStackView = UIStackView(
+    arrangedSubviews: [callMenuButton,
+                      bookmarkMenuButton,
+                      naviMenuButton,
+                      shareMenuButton]
+  ).then {
+    $0.axis = .horizontal
+    $0.distribution = .fillEqually
+  }
   
   // MARK: - LifeCycle
   
@@ -115,11 +127,10 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private func setupMenuButtons() {
-    contentView.addSubview(callMenuButton)
-    callMenuButton.snp.makeConstraints {
-      $0.top.equalTo(titleStackView.snp.bottom)
-      $0.width.equalTo(90)
-      $0.height.equalTo(60)
+    contentView.addSubview(menuButtonStackView)
+    menuButtonStackView.snp.makeConstraints {
+      $0.top.equalTo(titleStackView.snp.bottom).offset(32)
+      $0.horizontalEdges.equalToSuperview()
     }
   }
   

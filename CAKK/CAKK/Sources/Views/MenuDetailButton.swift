@@ -30,8 +30,6 @@ final class MenuDetailButton: UIButton {
   private lazy var stackView = UIStackView(
     arrangedSubviews: [menuImageView, menuTitleLabel]
   ).then {
-    $0.layer.borderColor = UIColor.black.cgColor
-    $0.layer.borderWidth = 1
     $0.axis = .vertical
     $0.alignment = .center
     $0.distribution = .fill
