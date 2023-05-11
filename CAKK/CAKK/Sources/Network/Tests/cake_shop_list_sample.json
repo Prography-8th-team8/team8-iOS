@@ -4,13 +4,13 @@
       "id": 1,
       "createdAt": 1622494800,
       "modifiedAt": 1622494800,
-      "name": "Cake Shop A",
+      "name": "케이크를 부탁해 연신내역점",
       "city": "Seoul",
       "district": "Jung",
-      "location": "123 A Street",
+      "location": "서울 은평구 연서로29길 8",
       "latitude": 37.564,
       "longitude": 126.98,
-      "storeTypes": ["LETTERING", "CHARACTER"]
+      "storeTypes": ["LETTERING", "CHARACTER", "MEALBOX", "TIARA", "RICE", "FLOWER", "FIGURE", "LETTERING"]
     },
     {
       "id": 2,
