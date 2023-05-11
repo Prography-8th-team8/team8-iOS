@@ -27,7 +27,9 @@ final class ShopDetailViewController: UIViewController {
   private let mainScrollView = UIScrollView().then {
     $0.contentInsetAdjustmentBehavior = .always
   }
-  private let contentView = UIView()
+  private let contentStackView = UIStackView().then {
+    $0.axis = .vertical
+  }
   
   private let shopImageView = UIImageView().then {
     $0.backgroundColor = R.color.stroke()
@@ -45,14 +47,6 @@ final class ShopDetailViewController: UIViewController {
     $0.text = cakeShop.location
   }
   
-  private lazy var titleStackView = UIStackView(
-    arrangedSubviews: [nameLabel, addressLabel]
-  ).then {
-    $0.axis = .vertical
-    $0.spacing = 12.f
-    $0.distribution = .fillEqually
-  }
-  
   private let callMenuButton = MenuDetailButton(image: R.image.call(), title: "전화하기")
   private let bookmarkMenuButton = MenuDetailButton(image: R.image.bookmark(), title: "북마크")
   private let naviMenuButton = MenuDetailButton(image: R.image.navi(), title: "길 안내")
@@ -60,13 +54,22 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
-                      bookmarkMenuButton,
-                      naviMenuButton,
-                      shareMenuButton]
+                       bookmarkMenuButton,
+                       naviMenuButton,
+                       shareMenuButton]
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
-    $0.addSeparators(color: R.color.stroke() ?? .lightGray)
+    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
+//    $0.isHidden = true // TODO: - MVP에서 메뉴 버튼 숨기기?
+  }
+  
+  private lazy var titleStackView = UIStackView(
+    arrangedSubviews: [nameLabel, addressLabel, menuButtonStackView]
+  ).then {
+    $0.axis = .vertical
+    $0.spacing = 12
+    $0.setCustomSpacing(32, after: addressLabel)
   }
   
   private let keywordTitleLabel = UILabel().then {
@@ -81,6 +84,15 @@ final class ShopDetailViewController: UIViewController {
   private let keywordContentStackView = UIStackView().then {
     $0.axis = .horizontal
     $0.spacing = 4
+  }
+  
+  private var seperatorView: UIView {
+    UIView().then {
+      $0.snp.makeConstraints { view in
+        view.height.equalTo(10)
+      }
+      $0.backgroundColor = R.color.stroke()?.withAlphaComponent(0.2)
+    }
   }
   
   private lazy var detailInfoView = MenuDetailInfoView(with: cakeShop)
@@ -114,7 +126,6 @@ final class ShopDetailViewController: UIViewController {
     setupScrollViewLayout()
     setupShopImageViewLayout()
     setupTitleViewLayout()
-    setupMenuButtonStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupDetailInfoView()
@@ -126,68 +137,59 @@ final class ShopDetailViewController: UIViewController {
       $0.edges.equalToSuperview()
     }
     
-    mainScrollView.addSubview(contentView)
-    contentView.snp.makeConstraints {
+    mainScrollView.addSubview(contentStackView)
+    contentStackView.snp.makeConstraints {
       $0.edges.equalToSuperview()
       $0.width.equalToSuperview()
     }
   }
   
   private func setupShopImageViewLayout() {
-    contentView.addSubview(shopImageView)
+    contentStackView.addArrangedSubview(shopImageView)
     shopImageView.snp.makeConstraints {
       $0.height.equalTo(view.frame.width * 0.5)
-      $0.top.horizontalEdges.equalToSuperview()
     }
+    contentStackView.setCustomSpacing(40, after: shopImageView)
   }
   
   private func setupTitleViewLayout() {
-    contentView.addSubview(titleStackView)
-    titleStackView.snp.makeConstraints {
-      $0.horizontalEdges.equalToSuperview()
-      $0.top.equalTo(shopImageView.snp.bottom).offset(40)
-    }
-  }
-  
-  private func setupMenuButtonStackViewLayout() {
-    contentView.addSubview(menuButtonStackView)
-    menuButtonStackView.snp.makeConstraints {
-      $0.top.equalTo(titleStackView.snp.bottom).offset(32)
-      $0.horizontalEdges.equalToSuperview()
-    }
+    contentStackView.addArrangedSubview(titleStackView)
+    contentStackView.setCustomSpacing(40, after: titleStackView)
+    addSeperatorLineView(withBottomSpacing: 32)
   }
   
   private func setupKeywordTitleLabelLayout() {
-    contentView.addSubview(keywordTitleLabel)
+    contentStackView.addArrangedSubview(keywordTitleLabel)
+    contentStackView.setCustomSpacing(24, after: keywordTitleLabel)
     keywordTitleLabel.snp.makeConstraints {
-      $0.top.equalTo(menuButtonStackView.snp.bottom).offset(40)
       $0.leading.equalToSuperview().offset(16)
     }
   }
   
   private func setupKeywordScrollViewLayout() {
-    contentView.addSubview(keywordScrollView)
-    keywordScrollView.snp.makeConstraints {
-      $0.top.equalTo(keywordTitleLabel.snp.bottom).offset(24)
-      $0.horizontalEdges.equalToSuperview()
-    }
-    
+    contentStackView.addArrangedSubview(keywordScrollView)
     keywordScrollView.addSubview(keywordContentStackView)
     keywordContentStackView.snp.makeConstraints {
       $0.edges.equalToSuperview()
       $0.height.equalToSuperview()
     }
+    contentStackView.setCustomSpacing(20, after: keywordScrollView)
   }
   
   private func setupDetailInfoView() {
-    contentView.addSubview(detailInfoView)
-    detailInfoView.snp.makeConstraints {
-      $0.horizontalEdges.equalToSuperview()
-      $0.top.equalTo(keywordScrollView.snp.bottom)
-//      $0.height.equalTo(250) // 원래 사이즈
-      $0.height.equalTo(300).priority(.medium)
-      $0.bottom.equalToSuperview().priority(.low)
+    contentStackView.addArrangedSubview(seperatorView)
+    contentStackView.addArrangedSubview(detailInfoView)
+  }
+  
+  private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
+    let seperatorView = UIView().then {
+      $0.backgroundColor = R.color.stroke()?.withAlphaComponent(0.5)
+      $0.snp.makeConstraints { view in
+        view.height.equalTo(1)
+      }
     }
+    contentStackView.addArrangedSubview(seperatorView)
+    contentStackView.setCustomSpacing(spacing, after: seperatorView)
   }
   
   private func setupView() {

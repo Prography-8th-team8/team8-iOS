@@ -177,7 +177,7 @@ final class MenuDetailInfoView: UIView {
       $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
       $0.height.equalTo(100)
     }
-    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke() ?? .lightGray)
+    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
     
     addressContainerView.addSubview(addressIconImageView)
     addressIconImageView.snp.makeConstraints {
