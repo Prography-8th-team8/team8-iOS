@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import Combine
+import CombineCocoa
 
 import SnapKit
 import Then
@@ -25,7 +27,8 @@ final class MainViewController: UIViewController {
   }
   
   enum Metric {
-    static let refreshButtonOffset = 16.f
+    static let horizontalPadding = 16.f
+    static let verticalPadding = 24.f
     
     static let naverMapViewHeightRatio = 0.5
     static let naverMapBottomInset = 10.f
@@ -33,6 +36,9 @@ final class MainViewController: UIViewController {
     static let seeLocationButtonBottomInset = 28.f
     
     static let bottomSheetTipModeHeight = 58.f
+    
+    static let hideDetailBottomSheetButtonSize = 40.f
+    static let hideDetailBottomSheetButtonCornerRadius = 20.f
   }
 
   
@@ -43,8 +49,7 @@ final class MainViewController: UIViewController {
     half: .fractional(0.5),
     tip: .absolute(CakeListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
-    half: .fractional(0.5),
-    tip: .absolute(-100)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
+    tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
   
   // MARK: - UI
   
@@ -82,6 +87,15 @@ final class MainViewController: UIViewController {
     $0.layer.shadowOffset = .zero
   }
   
+  private let hideDetailBottomSheetButton = UIButton().then {
+    $0.backgroundColor = .white
+    $0.tintColor = .black
+    $0.layer.borderColor = UIColor(hex: 0x222222).withAlphaComponent(0.1).cgColor
+    $0.layer.borderWidth = 1
+    $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+    $0.alpha = 0
+  }
+  
   private var isTableViewPanning: Bool = false
 
   
@@ -98,11 +112,13 @@ final class MainViewController: UIViewController {
   private func setup() {
     setupLayouts()
     setupView()
+    bind()
   }
   
   private func setupLayouts() {
     setupNaverMapViewLayout()
     setupRefreshButtonLayout()
+    setupHideDetailBottomSheetButtonLayout()
   }
   
   private func setupNaverMapViewLayout() {
@@ -115,9 +131,20 @@ final class MainViewController: UIViewController {
   private func setupRefreshButtonLayout() {
     view.addSubview(refreshButton)
     refreshButton.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.refreshButtonOffset)
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
       $0.centerX.equalToSuperview()
     }
+  }
+  
+  private func setupHideDetailBottomSheetButtonLayout() {
+    view.addSubview(hideDetailBottomSheetButton)
+    hideDetailBottomSheetButton.snp.makeConstraints {
+      $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.centerY.equalTo(refreshButton)
+      $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
+    }
+    
+    hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
   }
   
   private func setupView() {
@@ -168,7 +195,19 @@ final class MainViewController: UIViewController {
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
       contentViewController: .init())
-    cakeShopDetailBottomSheet.move(to: .tip)
+    cakeShopDetailBottomSheet.hide()
+  }
+  
+  private func bind() {
+    bindHideCakeShopDetailButton()
+  }
+  
+  private func bindHideCakeShopDetailButton() {
+    hideDetailBottomSheetButton.tapPublisher
+      .sink { [weak self] _ in
+        self?.hideCakeShopDetail()
+      }
+      .store(in: &cancellableBag)
   }
   
   @objc private func seeLocation() {
@@ -176,8 +215,21 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopDetail() {
-    cakeShopListBottomSheet.move(to: .tip)
-    cakeShopDetailBottomSheet.move(to: .half)
+    cakeShopListBottomSheet.hide()
+    cakeShopDetailBottomSheet.show(.half)
+
+    UIView.animate(withDuration: 0.3) {
+      self.hideDetailBottomSheetButton.alpha = 1
+    }
+  }
+
+  private func hideCakeShopDetail() {
+    cakeShopListBottomSheet.show()
+    cakeShopDetailBottomSheet.hide()
+    
+    UIView.animate(withDuration: 0.3) {
+      self.hideDetailBottomSheetButton.alpha = 0
+    }
   }
 }
 
