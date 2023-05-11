@@ -28,7 +28,7 @@ final class ShopDetailViewController: UIViewController {
   private let contentView = UIView()
   
   private let shopImageView = UIImageView().then {
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = R.color.stroke()
   }
   
   private lazy var nameLabel = UILabel().then {
@@ -63,7 +63,7 @@ final class ShopDetailViewController: UIViewController {
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
-    $0.addSeparators(color: .gray.withAlphaComponent(0.3))
+    $0.addSeparators(color: R.color.stroke() ?? .lightGray)
   }
   
   private let keywordTitleLabel = UILabel().then {
@@ -79,9 +79,7 @@ final class ShopDetailViewController: UIViewController {
     $0.axis = .horizontal
     $0.spacing = 4
   }
-  
-//  private lazy var detailKeywordView = DetailKeywordView(with: cakeShop.cakeShopTypes)
-  
+    
   // MARK: - LifeCycle
   
   init(cakeShop: CakeShop) {
@@ -112,7 +110,6 @@ final class ShopDetailViewController: UIViewController {
     setupShopImageViewLayout()
     setupTitleViewLayout()
     setupMenuButtonStackViewLayout()
-//    setupDetailKeywordViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
   }
@@ -184,12 +181,8 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private func setupCakeShopChips() {
-    let chipViews = cakeShop.cakeShopTypes.map { _ in
-      let chipView = ChipView()
-      // TODO: ChipView 케이크샵 타입에 따라 색상, 레이블 꾸미기...
-      chipView.title = "케이크 카테고리"
-      chipView.titleColor = R.color.iris100()
-      return chipView
+    let chipViews = cakeShop.cakeShopTypes.map {
+      CakeShopTypeChip($0)
     }
     
     chipViews.forEach {
