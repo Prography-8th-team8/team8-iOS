@@ -24,7 +24,9 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - UI
   
-  private let mainScrollView = UIScrollView()
+  private let mainScrollView = UIScrollView().then {
+    $0.contentInsetAdjustmentBehavior = .always
+  }
   private let contentView = UIView()
   
   private let shopImageView = UIImageView().then {
@@ -40,7 +42,7 @@ final class ShopDetailViewController: UIViewController {
   private lazy var addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
     $0.textAlignment = .center
-    $0.text = cakeShop.district
+    $0.text = cakeShop.location
   }
   
   private lazy var titleStackView = UIStackView(
@@ -55,6 +57,7 @@ final class ShopDetailViewController: UIViewController {
   private let bookmarkMenuButton = MenuDetailButton(image: R.image.bookmark(), title: "북마크")
   private let naviMenuButton = MenuDetailButton(image: R.image.navi(), title: "길 안내")
   private let shareMenuButton = MenuDetailButton(image: R.image.share(), title: "공유하기")
+  
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
                       bookmarkMenuButton,
@@ -79,6 +82,8 @@ final class ShopDetailViewController: UIViewController {
     $0.axis = .horizontal
     $0.spacing = 4
   }
+  
+  private lazy var detailInfoView = MenuDetailInfoView(with: cakeShop)
     
   // MARK: - LifeCycle
   
@@ -112,6 +117,7 @@ final class ShopDetailViewController: UIViewController {
     setupMenuButtonStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
+    setupDetailInfoView()
   }
   
   private func setupScrollViewLayout() {
@@ -164,13 +170,23 @@ final class ShopDetailViewController: UIViewController {
     keywordScrollView.snp.makeConstraints {
       $0.top.equalTo(keywordTitleLabel.snp.bottom).offset(24)
       $0.horizontalEdges.equalToSuperview()
-      $0.bottom.equalToSuperview().inset(24)
     }
     
     keywordScrollView.addSubview(keywordContentStackView)
     keywordContentStackView.snp.makeConstraints {
       $0.edges.equalToSuperview()
       $0.height.equalToSuperview()
+    }
+  }
+  
+  private func setupDetailInfoView() {
+    contentView.addSubview(detailInfoView)
+    detailInfoView.snp.makeConstraints {
+      $0.horizontalEdges.equalToSuperview()
+      $0.top.equalTo(keywordScrollView.snp.bottom)
+//      $0.height.equalTo(250) // 원래 사이즈
+      $0.height.equalTo(300).priority(.medium)
+      $0.bottom.equalToSuperview().priority(.low)
     }
   }
   

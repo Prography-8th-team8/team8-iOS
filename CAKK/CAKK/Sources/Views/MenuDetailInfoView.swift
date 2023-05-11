@@ -21,6 +21,7 @@ final class MenuDetailInfoView: UIView {
   // MARK: - Properties
   
   private let cakeShop: CakeShop
+  private var isBusinessTimeExpanded = false
   
   // MARK: - UI
   
@@ -29,11 +30,21 @@ final class MenuDetailInfoView: UIView {
     $0.font = .pretendard(size: 20, weight: .bold)
   }
   
-  private let addressView = UIView()
+  private var dotLabel: UILabel {
+    return UILabel().then {
+      $0.textColor = R.color.stroke()
+      $0.text = "·"
+    }
+  }
+  
+  // MARK: - UI - 주소부분
+  
+  private let addressContainerView = UIView()
+  
   private let addressIconImageView = UIImageView(image: R.image.map())
   
   private lazy var addressLabel = UILabel().then {
-    $0.text = "\(cakeShop.location) ·"
+    $0.text = "\(cakeShop.location)"
     $0.font = .pretendard()
   }
   private let copyAddressButton = UIButton().then {
@@ -44,9 +55,11 @@ final class MenuDetailInfoView: UIView {
     )
   }
   private lazy var addressHorizontalStackView = UIStackView(arrangedSubviews: [
-    addressLabel, copyAddressButton
+    addressLabel,
+    dotLabel,
+    copyAddressButton
   ]).then {
-    $0.spacing = 8
+    $0.spacing = 4
     $0.axis = .horizontal
   }
   
@@ -72,16 +85,54 @@ final class MenuDetailInfoView: UIView {
     $0.spacing = 12
   }
   
-  private let businessTimeButton = UIButton()
-  private let businessTimeIconImageView = UIImageView(image: R.image.time())
+  // MARK: - UI - 영업시간 부분
+  
+  private lazy var businessTimeContainerButton = UIButton().then {
+    $0.addTarget(self, action: #selector(showAndHideWeekendBusinessHours), for: .touchUpInside)
+  }
+  
+  private let businessTimeIconImageView = UIImageView(image: R.image.time()).then {
+    $0.contentMode = .scaleAspectFit
+    $0.snp.makeConstraints { imageView in
+      imageView.width.height.equalTo(20)
+    }
+  }
+  
   private lazy var businessStateLabel = UILabel().then {
     $0.font = .pretendard(weight: .bold)
     $0.text = "영업중"
   }
+  
   private lazy var businessTimeLabel = UILabel().then {
     $0.text = "22:30에 영업 종료"
     $0.font = .pretendard()
     //    $0.text = cakeShop. TODO: - 영업 시간 가져와야 함
+  }
+  
+  private let businessTimeToggleImageView = UIImageView().then {
+    $0.image = R.image.toggle_arrow_closed()
+    $0.contentMode = .scaleAspectFit
+    $0.snp.makeConstraints { imageView in
+      imageView.width.height.equalTo(16)
+    }
+  }
+  
+  private lazy var businessTimeHorizontalStackView = UIStackView(arrangedSubviews: [
+    businessTimeIconImageView,
+    businessStateLabel,
+    dotLabel,
+    businessTimeLabel,
+    businessTimeToggleImageView
+  ]).then {
+    $0.axis = .horizontal
+    $0.spacing = 4
+    $0.setCustomSpacing(10, after: businessTimeIconImageView)
+    $0.alignment = .center
+  }
+  
+  private let businessTimeWeekendStackView = UIStackView().then {
+    $0.axis = .vertical
+    $0.spacing = 8
   }
   
   // MARK: - LifeCycle
@@ -102,12 +153,13 @@ final class MenuDetailInfoView: UIView {
   
   private func setup() {
     setupLayout()
+    setupBusinessHourLabels()
   }
   
   private func setupLayout() {
     setupTitleLabelLayout()
-    setupAddressView()
-    setupBusinessHourView()
+    setupAddressViewLayout()
+    setupBusinessHourViewLayout()
   }
   
   private func setupTitleLabelLayout() {
@@ -118,22 +170,22 @@ final class MenuDetailInfoView: UIView {
     }
   }
   
-  private func setupAddressView() {
-    addSubview(addressView)
-    addressView.snp.makeConstraints {
+  private func setupAddressViewLayout() {
+    addSubview(addressContainerView)
+    addressContainerView.snp.makeConstraints {
       $0.top.equalTo(detailTitleLabel.snp.bottom).offset(24)
       $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
       $0.height.equalTo(100)
     }
-    addressView.addBorders(to: [.top, .bottom], color: R.color.stroke() ?? .lightGray)
+    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke() ?? .lightGray)
     
-    addressView.addSubview(addressIconImageView)
+    addressContainerView.addSubview(addressIconImageView)
     addressIconImageView.snp.makeConstraints {
       $0.leading.equalToSuperview()
       $0.top.equalToSuperview().inset(16)
     }
     
-    addressView.addSubview(addressLabelsStackView)
+    addressContainerView.addSubview(addressLabelsStackView)
     addressLabelsStackView.snp.makeConstraints {
       $0.top.equalTo(addressIconImageView)
       $0.leading.equalTo(addressIconImageView.snp.trailing).offset(Metric.horizontalPadding)
@@ -141,8 +193,53 @@ final class MenuDetailInfoView: UIView {
     }
   }
   
-  private func setupBusinessHourView() {
+  private func setupBusinessHourViewLayout() {
+    addSubview(businessTimeContainerButton)
+    businessTimeContainerButton.snp.makeConstraints {
+      $0.top.equalTo(addressContainerView.snp.bottom)
+      $0.height.equalTo(50)
+      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+    }
     
+    businessTimeContainerButton.addSubview(businessTimeHorizontalStackView)
+    businessTimeHorizontalStackView.snp.makeConstraints {
+      $0.verticalEdges.leading.equalToSuperview()
+    }
+    
+    addSubview(businessTimeWeekendStackView)
+    businessTimeWeekendStackView.snp.makeConstraints {
+      $0.leading.equalTo(businessStateLabel)
+      $0.top.equalTo(businessTimeHorizontalStackView.snp.bottom) //.offset(12)
+      $0.bottom.equalToSuperview()
+    }
+    
+    // 버튼 내부의 subview이 버튼의 터치 이벤트를 막지 않도록 함
+    businessTimeContainerButton.subviews.forEach {
+      $0.isUserInteractionEnabled = false
+    }
+  }
+  
+  @objc private func showAndHideWeekendBusinessHours() {
+    businessTimeWeekendStackView.arrangedSubviews.forEach {
+      $0.isHidden = isBusinessTimeExpanded
+    }
+    
+    let toggleImage = isBusinessTimeExpanded ? R.image.toggle_arrow_closed() : R.image.toggle_arrow_opened()
+    businessTimeToggleImageView.image = toggleImage
+    
+    isBusinessTimeExpanded.toggle()
+  }
+  
+  private func setupBusinessHourLabels() {
+    // TODO: 날짜별 정보 받아와서 뿌려주기... / 해당 날짜 bold 처리
+    (1...7).forEach { _ in
+      let label = UILabel().then {
+        $0.text = "월 11:00 - 22:30"
+        $0.font = .pretendard()
+      }
+      businessTimeWeekendStackView.addArrangedSubview(label)
+      label.isHidden = true
+    }
   }
 }
 
@@ -157,7 +254,7 @@ struct MenuDetailInfoViewPreview: PreviewProvider {
       return MenuDetailInfoView(with: SampleData.cakeShopList.first!)
     }
     .padding()
-//    .frame(height: 250)
+    .frame(height: 400)
     .border(.black)
     .previewLayout(.sizeThatFits)
   }
