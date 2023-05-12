@@ -56,6 +56,7 @@ final class CakeShopListViewController: UIViewController {
     $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
+    $0.delaysContentTouches = false
   }
   
   private let headerView = UIView()
@@ -154,6 +155,7 @@ extension CakeShopListViewController: UICollectionViewDelegate, UICollectionView
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
     cakeShopItemSelectAction()
   }
 }

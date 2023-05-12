@@ -50,6 +50,7 @@ final class MainViewController: UIViewController {
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
+  private var isDetailViewShown = false
   
   // MARK: - UI
   
@@ -141,7 +142,7 @@ final class MainViewController: UIViewController {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.top.equalToSuperview().inset(Metric.verticalPadding)
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
@@ -204,7 +205,7 @@ final class MainViewController: UIViewController {
     // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
-      contentViewController: .init())
+      contentViewController: ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!))
     
     // Appearance
     var appearance = BottomSheetAppearance()
@@ -233,6 +234,7 @@ final class MainViewController: UIViewController {
   private func showCakeShopDetail() {
     cakeShopListBottomSheet.hide()
     cakeShopDetailBottomSheet.show(.half)
+    isDetailViewShown = true
 
     UIView.animate(withDuration: 0.3) {
       self.hideDetailBottomSheetButton.alpha = 1
@@ -242,6 +244,7 @@ final class MainViewController: UIViewController {
   private func hideCakeShopDetail() {
     cakeShopListBottomSheet.show()
     cakeShopDetailBottomSheet.hide()
+    isDetailViewShown = false
     
     UIView.animate(withDuration: 0.3) {
       self.hideDetailBottomSheetButton.alpha = 0
@@ -253,7 +256,9 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    cakeShopListBottomSheet.move(to: .tip)
+    if isDetailViewShown == false {
+      cakeShopListBottomSheet.move(to: .tip)
+    }
   }
 }
 

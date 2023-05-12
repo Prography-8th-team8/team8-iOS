@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class RegionPickerCollectionCell: UICollectionViewCell {
+class RegionPickerCollectionCell: HighlightableCell {
   
   // MARK: - Constants
   
@@ -25,10 +25,6 @@ class RegionPickerCollectionCell: UICollectionViewCell {
     static let numberOfRegionsFontSize = 20.f
   }
   
-  // MARK: - UI
-  
-  private let cakkView = CakkView()
-  
   
   // MARK: - Properties
   
@@ -38,8 +34,10 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   private var borderColor = UIColor(hex: 0xD5D9E9)
   
   
-  // MARK: - Views
+  // MARK: - UI
   
+  private let cakkView = CakkView()
+
   public let titleLabel = UILabel().then {
     $0.font = .pretendard(size: Metric.titleFontSize, weight: .regular)
     $0.textColor = .black
