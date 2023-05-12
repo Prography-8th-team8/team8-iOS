@@ -141,7 +141,7 @@ final class MainViewController: UIViewController {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.top.equalToSuperview().inset(Metric.verticalPadding)
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
@@ -204,7 +204,7 @@ final class MainViewController: UIViewController {
     // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
-      contentViewController: .init())
+      contentViewController: ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!))
     
     // Appearance
     var appearance = BottomSheetAppearance()
