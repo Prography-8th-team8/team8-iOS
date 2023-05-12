@@ -176,6 +176,7 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
     presentMainView()
   }
 }

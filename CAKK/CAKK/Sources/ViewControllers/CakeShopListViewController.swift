@@ -155,6 +155,7 @@ extension CakeShopListViewController: UICollectionViewDelegate, UICollectionView
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
     cakeShopItemSelectAction()
   }
 }
