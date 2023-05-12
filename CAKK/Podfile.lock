@@ -49,7 +49,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BottomSheetView:
-    :commit: bdc2474b38cd1312b9a1c7d4ba8290cb0a930856
+    :commit: 915630818d0af8238b4c5d1cd96f854753bbbcce
     :git: "git@github.com:qwerty3345/BottomSheetView.git"
 
 SPEC CHECKSUMS:

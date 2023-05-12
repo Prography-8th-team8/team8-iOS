@@ -55,7 +55,7 @@ final class MainViewController: UIViewController {
   
   private let naverMapView = NMFNaverMapView(frame: .zero).then {
     $0.showZoomControls = false
-    $0.mapView.logoAlign = .leftTop
+    $0.mapView.logoAlign = .rightTop
   }
   
   private let refreshButton = CapsuleStyleButton(
