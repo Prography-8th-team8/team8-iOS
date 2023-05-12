@@ -1,5 +1,5 @@
 //
-//  CakeListViewController.swift
+//  CakeShopListViewController.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class CakeListViewController: UIViewController {
+final class CakeShopListViewController: UIViewController {
   
   // MARK: - Constants
   
@@ -52,7 +52,7 @@ final class CakeListViewController: UIViewController {
   
   // MARK: - UI
   
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeListViewController.layout).then {
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeShopListViewController.layout).then {
     $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
@@ -143,7 +143,7 @@ final class CakeListViewController: UIViewController {
 
 // MARK: - UICollectionView
 
-extension CakeListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CakeShopListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 20
   }
@@ -165,6 +165,6 @@ import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    CakeListViewController().toPreview()
+    CakeShopListViewController().toPreview()
   }
 }

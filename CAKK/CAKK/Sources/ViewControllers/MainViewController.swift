@@ -47,7 +47,7 @@ final class MainViewController: UIViewController {
   private var cancellableBag = Set<AnyCancellable>()
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
-    tip: .absolute(CakeListViewController.Metric.headerViewHeight))
+    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
   
@@ -78,7 +78,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
-  private let cakeListViewController = CakeListViewController()
+  private let cakeListViewController = CakeShopListViewController()
   
   private let cakeShopDetailBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
