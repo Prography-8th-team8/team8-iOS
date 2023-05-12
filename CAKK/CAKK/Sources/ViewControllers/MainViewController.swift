@@ -47,7 +47,7 @@ final class MainViewController: UIViewController {
   private var cancellableBag = Set<AnyCancellable>()
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
-    tip: .absolute(CakeListViewController.Metric.headerViewHeight))
+    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
   
@@ -55,13 +55,14 @@ final class MainViewController: UIViewController {
   
   private let naverMapView = NMFNaverMapView(frame: .zero).then {
     $0.showZoomControls = false
-    $0.mapView.logoAlign = .leftTop
+    $0.mapView.logoAlign = .rightTop
   }
   
-  private let refreshButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "arrow.clockwise")!,
-    text: Constants.refreshButtonText
-  )
+//  private let refreshButton = CapsuleStyleButton(
+//    iconImage: UIImage(systemName: "arrow.clockwise")!,
+//    text: Constants.refreshButtonText
+//  )
+  
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
     text: Constants.seeLocationButtonText
@@ -77,7 +78,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
-  private let cakeListViewController = CakeListViewController()
+  private let cakeListViewController = CakeShopListViewController()
   
   private let cakeShopDetailBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
@@ -117,7 +118,7 @@ final class MainViewController: UIViewController {
   
   private func setupLayouts() {
     setupNaverMapViewLayout()
-    setupRefreshButtonLayout()
+//    setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
   }
   
@@ -128,19 +129,19 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupRefreshButtonLayout() {
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
-      $0.centerX.equalToSuperview()
-    }
-  }
+//  private func setupRefreshButtonLayout() {
+//    view.addSubview(refreshButton)
+//    refreshButton.snp.makeConstraints {
+//      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
+//      $0.centerX.equalToSuperview()
+//    }
+//  }
   
   private func setupHideDetailBottomSheetButtonLayout() {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.centerY.equalTo(refreshButton)
+      $0.top.equalToSuperview().inset(Metric.verticalPadding)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
@@ -173,11 +174,19 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListBottomSheet() {
+    // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
     
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopListBottomSheet.appearance = appearance
+    
+    
+    // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
@@ -192,9 +201,16 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopDetailBottomSheet() {
+    // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
       contentViewController: .init())
+    
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopDetailBottomSheet.appearance = appearance
+    
     cakeShopDetailBottomSheet.hide()
   }
   
@@ -247,6 +263,8 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    MainViewController().toPreview()
+    MainViewController()
+      .toPreview()
+      .ignoresSafeArea()
   }
 }
