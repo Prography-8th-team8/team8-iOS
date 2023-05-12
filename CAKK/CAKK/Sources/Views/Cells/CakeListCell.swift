@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class CakeShopCollectionCell: UICollectionViewCell {
+final class CakeShopCollectionCell: HighlightableCell {
   
   // MARK: - Constants
   

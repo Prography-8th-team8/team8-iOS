@@ -72,6 +72,7 @@ class OnboardingViewController: UIViewController {
     $0.textAlignment = .left
   }
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: OnboardingViewController.layout).then {
+    $0.delaysContentTouches = false
     $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.alwaysBounceVertical = false
