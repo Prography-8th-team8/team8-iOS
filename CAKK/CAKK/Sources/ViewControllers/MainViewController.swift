@@ -58,10 +58,11 @@ final class MainViewController: UIViewController {
     $0.mapView.logoAlign = .rightTop
   }
   
-  private let refreshButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "arrow.clockwise")!,
-    text: Constants.refreshButtonText
-  )
+//  private let refreshButton = CapsuleStyleButton(
+//    iconImage: UIImage(systemName: "arrow.clockwise")!,
+//    text: Constants.refreshButtonText
+//  )
+  
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
     text: Constants.seeLocationButtonText
@@ -117,7 +118,7 @@ final class MainViewController: UIViewController {
   
   private func setupLayouts() {
     setupNaverMapViewLayout()
-    setupRefreshButtonLayout()
+//    setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
   }
   
@@ -128,19 +129,19 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupRefreshButtonLayout() {
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
-      $0.centerX.equalToSuperview()
-    }
-  }
+//  private func setupRefreshButtonLayout() {
+//    view.addSubview(refreshButton)
+//    refreshButton.snp.makeConstraints {
+//      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
+//      $0.centerX.equalToSuperview()
+//    }
+//  }
   
   private func setupHideDetailBottomSheetButtonLayout() {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.centerY.equalTo(refreshButton)
+      $0.top.equalToSuperview().inset(Metric.verticalPadding)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
