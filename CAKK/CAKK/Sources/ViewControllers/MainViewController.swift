@@ -173,11 +173,19 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListBottomSheet() {
+    // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
     
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopListBottomSheet.appearance = appearance
+    
+    
+    // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
@@ -192,9 +200,16 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopDetailBottomSheet() {
+    // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
       contentViewController: .init())
+    
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopDetailBottomSheet.appearance = appearance
+    
     cakeShopDetailBottomSheet.hide()
   }
   
@@ -247,6 +262,8 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    MainViewController().toPreview()
+    MainViewController()
+      .toPreview()
+      .ignoresSafeArea()
   }
 }
