@@ -1,19 +1,20 @@
 //
-//  CakeListCell.swift
+//  CakeShopCollectionCell.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
 //
 
 import UIKit
+
 import SnapKit
 import Then
 
-final class CakeListCell: UICollectionViewCell {
+final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - Constants
   
-  static let identifier = String(describing: CakeListCell.self)
+  static let identifier = String(describing: CakeShopCollectionCell.self)
   
   enum Metric {
     static let padding = 20.f
@@ -196,7 +197,7 @@ import SwiftUI
 struct CakeListCellPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      CakeListCell()
+      CakeShopCollectionCell()
     }
     .frame(width: 328, height: 158)
     .previewLayout(.sizeThatFits)

@@ -53,7 +53,7 @@ final class CakeListViewController: UIViewController {
   // MARK: - UI
   
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeListViewController.layout).then {
-    $0.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
   }
@@ -135,7 +135,7 @@ final class CakeListViewController: UIViewController {
   }
   
   private func setupCollectionView() {
-    collectionView.register(CakeListCell.self, forCellWithReuseIdentifier: CakeListCell.identifier)
+    collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
     collectionView.dataSource = self
     collectionView.delegate = self
   }
@@ -149,7 +149,7 @@ extension CakeListViewController: UICollectionViewDelegate, UICollectionViewData
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeListCell.identifier, for: indexPath) as? CakeListCell else { return .init()}
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeShopCollectionCell.identifier, for: indexPath) as? CakeShopCollectionCell else { return .init()}
     return cell
   }
   

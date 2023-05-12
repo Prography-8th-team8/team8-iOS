@@ -157,13 +157,12 @@
 			children = (
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
-				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
 				B48EA8552A0BBE3900AC336D /* MenuDetailButton.swift */,
 				B41FE93A2A0C752A0072BC98 /* MenuDetailInfoView.swift */,
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
-				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
 				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
+				8E3FF2E92A0E813300865E36 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,6 +195,15 @@
 				B43DA3D129F8ACFA00F1A4B1 /* APIKeys.xcconfig */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		8E3FF2E92A0E813300865E36 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8E9E191A29CEDD4F00CFF157 = {
