@@ -88,6 +88,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
+  private let shopDetailViewController = ShopDetailViewController(viewModel: ShopDetailViewModel(cakeShop: SampleData.cakeShopList.first!, service: NetworkService<CakeAPI>(type: .stub)))
   
   private let hideDetailBottomSheetButton = UIButton().then {
     $0.backgroundColor = .white
@@ -205,7 +206,7 @@ final class MainViewController: UIViewController {
     // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
-      contentViewController: ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!))
+      contentViewController: shopDetailViewController)
     
     // Appearance
     var appearance = BottomSheetAppearance()
@@ -232,6 +233,7 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopDetail() {
+    shopDetailViewController.notifyViewWillShow()
     cakeShopListBottomSheet.hide()
     cakeShopDetailBottomSheet.show(.half)
     isDetailViewShown = true

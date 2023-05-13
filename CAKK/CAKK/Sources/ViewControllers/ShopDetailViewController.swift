@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import Combine
+
 final class ShopDetailViewController: UIViewController {
   
   // MARK: - Constants
@@ -20,7 +22,9 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - Properties
   
-  private let cakeShop: CakeShop
+  private let viewModel: ShopDetailViewModel
+  
+  private var cancellableBag = Set<AnyCancellable>()
   
   // MARK: - UI
   
@@ -38,19 +42,17 @@ final class ShopDetailViewController: UIViewController {
   private lazy var nameLabel = UILabel().then {
     $0.font = .pretendard(size: 20, weight: .bold)
     $0.textAlignment = .center
-    $0.text = cakeShop.name
   }
   
   private lazy var addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
     $0.textAlignment = .center
-    $0.text = cakeShop.location
   }
   
-  private let callMenuButton = MenuDetailButton(image: R.image.call(), title: "전화하기")
-  private let bookmarkMenuButton = MenuDetailButton(image: R.image.bookmark(), title: "북마크")
-  private let naviMenuButton = MenuDetailButton(image: R.image.navi(), title: "길 안내")
-  private let shareMenuButton = MenuDetailButton(image: R.image.share(), title: "공유하기")
+  private let callMenuButton = DetailMenuButton(image: R.image.call(), title: "전화하기")
+  private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
+  private let naviMenuButton = DetailMenuButton(image: R.image.navi(), title: "길 안내")
+  private let shareMenuButton = DetailMenuButton(image: R.image.share(), title: "공유하기")
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
@@ -60,11 +62,11 @@ final class ShopDetailViewController: UIViewController {
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
-    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
+    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5))
 //    $0.isHidden = true // TODO: - MVP에서 메뉴 버튼 숨기기?
   }
   
-  private lazy var titleStackView = UIStackView(
+  private lazy var headerStackView = UIStackView(
     arrangedSubviews: [nameLabel, addressLabel, menuButtonStackView]
   ).then {
     $0.axis = .vertical
@@ -72,10 +74,7 @@ final class ShopDetailViewController: UIViewController {
     $0.setCustomSpacing(32, after: addressLabel)
   }
   
-  private let keywordTitleLabel = UILabel().then {
-    $0.text = "키워드"
-    $0.font = .pretendard(size: 20, weight: .bold)
-  }
+  private let keywordTitleView = DetailSectionTitleView(title: "키워드")
   
   private let keywordScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
@@ -95,12 +94,12 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private lazy var detailInfoView = MenuDetailInfoView(with: cakeShop)
+  private lazy var detailInfoView = DetailInfoView()
     
   // MARK: - LifeCycle
   
-  init(cakeShop: CakeShop) {
-    self.cakeShop = cakeShop
+  init(viewModel: ShopDetailViewModel) {
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -111,9 +110,14 @@ final class ShopDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind()
   }
   
   // MARK: - Public
+  
+  func notifyViewWillShow() {
+    viewModel.input.viewWillShow.send()
+  }
   
   // MARK: - Private
   
@@ -125,7 +129,7 @@ final class ShopDetailViewController: UIViewController {
   private func setupLayout() {
     setupScrollViewLayout()
     setupShopImageViewLayout()
-    setupTitleViewLayout()
+    setupHeaderStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupDetailInfoView()
@@ -152,18 +156,14 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.setCustomSpacing(40, after: shopImageView)
   }
   
-  private func setupTitleViewLayout() {
-    contentStackView.addArrangedSubview(titleStackView)
-    contentStackView.setCustomSpacing(40, after: titleStackView)
-    addSeperatorLineView(withBottomSpacing: 32)
+  private func setupHeaderStackViewLayout() {
+    contentStackView.addArrangedSubview(headerStackView)
+    contentStackView.setCustomSpacing(40, after: headerStackView)
+    addSeperatorLineView()
   }
   
   private func setupKeywordTitleLabelLayout() {
-    contentStackView.addArrangedSubview(keywordTitleLabel)
-    contentStackView.setCustomSpacing(24, after: keywordTitleLabel)
-    keywordTitleLabel.snp.makeConstraints {
-      $0.leading.equalToSuperview().offset(16)
-    }
+    contentStackView.addArrangedSubview(keywordTitleView)
   }
   
   private func setupKeywordScrollViewLayout() {
@@ -195,17 +195,30 @@ final class ShopDetailViewController: UIViewController {
   private func setupView() {
     view.backgroundColor = .white
     title = "상세정보"
-    setupCakeShopChips()
   }
   
-  private func setupCakeShopChips() {
-    let chipViews = cakeShop.cakeShopTypes.map {
+  private func setupCakeShopTypeChips(with cakeShopDetail: CakeShopDetailResponse) {
+    let chipViews = cakeShopDetail.cakeShopTypes.map {
       CakeShopTypeChip($0)
     }
     
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)
     }
+  }
+  
+  // MARK: - Bind
+  
+  private func bind() {
+    viewModel.output.cakeShopDetail
+      .sink { [weak self] in
+        guard let self else { return }
+
+        self.nameLabel.text = $0.name
+        self.addressLabel.text = $0.location
+        self.setupCakeShopTypeChips(with: $0)
+      }
+      .store(in: &cancellableBag)
   }
 }
 
@@ -217,7 +230,10 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
   static var previews: some View {
     UINavigationController(
       rootViewController:
-        ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!)
+        ShopDetailViewController(
+          viewModel: ShopDetailViewModel(
+            cakeShop: SampleData.cakeShopList.first!,
+            service: NetworkService<CakeAPI>()))
     ).toPreview()
     
   }

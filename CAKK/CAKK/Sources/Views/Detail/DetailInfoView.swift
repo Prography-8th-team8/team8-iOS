@@ -1,5 +1,5 @@
 //
-//  MenuDetailInfoView.swift
+//  DetailInfoView.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/05/11.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class MenuDetailInfoView: UIView {
+final class DetailInfoView: UIView {
   
   // MARK: - Constants
   
@@ -20,15 +20,11 @@ final class MenuDetailInfoView: UIView {
   
   // MARK: - Properties
   
-  private let cakeShop: CakeShop
   private var isBusinessTimeExpanded = false
   
   // MARK: - UI
   
-  private let detailTitleLabel = UILabel().then {
-    $0.text = "상세 정보"
-    $0.font = .pretendard(size: 20, weight: .bold)
-  }
+  private let detailTitleView = DetailSectionTitleView(title: "상세 정보")
   
   private var dotLabel: UILabel {
     return UILabel().then {
@@ -43,8 +39,7 @@ final class MenuDetailInfoView: UIView {
   
   private let addressIconImageView = UIImageView(image: R.image.map())
   
-  private lazy var addressLabel = UILabel().then {
-    $0.text = "\(cakeShop.location)"
+  private let addressLabel = UILabel().then {
     $0.font = .pretendard()
   }
   private let copyAddressButton = UIButton().then {
@@ -63,15 +58,14 @@ final class MenuDetailInfoView: UIView {
     $0.axis = .horizontal
   }
   
-  private lazy var lotAddressLabel = UILabel().then {
+  private let lotAddressLabel = UILabel().then {
     $0.textColor = R.color.stroke()
     $0.font = .pretendard()
     $0.text = "지번: 갈현동 399-7"
-    //    $0.text = cakeShop. TODO: - 지번 주소 가져와야 함
   }
-  private lazy var distanceFromStationLabel = UILabel().then {
+  
+  private let distanceFromStationLabel = UILabel().then {
     $0.text = "연신내역 7번 출구에서 219m"
-    //    $0.text = cakeShop. TODO: - 역에서의 거리 가져와야 함
     $0.font = .pretendard()
   }
   
@@ -106,7 +100,6 @@ final class MenuDetailInfoView: UIView {
   private lazy var businessTimeLabel = UILabel().then {
     $0.text = "22:30에 영업 종료"
     $0.font = .pretendard()
-    //    $0.text = cakeShop. TODO: - 영업 시간 가져와야 함
   }
   
   private let businessTimeToggleImageView = UIImageView().then {
@@ -137,8 +130,7 @@ final class MenuDetailInfoView: UIView {
   
   // MARK: - LifeCycle
   
-  init(with cakeShop: CakeShop) {
-    self.cakeShop = cakeShop
+  init() {
     super.init(frame: .zero)
     setup()
   }
@@ -147,7 +139,14 @@ final class MenuDetailInfoView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Public
+  // MARK: - Properties
+  
+  func configure(with cakeShopDetail: CakeShopDetailResponse) {
+    addressLabel.text = "\(cakeShopDetail.location)"
+    //    lotAddressLabel.text = cakeShop. TODO: - 지번 주소 가져와야 함
+    //    distanceFromStationLabel.text = cakeShop. TODO: - 역에서의 거리 가져와야 함
+    //    businessTimeLabel.text = cakeShop. TODO: - 영업 시간 가져와야 함
+  }
   
   // MARK: - Private
   
@@ -163,21 +162,20 @@ final class MenuDetailInfoView: UIView {
   }
   
   private func setupTitleLabelLayout() {
-    addSubview(detailTitleLabel)
-    detailTitleLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(40)
-      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+    addSubview(detailTitleView)
+    detailTitleView.snp.makeConstraints {
+      $0.top.horizontalEdges.equalToSuperview()
     }
   }
   
   private func setupAddressViewLayout() {
     addSubview(addressContainerView)
     addressContainerView.snp.makeConstraints {
-      $0.top.equalTo(detailTitleLabel.snp.bottom).offset(24)
+      $0.top.equalTo(detailTitleView.snp.bottom)
       $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
       $0.height.equalTo(100)
     }
-    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
+    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke()?.withAlphaComponent(0.5))
     
     addressContainerView.addSubview(addressIconImageView)
     addressIconImageView.snp.makeConstraints {
@@ -209,7 +207,7 @@ final class MenuDetailInfoView: UIView {
     addSubview(businessTimeWeekendStackView)
     businessTimeWeekendStackView.snp.makeConstraints {
       $0.leading.equalTo(businessStateLabel)
-      $0.top.equalTo(businessTimeHorizontalStackView.snp.bottom) //.offset(12)
+      $0.top.equalTo(businessTimeHorizontalStackView.snp.bottom)
       $0.bottom.equalToSuperview()
     }
     
@@ -251,7 +249,8 @@ import SwiftUI
 struct MenuDetailInfoViewPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      return MenuDetailInfoView(with: SampleData.cakeShopList.first!)
+      let view = DetailInfoView()
+      return view
     }
     .padding()
     .frame(height: 400)

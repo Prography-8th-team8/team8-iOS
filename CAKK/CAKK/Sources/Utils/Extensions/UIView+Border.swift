@@ -15,7 +15,7 @@ extension UIView {
     case left
   }
   
-  func addBorder(to edge: BorderEdge, color: UIColor, width: CGFloat = 1.0) {
+  func addBorder(to edge: BorderEdge, color: UIColor?, width: CGFloat = 1.0) {
     let borderView = UIView()
     borderView.translatesAutoresizingMaskIntoConstraints = false
     borderView.backgroundColor = color
@@ -40,7 +40,7 @@ extension UIView {
     }
   }
   
-  func addBorders(to edges: [BorderEdge], color: UIColor, width: CGFloat = 1.0) {
+  func addBorders(to edges: [BorderEdge], color: UIColor?, width: CGFloat = 1.0) {
     edges.forEach {
       addBorder(to: $0, color: color, width: width)
     }

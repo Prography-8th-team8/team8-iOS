@@ -83,7 +83,7 @@ extension CakeAPI: TargetType {
     case .fetchDistrictCounts:
       return Data()
     case .fetchCakeShopDetail:
-      return Data()
+      return SampleData.cakeShopDetailData
     case .fetchBlogReviews:
       return Data()
     case .fetchCakeShopImage:
