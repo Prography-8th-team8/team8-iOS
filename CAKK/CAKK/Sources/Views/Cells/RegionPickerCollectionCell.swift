@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class RegionPickerCollectionCell: UICollectionViewCell {
+class RegionPickerCollectionCell: HighlightableCell {
   
   // MARK: - Constants
   
@@ -30,11 +30,14 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   
   private var title: String = ""
   private var numberOfRegions: Int = 0
-  private var color: UIColor = R.color.fuschia100()!
+  private var color = UIColor(hex: 0xE9EDFF)
+  private var borderColor = UIColor(hex: 0xD5D9E9)
   
   
-  // MARK: - Views
+  // MARK: - UI
   
+  private let cakkView = CakkView()
+
   public let titleLabel = UILabel().then {
     $0.font = .pretendard(size: Metric.titleFontSize, weight: .regular)
     $0.textColor = .black
@@ -67,6 +70,7 @@ class RegionPickerCollectionCell: UICollectionViewCell {
     self.title = item.sectionName
     self.numberOfRegions = item.count
     self.color = item.color
+    self.borderColor = item.borderColor
     
     configureView()
   }
@@ -80,12 +84,20 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   }
   
   private func setupLayout() {
+    setupCakkViewLayout()
     setupTitleLabelLayout()
     setupNumberOfRegionsLabelLayout()
   }
   
+  private func setupCakkViewLayout() {
+    addSubview(cakkView)
+    cakkView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+  }
+  
   private func setupTitleLabelLayout() {
-    addSubview(titleLabel)
+    cakkView.addSubview(titleLabel)
     titleLabel.snp.makeConstraints {
       $0.top.equalToSuperview().inset(Metric.verticalPadding)
       $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
@@ -93,7 +105,7 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   }
   
   private func setupNumberOfRegionsLabelLayout() {
-    addSubview(numberOfRegionsLabel)
+    cakkView.addSubview(numberOfRegionsLabel)
     numberOfRegionsLabel.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
       $0.bottom.equalToSuperview().inset(Metric.verticalPadding)
@@ -101,18 +113,17 @@ class RegionPickerCollectionCell: UICollectionViewCell {
   }
   
   private func configureView() {
-    configureBaseView()
+    configureCakkView()
     configureTitleLabel()
     configureNumberOfRegionsLabel()
   }
   
-  private func configureBaseView() {
+  private func configureCakkView() {
     backgroundColor = .clear
     
-    contentView.backgroundColor = color
-    contentView.layer.borderWidth = 2
-    contentView.layer.borderColor = color.cgColor
-    contentView.layer.cornerRadius = Metric.cornerRadius
+    cakkView.borderColor = borderColor
+    cakkView.backgroundColor = color
+    cakkView.cornerRadius = Metric.cornerRadius
   }
   
   private func configureTitleLabel() {
@@ -137,7 +148,8 @@ struct RegionPickerPreview: PreviewProvider {
       regionPicker.configure(
         .init(
           count: 43,
-          color: UIColor(hex: 0x2448FF).withAlphaComponent(0.1),
+          color: UIColor(hex: 0xE9EDFF),
+          borderColor: UIColor(hex: 0xD5D9E9),
           districts: [.dobong, .gangbuk, .seongbuk, .nowon])
       )
       

@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import Combine
+import CombineCocoa
 
 import SnapKit
 import Then
@@ -25,7 +27,8 @@ final class MainViewController: UIViewController {
   }
   
   enum Metric {
-    static let refreshButtonOffset = 16.f
+    static let horizontalPadding = 16.f
+    static let verticalPadding = 24.f
     
     static let naverMapViewHeightRatio = 0.5
     static let naverMapBottomInset = 10.f
@@ -33,6 +36,9 @@ final class MainViewController: UIViewController {
     static let seeLocationButtonBottomInset = 28.f
     
     static let bottomSheetTipModeHeight = 58.f
+    
+    static let hideDetailBottomSheetButtonSize = 40.f
+    static let hideDetailBottomSheetButtonCornerRadius = 20.f
   }
 
   
@@ -41,22 +47,23 @@ final class MainViewController: UIViewController {
   private var cancellableBag = Set<AnyCancellable>()
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
-    tip: .absolute(CakeListViewController.Metric.headerViewHeight))
+    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
-    half: .fractional(0.5),
-    tip: .absolute(-100)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
+    tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
+  private var isDetailViewShown = false
   
   // MARK: - UI
   
   private let naverMapView = NMFNaverMapView(frame: .zero).then {
     $0.showZoomControls = false
-    $0.mapView.logoAlign = .leftTop
+    $0.mapView.logoAlign = .rightTop
   }
   
-  private let refreshButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "arrow.clockwise")!,
-    text: Constants.refreshButtonText
-  )
+//  private let refreshButton = CapsuleStyleButton(
+//    iconImage: UIImage(systemName: "arrow.clockwise")!,
+//    text: Constants.refreshButtonText
+//  )
+  
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
     text: Constants.seeLocationButtonText
@@ -72,7 +79,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
-  private let cakeListViewController = CakeListViewController()
+  private let cakeListViewController = CakeShopListViewController()
   
   private let cakeShopDetailBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
@@ -80,6 +87,15 @@ final class MainViewController: UIViewController {
     $0.layer.shadowOpacity = 0.1
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
+  }
+  
+  private let hideDetailBottomSheetButton = UIButton().then {
+    $0.backgroundColor = .white
+    $0.tintColor = .black
+    $0.layer.borderColor = UIColor(hex: 0x222222).withAlphaComponent(0.1).cgColor
+    $0.layer.borderWidth = 1
+    $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+    $0.alpha = 0
   }
   
   private var isTableViewPanning: Bool = false
@@ -98,11 +114,13 @@ final class MainViewController: UIViewController {
   private func setup() {
     setupLayouts()
     setupView()
+    bind()
   }
   
   private func setupLayouts() {
     setupNaverMapViewLayout()
-    setupRefreshButtonLayout()
+//    setupRefreshButtonLayout()
+    setupHideDetailBottomSheetButtonLayout()
   }
   
   private func setupNaverMapViewLayout() {
@@ -112,12 +130,23 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupRefreshButtonLayout() {
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.refreshButtonOffset)
-      $0.centerX.equalToSuperview()
+//  private func setupRefreshButtonLayout() {
+//    view.addSubview(refreshButton)
+//    refreshButton.snp.makeConstraints {
+//      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
+//      $0.centerX.equalToSuperview()
+//    }
+//  }
+  
+  private func setupHideDetailBottomSheetButtonLayout() {
+    view.addSubview(hideDetailBottomSheetButton)
+    hideDetailBottomSheetButton.snp.makeConstraints {
+      $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+      $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
+    
+    hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
   }
   
   private func setupView() {
@@ -146,11 +175,19 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListBottomSheet() {
+    // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
     
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopListBottomSheet.appearance = appearance
+    
+    
+    // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
@@ -165,10 +202,29 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopDetailBottomSheet() {
+    // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
-      contentViewController: .init())
-    cakeShopDetailBottomSheet.move(to: .tip)
+      contentViewController: ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!))
+    
+    // Appearance
+    var appearance = BottomSheetAppearance()
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    cakeShopDetailBottomSheet.appearance = appearance
+    
+    cakeShopDetailBottomSheet.hide()
+  }
+  
+  private func bind() {
+    bindHideCakeShopDetailButton()
+  }
+  
+  private func bindHideCakeShopDetailButton() {
+    hideDetailBottomSheetButton.tapPublisher
+      .sink { [weak self] _ in
+        self?.hideCakeShopDetail()
+      }
+      .store(in: &cancellableBag)
   }
   
   @objc private func seeLocation() {
@@ -176,8 +232,23 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopDetail() {
-    cakeShopListBottomSheet.move(to: .tip)
-    cakeShopDetailBottomSheet.move(to: .half)
+    cakeShopListBottomSheet.hide()
+    cakeShopDetailBottomSheet.show(.half)
+    isDetailViewShown = true
+
+    UIView.animate(withDuration: 0.3) {
+      self.hideDetailBottomSheetButton.alpha = 1
+    }
+  }
+
+  private func hideCakeShopDetail() {
+    cakeShopListBottomSheet.show()
+    cakeShopDetailBottomSheet.hide()
+    isDetailViewShown = false
+    
+    UIView.animate(withDuration: 0.3) {
+      self.hideDetailBottomSheetButton.alpha = 0
+    }
   }
 }
 
@@ -185,7 +256,9 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    cakeShopListBottomSheet.move(to: .tip)
+    if isDetailViewShown == false {
+      cakeShopListBottomSheet.move(to: .tip)
+    }
   }
 }
 
@@ -195,6 +268,8 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    MainViewController().toPreview()
+    MainViewController()
+      .toPreview()
+      .ignoresSafeArea()
   }
 }

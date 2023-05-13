@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04BD99AD3B39F0443E504F52 /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8AD4B387846B995E24D8F87 /* Pods_CAKK.framework */; };
+		2AFF51715E49582E6F5DFDCB /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5209961DD77F3141DC594767 /* Pods_CAKK.framework */; };
 		8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */; };
 		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
 		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
 		8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */; };
 		8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */; };
 		8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* DistrictSection.swift */; };
+		8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */; };
+		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
 		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
@@ -27,6 +29,7 @@
 		8E37754E29F7CA2F00166198 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79629F7BDF000D3F5BF /* Pretendard-ExtraBold.otf */; };
 		8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */; };
 		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
+		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
 		8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */; };
 		8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */; };
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
@@ -52,7 +55,7 @@
 		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
 		B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C43A2A07F12F00FB8403 /* SampleData.swift */; };
 		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
-		B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeListViewController.swift */; };
+		B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */; };
 		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
 		B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */; };
 		B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */; };
@@ -66,17 +69,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		89FE7587355AC70EB6C3DA52 /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
+		5209961DD77F3141DC594767 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPickerCollectionCell.swift; sourceTree = "<group>"; };
 		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		8E02B7832A057F3B003AE7AF /* DistrictSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSection.swift; sourceTree = "<group>"; };
+		8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Common.swift"; sourceTree = "<group>"; };
+		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
+		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
+		8E4B6B06E1E7B3A1349B2119 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
 		8E9E192329CEDD4F00CFF157 /* CAKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +120,7 @@
 		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
 		B455C43A2A07F12F00FB8403 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
-		B46F9DC729DACC8500113979 /* CakeListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeShopListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
@@ -124,8 +131,7 @@
 		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
-		B8AD4B387846B995E24D8F87 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA4007F68622F5EB9E36F88F /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
+		C514646E3811B38ABAAA47AF /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,21 +139,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04BD99AD3B39F0443E504F52 /* Pods_CAKK.framework in Frameworks */,
+				2AFF51715E49582E6F5DFDCB /* Pods_CAKK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68B60F851A88B685C4AA9359 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5209961DD77F3141DC594767 /* Pods_CAKK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8E32CE9B29CEE2DF00905FD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
-				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
 				B48EA8552A0BBE3900AC336D /* MenuDetailButton.swift */,
 				B41FE93A2A0C752A0072BC98 /* MenuDetailInfoView.swift */,
+				8E37755029F7CFAD00166198 /* LabelChip.swift */,
+				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
+				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
+				8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */,
+				8E3FF2E92A0E813300865E36 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,13 +200,22 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		8E3FF2E92A0E813300865E36 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		8E9E191A29CEDD4F00CFF157 = {
 			isa = PBXGroup;
 			children = (
 				8E9E192529CEDD4F00CFF157 /* CAKK */,
 				8E9E192429CEDD4F00CFF157 /* Products */,
 				D911E24E8132FA565E4A398E /* Pods */,
-				F7EFDB0A68541FC9AE99BDD9 /* Frameworks */,
+				68B60F851A88B685C4AA9359 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -242,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
-				B46F9DC729DACC8500113979 /* CakeListViewController.swift */,
+				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
 				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
 				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
@@ -263,9 +290,6 @@
 		8EB7B78529F6920900D3F5BF /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8E37755029F7CFAD00166198 /* LabelChip.swift */,
-				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
-				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -337,6 +361,7 @@
 				B452B84C2A075E9700784A17 /* UIView+Shadow.swift */,
 				B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */,
 				B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */,
+				8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,18 +369,10 @@
 		D911E24E8132FA565E4A398E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EA4007F68622F5EB9E36F88F /* Pods-CAKK.debug.xcconfig */,
-				89FE7587355AC70EB6C3DA52 /* Pods-CAKK.release.xcconfig */,
+				8E4B6B06E1E7B3A1349B2119 /* Pods-CAKK.debug.xcconfig */,
+				C514646E3811B38ABAAA47AF /* Pods-CAKK.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		F7EFDB0A68541FC9AE99BDD9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B8AD4B387846B995E24D8F87 /* Pods_CAKK.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,13 +382,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9E193729CEDD5000CFF157 /* Build configuration list for PBXNativeTarget "CAKK" */;
 			buildPhases = (
-				4385C23275307FE8759ABA5D /* [CP] Check Pods Manifest.lock */,
+				E4E4F152D6282780784E1A24 /* [CP] Check Pods Manifest.lock */,
 				8E32CE9D29CEE58C00905FD6 /* SwiftLint */,
 				8EB7B78C29F6CAC400D3F5BF /* r.swift */,
 				8E9E191F29CEDD4F00CFF157 /* Sources */,
 				8E9E192029CEDD4F00CFF157 /* Frameworks */,
 				8E9E192129CEDD4F00CFF157 /* Resources */,
-				3B30F6B3DF5AF89C1EA5B632 /* [CP] Embed Pods Frameworks */,
+				331E839E80896D19635ABEB2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -441,7 +458,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3B30F6B3DF5AF89C1EA5B632 /* [CP] Embed Pods Frameworks */ = {
+		331E839E80896D19635ABEB2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -456,28 +473,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4385C23275307FE8759ABA5D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CAKK-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8E32CE9D29CEE58C00905FD6 /* SwiftLint */ = {
@@ -518,6 +513,28 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
+		E4E4F152D6282780784E1A24 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CAKK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -540,7 +557,7 @@
 				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
-				B46F9DC829DACC8500113979 /* CakeListViewController.swift in Sources */,
+				B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */,
 				B48EA8562A0BBE3900AC336D /* MenuDetailButton.swift in Sources */,
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
@@ -555,8 +572,11 @@
 				8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */,
 				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
 				B455C4302A07E93300FB8403 /* CakeShopResponse.swift in Sources */,
+				8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */,
 				8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */,
 				8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */,
+				8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */,
+				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */,
 				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
@@ -702,7 +722,7 @@
 		};
 		8E9E193829CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA4007F68622F5EB9E36F88F /* Pods-CAKK.debug.xcconfig */;
+			baseConfigurationReference = 8E4B6B06E1E7B3A1349B2119 /* Pods-CAKK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -736,7 +756,7 @@
 		};
 		8E9E193929CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89FE7587355AC70EB6C3DA52 /* Pods-CAKK.release.xcconfig */;
+			baseConfigurationReference = C514646E3811B38ABAAA47AF /* Pods-CAKK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

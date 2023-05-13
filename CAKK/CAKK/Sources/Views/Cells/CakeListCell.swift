@@ -1,19 +1,20 @@
 //
-//  CakeListCell.swift
+//  CakeShopCollectionCell.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
 //
 
 import UIKit
+
 import SnapKit
 import Then
 
-final class CakeListCell: UICollectionViewCell {
+final class CakeShopCollectionCell: HighlightableCell {
   
   // MARK: - Constants
   
-  static let identifier = String(describing: CakeListCell.self)
+  static let identifier = String(describing: CakeShopCollectionCell.self)
   
   enum Metric {
     static let padding = 20.f
@@ -40,6 +41,8 @@ final class CakeListCell: UICollectionViewCell {
   // MARK: - Properties
   
   // MARK: - UI
+  
+  private let cakkView = CakkView()
   
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -109,6 +112,7 @@ final class CakeListCell: UICollectionViewCell {
   }
   
   private func setupLayout() {
+    setupCakkViewLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -117,8 +121,15 @@ final class CakeListCell: UICollectionViewCell {
     setupCakeShopTypeStackViewLayout()
   }
   
+  private func setupCakkViewLayout() {
+    addSubview(cakkView)
+    cakkView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+  }
+  
   private func setupHeaderStackViewLayout() {
-    contentView.addSubview(headerStackView)
+    cakkView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
     }
@@ -141,7 +152,7 @@ final class CakeListCell: UICollectionViewCell {
   }
   
   private func setupLocationLabelLayout() {
-    contentView.addSubview(locationLabel)
+    cakkView.addSubview(locationLabel)
     locationLabel.snp.makeConstraints {
       $0.top.equalTo(headerStackView.snp.bottom).offset(Metric.locationLabelTopPadding)
       $0.leading.trailing.equalToSuperview().inset(Metric.padding)
@@ -149,7 +160,7 @@ final class CakeListCell: UICollectionViewCell {
   }
   
   private func setupCakeShopTypeStackViewLayout() {
-    contentView.addSubview(cakeShopTypeStackView)
+    cakkView.addSubview(cakeShopTypeStackView)
     cakeShopTypeStackView.snp.makeConstraints {
       $0.leading.bottom.equalToSuperview().inset(Metric.padding)
     }
@@ -161,10 +172,9 @@ final class CakeListCell: UICollectionViewCell {
   }
   
   private func setupContentView() {
-    contentView.backgroundColor = UIColor(hex: 0xF8F5E9)
-    contentView.layer.cornerRadius = Metric.cornerRadius
-    contentView.layer.borderWidth = Metric.borderWidth
-    contentView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+    cakkView.backgroundColor = UIColor(hex: 0xF8F5E9)
+    cakkView.borderColor = UIColor(hex: 0xE3E0D5)
+    cakkView.cornerRadius = Metric.cornerRadius
   }
   
   private func setupCakeShopTypeStackView() {
@@ -187,7 +197,7 @@ import SwiftUI
 struct CakeListCellPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      CakeListCell()
+      CakeShopCollectionCell()
     }
     .frame(width: 328, height: 158)
     .previewLayout(.sizeThatFits)
