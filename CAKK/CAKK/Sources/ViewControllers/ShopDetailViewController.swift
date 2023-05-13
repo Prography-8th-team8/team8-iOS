@@ -64,7 +64,7 @@ final class ShopDetailViewController: UIViewController {
 //    $0.isHidden = true // TODO: - MVP에서 메뉴 버튼 숨기기?
   }
   
-  private lazy var titleStackView = UIStackView(
+  private lazy var headerStackView = UIStackView(
     arrangedSubviews: [nameLabel, addressLabel, menuButtonStackView]
   ).then {
     $0.axis = .vertical
@@ -72,18 +72,7 @@ final class ShopDetailViewController: UIViewController {
     $0.setCustomSpacing(32, after: addressLabel)
   }
   
-  private let keywordTitleLabel = UILabel().then {
-    $0.text = "키워드"
-    $0.font = .pretendard(size: 20, weight: .bold)
-  }
-  
-  private lazy var keywordTitleContainerView = UIView().then {
-    $0.addSubview(keywordTitleLabel)
-    keywordTitleLabel.snp.makeConstraints {
-      $0.verticalEdges.equalToSuperview()
-      $0.leading.equalToSuperview()
-    }
-  }
+  private let keywordTitleView = DetailSectionTitleView(title: "키워드")
   
   private let keywordScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
@@ -133,7 +122,7 @@ final class ShopDetailViewController: UIViewController {
   private func setupLayout() {
     setupScrollViewLayout()
     setupShopImageViewLayout()
-    setupTitleViewLayout()
+    setupHeaderStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupDetailInfoView()
@@ -160,21 +149,14 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.setCustomSpacing(40, after: shopImageView)
   }
   
-  private func setupTitleViewLayout() {
-    contentStackView.addArrangedSubview(titleStackView)
-    contentStackView.setCustomSpacing(40, after: titleStackView)
-    addSeperatorLineView(withBottomSpacing: 32)
+  private func setupHeaderStackViewLayout() {
+    contentStackView.addArrangedSubview(headerStackView)
+    contentStackView.setCustomSpacing(40, after: headerStackView)
+    addSeperatorLineView()
   }
   
   private func setupKeywordTitleLabelLayout() {
-    contentStackView.addArrangedSubview(keywordTitleLabel)
-    contentStackView.setCustomSpacing(24, after: keywordTitleLabel)
-//    keywordTitleLabel.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-//    keywordTitleLabel.insetsLayoutMarginsFromSafeArea = true
-//    keywordTitleLabel.margin = true
-    keywordTitleLabel.snp.makeConstraints {
-      $0.leading.equalTo(contentStackView.snp.leading).offset(16)
-    }
+    contentStackView.addArrangedSubview(keywordTitleView)
   }
   
   private func setupKeywordScrollViewLayout() {

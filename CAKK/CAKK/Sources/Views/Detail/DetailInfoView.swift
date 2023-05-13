@@ -25,10 +25,7 @@ final class DetailInfoView: UIView {
   
   // MARK: - UI
   
-  private let detailTitleLabel = UILabel().then {
-    $0.text = "상세 정보"
-    $0.font = .pretendard(size: 20, weight: .bold)
-  }
+  private let detailTitleView = DetailSectionTitleView(title: "상세 정보")
   
   private var dotLabel: UILabel {
     return UILabel().then {
@@ -147,8 +144,6 @@ final class DetailInfoView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Public
-  
   // MARK: - Private
   
   private func setup() {
@@ -163,17 +158,16 @@ final class DetailInfoView: UIView {
   }
   
   private func setupTitleLabelLayout() {
-    addSubview(detailTitleLabel)
-    detailTitleLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(40)
-      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+    addSubview(detailTitleView)
+    detailTitleView.snp.makeConstraints {
+      $0.top.horizontalEdges.equalToSuperview()
     }
   }
   
   private func setupAddressViewLayout() {
     addSubview(addressContainerView)
     addressContainerView.snp.makeConstraints {
-      $0.top.equalTo(detailTitleLabel.snp.bottom).offset(24)
+      $0.top.equalTo(detailTitleView.snp.bottom)
       $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
       $0.height.equalTo(100)
     }
@@ -209,7 +203,7 @@ final class DetailInfoView: UIView {
     addSubview(businessTimeWeekendStackView)
     businessTimeWeekendStackView.snp.makeConstraints {
       $0.leading.equalTo(businessStateLabel)
-      $0.top.equalTo(businessTimeHorizontalStackView.snp.bottom) //.offset(12)
+      $0.top.equalTo(businessTimeHorizontalStackView.snp.bottom)
       $0.bottom.equalToSuperview()
     }
     
