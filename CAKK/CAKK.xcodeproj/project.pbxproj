@@ -62,6 +62,7 @@
 		B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */; };
 		B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */; };
 		B490C33B2A0FE942008A2736 /* cake_shop_detail_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */; };
+		B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C33D2A0FF066008A2736 /* ViewModelType.swift */; };
 		B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */; };
 		B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */; };
 		B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */; };
@@ -69,6 +70,7 @@
 		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
 		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
 		B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */; };
+		B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +131,7 @@
 		B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuButton.swift; sourceTree = "<group>"; };
 		B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailResponse.swift; sourceTree = "<group>"; };
 		B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_detail_sample.json; sourceTree = "<group>"; };
+		B490C33D2A0FF066008A2736 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Seperator.swift"; sourceTree = "<group>"; };
 		B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; tabWidth = 2; };
@@ -136,6 +139,7 @@
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSectionTitleView.swift; sourceTree = "<group>"; };
+		B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModel.swift; sourceTree = "<group>"; };
 		DF4A3C139D6879EB1F968EFA /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
 		E0736CFEAE6A639F6FDF8C39 /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -369,6 +373,8 @@
 		B4FB8E7F2A0F700800DBF193 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
+				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
 				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
+				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
@@ -572,6 +579,7 @@
 				8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */,
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
+				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
 				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,
 				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
 				B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */,

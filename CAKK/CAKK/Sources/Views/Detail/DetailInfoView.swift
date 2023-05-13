@@ -20,7 +20,6 @@ final class DetailInfoView: UIView {
   
   // MARK: - Properties
   
-  private let cakeShop: CakeShop
   private var isBusinessTimeExpanded = false
   
   // MARK: - UI
@@ -40,8 +39,7 @@ final class DetailInfoView: UIView {
   
   private let addressIconImageView = UIImageView(image: R.image.map())
   
-  private lazy var addressLabel = UILabel().then {
-    $0.text = "\(cakeShop.location)"
+  private let addressLabel = UILabel().then {
     $0.font = .pretendard()
   }
   private let copyAddressButton = UIButton().then {
@@ -60,15 +58,14 @@ final class DetailInfoView: UIView {
     $0.axis = .horizontal
   }
   
-  private lazy var lotAddressLabel = UILabel().then {
+  private let lotAddressLabel = UILabel().then {
     $0.textColor = R.color.stroke()
     $0.font = .pretendard()
     $0.text = "지번: 갈현동 399-7"
-    //    $0.text = cakeShop. TODO: - 지번 주소 가져와야 함
   }
-  private lazy var distanceFromStationLabel = UILabel().then {
+  
+  private let distanceFromStationLabel = UILabel().then {
     $0.text = "연신내역 7번 출구에서 219m"
-    //    $0.text = cakeShop. TODO: - 역에서의 거리 가져와야 함
     $0.font = .pretendard()
   }
   
@@ -103,7 +100,6 @@ final class DetailInfoView: UIView {
   private lazy var businessTimeLabel = UILabel().then {
     $0.text = "22:30에 영업 종료"
     $0.font = .pretendard()
-    //    $0.text = cakeShop. TODO: - 영업 시간 가져와야 함
   }
   
   private let businessTimeToggleImageView = UIImageView().then {
@@ -134,14 +130,22 @@ final class DetailInfoView: UIView {
   
   // MARK: - LifeCycle
   
-  init(with cakeShop: CakeShop) {
-    self.cakeShop = cakeShop
+  init() {
     super.init(frame: .zero)
     setup()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Properties
+  
+  func configure(with cakeShopDetail: CakeShopDetailResponse) {
+    addressLabel.text = "\(cakeShopDetail.location)"
+    //    lotAddressLabel.text = cakeShop. TODO: - 지번 주소 가져와야 함
+    //    distanceFromStationLabel.text = cakeShop. TODO: - 역에서의 거리 가져와야 함
+    //    businessTimeLabel.text = cakeShop. TODO: - 영업 시간 가져와야 함
   }
   
   // MARK: - Private
@@ -171,7 +175,7 @@ final class DetailInfoView: UIView {
       $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
       $0.height.equalTo(100)
     }
-    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
+    addressContainerView.addBorders(to: [.top, .bottom], color: R.color.stroke()?.withAlphaComponent(0.5))
     
     addressContainerView.addSubview(addressIconImageView)
     addressIconImageView.snp.makeConstraints {
@@ -245,7 +249,8 @@ import SwiftUI
 struct MenuDetailInfoViewPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      return DetailInfoView(with: SampleData.cakeShopList.first!)
+      let view = DetailInfoView()
+      return view
     }
     .padding()
     .frame(height: 400)

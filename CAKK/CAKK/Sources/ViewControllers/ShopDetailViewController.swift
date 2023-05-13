@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import Combine
+
 final class ShopDetailViewController: UIViewController {
   
   // MARK: - Constants
@@ -20,7 +22,9 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - Properties
   
-  private let cakeShop: CakeShop
+  private let viewModel: ShopDetailViewModel
+  
+  private var cancellableBag = Set<AnyCancellable>()
   
   // MARK: - UI
   
@@ -38,13 +42,11 @@ final class ShopDetailViewController: UIViewController {
   private lazy var nameLabel = UILabel().then {
     $0.font = .pretendard(size: 20, weight: .bold)
     $0.textAlignment = .center
-    $0.text = cakeShop.name
   }
   
   private lazy var addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
     $0.textAlignment = .center
-    $0.text = cakeShop.location
   }
   
   private let callMenuButton = DetailMenuButton(image: R.image.call(), title: "전화하기")
@@ -60,7 +62,7 @@ final class ShopDetailViewController: UIViewController {
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
-    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5) ?? .lightGray)
+    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5))
 //    $0.isHidden = true // TODO: - MVP에서 메뉴 버튼 숨기기?
   }
   
@@ -92,12 +94,12 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private lazy var detailInfoView = DetailInfoView(with: cakeShop)
+  private lazy var detailInfoView = DetailInfoView()
     
   // MARK: - LifeCycle
   
-  init(cakeShop: CakeShop) {
-    self.cakeShop = cakeShop
+  init(viewModel: ShopDetailViewModel) {
+    self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -108,9 +110,14 @@ final class ShopDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind()
   }
   
   // MARK: - Public
+  
+  func notifyViewWillShow() {
+    viewModel.input.viewWillShow.send()
+  }
   
   // MARK: - Private
   
@@ -188,17 +195,30 @@ final class ShopDetailViewController: UIViewController {
   private func setupView() {
     view.backgroundColor = .white
     title = "상세정보"
-    setupCakeShopChips()
   }
   
-  private func setupCakeShopChips() {
-    let chipViews = cakeShop.cakeShopTypes.map {
+  private func setupCakeShopTypeChips(with cakeShopDetail: CakeShopDetailResponse) {
+    let chipViews = cakeShopDetail.cakeShopTypes.map {
       CakeShopTypeChip($0)
     }
     
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)
     }
+  }
+  
+  // MARK: - Bind
+  
+  private func bind() {
+    viewModel.output.cakeShopDetail
+      .sink { [weak self] in
+        guard let self else { return }
+
+        self.nameLabel.text = $0.name
+        self.addressLabel.text = $0.location
+        self.setupCakeShopTypeChips(with: $0)
+      }
+      .store(in: &cancellableBag)
   }
 }
 
@@ -210,7 +230,10 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
   static var previews: some View {
     UINavigationController(
       rootViewController:
-        ShopDetailViewController(cakeShop: SampleData.cakeShopList.first!)
+        ShopDetailViewController(
+          viewModel: ShopDetailViewModel(
+            cakeShop: SampleData.cakeShopList.first!,
+            service: NetworkService<CakeAPI>()))
     ).toPreview()
     
   }
