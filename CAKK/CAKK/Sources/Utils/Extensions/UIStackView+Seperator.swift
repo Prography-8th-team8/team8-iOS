@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIStackView {
-  func addSeparators(color: UIColor, width: CGFloat = 1) {
+  func addSeparators(color: UIColor?, width: CGFloat = 1) {
     arrangedSubviews.enumerated().forEach { index, view in
       guard index < arrangedSubviews.count - 1 else { return }
       
