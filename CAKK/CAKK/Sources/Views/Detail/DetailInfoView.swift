@@ -1,5 +1,5 @@
 //
-//  MenuDetailInfoView.swift
+//  DetailInfoView.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/05/11.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class MenuDetailInfoView: UIView {
+final class DetailInfoView: UIView {
   
   // MARK: - Constants
   
@@ -251,7 +251,7 @@ import SwiftUI
 struct MenuDetailInfoViewPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      return MenuDetailInfoView(with: SampleData.cakeShopList.first!)
+      return DetailInfoView(with: SampleData.cakeShopList.first!)
     }
     .padding()
     .frame(height: 400)

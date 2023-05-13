@@ -47,10 +47,10 @@ final class ShopDetailViewController: UIViewController {
     $0.text = cakeShop.location
   }
   
-  private let callMenuButton = MenuDetailButton(image: R.image.call(), title: "전화하기")
-  private let bookmarkMenuButton = MenuDetailButton(image: R.image.bookmark(), title: "북마크")
-  private let naviMenuButton = MenuDetailButton(image: R.image.navi(), title: "길 안내")
-  private let shareMenuButton = MenuDetailButton(image: R.image.share(), title: "공유하기")
+  private let callMenuButton = DetailMenuButton(image: R.image.call(), title: "전화하기")
+  private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
+  private let naviMenuButton = DetailMenuButton(image: R.image.navi(), title: "길 안내")
+  private let shareMenuButton = DetailMenuButton(image: R.image.share(), title: "공유하기")
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
@@ -77,6 +77,14 @@ final class ShopDetailViewController: UIViewController {
     $0.font = .pretendard(size: 20, weight: .bold)
   }
   
+  private lazy var keywordTitleContainerView = UIView().then {
+    $0.addSubview(keywordTitleLabel)
+    keywordTitleLabel.snp.makeConstraints {
+      $0.verticalEdges.equalToSuperview()
+      $0.leading.equalToSuperview()
+    }
+  }
+  
   private let keywordScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
     $0.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -95,7 +103,7 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private lazy var detailInfoView = MenuDetailInfoView(with: cakeShop)
+  private lazy var detailInfoView = DetailInfoView(with: cakeShop)
     
   // MARK: - LifeCycle
   
@@ -161,8 +169,11 @@ final class ShopDetailViewController: UIViewController {
   private func setupKeywordTitleLabelLayout() {
     contentStackView.addArrangedSubview(keywordTitleLabel)
     contentStackView.setCustomSpacing(24, after: keywordTitleLabel)
+//    keywordTitleLabel.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+//    keywordTitleLabel.insetsLayoutMarginsFromSafeArea = true
+//    keywordTitleLabel.margin = true
     keywordTitleLabel.snp.makeConstraints {
-      $0.leading.equalToSuperview().offset(16)
+      $0.leading.equalTo(contentStackView.snp.leading).offset(16)
     }
   }
   

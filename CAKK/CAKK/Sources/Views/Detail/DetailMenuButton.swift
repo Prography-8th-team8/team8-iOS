@@ -1,5 +1,5 @@
 //
-//  MenuDetailButton.swift
+//  DetailMenuButton.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/05/10.
@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class MenuDetailButton: UIButton {
+final class DetailMenuButton: UIButton {
   
   // MARK: - UI
   
@@ -77,7 +77,7 @@ struct MenuDetailButtonPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
       let image = UIImage(systemName: "phone")?.withTintColor(.black)
-      return MenuDetailButton(image: image, title: "전화하기")
+      return DetailMenuButton(image: image, title: "전화하기")
     }
     .padding()
     .frame(width: 120, height: 90)
