@@ -12,16 +12,11 @@ import Then
 
 final class DetailSectionTitleView: UIView {
   
-  // MARK: - Constants
-  
-  enum Metric { }
-  
-  // MARK: - Properties
-  
   // MARK: - UI
   
   private let keywordTitleLabel = UILabel().then {
     $0.font = .pretendard(size: 20, weight: .bold)
+    $0.text = "-"
   }
   
   // MARK: - LifeCycle

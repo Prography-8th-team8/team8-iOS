@@ -16,8 +16,8 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - Constants
   
-  enum Metric {
-    
+  enum Constants {
+    static let skeletonText = "-"
   }
   
   // MARK: - Properties
@@ -39,13 +39,15 @@ final class ShopDetailViewController: UIViewController {
     $0.backgroundColor = R.color.stroke()
   }
   
-  private lazy var nameLabel = UILabel().then {
+  private let nameLabel = UILabel().then {
     $0.font = .pretendard(size: 20, weight: .bold)
+    $0.text = Constants.skeletonText
     $0.textAlignment = .center
   }
   
-  private lazy var addressLabel = UILabel().then {
+  private let addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
+    $0.text = Constants.skeletonText
     $0.textAlignment = .center
   }
   
@@ -67,7 +69,9 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private lazy var headerStackView = UIStackView(
-    arrangedSubviews: [nameLabel, addressLabel, menuButtonStackView]
+    arrangedSubviews: [nameLabel,
+                       addressLabel,
+                       menuButtonStackView]
   ).then {
     $0.axis = .vertical
     $0.spacing = 12
@@ -94,7 +98,17 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private lazy var detailInfoView = DetailInfoView()
+  private let detailInfoView = DetailInfoView()
+  
+  private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
+    $0.backgroundColor = .systemBackground
+  }
+  
+  private lazy var indicatorView = UIActivityIndicatorView().then {
+    $0.center = indicatorContainerView.center
+    $0.color = .gray
+    $0.style = .medium
+  }
     
   // MARK: - LifeCycle
   
@@ -133,6 +147,7 @@ final class ShopDetailViewController: UIViewController {
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupDetailInfoView()
+    setupActivityIndicator()
   }
   
   private func setupScrollViewLayout() {
@@ -192,6 +207,12 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.setCustomSpacing(spacing, after: seperatorView)
   }
   
+  private func setupActivityIndicator() {
+    view.addSubview(indicatorContainerView)
+    indicatorContainerView.addSubview(indicatorView)
+    setActivityIndicator(toAnimate: true)
+  }
+  
   private func setupView() {
     view.backgroundColor = .white
     title = "상세정보"
@@ -207,6 +228,21 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func setActivityIndicator(toAnimate isAnimate: Bool) {
+    guard isAnimate != indicatorView.isAnimating else { return }
+    
+    let alpha: CGFloat = isAnimate ? 1.0 : 0.0
+    UIView.animate(withDuration: 0.5) {
+      self.indicatorContainerView.alpha = alpha
+    }
+    
+    if isAnimate {
+      indicatorView.startAnimating()
+    } else {
+      indicatorView.stopAnimating()
+    }
+  }
+  
   // MARK: - Bind
   
   private func bind() {
@@ -217,6 +253,7 @@ final class ShopDetailViewController: UIViewController {
         self.nameLabel.text = $0.name
         self.addressLabel.text = $0.location
         self.setupCakeShopTypeChips(with: $0)
+        self.setActivityIndicator(toAnimate: false)
       }
       .store(in: &cancellableBag)
   }
@@ -235,6 +272,5 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
             cakeShop: SampleData.cakeShopList.first!,
             service: NetworkService<CakeAPI>()))
     ).toPreview()
-    
   }
 }
