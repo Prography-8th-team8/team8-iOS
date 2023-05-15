@@ -24,15 +24,10 @@ class RegionPickerCollectionCell: HighlightableCell {
     static let titleFontSize = 14.f
     static let numberOfRegionsFontSize = 20.f
   }
-  
+
   
   // MARK: - Properties
-  
-  private var title: String = ""
-  private var numberOfRegions: Int = 0
-  private var color = UIColor(hex: 0xE9EDFF)
-  private var borderColor = UIColor(hex: 0xD5D9E9)
-  
+
   
   // MARK: - UI
   
@@ -67,12 +62,13 @@ class RegionPickerCollectionCell: HighlightableCell {
   // MARK: - Publics
   
   public func configure(_ item: DistrictSection) {
-    self.title = item.sectionName
-    self.numberOfRegions = item.count
-    self.color = item.color
-    self.borderColor = item.borderColor
+    titleLabel.text = item.sectionName
+    numberOfRegionsLabel.text = "\(item.count)개"
     
-    configureView()
+    backgroundColor = .clear
+    cakkView.borderColor = item.borderColor
+    cakkView.backgroundColor = item.color
+    cakkView.cornerRadius = Metric.cornerRadius
   }
   
   
@@ -80,7 +76,6 @@ class RegionPickerCollectionCell: HighlightableCell {
   
   private func setup() {
     setupLayout()
-    configureView()
   }
   
   private func setupLayout() {
@@ -110,28 +105,6 @@ class RegionPickerCollectionCell: HighlightableCell {
       $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
       $0.bottom.equalToSuperview().inset(Metric.verticalPadding)
     }
-  }
-  
-  private func configureView() {
-    configureCakkView()
-    configureTitleLabel()
-    configureNumberOfRegionsLabel()
-  }
-  
-  private func configureCakkView() {
-    backgroundColor = .clear
-    
-    cakkView.borderColor = borderColor
-    cakkView.backgroundColor = color
-    cakkView.cornerRadius = Metric.cornerRadius
-  }
-  
-  private func configureTitleLabel() {
-    titleLabel.text = title
-  }
-  
-  private func configureNumberOfRegionsLabel() {
-    numberOfRegionsLabel.text = "\(numberOfRegions)개"
   }
 }
 

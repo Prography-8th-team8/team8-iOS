@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import Combine
+
 class OnboardingViewController: UIViewController {
   
   // MARK: - Constants
@@ -46,14 +48,21 @@ class OnboardingViewController: UIViewController {
   // MARK: - Types
   
   typealias ViewModel = OnboardingViewModel
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
   
   
   // MARK: - Properties
   
   public var viewModel: ViewModel!
+  private var dataSource: DataSource!
+  private var cancellableBag = Set<AnyCancellable>()
   
   private var regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
     cell.configure(item)
+  }
+  
+  enum Section {
+    case regionSelector
   }
   
   
@@ -84,7 +93,6 @@ class OnboardingViewController: UIViewController {
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
-    viewModel.dataSource = dataSource()
   }
   
   required init?(coder: NSCoder) {
@@ -103,8 +111,11 @@ class OnboardingViewController: UIViewController {
   private func setup() {
     setupLayout()
     setupView()
+    setupDataSource()
+    bind()
   }
   
+  // Setup Layouts
   private func setupLayout() {
     setupTitleLabelLayout()
     setupDescriptionLabelLayout()
@@ -136,6 +147,7 @@ class OnboardingViewController: UIViewController {
     }
   }
   
+  // Setup Views
   private func setupView() {
     setupBaseView()
     setupCollectionView()
@@ -149,25 +161,46 @@ class OnboardingViewController: UIViewController {
     collectionView.delegate = self
   }
   
-  private func dataSource() -> OnboardingViewModel.DataSource {
-    let dataSource = OnboardingViewModel.DataSource(
+  public func setupDataSource() {
+    dataSource = DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: self.regionPickerCellRegistration,
           for: indexPath,
           item: item)
-
+        cell.configure(item)
         return cell
       })
-      
-      return dataSource
   }
   
-  private func presentMainView() {
-    let vc = MainViewController()
-    vc.modalPresentationStyle = .fullScreen
-    present(vc, animated: true)
+  // Bind
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() { }
+  
+  private func bindOutput() {
+    viewModel.output.districtSections
+      .sink { [weak self] districtSections in
+        let section: [Section] = [.regionSelector]
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
+        snapshot.appendSections(section)
+        snapshot.appendItems(districtSections)
+        self?.dataSource.apply(snapshot)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.presentMainView
+      .sink { [weak self] _ in
+        guard let self else { return }
+        let vc = MainViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+      }
+      .store(in: &cancellableBag)
   }
 }
 
@@ -177,7 +210,9 @@ class OnboardingViewController: UIViewController {
 extension OnboardingViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    presentMainView()
+    viewModel.input
+      .selectDistrict
+      .send(indexPath)
   }
 }
 
