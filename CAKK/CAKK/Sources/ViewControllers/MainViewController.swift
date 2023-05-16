@@ -50,7 +50,14 @@ final class MainViewController: UIViewController {
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
-  private var isDetailViewShown = false
+  private var isDetailViewShown = false {
+    didSet {
+      let alpha = isDetailViewShown ? 1.f : 0.f
+      UIView.animate(withDuration: 0.3) {
+        self.hideDetailBottomSheetButton.alpha = alpha
+      }
+    }
+  }
   
   // MARK: - UI
   
@@ -58,11 +65,6 @@ final class MainViewController: UIViewController {
     $0.showZoomControls = false
     $0.mapView.logoAlign = .rightTop
   }
-  
-//  private let refreshButton = CapsuleStyleButton(
-//    iconImage: UIImage(systemName: "arrow.clockwise")!,
-//    text: Constants.refreshButtonText
-//  )
   
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
@@ -79,7 +81,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
-  private let cakeListViewController = CakeShopListViewController()
+  private var cakeListViewController: CakeShopListViewController?
   
   private let cakeShopDetailBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
@@ -88,7 +90,7 @@ final class MainViewController: UIViewController {
     $0.layer.shadowRadius = 20
     $0.layer.shadowOffset = .zero
   }
-  private let shopDetailViewController = ShopDetailViewController(viewModel: ShopDetailViewModel(cakeShop: SampleData.cakeShopList.first!, service: NetworkService<CakeAPI>(type: .stub)))
+  private var shopDetailViewController: ShopDetailViewController?
   
   private let hideDetailBottomSheetButton = UIButton().then {
     $0.backgroundColor = .white
@@ -118,9 +120,9 @@ final class MainViewController: UIViewController {
     bind()
   }
   
+  // Setup Layout
   private func setupLayouts() {
     setupNaverMapViewLayout()
-//    setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
   }
   
@@ -130,14 +132,6 @@ final class MainViewController: UIViewController {
       $0.edges.equalToSuperview()
     }
   }
-  
-//  private func setupRefreshButtonLayout() {
-//    view.addSubview(refreshButton)
-//    refreshButton.snp.makeConstraints {
-//      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(Metric.verticalPadding)
-//      $0.centerX.equalToSuperview()
-//    }
-//  }
   
   private func setupHideDetailBottomSheetButtonLayout() {
     view.addSubview(hideDetailBottomSheetButton)
@@ -150,12 +144,12 @@ final class MainViewController: UIViewController {
     hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
   }
   
+  // Setup View
   private func setupView() {
     setupBaseView()
     setupMapView()
     setupSeeLocationButton()
     setupCakeShopListBottomSheet()
-    setupCakeShopListViewController()
     setupCakeShopDetailBottomSheet()
   }
   
@@ -176,6 +170,15 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListBottomSheet() {
+    let viewModel = CakeShopListViewModel(
+      districtSection: .items().first!,
+      service: NetworkService(type: .stub))
+    let cakeListViewController = CakeShopListViewController(viewModel: viewModel)
+    cakeListViewController.cakeShopItemSelectAction = { [weak self] in
+      self?.showCakeShopDetail()
+    }
+    self.cakeListViewController = cakeListViewController
+    
     // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
@@ -187,7 +190,6 @@ final class MainViewController: UIViewController {
     appearance.fillSafeAreaWhenPositionAtFull = true
     cakeShopListBottomSheet.appearance = appearance
     
-    
     // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
@@ -196,17 +198,11 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupCakeShopListViewController() {
-    cakeListViewController.cakeShopItemSelectAction = { [weak self] in
-      self?.showCakeShopDetail()
-    }
-  }
-  
   private func setupCakeShopDetailBottomSheet() {
     // Configuration
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
-      contentViewController: shopDetailViewController)
+      contentViewController: .init())
     
     // Appearance
     var appearance = BottomSheetAppearance()
@@ -216,6 +212,7 @@ final class MainViewController: UIViewController {
     cakeShopDetailBottomSheet.hide()
   }
   
+  // Bind
   private func bind() {
     bindHideCakeShopDetailButton()
   }
@@ -233,24 +230,26 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopDetail() {
+    let viewModel = ShopDetailViewModel(
+      cakeShop: SampleData.cakeShopList.first!,
+      service: NetworkService<CakeAPI>(type: .stub))
+    let shopDetailViewController = ShopDetailViewController(viewModel: viewModel)
+    self.shopDetailViewController = shopDetailViewController
+    
+    cakeShopDetailBottomSheet.configure(
+      parentViewController: self,
+      contentViewController: shopDetailViewController)
+    
     shopDetailViewController.notifyViewWillShow()
     cakeShopListBottomSheet.hide()
     cakeShopDetailBottomSheet.show(.half)
     isDetailViewShown = true
-
-    UIView.animate(withDuration: 0.3) {
-      self.hideDetailBottomSheetButton.alpha = 1
-    }
   }
 
   private func hideCakeShopDetail() {
     cakeShopListBottomSheet.show()
     cakeShopDetailBottomSheet.hide()
     isDetailViewShown = false
-    
-    UIView.animate(withDuration: 0.3) {
-      self.hideDetailBottomSheetButton.alpha = 0
-    }
   }
 }
 

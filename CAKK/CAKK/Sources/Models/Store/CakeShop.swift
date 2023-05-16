@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CakeShop: Decodable {
+struct CakeShop: Decodable, Hashable {
   let id: Int
   let createdAt: TimeInterval
   let modifiedAt: TimeInterval
