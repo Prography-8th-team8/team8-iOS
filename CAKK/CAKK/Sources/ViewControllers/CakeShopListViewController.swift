@@ -65,7 +65,7 @@ final class CakeShopListViewController: UIViewController {
     case cakeShop
   }
   
-  public var cakeShopItemSelectAction: () -> Void = { }
+  public var cakeShopItemSelectAction: ((CakeShop) -> Void)?
   private var dataSource: DataSource!
   private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
   
@@ -207,8 +207,7 @@ final class CakeShopListViewController: UIViewController {
     viewModel.output
       .presentCakeShopDetail
       .sink { [weak self] cakeShop in
-        // 여기서 뷰모델 넘겨주면 댐
-        self?.cakeShopItemSelectAction()
+        self?.cakeShopItemSelectAction?(cakeShop)
       }
       .store(in: &cancellableBag)
   }
