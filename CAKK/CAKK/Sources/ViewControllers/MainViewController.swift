@@ -45,11 +45,26 @@ final class MainViewController: UIViewController {
   // MARK: - Properties
 
   private var cancellableBag = Set<AnyCancellable>()
+  
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
+  
   static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
     tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
+  
+  private var bottomSheetAppearance: BottomSheetAppearance {
+    var appearance = BottomSheetAppearance()
+    appearance.shadowColor = UIColor.black.cgColor
+    appearance.shadowOpacity = 0.1
+    appearance.shadowRadius = 20
+    appearance.shadowOffset = .init(width: 0, height: -8)
+    
+    appearance.fillSafeAreaWhenPositionAtFull = true
+    
+    return appearance
+  }
+  
   private var isDetailViewShown = false {
     didSet {
       let alpha = isDetailViewShown ? 1.f : 0.f
@@ -58,6 +73,9 @@ final class MainViewController: UIViewController {
       }
     }
   }
+  
+  private var shopDetailViewController: ShopDetailViewController?
+  
   
   // MARK: - UI
   
@@ -76,21 +94,12 @@ final class MainViewController: UIViewController {
 
   private let cakeShopListBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopListBottomSheetLayout
-    $0.layer.shadowColor = UIColor.black.cgColor
-    $0.layer.shadowOpacity = 0.1
-    $0.layer.shadowRadius = 20
-    $0.layer.shadowOffset = .zero
   }
   private var cakeListViewController: CakeShopListViewController?
   
   private let cakeShopDetailBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
-    $0.layer.shadowColor = UIColor.black.cgColor
-    $0.layer.shadowOpacity = 0.1
-    $0.layer.shadowRadius = 20
-    $0.layer.shadowOffset = .zero
   }
-  private var shopDetailViewController: ShopDetailViewController?
   
   private let hideDetailBottomSheetButton = UIButton().then {
     $0.backgroundColor = .white
@@ -150,7 +159,6 @@ final class MainViewController: UIViewController {
     setupMapView()
     setupSeeLocationButton()
     setupCakeShopListBottomSheet()
-    setupCakeShopDetailBottomSheet()
   }
   
   private func setupBaseView() {
@@ -174,8 +182,8 @@ final class MainViewController: UIViewController {
       districtSection: .items().first!,
       service: NetworkService(type: .stub))
     let cakeListViewController = CakeShopListViewController(viewModel: viewModel)
-    cakeListViewController.cakeShopItemSelectAction = { [weak self] in
-      self?.showCakeShopDetail()
+    cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
+      self?.showCakeShopDetail(cakeShop)
     }
     self.cakeListViewController = cakeListViewController
     
@@ -185,31 +193,15 @@ final class MainViewController: UIViewController {
       contentViewController: cakeListViewController
     )
     
-    // Appearance
-    var appearance = BottomSheetAppearance()
-    appearance.fillSafeAreaWhenPositionAtFull = true
-    cakeShopListBottomSheet.appearance = appearance
-    
     // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
       $0.top.equalTo(naverMapView.snp.bottom)
         .inset(Metric.naverMapBottomInset)
         .priority(.low)
     }
-  }
-  
-  private func setupCakeShopDetailBottomSheet() {
-    // Configuration
-    cakeShopDetailBottomSheet.configure(
-      parentViewController: self,
-      contentViewController: .init())
     
     // Appearance
-    var appearance = BottomSheetAppearance()
-    appearance.fillSafeAreaWhenPositionAtFull = true
-    cakeShopDetailBottomSheet.appearance = appearance
-    
-    cakeShopDetailBottomSheet.hide()
+    cakeShopListBottomSheet.appearance = bottomSheetAppearance
   }
   
   // Bind
@@ -229,9 +221,9 @@ final class MainViewController: UIViewController {
     cakeShopListBottomSheet.move(to: .half)
   }
   
-  private func showCakeShopDetail() {
+  private func showCakeShopDetail(_ cakeShop: CakeShop) {
     let viewModel = ShopDetailViewModel(
-      cakeShop: SampleData.cakeShopList.first!,
+      cakeShop: cakeShop,
       service: NetworkService<CakeAPI>(type: .stub))
     let shopDetailViewController = ShopDetailViewController(viewModel: viewModel)
     self.shopDetailViewController = shopDetailViewController
@@ -239,6 +231,8 @@ final class MainViewController: UIViewController {
     cakeShopDetailBottomSheet.configure(
       parentViewController: self,
       contentViewController: shopDetailViewController)
+    
+    cakeShopDetailBottomSheet.appearance = bottomSheetAppearance
     
     shopDetailViewController.notifyViewWillShow()
     cakeShopListBottomSheet.hide()
