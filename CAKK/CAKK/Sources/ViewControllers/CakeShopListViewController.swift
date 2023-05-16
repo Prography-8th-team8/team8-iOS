@@ -178,7 +178,7 @@ final class CakeShopListViewController: UIViewController {
           using: self.cakeShopCellRegistration,
           for: indexPath,
           item: item)
-        
+        cell.configure(item)
         return cell
       })
   }

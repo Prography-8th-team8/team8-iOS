@@ -51,7 +51,6 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private let shopNameLabel = UILabel().then {
-    $0.text = "케이크를 부탁해 연신내역점"
     $0.font = .pretendard(size: Metric.shopNameFontSize, weight: .bold)
     $0.textColor = .black
     $0.numberOfLines = Metric.shopNameNumberOfLines
@@ -62,13 +61,11 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private let districtLocationLabel = UILabel().then {
-    $0.text = "은평구"
     $0.font = .systemFont(ofSize: Metric.districtFontSize)
     $0.textColor = .black
   }
 
   private let locationLabel = UILabel().then {
-    $0.text = "서울 은평구 갈현로 36길 6-4 101호 동그리케이크"
     $0.font = .systemFont(ofSize: Metric.locationLabelFontSize)
     $0.textColor = .black.withAlphaComponent(0.6)
     $0.numberOfLines = Metric.locationLabelNumberOfLines
@@ -79,14 +76,6 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.spacing = Metric.cakeShopTypeStackViewSpacing
     $0.alignment = .leading
   }
-  
-  private let cakeShopTypeSupplementaryChip = LabelChip().then {
-    $0.title = "+3"
-    $0.isBackgroundSynced = false
-    $0.titleColor = .white
-    $0.backgroundColor = .black
-  }
-  
   
   
   // MARK: - LifeCycle
@@ -102,6 +91,14 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   
   // MARK: - Public
+  
+  public func configure(_ item: CakeShop) {
+    shopNameLabel.text = item.name
+    districtLocationLabel.text = item.district
+    locationLabel.text = item.location
+    
+    configureCakeShopTypeStackView(item.cakeShopTypes)
+  }
 
   
   // MARK: - Private
@@ -111,6 +108,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     setupView()
   }
   
+  // Setup Layout
   private func setupLayout() {
     setupCakkViewLayout()
     setupHeaderStackViewLayout()
@@ -166,9 +164,10 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
+  // Setup View
   private func setupView() {
     setupContentView()
-    setupCakeShopTypeStackView()
+//    setupCakeShopTypeStackView()
   }
   
   private func setupContentView() {
@@ -177,14 +176,28 @@ final class CakeShopCollectionCell: HighlightableCell {
     cakkView.cornerRadius = Metric.cornerRadius
   }
   
-  private func setupCakeShopTypeStackView() {
-    let sampleTypes: [CakeShopType] = [.character, .figure, .flower]
-    sampleTypes.forEach { shopType in
-      let chip = CakeShopTypeChip(shopType)
-      cakeShopTypeStackView.addArrangedSubview(chip)
-    }
+  private func configureCakeShopTypeStackView(_ types: [CakeShopType]) {
+    cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
     
-    cakeShopTypeStackView.addArrangedSubview(cakeShopTypeSupplementaryChip)
+    for (index, type) in types.enumerated() {
+      if index < 3 {
+        let chip = CakeShopTypeChip(type)
+        cakeShopTypeStackView.addArrangedSubview(chip)
+      } else {
+        // at the end of the loop
+        if index == types.count - 1 {
+          let count = "+\((index - 1) - 3)"
+          
+          let supplementaryChip = LabelChip()
+          supplementaryChip.title = count
+          supplementaryChip.isBackgroundSynced = false
+          supplementaryChip.titleColor = .white
+          supplementaryChip.backgroundColor = .black
+          
+          cakeShopTypeStackView.addArrangedSubview(supplementaryChip)
+        }
+      }
+    }
   }
 }
 
@@ -197,7 +210,9 @@ import SwiftUI
 struct CakeListCellPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      CakeShopCollectionCell()
+      let cell = CakeShopCollectionCell()
+      cell.configure(SampleData.cakeShopList.first!)
+      return cell
     }
     .frame(width: 328, height: 158)
     .previewLayout(.sizeThatFits)
