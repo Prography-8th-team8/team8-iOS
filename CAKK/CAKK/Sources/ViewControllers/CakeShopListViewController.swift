@@ -6,8 +6,11 @@
 //
 
 import UIKit
+
 import SnapKit
 import Then
+
+import Combine
 
 final class CakeShopListViewController: UIViewController {
   
@@ -32,7 +35,16 @@ final class CakeShopListViewController: UIViewController {
     static let cakeTableViewItemSpacing = 10.f
   }
   
+  // MARK: - Types
+  
+  typealias ViewModel = CakeShopListViewModel
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, CakeShop>
+  
+  
   // MARK: - Properties
+  
+  private var viewModel: ViewModel
+  private var cancellableBag = Set<AnyCancellable>()
   
   static var layout: UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
@@ -48,7 +60,15 @@ final class CakeShopListViewController: UIViewController {
     section.interGroupSpacing = Metric.collectionViewItemSpacing
     return UICollectionViewCompositionalLayout(section: section)
   }
+  
+  enum Section {
+    case cakeShop
+  }
+  
   public var cakeShopItemSelectAction: () -> Void = { }
+  private var dataSource: DataSource!
+  private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
+  
   
   // MARK: - UI
   
@@ -67,14 +87,14 @@ final class CakeShopListViewController: UIViewController {
     $0.textColor = .black
   }
   
-  private let numberOfCakeshopsLabel = UILabel().then {
+  private let numberOfCakeShopLabel = UILabel().then {
     $0.text = "0개의 케이크샵"
     $0.font = .systemFont(ofSize: Metric.numberOfCakeShopFontSize)
     $0.textColor = .black.withAlphaComponent(0.8)
   }
   
   private lazy var labelsStack = UIStackView(
-    arrangedSubviews: [locationsLabel, numberOfCakeshopsLabel]
+    arrangedSubviews: [locationsLabel, numberOfCakeShopLabel]
   ).then {
     $0.alignment = .leading
     $0.axis = .vertical
@@ -83,7 +103,16 @@ final class CakeShopListViewController: UIViewController {
   
 
   // MARK: - LifeCycle
-
+  
+  init(viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -95,8 +124,10 @@ final class CakeShopListViewController: UIViewController {
   private func setup() {
     setupLayout()
     setupView()
+    bind()
   }
 
+  // Setup Layouts
   private func setupLayout() {
     setupHeaderViewLayout()
     setupLabelStackLayout()
@@ -127,6 +158,7 @@ final class CakeShopListViewController: UIViewController {
     }
   }
   
+  // Setup Views
   private func setupView() {
     setupCollectionView()
   }
@@ -137,26 +169,59 @@ final class CakeShopListViewController: UIViewController {
   
   private func setupCollectionView() {
     collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
-    collectionView.dataSource = self
     collectionView.delegate = self
+    
+    dataSource = DataSource(
+      collectionView: collectionView,
+      cellProvider: { collectionView, indexPath, item in
+        let cell = collectionView.dequeueConfiguredReusableCell(
+          using: self.cakeShopCellRegistration,
+          for: indexPath,
+          item: item)
+        
+        return cell
+      })
+  }
+  
+  // Bind
+  
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() { }
+  
+  private func bindOutput() {
+    viewModel.output
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        let section: [Section] = [.cakeShop]
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CakeShop>()
+        snapshot.appendSections(section)
+        snapshot.appendItems(cakeShops)
+        self?.dataSource.apply(snapshot)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .presentCakeShopDetail
+      .sink { [weak self] cakeShop in
+        // 여기서 뷰모델 넘겨주면 댐
+        self?.cakeShopItemSelectAction()
+      }
+      .store(in: &cancellableBag)
   }
 }
 
 // MARK: - UICollectionView
 
-extension CakeShopListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 20
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CakeShopCollectionCell.identifier, for: indexPath) as? CakeShopCollectionCell else { return .init()}
-    return cell
-  }
-  
+extension CakeShopListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    cakeShopItemSelectAction()
+    viewModel.input
+      .selectCakeShop
+      .send(indexPath)
   }
 }
 
@@ -167,6 +232,13 @@ import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    CakeShopListViewController().toPreview()
+    let viewModel = CakeShopListViewModel(
+      districtSection: .items().first!,
+      service: .init(type: .stub)
+    )
+    
+    CakeShopListViewController(viewModel: viewModel)
+      .toPreview()
+      .ignoresSafeArea()
   }
 }

@@ -8,8 +8,7 @@
 import UIKit
 import Combine
 
-class OnboardingViewModel: ObservableObject {
-  
+class OnboardingViewModel {
   
   // MARK: - Properties
   
@@ -31,6 +30,7 @@ class OnboardingViewModel: ObservableObject {
   
   init() {
     setupInputOutput()
+    setupData()
   }
   
   
@@ -39,9 +39,6 @@ class OnboardingViewModel: ObservableObject {
   private func setupInputOutput() {
     let input = Input()
     let output = Output()
-    
-    output.districtSections
-      .send(DistrictSection.items())
     
     input.selectDistrict
       .sink { indexPath in
@@ -52,5 +49,14 @@ class OnboardingViewModel: ObservableObject {
     
     self.input = input
     self.output = output
+  }
+  
+  private func setupData() {
+    fetchDistrictSections()
+  }
+  
+  private func fetchDistrictSections() {
+    output.districtSections
+      .send(DistrictSection.items())
   }
 }

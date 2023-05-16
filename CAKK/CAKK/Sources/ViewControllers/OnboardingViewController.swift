@@ -111,7 +111,6 @@ class OnboardingViewController: UIViewController {
   private func setup() {
     setupLayout()
     setupView()
-    setupDataSource()
     bind()
   }
   
@@ -159,9 +158,7 @@ class OnboardingViewController: UIViewController {
   
   private func setupCollectionView() {
     collectionView.delegate = self
-  }
-  
-  public func setupDataSource() {
+    
     dataSource = DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
