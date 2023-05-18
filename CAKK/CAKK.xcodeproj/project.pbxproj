@@ -44,6 +44,7 @@
 		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
 		B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */; };
 		B43889B52A15B21700476BFC /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* NaverMapView.swift */; };
+		B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */; };
 		B43889C62A15E02300476BFC /* district_count_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B43889C52A15E02300476BFC /* district_count_sample.json */; };
 		B43DA3D229F8ACFA00F1A4B1 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B43DA3D129F8ACFA00F1A4B1 /* APIKeys.xcconfig */; };
 		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
@@ -75,6 +76,16 @@
 		B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */; };
 		B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B43889BE2A15DB4600476BFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9E191B29CEDD4F00CFF157 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9E192229CEDD4F00CFF157;
+			remoteInfo = CAKK;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		014B174A5E6D2252FA1A52C8 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +129,8 @@
 		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
 		B43889B42A15B21700476BFC /* NaverMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapView.swift; sourceTree = "<group>"; };
+		B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CAKKNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAKKNetworkingTests.swift; sourceTree = "<group>"; };
 		B43889C52A15E02300476BFC /* district_count_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = district_count_sample.json; sourceTree = "<group>"; };
 		B43DA3D129F8ACFA00F1A4B1 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -156,6 +169,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C7534055987407556BE848A /* Pods_CAKK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B43889B72A15DB4600476BFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9E192529CEDD4F00CFF157 /* CAKK */,
+				B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */,
 				8E9E192429CEDD4F00CFF157 /* Products */,
 				D911E24E8132FA565E4A398E /* Pods */,
 				AD4B4F1E58EFB12089A0F251 /* Frameworks */,
@@ -231,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9E192329CEDD4F00CFF157 /* CAKK.app */,
+				B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -326,6 +348,14 @@
 				1BA728E0477EEDD96A85FAA5 /* Pods_CAKK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */ = {
+			isa = PBXGroup;
+			children = (
+				B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */,
+			);
+			path = CAKKNetworkingTests;
 			sourceTree = "<group>";
 		};
 		B455C4312A07E98A00FB8403 /* Store */ = {
@@ -431,6 +461,24 @@
 			productReference = 8E9E192329CEDD4F00CFF157 /* CAKK.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B43889B92A15DB4600476BFC /* CAKKNetworkingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B43889C22A15DB4600476BFC /* Build configuration list for PBXNativeTarget "CAKKNetworkingTests" */;
+			buildPhases = (
+				B43889B62A15DB4600476BFC /* Sources */,
+				B43889B72A15DB4600476BFC /* Frameworks */,
+				B43889B82A15DB4600476BFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B43889BF2A15DB4600476BFC /* PBXTargetDependency */,
+			);
+			name = CAKKNetworkingTests;
+			productName = CAKKNetworkingTests;
+			productReference = B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -443,6 +491,10 @@
 				TargetAttributes = {
 					8E9E192229CEDD4F00CFF157 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					B43889B92A15DB4600476BFC = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 8E9E192229CEDD4F00CFF157;
 					};
 				};
 			};
@@ -460,6 +512,7 @@
 			projectRoot = "";
 			targets = (
 				8E9E192229CEDD4F00CFF157 /* CAKK */,
+				B43889B92A15DB4600476BFC /* CAKKNetworkingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -486,6 +539,13 @@
 				8E37754D29F7CA2F00166198 /* Pretendard-Black.otf in Resources */,
 				B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */,
 				8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B43889B82A15DB4600476BFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,7 +688,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B43889B62A15DB4600476BFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B43889BF2A15DB4600476BFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9E192229CEDD4F00CFF157 /* CAKK */;
+			targetProxy = B43889BE2A15DB4600476BFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */ = {
@@ -828,6 +904,50 @@
 			};
 			name = Release;
 		};
+		B43889C02A15DB4600476BFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MasonKim.CAKKNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CAKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CAKK";
+			};
+			name = Debug;
+		};
+		B43889C12A15DB4600476BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MasonKim.CAKKNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CAKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CAKK";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -845,6 +965,15 @@
 			buildConfigurations = (
 				8E9E193829CEDD5000CFF157 /* Debug */,
 				8E9E193929CEDD5000CFF157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B43889C22A15DB4600476BFC /* Build configuration list for PBXNativeTarget "CAKKNetworkingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B43889C02A15DB4600476BFC /* Debug */,
+				B43889C12A15DB4600476BFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
