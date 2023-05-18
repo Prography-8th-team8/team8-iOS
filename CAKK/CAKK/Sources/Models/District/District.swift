@@ -8,31 +8,31 @@
 import Foundation
 
 enum District: String, Decodable {
-  case jongno
-  case jung
-  case yongsan
-  case seongdong
-  case gwangjin
-  case dongdaemun
-  case jungnang
-  case seongbuk
-  case gangbuk
-  case dobong
-  case nowon
-  case eunpyeong
-  case seodaemun
-  case mapo
-  case yangcheon
-  case gangseo
-  case guro
-  case geumcheon
-  case yeongdeungpo
-  case dongjak
-  case gwanak
-  case seocho
-  case gangnam
-  case songpa
-  case gangdong
+  case jongno = "JONGNO"
+  case jung = "JUNG"
+  case yongsan = "YONGSAN"
+  case seongdong = "SEONGDONG"
+  case gwangjin = "GWANGJIN"
+  case dongdaemun = "DONGDAEMUN"
+  case jungnang = "JUNGNANG"
+  case seongbuk = "SEONGBUK"
+  case gangbuk = "GANGBUK"
+  case dobong = "DOBONG"
+  case nowon = "NOWON"
+  case eunpyeong = "EUNPYEONG"
+  case seodaemun = "SEODAEMUN"
+  case mapo = "MAPO"
+  case yangcheon = "YANGCHEON"
+  case gangseo = "GANGSEO"
+  case guro = "GURO"
+  case geumcheon = "GEUMCHEON"
+  case yeongdeungpo = "YEONGDEUNGPO"
+  case dongjak = "DONGJAK"
+  case gwanak = "GWANAK"
+  case seocho = "SEOCHO"
+  case gangnam = "GANGNAM"
+  case songpa = "SONGPA"
+  case gangdong = "GANGDONG"
   
   var koreanName: String {
     switch self {
