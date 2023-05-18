@@ -23,39 +23,64 @@ final class CAKKNetworkingTests: XCTestCase {
   }
   
   func test_케이크리스트_Response_객체가_정상적으로_디코딩_된다() throws {
+    // given
+    let expectation = XCTestExpectation()
+    
+    // when
     sut.request(.fetchCakeShopList(districts: [.dobong]), type: CakeShopResponse.self)
-      .sink { error in
-        print(error)
-        XCTFail("CakeShopResponse 객체 디코딩 실패")
+      .sink { completion in
+        if case let .failure(error) = completion {
+          XCTFail("CakeShopResponse 객체 디코딩 실패: \(error)")
+        }
       } receiveValue: { response in
+        // then
         XCTAssertGreaterThan(response.cakeShops.count, 0)
+        expectation.fulfill()
       }
       .store(in: &cancellableBag)
+    
+    wait(for: [expectation], timeout: 2)
   }
   
   func test_케이크상세정보_Response_객체가_정상적으로_디코딩_된다() throws {
-    let expectation = SampleData.cakeShopDetail
+    // given
+    let expectation = XCTestExpectation()
+    let expectatedData = SampleData.cakeShopDetail
     
+    // when
     sut.request(.fetchCakeShopDetail(id: 0), type: CakeShopDetailResponse.self)
-      .sink { error in
-        print(error)
-        XCTFail("CakeShopDetailResponse 객체 디코딩 실패")
+      .sink { completion in
+        if case let .failure(error) = completion {
+          XCTFail("CakeShopDetailResponse 객체 디코딩 실패: \(error)")
+        }
       } receiveValue: { response in
-        XCTAssertEqual(response.name, expectation?.name)
+        // then
+        XCTAssertEqual(response.name, expectatedData?.name)
+        expectation.fulfill()
       }
       .store(in: &cancellableBag)
+    
+    wait(for: [expectation], timeout: 2)
   }
 
   func test_지역별_가게_갯수_Response_객체가_정상적으로_디코딩_된다() throws {
-    let expectation = SampleData.districtCount
+    // given
+    let expectation = XCTestExpectation()
+    let expectatedData = SampleData.districtCount
     
+    // when
     sut.request(.fetchDistrictCounts, type: DistrictCountResponse.self)
-      .sink { error in
-        print(error)
-        XCTFail("DistrictCountResponse 객체 디코딩 실패")
+      .sink { completion in
+        if case let .failure(error) = completion {
+          XCTFail("DistrictCountResponse 객체 디코딩 실패: \(error)")
+        }
       } receiveValue: { response in
-        XCTAssertEqual(response.count, expectation?.count)
+        // then
+        XCTAssertEqual(response.count, expectatedData?.count)
+        expectation.fulfill()
       }
       .store(in: &cancellableBag)
+    
+    wait(for: [expectation], timeout: 2)
   }
 }
