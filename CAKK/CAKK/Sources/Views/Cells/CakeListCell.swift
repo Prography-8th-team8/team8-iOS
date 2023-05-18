@@ -94,7 +94,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   public func configure(_ item: CakeShop) {
     shopNameLabel.text = item.name
-    districtLocationLabel.text = item.district
+    districtLocationLabel.text = item.district.koreanName
     locationLabel.text = item.location
     
     configureCakeShopTypeStackView(item.cakeShopTypes)
