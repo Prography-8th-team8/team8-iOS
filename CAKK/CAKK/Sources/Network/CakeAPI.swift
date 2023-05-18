@@ -79,11 +79,11 @@ extension CakeAPI: TargetType {
   var sampleData: Data {
     switch self {
     case .fetchCakeShopList:
-      return SampleData.cakeShopList
+      return SampleData.cakeShopListData
     case .fetchDistrictCounts:
       return Data()
     case .fetchCakeShopDetail:
-      return Data()
+      return SampleData.cakeShopDetailData
     case .fetchBlogReviews:
       return Data()
     case .fetchCakeShopImage:

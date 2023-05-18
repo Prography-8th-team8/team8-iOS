@@ -38,7 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let splashViewController = SplashViewController()
     splashViewController.modalPresentationStyle = .overCurrentContext // splashViewController.view.alpha = 0 했을 시에 배경이 검정색이 아닌 투명으로 보여주기 위함
     onboardingViewController.present(splashViewController, animated: false)
-    
+
     splashViewController.startSplash {
       UIView.animate(withDuration: Constants.splashFadeOutDuration) {
         splashViewController.view.alpha = 0

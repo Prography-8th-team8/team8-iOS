@@ -8,35 +8,29 @@
 import UIKit
 import Combine
 
-class OnboardingViewModel: ObservableObject {
-  
-  // MARK: - Types
-  
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
-  
+class OnboardingViewModel {
   
   // MARK: - Properties
   
-  struct Input { }
-  struct Output { }
+  struct Input {
+    var selectDistrict = PassthroughSubject<IndexPath, Never>()
+  }
+  
+  struct Output {
+    var districtSections = CurrentValueSubject<[DistrictSection], Never>([])
+    var presentMainView = PassthroughSubject<DistrictSection, Never>()
+  }
   
   public var input: Input!
   public var output: Output!
-  
-  public var dataSource: DataSource! {
-    didSet {
-      setupDataSource()
-    }
-  }
-  public enum Section {
-    case region
-  }
+  private var cancellableBag = Set<AnyCancellable>()
   
   
   // MARK: - LifeCycles
   
   init() {
     setupInputOutput()
+    setupData()
   }
   
   
@@ -46,15 +40,23 @@ class OnboardingViewModel: ObservableObject {
     let input = Input()
     let output = Output()
     
+    input.selectDistrict
+      .sink { indexPath in
+        let districtSection = output.districtSections.value[indexPath.row]
+        output.presentMainView.send(districtSection)
+      }
+      .store(in: &cancellableBag)
+    
     self.input = input
     self.output = output
   }
   
-  public func setupDataSource() {
-    let section: [Section] = [.region]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
-    snapshot.appendSections(section)
-    snapshot.appendItems(DistrictSection.items())
-    dataSource.apply(snapshot)
+  private func setupData() {
+    fetchDistrictSections()
+  }
+  
+  private func fetchDistrictSections() {
+    output.districtSections
+      .send(DistrictSection.items())
   }
 }
