@@ -18,11 +18,20 @@ enum SampleData {
     return try? Data(contentsOf: location)
   }()
   
+  static let districtCountData: Data! = {
+    let location = Bundle.main.url(forResource: "district_count_sample", withExtension: "json")!
+    return try? Data(contentsOf: location)
+  }()
+  
   static let cakeShopList: [CakeShop]! = {
     return try? JSONDecoder().decode(CakeShopResponse.self, from: SampleData.cakeShopListData).cakeShops
   }()
   
   static let cakeShopDetail: CakeShopDetailResponse! = {
     return try? JSONDecoder().decode(CakeShopDetailResponse.self, from: SampleData.cakeShopDetailData)
+  }()
+  
+  static let districtCount: DistrictCountResponse! = {
+    return try? JSONDecoder().decode(DistrictCountResponse.self, from: SampleData.districtCountData)
   }()
 }

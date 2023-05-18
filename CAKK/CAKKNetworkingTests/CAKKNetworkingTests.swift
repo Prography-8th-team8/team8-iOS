@@ -6,30 +6,56 @@
 //
 
 import XCTest
+import Combine
+@testable import CAKK
 
 final class CAKKNetworkingTests: XCTestCase {
+  
+  var sut: NetworkService<CakeAPI>!
+  private var cancellableBag = Set<AnyCancellable>()
+  
+  override func setUpWithError() throws {
+    sut = NetworkService<CakeAPI>(type: .stub)
+  }
+  
+  override func tearDownWithError() throws {
+    sut = nil
+  }
+  
+  func test_케이크리스트_Response_객체가_정상적으로_디코딩_된다() throws {
+    sut.request(.fetchCakeShopList(districts: [.dobong]), type: CakeShopResponse.self)
+      .sink { error in
+        print(error)
+        XCTFail("CakeShopResponse 객체 디코딩 실패")
+      } receiveValue: { response in
+        XCTAssertGreaterThan(response.cakeShops.count, 0)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  func test_케이크상세정보_Response_객체가_정상적으로_디코딩_된다() throws {
+    let expectation = SampleData.cakeShopDetail
+    
+    sut.request(.fetchCakeShopDetail(id: 0), type: CakeShopDetailResponse.self)
+      .sink { error in
+        print(error)
+        XCTFail("CakeShopDetailResponse 객체 디코딩 실패")
+      } receiveValue: { response in
+        XCTAssertEqual(response.name, expectation?.name)
+      }
+      .store(in: &cancellableBag)
+  }
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+  func test_지역별_가게_갯수_Response_객체가_정상적으로_디코딩_된다() throws {
+    let expectation = SampleData.districtCount
+    
+    sut.request(.fetchDistrictCounts, type: DistrictCountResponse.self)
+      .sink { error in
+        print(error)
+        XCTFail("DistrictCountResponse 객체 디코딩 실패")
+      } receiveValue: { response in
+        XCTAssertEqual(response.count, expectation?.count)
+      }
+      .store(in: &cancellableBag)
+  }
 }
