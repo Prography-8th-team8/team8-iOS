@@ -79,10 +79,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - UI
   
-  private let naverMapView = NMFNaverMapView(frame: .zero).then {
-    $0.showZoomControls = false
-    $0.mapView.logoAlign = .rightTop
-  }
+  private let naverMapView = NaverMapView(frame: .zero)
   
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
@@ -181,6 +178,10 @@ final class MainViewController: UIViewController {
     let viewModel = CakeShopListViewModel(
       districtSection: .items().first!,
       service: NetworkService(type: .stub))
+    
+    // TODO: 임시로 여기 넣음...
+    naverMapView.bind(to: viewModel)
+    
     let cakeListViewController = CakeShopListViewController(viewModel: viewModel)
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
