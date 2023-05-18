@@ -13,10 +13,16 @@ import NMapsMap
 
 final class NaverMapView: NMFNaverMapView {
   
+  private enum MarkerImage {
+    static let pin = NMFOverlayImage(image: R.image.map_pin() ?? .checkmark)
+    static let selectedPin = NMFOverlayImage(image: R.image.map_pin_selected() ?? .checkmark)
+  }
+  
   // MARK: - Properties
   
   private var cancellableBag = Set<AnyCancellable>()
   private var markers: [NMFMarker] = []
+  private var selectedMarker: NMFMarker?
   
   var didTappedMarker: ((CakeShop) -> Void)?
   
@@ -58,7 +64,7 @@ final class NaverMapView: NMFNaverMapView {
     let position = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
     let marker = NMFMarker(position: position)
     marker.mapView = mapView
-    marker.iconImage = NMFOverlayImage(image: R.image.map() ?? .checkmark)
+    marker.iconImage = MarkerImage.pin
     marker.userInfo = [cakeShop.id: cakeShop]
     setupMarkerTouchHandler(marker, position: position, cakeShop: cakeShop)
     return marker
@@ -69,7 +75,15 @@ final class NaverMapView: NMFNaverMapView {
       let cameraUpdate = NMFCameraUpdate(scrollTo: position)
       cameraUpdate.animation = .easeIn
       self?.mapView.moveCamera(cameraUpdate)
+      marker.iconImage = MarkerImage.selectedPin
+      
+      if marker != self?.selectedMarker {
+        self?.selectedMarker?.iconImage = MarkerImage.pin
+      }
+      
+      self?.selectedMarker = marker
       self?.didTappedMarker?(cakeShop)
+      
       return true
     }
   }
@@ -80,6 +94,8 @@ final class NaverMapView: NMFNaverMapView {
       $0.touchHandler = nil
     }
     markers.removeAll()
+    
+    selectedMarker = nil
   }
   
 }
