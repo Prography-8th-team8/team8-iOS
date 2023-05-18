@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct DistrictCountResponse: Decodable {
-  let districtCounts: [District: Int]
-  
-  enum CodingKeys: String, CodingKey {
-    case districtCounts = "district"
-  }
+struct DistrictCount: Decodable {
+  let district: District
+  let count: Int
 }
+
+typealias DistrictCountResponse = [DistrictCount]
