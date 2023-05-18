@@ -1,12 +1,16 @@
 {
-  "id": 1,
-  "createdAt": 1622494800,
-  "modifiedAt": 1622494800,
-  "name": "케이크를 부탁해 연신내역점",
-  "city": "Seoul",
-  "district": "Jung",
-  "location": "서울 은평구 연서로29길 8",
-  "latitude": 37.564,
-  "longitude": 126.98,
-  "storeTypes": ["LETTERING", "CHARACTER", "MEALBOX", "TIARA", "RICE", "FLOWER", "FIGURE", "LETTERING"]
+  "id": 2,
+  "createdAt": "2023-05-17T22:13:49",
+  "modifiedAt": "2023-05-17T22:13:52",
+  "name": "팬토리케이크",
+  "city": "SEOUL",
+  "district": "EUNPYEONG",
+  "location": "주소주소",
+  "latitude": 105.0,
+  "longitude": 202.0,
+  "storeTypes": ["LETTERING", "CHARACTER", "MEALBOX", "TIARA", "RICE", "FLOWER", "FIGURE", "LETTERING"],
+  "link": "https:\/\/www.instagram.com\/pantory_cake_\/",
+  "description": "",
+  "phoneNumber": "",
+  "address": "서울특별시 은평구 연서로18길 6 1층"
 }
