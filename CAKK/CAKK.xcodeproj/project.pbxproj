@@ -199,8 +199,8 @@
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
 				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
-				8E3FF2E92A0E813300865E36 /* Cells */,
 				B43889B42A15B21700476BFC /* NaverMapView.swift */,
+				8E3FF2E92A0E813300865E36 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
