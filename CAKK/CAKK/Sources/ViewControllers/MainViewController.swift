@@ -153,9 +153,10 @@ final class MainViewController: UIViewController {
   // Setup View
   private func setupView() {
     setupBaseView()
+    setupCakeShopListBottomSheet()
     setupMapView()
     setupSeeLocationButton()
-    setupCakeShopListBottomSheet()
+//    setupCakeShopListBottomSheet()
   }
   
   private func setupBaseView() {
@@ -164,6 +165,9 @@ final class MainViewController: UIViewController {
   
   private func setupMapView() {
     naverMapView.mapView.addCameraDelegate(delegate: self)
+    naverMapView.didTappedMarker = { [weak self] cakeShop in
+      self?.showCakeShopDetail(cakeShop)
+    }
   }
   
   private func setupSeeLocationButton() {
@@ -179,7 +183,6 @@ final class MainViewController: UIViewController {
       districtSection: .items().first!,
       service: NetworkService(type: .stub))
     
-    // TODO: 임시로 여기 넣음...
     naverMapView.bind(to: viewModel)
     
     let cakeListViewController = CakeShopListViewController(viewModel: viewModel)
@@ -223,6 +226,8 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopDetail(_ cakeShop: CakeShop) {
+    hideCakeShopDetail()
+    
     let viewModel = ShopDetailViewModel(
       cakeShop: cakeShop,
       service: NetworkService<CakeAPI>(type: .stub))

@@ -70,17 +70,23 @@ final class NaverMapView: NMFNaverMapView {
   
   private func setupMarkerTouchHandler(_ marker: NMFMarker, position: NMGLatLng, cakeShop: CakeShop) {
     marker.touchHandler = { [weak self] _ in
+      guard let self else { return false }
+      
+      // Update camera
       let cameraUpdate = NMFCameraUpdate(scrollTo: position)
       cameraUpdate.animation = .easeIn
-      self?.mapView.moveCamera(cameraUpdate)
-      marker.iconImage = MarkerImage.selectedPin
+      self.mapView.moveCamera(cameraUpdate)
       
-      if marker != self?.selectedMarker {
-        self?.selectedMarker?.iconImage = MarkerImage.pin
+      // Update marker
+      marker.iconImage = MarkerImage.selectedPin
+      if marker != self.selectedMarker {
+        self.selectedMarker?.iconImage = MarkerImage.pin
       }
       
-      self?.selectedMarker = marker
-      self?.didTappedMarker?(cakeShop)
+      self.selectedMarker = marker
+      
+      // Notify
+      self.didTappedMarker?(cakeShop)
       
       return true
     }

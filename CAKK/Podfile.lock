@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
-  - BottomSheetView (0.1.6)
+  - BottomSheetView (0.1.7)
   - CombineCocoa (0.4.1)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
@@ -49,12 +49,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BottomSheetView:
-    :commit: 435b572f067793a061c5196187304018298d2925
+    :commit: b38afd746af3d962c4d813695896ba4977c111ce
     :git: "git@github.com:qwerty3345/BottomSheetView.git"
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
-  BottomSheetView: 0bda5bf46f45cb190ccb9d5a9edfc6439c97f692
+  BottomSheetView: 92f6914e3c75f2639d5fa92dba060d7ea89c5062
   CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
