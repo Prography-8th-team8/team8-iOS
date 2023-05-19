@@ -79,7 +79,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - UI
   
-  private let naverMapView = NaverMapView(frame: .zero)
+  private let naverMapView = CakkMapView(frame: .zero)
   
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,

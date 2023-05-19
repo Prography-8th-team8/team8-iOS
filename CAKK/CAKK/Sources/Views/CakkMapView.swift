@@ -1,5 +1,5 @@
 //
-//  NaverMapView.swift
+//  CakkMapView.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/05/18.
@@ -9,7 +9,7 @@ import Combine
 
 import NMapsMap
 
-final class NaverMapView: NMFNaverMapView {
+final class CakkMapView: NMFNaverMapView {
   
   private enum MarkerImage {
     static let pin = NMFOverlayImage(image: R.image.map_pin() ?? .checkmark)
@@ -72,20 +72,8 @@ final class NaverMapView: NMFNaverMapView {
     marker.touchHandler = { [weak self] _ in
       guard let self else { return false }
       
-      // Update camera
-      let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-      cameraUpdate.animation = .easeIn
-      self.mapView.moveCamera(cameraUpdate)
-      
-      // Update marker
-      marker.iconImage = MarkerImage.selectedPin
-      if marker != self.selectedMarker {
-        self.selectedMarker?.iconImage = MarkerImage.pin
-      }
-      
-      self.selectedMarker = marker
-      
-      // Notify
+      self.moveCamera(position)
+      self.updateMarker(marker)
       self.didTappedMarker?(cakeShop)
       
       return true
@@ -102,4 +90,20 @@ final class NaverMapView: NMFNaverMapView {
     selectedMarker = nil
   }
   
+  private func moveCamera(_ position: NMGLatLng) {
+    let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+    cameraUpdate.animation = .easeIn
+    mapView.moveCamera(cameraUpdate)
+  }
+  
+  private func updateMarker(_ marker: NMFMarker) {
+    marker.iconImage = MarkerImage.selectedPin
+    if marker != selectedMarker {
+      selectedMarker?.iconImage = MarkerImage.pin
+    }
+    
+    UIView.animate(withDuration: 1) {
+      self.selectedMarker = marker
+    }
+  }
 }
