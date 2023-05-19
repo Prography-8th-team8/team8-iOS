@@ -43,7 +43,7 @@
 		8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */; };
 		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
 		B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */; };
-		B43889B52A15B21700476BFC /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* NaverMapView.swift */; };
+		B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* CakkMapView.swift */; };
 		B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */; };
 		B43889C62A15E02300476BFC /* district_count_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B43889C52A15E02300476BFC /* district_count_sample.json */; };
 		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
@@ -128,7 +128,7 @@
 		8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopTypeChip.swift; sourceTree = "<group>"; };
 		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
-		B43889B42A15B21700476BFC /* NaverMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapView.swift; sourceTree = "<group>"; };
+		B43889B42A15B21700476BFC /* CakkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkMapView.swift; sourceTree = "<group>"; };
 		B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CAKKNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAKKNetworkingTests.swift; sourceTree = "<group>"; };
 		B43889C52A15E02300476BFC /* district_count_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = district_count_sample.json; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
 				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
-				B43889B42A15B21700476BFC /* NaverMapView.swift */,
+				B43889B42A15B21700476BFC /* CakkMapView.swift */,
 				8E3FF2E92A0E813300865E36 /* Cells */,
 			);
 			path = Views;
@@ -640,7 +640,7 @@
 				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
-				B43889B52A15B21700476BFC /* NaverMapView.swift in Sources */,
+				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
