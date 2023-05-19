@@ -19,8 +19,8 @@ final class ShopDetailViewModel: ViewModelType {
   
   // MARK: - Properties
   
-  var input: Input = Input()
-  var output: Output = Output()
+  private(set) var input: Input!
+  private(set) var output: Output!
   
   private let service: NetworkService<CakeAPI>
   
@@ -40,17 +40,26 @@ final class ShopDetailViewModel: ViewModelType {
   // MARK: - Private
   
   private func bindInputs() {
+    let input = Input()
+    let output = Output()
+    
     input.viewWillShow
-      .flatMap {
-        self.service.request(.fetchCakeShopDetail(id: self.cakeShop.id),
-                             type: CakeShopDetailResponse.self)
+      .flatMap { [weak self] in
+        guard let self = self else {
+          return Empty<CakeShopDetailResponse, any Error>().eraseToAnyPublisher()
+        }
+        return self.service.request(.fetchCakeShopDetail(id: self.cakeShop.id),
+                                    type: CakeShopDetailResponse.self)
       }
       .catch { _ in
         return Empty<CakeShopDetailResponse, Never>()
       }
       .sink {
-        self.output.cakeShopDetail.send($0)
+        output.cakeShopDetail.send($0)
       }
       .store(in: &cancellableBag)
+    
+    self.input = input
+    self.output = output
   }
 }
