@@ -43,7 +43,7 @@ final class CakeShopListViewController: UIViewController {
   
   // MARK: - Properties
   
-  private var viewModel: ViewModel
+  private(set) var viewModel: ViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
   static var layout: UICollectionViewCompositionalLayout {

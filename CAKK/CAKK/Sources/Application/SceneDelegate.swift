@@ -20,7 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   var window: UIWindow?
   
-  
   // MARK: - LifeCycle
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -28,8 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     
     // 루트뷰를 메인뷰로 설정
-    let viewModel = OnboardingViewModel()
-    let onboardingViewController = OnboardingViewController(viewModel: viewModel)
+    let onboardingViewController = DIContainer.shared.makeOnboardingViewController()
     window.rootViewController = onboardingViewController
     self.window = window
     window.makeKeyAndVisible()
