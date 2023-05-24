@@ -180,7 +180,7 @@ final class MainViewController: UIViewController {
   
   private func setupCakeShopListBottomSheet() {
     // TODO: 변경
-    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .items().first!)
+    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .init(count: 3, color: .black, borderColor: .black, districts: [.jongno]))
     naverMapView.bind(to: cakeListViewController.viewModel)
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in

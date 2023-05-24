@@ -24,7 +24,7 @@ enum SampleData {
   }()
   
   static let cakeShopList: [CakeShop]! = {
-    return try? JSONDecoder().decode(CakeShopResponse.self, from: SampleData.cakeShopListData).cakeShops
+    return try? JSONDecoder().decode(CakeShopResponse.self, from: SampleData.cakeShopListData)
   }()
   
   static let cakeShopDetail: CakeShopDetailResponse! = {

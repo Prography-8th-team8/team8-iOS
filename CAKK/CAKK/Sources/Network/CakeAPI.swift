@@ -18,7 +18,7 @@ enum CakeAPI {
 
 extension CakeAPI: TargetType {
   var baseURL: URL {
-    return URL(string: "http://15.165.196.34:8080/store")!
+    return URL(string: "http://15.165.196.34:8081/api/store")!
   }
   
   var path: String {
@@ -27,8 +27,8 @@ extension CakeAPI: TargetType {
       return "/list"
     case .fetchDistrictCounts:
       return "/district/count"
-    case .fetchCakeShopDetail:
-      return "/store"
+    case .fetchCakeShopDetail(id: let id):
+      return "/\(id)"
     case .fetchBlogReviews:
       return "/blog"
     case .fetchCakeShopImage(id: let id):
@@ -47,7 +47,9 @@ extension CakeAPI: TargetType {
     switch self {
     case .fetchCakeShopList(let districts):
       let parameters: Parameters = [
-        "district": districts.map { $0.rawValue.uppercased() }
+        "district": districts
+          .map { $0.rawValue.uppercased() }
+          .joined(separator: ",")
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
@@ -55,10 +57,8 @@ extension CakeAPI: TargetType {
     case .fetchDistrictCounts:
       return .requestPlain
       
-    case .fetchCakeShopDetail(let id):
-      let parameters: Parameters = ["id": id]
-      let encoding = URLEncoding(destination: .queryString)
-      return .requestParameters(parameters: parameters, encoding: encoding)
+    case .fetchCakeShopDetail:
+      return .requestPlain
       
     case .fetchBlogReviews(cakeShopName: let name):
       let parameters: Parameters = ["name": name]
