@@ -34,7 +34,7 @@ final class CAKKNetworkingTests: XCTestCase {
         }
       } receiveValue: { response in
         // then
-        XCTAssertGreaterThan(response.cakeShops.count, 0)
+        XCTAssertGreaterThan(response.count, 0)
         expectation.fulfill()
       }
       .store(in: &cancellableBag)
