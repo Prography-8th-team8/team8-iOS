@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CakeShopResponse: Decodable {
-  let cakeShops: [CakeShop]
-  
-  enum CodingKeys: String, CodingKey {
-    case cakeShops = "storeList"
-  }
-}
+//struct CakeShopResponse: Decodable {
+//  let cakeShops: [CakeShop]
+//  
+//  enum CodingKeys: String, CodingKey {
+//    case cakeShops = "storeList"
+//  }
+//}

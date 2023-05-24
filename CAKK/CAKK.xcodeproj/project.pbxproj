@@ -52,7 +52,6 @@
 		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
 		B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42B2A07E62500FB8403 /* CakeShop.swift */; };
 		B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */; };
-		B455C4302A07E93300FB8403 /* CakeShopResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42F2A07E93300FB8403 /* CakeShopResponse.swift */; };
 		B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4322A07E99500FB8403 /* CakeShopType.swift */; };
 		B455C4362A07EB2F00FB8403 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4352A07EB2F00FB8403 /* District.swift */; };
 		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
@@ -69,6 +68,8 @@
 		B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */; };
 		B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */; };
 		B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */; };
+		B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A66FC62A1E5F7800D3581D /* BlogPost.swift */; };
+		B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */; };
 		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
 		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
 		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
@@ -138,7 +139,6 @@
 		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
 		B455C42B2A07E62500FB8403 /* CakeShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShop.swift; sourceTree = "<group>"; };
 		B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictCountResponse.swift; sourceTree = "<group>"; };
-		B455C42F2A07E93300FB8403 /* CakeShopResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopResponse.swift; sourceTree = "<group>"; };
 		B455C4322A07E99500FB8403 /* CakeShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopType.swift; sourceTree = "<group>"; };
 		B455C4352A07EB2F00FB8403 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
@@ -155,6 +155,8 @@
 		B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Seperator.swift"; sourceTree = "<group>"; };
 		B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B4A66FC62A1E5F7800D3581D /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
+		B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -277,8 +279,7 @@
 		8E9E193A29CEDDAD00CFF157 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
-				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
+				B4F1F41F2A17AF5F00DA6358 /* Application */,
 				8E32CE9C29CEE30A00905FD6 /* Network */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
@@ -359,10 +360,10 @@
 		B455C4312A07E98A00FB8403 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				B455C42F2A07E93300FB8403 /* CakeShopResponse.swift */,
 				B455C42B2A07E62500FB8403 /* CakeShop.swift */,
 				B455C4322A07E99500FB8403 /* CakeShopType.swift */,
 				B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */,
+				B4A66FC62A1E5F7800D3581D /* BlogPost.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -405,6 +406,16 @@
 				8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B4F1F41F2A17AF5F00DA6358 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
+				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
+				B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		B4FB8E7F2A0F700800DBF193 /* ViewModels */ = {
@@ -658,6 +669,7 @@
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
 				B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */,
 				B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */,
+				B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */,
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
@@ -671,12 +683,12 @@
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,
 				8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */,
 				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
-				B455C4302A07E93300FB8403 /* CakeShopResponse.swift in Sources */,
 				8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */,
 				8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */,
 				8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */,
 				8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */,
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
+				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */,
 				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
@@ -843,7 +855,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
@@ -877,7 +889,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";

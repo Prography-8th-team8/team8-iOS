@@ -251,7 +251,7 @@ final class ShopDetailViewController: UIViewController {
         guard let self else { return }
 
         self.nameLabel.text = $0.name
-        self.addressLabel.text = $0.location
+//        self.addressLabel.text = $0.location
         self.setupCakeShopTypeChips(with: $0)
         self.setActivityIndicator(toAnimate: false)
       }
