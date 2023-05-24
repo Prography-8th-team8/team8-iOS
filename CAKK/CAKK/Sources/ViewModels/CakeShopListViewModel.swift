@@ -69,7 +69,7 @@ class CakeShopListViewModel {
       print(error)
     } receiveValue: { [weak self] response in
       self?.output.cakeShops
-        .send(response.cakeShops)
+        .send(response)
     }
     .store(in: &cancellableBag)
   }

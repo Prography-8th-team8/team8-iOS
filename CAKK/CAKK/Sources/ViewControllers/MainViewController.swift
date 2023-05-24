@@ -179,13 +179,10 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListBottomSheet() {
-    let viewModel = CakeShopListViewModel(
-      districtSection: .items().first!,
-      service: NetworkService(type: .stub))
+    // TODO: 변경
+    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .init(count: 3, color: .black, borderColor: .black, districts: [.jongno]))
+    naverMapView.bind(to: cakeListViewController.viewModel)
     
-    naverMapView.bind(to: viewModel)
-    
-    let cakeListViewController = CakeShopListViewController(viewModel: viewModel)
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
     }
@@ -228,10 +225,7 @@ final class MainViewController: UIViewController {
   private func showCakeShopDetail(_ cakeShop: CakeShop) {
     hideCakeShopDetail()
     
-    let viewModel = ShopDetailViewModel(
-      cakeShop: cakeShop,
-      service: NetworkService<CakeAPI>(type: .stub))
-    let shopDetailViewController = ShopDetailViewController(viewModel: viewModel)
+    let shopDetailViewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
     self.shopDetailViewController = shopDetailViewController
     
     cakeShopDetailBottomSheet.configure(

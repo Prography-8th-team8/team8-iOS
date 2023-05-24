@@ -142,7 +142,7 @@ final class DetailInfoView: UIView {
   // MARK: - Properties
   
   func configure(with cakeShopDetail: CakeShopDetailResponse) {
-    addressLabel.text = "\(cakeShopDetail.location)"
+//    addressLabel.text = "\(cakeShopDetail.location)"
     //    lotAddressLabel.text = cakeShop. TODO: - 지번 주소 가져와야 함
     //    distanceFromStationLabel.text = cakeShop. TODO: - 역에서의 거리 가져와야 함
     //    businessTimeLabel.text = cakeShop. TODO: - 영업 시간 가져와야 함
