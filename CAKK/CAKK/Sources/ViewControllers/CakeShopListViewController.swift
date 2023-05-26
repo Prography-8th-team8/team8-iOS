@@ -88,7 +88,6 @@ final class CakeShopListViewController: UIViewController {
   }
   
   private let numberOfCakeShopLabel = UILabel().then {
-    $0.text = "0개의 케이크샵"
     $0.font = .systemFont(ofSize: Metric.numberOfCakeShopFontSize)
     $0.textColor = .black.withAlphaComponent(0.8)
   }
@@ -100,6 +99,13 @@ final class CakeShopListViewController: UIViewController {
     $0.axis = .vertical
     $0.spacing = Metric.labelsStackViewSpacing
   }
+  
+  private let loadingView = UIActivityIndicatorView()
+  
+  private var noDataView = NoDataView(
+    title: "표시할 데이터가 없어요!",
+    subTitle: "빠른 시일내에 준비하겠습니다."
+  )
   
 
   // MARK: - LifeCycle
@@ -132,6 +138,8 @@ final class CakeShopListViewController: UIViewController {
     setupHeaderViewLayout()
     setupLabelStackLayout()
     setupCollectionViewLayout()
+    setupLoadingViewLayout()
+    setupNoDataViewLayout()
   }
   
   private func setupHeaderViewLayout() {
@@ -155,6 +163,20 @@ final class CakeShopListViewController: UIViewController {
       $0.top.equalTo(headerView.snp.bottom)
       $0.leading.trailing.equalToSuperview().inset(Metric.collectionViewHorizontalPadding)
       $0.bottom.equalToSuperview()
+    }
+  }
+  
+  private func setupLoadingViewLayout() {
+    view.addSubview(loadingView)
+    loadingView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
+  }
+  
+  private func setupNoDataViewLayout() {
+    view.addSubview(noDataView)
+    noDataView.snp.makeConstraints {
+      $0.center.equalToSuperview()
     }
   }
   
@@ -205,9 +227,43 @@ final class CakeShopListViewController: UIViewController {
       .store(in: &cancellableBag)
     
     viewModel.output
+      .cakeShops
+      .map { $0.count.description }
+      .sink { [weak self] count in
+        self?.numberOfCakeShopLabel.text = "\(count)개의 케이크샵"
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .hasNoData
+      .sink { [weak self] hasNoData in
+        if hasNoData {
+          self?.noDataView.isHidden = false
+        } else {
+          self?.noDataView.isHidden = true
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
       .presentCakeShopDetail
       .sink { [weak self] cakeShop in
         self?.cakeShopItemSelectAction?(cakeShop)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .isLoading
+      .sink { [weak self] isLoading in
+        if isLoading {
+          self?.collectionView.isHidden = true
+          self?.loadingView.isHidden = false
+          self?.loadingView.startAnimating()
+        } else {
+          self?.collectionView.isHidden = false
+          self?.loadingView.isHidden = true
+          self?.loadingView.stopAnimating()
+        }
       }
       .store(in: &cancellableBag)
   }
