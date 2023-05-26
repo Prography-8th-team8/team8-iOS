@@ -19,6 +19,8 @@ class CakeShopListViewModel {
   struct Output {
     var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
     var presentCakeShopDetail = PassthroughSubject<CakeShop, Never>()
+    var isLoading = CurrentValueSubject<Bool, Never>(false)
+    var hasNoData = CurrentValueSubject<Bool, Never>(false)
   }
   
   private(set) var input: Input!
@@ -62,15 +64,28 @@ class CakeShopListViewModel {
   }
   
   private func fetchCakeShops() {
-    service.request(
-      .fetchCakeShopList(districts: districtSection.districts),
-      type: CakeShopResponse.self)
-    .sink { error in
-      print(error)
-    } receiveValue: { [weak self] response in
-      self?.output.cakeShops
-        .send(response)
-    }
-    .store(in: &cancellableBag)
+    Just(Void())
+      .map { [weak self] in
+        self?.output.hasNoData.send(false)
+        self?.output.isLoading.send(true)
+      }
+      .flatMap { [unowned self] (_) -> AnyPublisher<[CakeShop], Error> in
+        self.service.request(
+          .fetchCakeShopList(districts: self.districtSection.districts),
+          type: CakeShopResponse.self)
+      }
+      .sink { [weak self] error in
+        print(error)
+        self?.output.isLoading.send(false)
+      } receiveValue: { [weak self] cakeShops in
+        if cakeShops.isEmpty {
+          self?.output.hasNoData.send(true)
+        } else {
+          self?.output.hasNoData.send(false)
+        }
+
+        self?.output.cakeShops.send(cakeShops)
+      }
+      .store(in: &cancellableBag)
   }
 }

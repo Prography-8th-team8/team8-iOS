@@ -59,8 +59,7 @@ final class MainViewController: UIViewController {
     appearance.shadowOpacity = 0.1
     appearance.shadowRadius = 20
     appearance.shadowOffset = .init(width: 0, height: -8)
-    
-    appearance.fillSafeAreaWhenPositionAtFull = true
+    appearance.ignoreSafeArea = [.top]
     
     return appearance
   }
