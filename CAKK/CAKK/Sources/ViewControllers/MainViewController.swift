@@ -166,6 +166,9 @@ final class MainViewController: UIViewController {
     cakkMapView.didTappedMarker = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
     }
+    cakkMapView.didUnselectMarker = { [weak self] in
+      self?.hideCakeShopDetail()
+    }
   }
   
   private func setupSeeLocationButton() {

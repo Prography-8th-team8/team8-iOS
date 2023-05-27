@@ -55,6 +55,12 @@ class CakeShopListViewModel {
       }
       .store(in: &cancellableBag)
     
+    input.unselectCakeShop
+      .sink {
+        
+      }
+      .store(in: &cancellableBag)
+    
     self.input = input
     self.output = output
   }

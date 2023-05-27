@@ -20,18 +20,18 @@ final class CakkMapView: NMFNaverMapView {
   
   private var cancellableBag = Set<AnyCancellable>()
   private var markers: [NMFMarker] = []
-  private var selectedMarker: NMFMarker?
+  private var selectedMarker: NMFMarker? // 마지막으로 선택된 마커
   
-  // 마커 선택 시의 동작 closure 바인딩
+  // 마커 선택, 해제 시의 동작 closure 바인딩
   var didTappedMarker: ((CakeShop) -> Void)?
+  var didUnselectMarker: (() -> Void)?
   
   // MARK: - LifeCycle
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    showZoomControls = false
-    mapView.logoAlign = .rightTop
+    setupMapView()
   }
   
   required init?(coder: NSCoder) {
@@ -57,6 +57,12 @@ final class CakkMapView: NMFNaverMapView {
   }
   
   // MARK: - Private
+  
+  private func setupMapView() {
+    mapView.touchDelegate = self
+    showZoomControls = false
+    mapView.logoAlign = .rightTop
+  }
   
   private func updateMarkers(with cakeShops: [CakeShop]) {
     clearMarkers()
@@ -121,18 +127,29 @@ final class CakkMapView: NMFNaverMapView {
       unselectMarker(selectedMarker)
     }
     
-    UIView.animate(withDuration: 1) {
-      self.selectedMarker = marker
-    }
+    selectedMarker = marker
   }
   
   private func unselectMarker(_ marker: NMFMarker?) {
     marker?.iconImage = MarkerImage.pin
+    if marker == selectedMarker {
+      selectedMarker = nil
+    }
   }
   
   private func moveCamera(_ position: NMGLatLng) {
     let cameraUpdate = NMFCameraUpdate(scrollTo: position)
     cameraUpdate.animation = .easeIn
     mapView.moveCamera(cameraUpdate)
+  }
+}
+
+// MARK: - NMFMapViewTouchDelegate
+
+extension CakkMapView: NMFMapViewTouchDelegate {
+  // 맵뷰 마커가 아닌 다른 영역 선택 시 해당 마커를 해제하기 위함
+  func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+    unselectMarker(selectedMarker)
+    didUnselectMarker?()
   }
 }
