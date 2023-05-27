@@ -736,6 +736,7 @@
 /* Begin XCBuildConfiguration section */
 		8E9E193529CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EAD17232A166BB600E0C812 /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -797,6 +798,7 @@
 		};
 		8E9E193629CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EAD17232A166BB600E0C812 /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
