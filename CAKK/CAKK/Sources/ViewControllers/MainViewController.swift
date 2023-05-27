@@ -30,8 +30,7 @@ final class MainViewController: UIViewController {
     static let horizontalPadding = 16.f
     static let verticalPadding = 24.f
     
-    static let naverMapViewHeightRatio = 0.5
-    static let naverMapBottomInset = 10.f
+    static let cakkMapBottomInset = 10.f
 
     static let seeLocationButtonBottomInset = 28.f
     
@@ -78,7 +77,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - UI
   
-  private let naverMapView = CakkMapView(frame: .zero)
+  private let cakkMapView = CakkMapView(frame: .zero)
   
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
@@ -132,8 +131,8 @@ final class MainViewController: UIViewController {
   }
   
   private func setupNaverMapViewLayout() {
-    view.addSubview(naverMapView)
-    naverMapView.snp.makeConstraints {
+    view.addSubview(cakkMapView)
+    cakkMapView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
   }
@@ -163,9 +162,12 @@ final class MainViewController: UIViewController {
   }
   
   private func setupMapView() {
-    naverMapView.mapView.addCameraDelegate(delegate: self)
-    naverMapView.didTappedMarker = { [weak self] cakeShop in
+    cakkMapView.mapView.addCameraDelegate(delegate: self)
+    cakkMapView.didTappedMarker = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
+    }
+    cakkMapView.didUnselectMarker = { [weak self] in
+      self?.hideCakeShopDetail()
     }
   }
   
@@ -180,7 +182,7 @@ final class MainViewController: UIViewController {
   private func setupCakeShopListBottomSheet() {
     // TODO: 변경
     let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .init(count: 3, color: .black, borderColor: .black, districts: [.jongno]))
-    naverMapView.bind(to: cakeListViewController.viewModel)
+    cakkMapView.bind(to: cakeListViewController.viewModel)
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
@@ -195,8 +197,8 @@ final class MainViewController: UIViewController {
     
     // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
-      $0.top.equalTo(naverMapView.snp.bottom)
-        .inset(Metric.naverMapBottomInset)
+      $0.top.equalTo(cakkMapView.snp.bottom)
+        .inset(Metric.cakkMapBottomInset)
         .priority(.low)
     }
     
@@ -213,6 +215,7 @@ final class MainViewController: UIViewController {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.hideCakeShopDetail()
+        self?.cakkMapView.unselectMarker()
       }
       .store(in: &cancellableBag)
   }
