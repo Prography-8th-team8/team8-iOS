@@ -22,6 +22,7 @@ final class CakkMapView: NMFNaverMapView {
   private var markers: [NMFMarker] = []
   private var selectedMarker: NMFMarker?
   
+  // 마커 선택 시의 동작 closure 바인딩
   var didTappedMarker: ((CakeShop) -> Void)?
   
   // MARK: - LifeCycle
@@ -46,6 +47,13 @@ final class CakkMapView: NMFNaverMapView {
         self.updateMarkers(with: cakeShops)
       }
       .store(in: &cancellableBag)
+    
+    viewModel.output.presentCakeShopDetail
+      .sink { [weak self] cakeShop in
+        guard let self = self else { return }
+        self.selectMarker(of: cakeShop)
+      }
+      .store(in: &cancellableBag)
   }
   
   // MARK: - Private
@@ -53,6 +61,7 @@ final class CakkMapView: NMFNaverMapView {
   private func updateMarkers(with cakeShops: [CakeShop]) {
     clearMarkers()
     
+    // 마커를 등록한 후, 차후 clear 시 해제를 위해 현재 선택된 마커들을 담아놓음
     markers = cakeShops.map {
       makeMarker(with: $0)
     }
@@ -68,12 +77,12 @@ final class CakkMapView: NMFNaverMapView {
     return marker
   }
   
+  // 마커 선택 시의 액션 (카메라 시점 이동... 등) 등록
   private func setupMarkerTouchHandler(_ marker: NMFMarker, position: NMGLatLng, cakeShop: CakeShop) {
     marker.touchHandler = { [weak self] _ in
       guard let self else { return false }
       
-      self.moveCamera(position)
-      self.updateMarker(marker)
+      self.selectMarker(marker)
       self.didTappedMarker?(cakeShop)
       
       return true
@@ -90,20 +99,40 @@ final class CakkMapView: NMFNaverMapView {
     selectedMarker = nil
   }
   
-  private func moveCamera(_ position: NMGLatLng) {
-    let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-    cameraUpdate.animation = .easeIn
-    mapView.moveCamera(cameraUpdate)
+  // 등록된 마커들 중, 특정 케이크 샵에 대한 마커 선택
+  private func selectMarker(of cakeShop: CakeShop) {
+    guard let marker = markers.first(where: { marker in
+      marker.position.lat == cakeShop.latitude &&
+      marker.position.lng == cakeShop.longitude
+    }) else {
+      return
+    }
+    
+    selectMarker(marker)
   }
   
-  private func updateMarker(_ marker: NMFMarker) {
+  // 특정 마커 선택 시 이미지 변경, 카메라 이동
+  private func selectMarker(_ marker: NMFMarker) {
+    moveCamera(marker.position)
+    
     marker.iconImage = MarkerImage.selectedPin
+    
     if marker != selectedMarker {
-      selectedMarker?.iconImage = MarkerImage.pin
+      unselectMarker(selectedMarker)
     }
     
     UIView.animate(withDuration: 1) {
       self.selectedMarker = marker
     }
+  }
+  
+  private func unselectMarker(_ marker: NMFMarker?) {
+    marker?.iconImage = MarkerImage.pin
+  }
+  
+  private func moveCamera(_ position: NMGLatLng) {
+    let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+    cameraUpdate.animation = .easeIn
+    mapView.moveCamera(cameraUpdate)
   }
 }

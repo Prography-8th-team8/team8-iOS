@@ -84,6 +84,7 @@ class CakeShopListViewModel {
           self?.output.hasNoData.send(false)
         }
 
+        print(cakeShops.map { $0.latitude })
         self?.output.cakeShops.send(cakeShops)
       }
       .store(in: &cancellableBag)
