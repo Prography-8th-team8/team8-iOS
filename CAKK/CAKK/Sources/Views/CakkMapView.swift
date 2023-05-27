@@ -56,6 +56,11 @@ final class CakkMapView: NMFNaverMapView {
       .store(in: &cancellableBag)
   }
   
+  func unselectMarker() {
+    selectedMarker?.iconImage = MarkerImage.pin
+    selectedMarker = nil
+  }
+  
   // MARK: - Private
   
   private func setupMapView() {
@@ -124,17 +129,10 @@ final class CakkMapView: NMFNaverMapView {
     marker.iconImage = MarkerImage.selectedPin
     
     if marker != selectedMarker {
-      unselectMarker(selectedMarker)
+      unselectMarker()
     }
     
     selectedMarker = marker
-  }
-  
-  private func unselectMarker(_ marker: NMFMarker?) {
-    marker?.iconImage = MarkerImage.pin
-    if marker == selectedMarker {
-      selectedMarker = nil
-    }
   }
   
   private func moveCamera(_ position: NMGLatLng) {
@@ -149,7 +147,7 @@ final class CakkMapView: NMFNaverMapView {
 extension CakkMapView: NMFMapViewTouchDelegate {
   // 맵뷰 마커가 아닌 다른 영역 선택 시 해당 마커를 해제하기 위함
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-    unselectMarker(selectedMarker)
+    unselectMarker()
     didUnselectMarker?()
   }
 }

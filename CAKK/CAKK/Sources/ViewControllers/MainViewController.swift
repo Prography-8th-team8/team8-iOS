@@ -215,6 +215,7 @@ final class MainViewController: UIViewController {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.hideCakeShopDetail()
+        self?.cakkMapView.unselectMarker()
       }
       .store(in: &cancellableBag)
   }
