@@ -36,6 +36,7 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private let shopImageView = UIImageView().then {
+    $0.image = R.image.noimage()
     $0.backgroundColor = R.color.stroke()
   }
   
@@ -89,7 +90,7 @@ final class ShopDetailViewController: UIViewController {
     $0.spacing = 4
   }
   
-  private var seperatorView: UIView {
+  private var separatorView: UIView {
     UIView().then {
       $0.snp.makeConstraints { view in
         view.height.equalTo(10)
@@ -192,7 +193,7 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private func setupDetailInfoView() {
-    contentStackView.addArrangedSubview(seperatorView)
+    contentStackView.addArrangedSubview(separatorView)
     contentStackView.addArrangedSubview(detailInfoView)
   }
   
