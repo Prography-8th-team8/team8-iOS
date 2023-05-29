@@ -99,7 +99,7 @@ final class MainViewController: UIViewController {
   private let hideDetailBottomSheetButton = UIButton().then {
     $0.backgroundColor = .white
     $0.tintColor = .black
-    $0.layer.borderColor = UIColor(hex: 0x222222).withAlphaComponent(0.1).cgColor
+    $0.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
     $0.layer.borderWidth = 1
     $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
     $0.alpha = 0
