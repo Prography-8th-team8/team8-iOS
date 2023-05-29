@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OnboardingViewModel {
+class OnboardingViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -21,8 +21,8 @@ class OnboardingViewModel {
     var presentMainView = PassthroughSubject<DistrictSection, Never>()
   }
   
-  public var input: Input!
-  public var output: Output!
+  private(set) var input: Input!
+  private(set) var output: Output!
   private var cancellableBag = Set<AnyCancellable>()
   
   

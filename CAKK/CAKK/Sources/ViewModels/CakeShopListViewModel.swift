@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CakeShopListViewModel {
+class CakeShopListViewModel: ViewModelType {
   
   // MARK: - Properties
   
