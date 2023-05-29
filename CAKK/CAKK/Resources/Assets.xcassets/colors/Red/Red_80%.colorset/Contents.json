@@ -1,0 +1,20 @@
+{
+  "colors": [
+    {
+      "color": {
+        "color-space": "srgb",
+        "components": {
+          "alpha": "0.800",
+          "blue": "0.090",
+          "green": "0.090",
+          "red": "0.867"
+        }
+      },
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode-color-asset-exporter",
+    "version": 1
+  }
+}
