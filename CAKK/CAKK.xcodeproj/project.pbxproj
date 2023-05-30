@@ -310,11 +310,11 @@
 		8E9E193C29CEDDDE00CFF157 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
-				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
-				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
-				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
+				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
+				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
+				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
+				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -424,10 +424,10 @@
 		B4FB8E7F2A0F700800DBF193 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
-				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
-				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
+				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
+				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
+				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
