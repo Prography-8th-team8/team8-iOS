@@ -95,6 +95,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   public func configure(_ item: CakeShop) {
     shopNameLabel.text = item.name
     districtLocationLabel.text = item.district.koreanName
+    locationLabel.text = item.location
     
     configureCakeShopTypeStackView(item.cakeShopTypes)
   }
@@ -177,6 +178,16 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   private func configureCakeShopTypeStackView(_ types: [CakeShopType]) {
     cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
+    
+    if types.isEmpty {
+      let chip = LabelChip()
+      chip.title = "카테고리를 추천해 주세요!"
+      chip.isBackgroundSynced = false
+      chip.titleColor = R.color.pink_100()
+      chip.backgroundColor = R.color.pink_15()
+      cakeShopTypeStackView.addArrangedSubview(chip)
+      return
+    }
     
     for (index, type) in types.enumerated() {
       if index < 3 {
