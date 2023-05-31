@@ -20,6 +20,14 @@ final class DIContainer {
   
   // MARK: - DI Factory Methods
   
+  func makeSplashViewController() -> SplashViewController {
+    return SplashViewController()
+  }
+  
+  func makeMainViewController() -> MainViewController {
+    return MainViewController()
+  }
+  
   func makeOnboardingViewController() -> OnboardingViewController {
     let viewModel = OnboardingViewModel()
     return OnboardingViewController(viewModel: viewModel)
