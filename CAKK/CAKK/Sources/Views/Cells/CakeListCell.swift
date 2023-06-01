@@ -223,7 +223,7 @@ final class CakeShopCollectionCell: HighlightableCell {
       } else {
         // at the end of the loop
         if index == types.count - 1 {
-          let count = "+\((index - 1) - 3)"
+          let count = "+\((index + 2) - 3)"
           
           let supplementaryChip = LabelChip()
           supplementaryChip.title = count
