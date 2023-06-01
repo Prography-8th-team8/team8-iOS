@@ -105,6 +105,13 @@ final class MainViewController: UIViewController {
     $0.alpha = 0
   }
   
+  private let refreshButton = CapsuleStyleButton(
+    iconImage: UIImage(systemName: "arrow.counterclockwise") ?? .init(),
+    text: "이 지역 재검색"
+  ).then {
+    $0.isEnabled = false
+  }
+  
   private var isTableViewPanning: Bool = false
 
   
@@ -151,10 +158,10 @@ final class MainViewController: UIViewController {
   // Setup View
   private func setupView() {
     setupBaseView()
-    setupCakeShopListBottomSheet()
     setupMapView()
+    setupRefreshButtonLayout()
     setupSeeLocationButton()
-//    setupCakeShopListBottomSheet()
+    setupCakeShopListBottomSheet()
   }
   
   private func setupBaseView() {
@@ -168,6 +175,14 @@ final class MainViewController: UIViewController {
     }
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopDetail()
+    }
+  }
+  
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
     }
   }
   
