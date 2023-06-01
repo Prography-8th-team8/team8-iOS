@@ -22,6 +22,17 @@ final class CapsuleStyleButton: UIButton {
   
   // MARK: - Properties
   
+  override var isEnabled: Bool {
+    didSet {
+      if isEnabled {
+        enableButton()
+      } else {
+        disableButton()
+      }
+    }
+  }
+  
+  
   // MARK: - UI
   
   private let iconImageView = UIImageView().then {
@@ -61,7 +72,7 @@ final class CapsuleStyleButton: UIButton {
   }
   
   private func setupViewStyle() {
-    backgroundColor = .black
+    backgroundColor = R.color.black()
   }
 
   private func setupComponent(_ iconImage: UIImage, _ text: String) {
@@ -86,5 +97,17 @@ final class CapsuleStyleButton: UIButton {
   
   private func configureCornerRadius() {
     layer.cornerRadius = frame.height / 2
+  }
+  
+  private func disableButton() {
+    UIView.animate(withDuration: 0.3) {
+      self.alpha = 0
+    }
+  }
+  
+  private func enableButton() {
+    UIView.animate(withDuration: 0.3) {
+      self.alpha = 1
+    }
   }
 }

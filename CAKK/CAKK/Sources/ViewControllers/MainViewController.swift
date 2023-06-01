@@ -218,6 +218,7 @@ final class MainViewController: UIViewController {
       .sink { [weak self] cakeShops in
         if cakeShops.isEmpty == false {
           self?.showCakeShopList(cakeShops)
+          self?.refreshButton.isEnabled = false
         }
       }
       .store(in: &cancellableBag)
@@ -285,6 +286,10 @@ extension MainViewController: NMFMapViewCameraDelegate {
     if isDetailViewShown == false {
       cakeShopListBottomSheet.move(to: .tip)
     }
+  }
+  
+  func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+    refreshButton.isEnabled = true
   }
 }
 
