@@ -188,12 +188,6 @@ final class MainViewController: UIViewController {
   
   private func setupMapView() {
     cakkMapView.mapView.addCameraDelegate(delegate: self)
-    cakkMapView.didTappedMarker = { [weak self] cakeShop in
-      self?.showCakeShopDetail(cakeShop)
-    }
-    cakkMapView.didUnselectMarker = { [weak self] in
-      self?.hideCakeShopDetail()
-    }
   }
   
   private func setupSeeLocationButton() {
@@ -208,7 +202,6 @@ final class MainViewController: UIViewController {
   private func bind(_ viewModel: MainViewModel) {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
-        self?.hideCakeShopDetail()
         self?.cakkMapView.unselectMarker()
       }
       .store(in: &cancellableBag)
@@ -242,7 +235,8 @@ final class MainViewController: UIViewController {
     refreshButton.isEnabled = false
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
-      self?.showCakeShopDetail(cakeShop)
+      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
+      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
     }
     self.cakeListViewController = cakeListViewController
     
@@ -261,31 +255,6 @@ final class MainViewController: UIViewController {
     
     // Appearance
     cakeShopListBottomSheet.appearance = bottomSheetAppearance
-  }
-  
-  private func showCakeShopDetail(_ cakeShop: CakeShop) {
-    hideCakeShopDetail()
-    refreshButton.isEnabled = false
-    
-    let shopDetailViewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
-    self.shopDetailViewController = shopDetailViewController
-    
-    cakeShopDetailBottomSheet.configure(
-      parentViewController: self,
-      contentViewController: shopDetailViewController)
-    
-    cakeShopDetailBottomSheet.appearance = bottomSheetAppearance
-    
-    shopDetailViewController.notifyViewWillShow()
-    cakeShopListBottomSheet.hide()
-    cakeShopDetailBottomSheet.show(.half)
-    isDetailViewShown = true
-  }
-
-  private func hideCakeShopDetail() {
-    cakeShopListBottomSheet.show()
-    cakeShopDetailBottomSheet.hide()
-    isDetailViewShown = false
   }
 }
 

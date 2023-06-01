@@ -216,6 +216,7 @@ final class CakeShopListViewController: UIViewController {
   
   private func setupCollectionView() {
     collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
+    collectionView.delegate = self
     
     dataSource = DataSource(
       collectionView: collectionView,
@@ -296,6 +297,12 @@ final class CakeShopListViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
+  }
+}
+
+extension CakeShopListViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    viewModel.input.selectCakeShop.send(indexPath)
   }
 }
 
