@@ -14,7 +14,7 @@ final class ShopDetailViewModel: ViewModelType {
   }
   
   struct Output {
-    let cakeShopDetail = PassthroughSubject<CakeShopDetailResponse, Never>()
+    let cakeShopDetail = PassthroughSubject<CakeShop, Never>()
   }
   
   // MARK: - Properties
@@ -54,8 +54,8 @@ final class ShopDetailViewModel: ViewModelType {
       .catch { _ in
         return Empty<CakeShopDetailResponse, Never>()
       }
-      .sink {
-        output.cakeShopDetail.send($0)
+      .sink { _ in
+        output.cakeShopDetail.send(self.cakeShop)
       }
       .store(in: &cancellableBag)
     
