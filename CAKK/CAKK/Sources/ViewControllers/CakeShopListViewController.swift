@@ -87,7 +87,7 @@ final class CakeShopListViewController: UIViewController {
   
   private let headerView = UIView()
   
-  private let locationsLabel = UILabel().then {
+  private let headerLabel = UILabel().then {
     $0.text = "이 근처 케이크샵"
     $0.font = .pretendard(size: Metric.locationLabelFontSize, weight: .bold)
     $0.textColor = .black
@@ -99,7 +99,7 @@ final class CakeShopListViewController: UIViewController {
   }
   
   private lazy var labelsStack = UIStackView(
-    arrangedSubviews: [locationsLabel, numberOfCakeShopLabel]
+    arrangedSubviews: [headerLabel, numberOfCakeShopLabel]
   ).then {
     $0.alignment = .leading
     $0.axis = .vertical
@@ -313,7 +313,7 @@ import SwiftUI
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
     let viewModel = CakeShopListViewModel(
-      districtSection: .items().first!,
+      initialCakeShops: [],
       service: .init(type: .stub)
     )
     

@@ -220,7 +220,7 @@ extension SplashViewController: CLLocationManagerDelegate {
     case .authorizedAlways, .authorizedWhenInUse:
       // 권한 허용시 메인 뷰컨으로 이동
       startSplash { [weak self] in
-        self?.replaceRoot(viewController: DIContainer.shared.makeMainViewController())
+        self?.replaceRoot(viewController: DIContainer.shared.makeMainViewController(districts: [.dobong, .dongdaemun, .dongjak]))
       }
     case .denied, .restricted:
       // 권한 허용 안되면 지역 선택으로 이동

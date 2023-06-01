@@ -43,6 +43,7 @@ final class MainViewController: UIViewController {
   
   // MARK: - Properties
 
+  private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
@@ -117,6 +118,15 @@ final class MainViewController: UIViewController {
   
   // MARK: - LifeCycle
   
+  init(viewModel: MainViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -128,7 +138,8 @@ final class MainViewController: UIViewController {
   private func setup() {
     setupLayouts()
     setupView()
-    bind()
+    
+    bind(viewModel)
   }
   
   // Setup Layout
@@ -161,7 +172,6 @@ final class MainViewController: UIViewController {
     setupMapView()
     setupRefreshButtonLayout()
     setupSeeLocationButton()
-    setupCakeShopListBottomSheet()
   }
   
   private func setupBaseView() {
@@ -194,9 +204,31 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupCakeShopListBottomSheet() {
-    // TODO: 변경
-    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .init(count: 3, color: .black, borderColor: .black, districts: [.jongno]))
+  // Bind
+  private func bind(_ viewModel: MainViewModel) {
+    hideDetailBottomSheetButton.tapPublisher
+      .sink { [weak self] _ in
+        self?.hideCakeShopDetail()
+        self?.cakkMapView.unselectMarker()
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        if cakeShops.isEmpty == false {
+          self?.showCakeShopList(cakeShops)
+        }
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  @objc private func seeLocation() {
+    cakeShopListBottomSheet.move(to: .half)
+  }
+  
+  private func showCakeShopList(_ cakeShops: [CakeShop]) {
+    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
     cakkMapView.bind(to: cakeListViewController.viewModel)
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
@@ -219,24 +251,6 @@ final class MainViewController: UIViewController {
     
     // Appearance
     cakeShopListBottomSheet.appearance = bottomSheetAppearance
-  }
-  
-  // Bind
-  private func bind() {
-    bindHideCakeShopDetailButton()
-  }
-  
-  private func bindHideCakeShopDetailButton() {
-    hideDetailBottomSheetButton.tapPublisher
-      .sink { [weak self] _ in
-        self?.hideCakeShopDetail()
-        self?.cakkMapView.unselectMarker()
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  @objc private func seeLocation() {
-    cakeShopListBottomSheet.move(to: .half)
   }
   
   private func showCakeShopDetail(_ cakeShop: CakeShop) {
@@ -280,7 +294,8 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    MainViewController()
+    let viewModel = MainViewModel(districts: [.dobong, .dongdaemun], service: .init(type: .stub))
+    MainViewController(viewModel: viewModel)
       .toPreview()
       .ignoresSafeArea()
   }

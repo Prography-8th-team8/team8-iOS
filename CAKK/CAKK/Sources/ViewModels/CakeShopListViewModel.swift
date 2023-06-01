@@ -27,19 +27,18 @@ class CakeShopListViewModel: ViewModelType {
   private(set) var output: Output!
   private var cancellableBag = Set<AnyCancellable>()
   
-  private let districtSection: DistrictSection
+  private let initialCakeShops: [CakeShop]
   private let service: NetworkService<CakeAPI>
   
   
   // MARK: - LifeCycle
   
-  init(districtSection: DistrictSection,
+  init(initialCakeShops: [CakeShop],
        service: NetworkService<CakeAPI>) {
-    self.districtSection = districtSection
+    self.initialCakeShops = initialCakeShops
     self.service = service
     
     setupInputOutput()
-    setupData()
   }
   
   // MARK: - Privates
@@ -47,6 +46,13 @@ class CakeShopListViewModel: ViewModelType {
   private func setupInputOutput() {
     let input = Input()
     let output = Output()
+    
+    Just(Void())
+      .sink { [weak self] _ in
+        guard let self else { return }
+        output.cakeShops.send(self.initialCakeShops)
+      }
+      .store(in: &cancellableBag)
     
     input.selectCakeShop
       .sink { indexPath in
@@ -57,36 +63,5 @@ class CakeShopListViewModel: ViewModelType {
     
     self.input = input
     self.output = output
-  }
-  
-  private func setupData() {
-    fetchCakeShops()
-  }
-  
-  private func fetchCakeShops() {
-    Just(Void())
-      .map { [weak self] in
-        self?.output.hasNoData.send(false)
-        self?.output.isLoading.send(true)
-      }
-      .flatMap { [unowned self] (_) -> AnyPublisher<[CakeShop], Error> in
-        self.service.request(
-          .fetchCakeShopList(districts: self.districtSection.districts),
-          type: CakeShopResponse.self)
-      }
-      .sink { [weak self] error in
-        print(error)
-        self?.output.isLoading.send(false)
-      } receiveValue: { [weak self] cakeShops in
-        if cakeShops.isEmpty {
-          self?.output.hasNoData.send(true)
-        } else {
-          self?.output.hasNoData.send(false)
-        }
-
-        print(cakeShops.map { $0.latitude })
-        self?.output.cakeShops.send(cakeShops)
-      }
-      .store(in: &cancellableBag)
   }
 }

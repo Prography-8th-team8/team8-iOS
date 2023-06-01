@@ -31,6 +31,7 @@
 		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
 		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
 		8E5A33812A21088A00355FF1 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A33802A21088A00355FF1 /* NoDataView.swift */; };
+		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */; };
 		8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */; };
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
@@ -107,6 +108,7 @@
 		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
 		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
 		8E5A33802A21088A00355FF1 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E9E192329CEDD4F00CFF157 /* CAKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
+				8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */,
 				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
 				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
 				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
@@ -681,6 +684,7 @@
 				B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */,
+				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,

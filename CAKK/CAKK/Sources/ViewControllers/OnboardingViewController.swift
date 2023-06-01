@@ -191,9 +191,9 @@ class OnboardingViewController: UIViewController {
       .store(in: &cancellableBag)
     
     viewModel.output.presentMainView
-      .sink { [weak self] _ in
+      .sink { [weak self] districtSection in
         guard let self else { return }
-        let vc = MainViewController()
+        let vc = DIContainer.shared.makeMainViewController(districts: districtSection.districts)
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
       }

@@ -24,8 +24,9 @@ final class DIContainer {
     return SplashViewController()
   }
   
-  func makeMainViewController() -> MainViewController {
-    return MainViewController()
+  func makeMainViewController(districts: [District]) -> MainViewController {
+    let viewModel = MainViewModel(districts: districts, service: networkService)
+    return MainViewController(viewModel: viewModel)
   }
   
   func makeOnboardingViewController() -> OnboardingViewController {
@@ -38,8 +39,8 @@ final class DIContainer {
     return ShopDetailViewController(viewModel: viewModel)
   }
   
-  func makeCakeShopListViewController(with section: DistrictSection) -> CakeShopListViewController {
-    let viewModel = CakeShopListViewModel(districtSection: section, service: networkService)
+  func makeCakeShopListViewController(initialCakeShops: [CakeShop]) -> CakeShopListViewController {
+    let viewModel = CakeShopListViewModel(initialCakeShops: initialCakeShops, service: networkService)
     return CakeShopListViewController(viewModel: viewModel)
   }
 }
