@@ -216,7 +216,6 @@ final class CakeShopListViewController: UIViewController {
   
   private func setupCollectionView() {
     collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
-    collectionView.delegate = self
     
     dataSource = DataSource(
       collectionView: collectionView,
@@ -226,6 +225,12 @@ final class CakeShopListViewController: UIViewController {
           for: indexPath,
           item: item)
         cell.configure(item)
+        cell.shareButtonTapHandler = { [weak self] in
+          let items = [item.name, item.location, item.url]
+          
+          let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+          self?.present(activity, animated: true)
+        }
         return cell
       })
   }
@@ -293,18 +298,6 @@ final class CakeShopListViewController: UIViewController {
       .store(in: &cancellableBag)
   }
 }
-
-// MARK: - UICollectionView
-
-extension CakeShopListViewController: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    viewModel.input
-      .selectCakeShop
-      .send(indexPath)
-  }
-}
-
 
 // MARK: - Preview
 

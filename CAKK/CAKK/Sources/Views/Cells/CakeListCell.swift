@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 import SnapKit
 import Then
@@ -21,6 +22,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     static let cornerRadius = 24.f
     
     static let headerStackViewSpacing = 4.f
+    static let headerStackViewRightPadding = 8.f
     static let stackViewDividerWidth = 1.f
     static let stackViewDividerHeight = 12.f
     
@@ -36,9 +38,16 @@ final class CakeShopCollectionCell: HighlightableCell {
     static let locationLabelNumberOfLines = 3
     
     static let cakeShopTypeStackViewSpacing = 4.f
+    
+    static let shareButtonSize = 28.f
+    static let shareButtonImagePadding = 7.f
   }
   
   // MARK: - Properties
+  
+  private var cancellableBag = Set<AnyCancellable>()
+  public var shareButtonTapHandler: (() -> Void)?
+  
   
   // MARK: - UI
   
@@ -77,12 +86,21 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.alignment = .leading
   }
   
+  private let shareButton = UIButton().then {
+    $0.tintColor = R.color.white()
+    $0.backgroundColor = R.color.black()
+    $0.setImage(R.image.share_thick(), for: .normal)
+    $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
+    $0.layer.cornerRadius = Metric.shareButtonSize / 2
+  }
+  
   
   // MARK: - LifeCycle
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
+    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -111,6 +129,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   // Setup Layout
   private func setupLayout() {
     setupCakkViewLayout()
+    setupShareButtonLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -126,10 +145,19 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
+  private func setupShareButtonLayout() {
+    cakkView.addSubview(shareButton)
+    shareButton.snp.makeConstraints {
+      $0.top.trailing.equalToSuperview().inset(Metric.padding)
+      $0.width.height.equalTo(Metric.shareButtonSize)
+    }
+  }
+  
   private func setupHeaderStackViewLayout() {
     cakkView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.top.leading.equalToSuperview().inset(Metric.padding)
+      $0.trailing.equalTo(shareButton.snp.leading).inset(Metric.headerStackViewRightPadding)
     }
   }
   
@@ -167,7 +195,6 @@ final class CakeShopCollectionCell: HighlightableCell {
   // Setup View
   private func setupView() {
     setupContentView()
-//    setupCakeShopTypeStackView()
   }
   
   private func setupContentView() {
@@ -209,6 +236,21 @@ final class CakeShopCollectionCell: HighlightableCell {
       }
     }
   }
+  
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
+    shareButton.tapPublisher
+      .sink { [weak self] in
+        self?.shareButtonTapHandler?()
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() { }
 }
 
 
