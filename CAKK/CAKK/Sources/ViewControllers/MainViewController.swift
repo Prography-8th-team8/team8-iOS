@@ -38,6 +38,9 @@ final class MainViewController: UIViewController {
     
     static let hideDetailBottomSheetButtonSize = 40.f
     static let hideDetailBottomSheetButtonCornerRadius = 20.f
+    
+    static let cakeShopPopupViewBottomInset = 12.f
+    static let cakeShopPopupViewHeight = 158.f
   }
 
   
@@ -74,6 +77,7 @@ final class MainViewController: UIViewController {
   }
   
   private var shopDetailViewController: ShopDetailViewController?
+  private var cakeShopPopupView: CakeShopPopUpView?
   
   
   // MARK: - UI
@@ -188,6 +192,12 @@ final class MainViewController: UIViewController {
   
   private func setupMapView() {
     cakkMapView.mapView.addCameraDelegate(delegate: self)
+    cakkMapView.didTappedMarker = { [weak self] cakeShop in
+      self?.showCakeShopPopupView(cakeShop)
+    }
+    cakkMapView.didUnselectMarker = { [weak self] in
+      self?.hideCakeShopPopupView()
+    }
   }
   
   private func setupSeeLocationButton() {
@@ -237,6 +247,7 @@ final class MainViewController: UIViewController {
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
       let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
       self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
+      self?.showCakeShopPopupView(cakeShop)
     }
     self.cakeListViewController = cakeListViewController
     
@@ -255,6 +266,35 @@ final class MainViewController: UIViewController {
     
     // Appearance
     cakeShopListBottomSheet.appearance = bottomSheetAppearance
+  }
+  
+  private func showCakeShopPopupView(_ cakeShop: CakeShop) {
+    cakeShopPopupView?.removeFromSuperview()
+    
+    let cakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
+    view.addSubview(cakeShopPopupView)
+    cakeShopPopupView.snp.makeConstraints {
+      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.bottom.equalTo(cakeShopListBottomSheet.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
+      $0.height.equalTo(Metric.cakeShopPopupViewHeight)
+    }
+    
+    cakeShopPopupView.shareButtonTapHandler = { [weak self] in
+      let items = [cakeShop.name, cakeShop.location, cakeShop.url]
+      
+      let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+      self?.present(activity, animated: true)
+    }
+    
+    self.cakeShopPopupView = cakeShopPopupView
+  }
+  
+  private func hideCakeShopPopupView() {
+    UIView.animate(withDuration: 0.1) { [weak self] in
+      self?.cakeShopPopupView?.alpha = 0
+    } completion: { [weak self] _ in
+      self?.cakeShopPopupView?.removeFromSuperview()
+    }
   }
 }
 
