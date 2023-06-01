@@ -20,6 +20,15 @@ final class DIContainer {
   
   // MARK: - DI Factory Methods
   
+  func makeSplashViewController() -> SplashViewController {
+    return SplashViewController()
+  }
+  
+  func makeMainViewController(districts: [District]) -> MainViewController {
+    let viewModel = MainViewModel(districts: districts, service: networkService)
+    return MainViewController(viewModel: viewModel)
+  }
+  
   func makeOnboardingViewController() -> OnboardingViewController {
     let viewModel = OnboardingViewModel()
     return OnboardingViewController(viewModel: viewModel)
@@ -30,8 +39,8 @@ final class DIContainer {
     return ShopDetailViewController(viewModel: viewModel)
   }
   
-  func makeCakeShopListViewController(with section: DistrictSection) -> CakeShopListViewController {
-    let viewModel = CakeShopListViewModel(districtSection: section, service: networkService)
+  func makeCakeShopListViewController(initialCakeShops: [CakeShop]) -> CakeShopListViewController {
+    let viewModel = CakeShopListViewModel(initialCakeShops: initialCakeShops, service: networkService)
     return CakeShopListViewController(viewModel: viewModel)
   }
 }

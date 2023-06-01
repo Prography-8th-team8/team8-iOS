@@ -7,6 +7,8 @@
 
 import UIKit
 
+import CoreLocation
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   // MARK: - Constants
@@ -26,23 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     
-    // 루트뷰를 메인뷰로 설정
-    let onboardingViewController = DIContainer.shared.makeOnboardingViewController()
-    window.rootViewController = onboardingViewController
+    let splashViewController = SplashViewController()
+    window.rootViewController = splashViewController
     self.window = window
     window.makeKeyAndVisible()
-    
-    // 스플래시 시작
-    let splashViewController = SplashViewController()
-    splashViewController.modalPresentationStyle = .overCurrentContext // splashViewController.view.alpha = 0 했을 시에 배경이 검정색이 아닌 투명으로 보여주기 위함
-    onboardingViewController.present(splashViewController, animated: false)
-
-    splashViewController.startSplash {
-      UIView.animate(withDuration: Constants.splashFadeOutDuration) {
-        splashViewController.view.alpha = 0
-      } completion: { _ in
-        splashViewController.dismiss(animated: true)
-      }
-    }
   }
 }

@@ -59,7 +59,6 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
-                       bookmarkMenuButton,
                        naviMenuButton,
                        shareMenuButton]
   ).then {
@@ -99,7 +98,10 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private let detailInfoView = DetailInfoView()
+  private let detailInfoView = DetailInfoView().then {
+    // TODO: - 일단 상세정보 없으니까 가림.
+    $0.isHidden = true
+  }
   
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
@@ -219,8 +221,8 @@ final class ShopDetailViewController: UIViewController {
     title = "상세정보"
   }
   
-  private func setupCakeShopTypeChips(with cakeShopDetail: CakeShopDetailResponse) {
-    let chipViews = cakeShopDetail.cakeShopTypes.map {
+  private func setupCakeShopTypeChips(with cakeShop: CakeShop) {
+    let chipViews = cakeShop.cakeShopTypes.map {
       CakeShopTypeChip($0)
     }
     
@@ -248,12 +250,12 @@ final class ShopDetailViewController: UIViewController {
   
   private func bind() {
     viewModel.output.cakeShopDetail
-      .sink { [weak self] in
+      .sink { [weak self] cakeShop in
         guard let self else { return }
 
-        self.nameLabel.text = $0.name
-//        self.addressLabel.text = $0.location
-        self.setupCakeShopTypeChips(with: $0)
+        self.nameLabel.text = cakeShop.name
+        self.addressLabel.text = cakeShop.location
+        self.setupCakeShopTypeChips(with: cakeShop)
         self.setActivityIndicator(toAnimate: false)
       }
       .store(in: &cancellableBag)

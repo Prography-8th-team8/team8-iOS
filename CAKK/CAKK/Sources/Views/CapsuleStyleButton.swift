@@ -14,14 +14,24 @@ final class CapsuleStyleButton: UIButton {
   // MARK: - Constants
   
   enum Metric {
+    static let fontSize = 12.f
+    static let horizontalInset = 12.f
     static let refreshImageViewVerticalInset = 12.f
-    static let refreshImageViewLeftInset = 16.f
-    
-    static let refreshLabelRightInset = 16.f
-    static let refreshLabelSpacing = 8.f
+    static let refreshLabelSpacing = 4.f
   }
   
   // MARK: - Properties
+  
+  override var isEnabled: Bool {
+    didSet {
+      if isEnabled {
+        enableButton()
+      } else {
+        disableButton()
+      }
+    }
+  }
+  
   
   // MARK: - UI
   
@@ -32,7 +42,7 @@ final class CapsuleStyleButton: UIButton {
   private let buttonLabel = UILabel().then {
     $0.text = "새로 고침"
     $0.textColor = .white
-    $0.font = .preferredFont(forTextStyle: .body)
+    $0.font = .pretendard(size: Metric.fontSize, weight: .bold)
   }
   
   // MARK: - LifeCycle
@@ -62,7 +72,7 @@ final class CapsuleStyleButton: UIButton {
   }
   
   private func setupViewStyle() {
-    backgroundColor = .black
+    backgroundColor = R.color.black()
   }
 
   private func setupComponent(_ iconImage: UIImage, _ text: String) {
@@ -74,18 +84,30 @@ final class CapsuleStyleButton: UIButton {
     addSubview(iconImageView)
     iconImageView.snp.makeConstraints {
       $0.top.bottom.equalToSuperview().inset(Metric.refreshImageViewVerticalInset)
-      $0.left.equalToSuperview().inset(Metric.refreshImageViewLeftInset)
+      $0.left.equalToSuperview().inset(Metric.horizontalInset)
     }
     
     addSubview(buttonLabel)
     buttonLabel.snp.makeConstraints {
       $0.centerY.equalToSuperview()
-      $0.right.equalToSuperview().inset(Metric.refreshLabelRightInset)
+      $0.right.equalToSuperview().inset(Metric.horizontalInset)
       $0.left.equalTo(iconImageView.snp.right).offset(Metric.refreshLabelSpacing)
     }
   }
   
   private func configureCornerRadius() {
     layer.cornerRadius = frame.height / 2
+  }
+  
+  private func disableButton() {
+    UIView.animate(withDuration: 0.3) {
+      self.alpha = 0
+    }
+  }
+  
+  private func enableButton() {
+    UIView.animate(withDuration: 0.3) {
+      self.alpha = 1
+    }
   }
 }

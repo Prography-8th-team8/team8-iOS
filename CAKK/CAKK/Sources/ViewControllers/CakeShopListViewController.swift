@@ -30,10 +30,16 @@ final class CakeShopListViewController: UIViewController {
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
     
+    static let changeDistrictWidth = 75.f
+    static let changeDistrictHeight = 36.f
+    static let changeDistrictCornerRadius = 12.f
+    static let changeDistrictFontSize = 12.f
+    
     static let labelsStackViewSpacing = 12.f
     
     static let cakeTableViewItemSpacing = 10.f
   }
+
   
   // MARK: - Types
   
@@ -81,8 +87,8 @@ final class CakeShopListViewController: UIViewController {
   
   private let headerView = UIView()
   
-  private let locationsLabel = UILabel().then {
-    $0.text = "은평, 마포, 서대문"
+  private let headerLabel = UILabel().then {
+    $0.text = "이 근처 케이크샵"
     $0.font = .pretendard(size: Metric.locationLabelFontSize, weight: .bold)
     $0.textColor = .black
   }
@@ -93,11 +99,19 @@ final class CakeShopListViewController: UIViewController {
   }
   
   private lazy var labelsStack = UIStackView(
-    arrangedSubviews: [locationsLabel, numberOfCakeShopLabel]
+    arrangedSubviews: [headerLabel, numberOfCakeShopLabel]
   ).then {
     $0.alignment = .leading
     $0.axis = .vertical
     $0.spacing = Metric.labelsStackViewSpacing
+  }
+  
+  private let changeDistrictButton = UIButton().then {
+    $0.setTitle("지역 변경", for: .normal)
+    $0.titleLabel?.font = .pretendard(size: Metric.changeDistrictFontSize, weight: .bold)
+    $0.setTitleColor(R.color.pink_TBD(), for: .normal)
+    $0.backgroundColor = R.color.pink_15()
+    $0.layer.cornerRadius = Metric.changeDistrictCornerRadius
   }
   
   private let loadingView = UIActivityIndicatorView()
@@ -137,6 +151,7 @@ final class CakeShopListViewController: UIViewController {
   private func setupLayout() {
     setupHeaderViewLayout()
     setupLabelStackLayout()
+    setupChangeDistrictButtonLayout()
     setupCollectionViewLayout()
     setupLoadingViewLayout()
     setupNoDataViewLayout()
@@ -153,7 +168,17 @@ final class CakeShopListViewController: UIViewController {
   private func setupLabelStackLayout() {
     headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.top.leading.equalToSuperview().inset(Metric.padding)
+    }
+  }
+  
+  private func setupChangeDistrictButtonLayout() {
+    headerView.addSubview(changeDistrictButton)
+    changeDistrictButton.snp.makeConstraints {
+      $0.centerY.equalToSuperview()
+      $0.trailing.equalToSuperview().inset(Metric.padding)
+      $0.width.equalTo(Metric.changeDistrictWidth)
+      $0.height.equalTo(Metric.changeDistrictHeight)
     }
   }
   
@@ -201,6 +226,12 @@ final class CakeShopListViewController: UIViewController {
           for: indexPath,
           item: item)
         cell.configure(item)
+        cell.shareButtonTapHandler = { [weak self] in
+          let items = [item.name, item.location, item.url]
+          
+          let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+          self?.present(activity, animated: true)
+        }
         return cell
       })
   }
@@ -269,17 +300,11 @@ final class CakeShopListViewController: UIViewController {
   }
 }
 
-// MARK: - UICollectionView
-
 extension CakeShopListViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    viewModel.input
-      .selectCakeShop
-      .send(indexPath)
+    viewModel.input.selectCakeShop.send(indexPath)
   }
 }
-
 
 // MARK: - Preview
 
@@ -288,7 +313,7 @@ import SwiftUI
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
     let viewModel = CakeShopListViewModel(
-      districtSection: .items().first!,
+      initialCakeShops: [],
       service: .init(type: .stub)
     )
     

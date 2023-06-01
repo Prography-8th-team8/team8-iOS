@@ -1,21 +1,16 @@
 //
-//  CakeShopCollectionCell.swift
+//  CakeShopPopUpView.swift
 //  CAKK
 //
-//  Created by Mason Kim on 2023/04/03.
+//  Created by 이승기 on 2023/06/01.
 //
 
 import UIKit
 import Combine
 
-import SnapKit
-import Then
-
-final class CakeShopCollectionCell: HighlightableCell {
+class CakeShopPopUpView: UIView {
   
   // MARK: - Constants
-  
-  static let identifier = String(describing: CakeShopCollectionCell.self)
   
   enum Metric {
     static let padding = 20.f
@@ -43,15 +38,15 @@ final class CakeShopCollectionCell: HighlightableCell {
     static let shareButtonImagePadding = 7.f
   }
   
+  
   // MARK: - Properties
   
+  private let cakeShop: CakeShop
   private var cancellableBag = Set<AnyCancellable>()
   public var shareButtonTapHandler: (() -> Void)?
   
   
   // MARK: - UI
-  
-  private let cakkView = CakkView()
   
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -73,7 +68,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.font = .systemFont(ofSize: Metric.districtFontSize)
     $0.textColor = .black
   }
-
+  
   private let locationLabel = UILabel().then {
     $0.font = .systemFont(ofSize: Metric.locationLabelFontSize)
     $0.textColor = .black.withAlphaComponent(0.6)
@@ -97,8 +92,10 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   // MARK: - LifeCycle
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  init(cakeShop: CakeShop) {
+    self.cakeShop = cakeShop
+    super.init(frame: .zero)
+    
     setup()
     bind()
   }
@@ -107,18 +104,6 @@ final class CakeShopCollectionCell: HighlightableCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
-  // MARK: - Public
-  
-  public func configure(_ item: CakeShop) {
-    shopNameLabel.text = item.name
-    districtLocationLabel.text = item.district.koreanName
-    locationLabel.text = item.location
-    
-    configureCakeShopTypeStackView(item.cakeShopTypes)
-  }
-
-  
   // MARK: - Private
   
   private func setup() {
@@ -126,9 +111,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     setupView()
   }
   
-  // Setup Layout
   private func setupLayout() {
-    setupCakkViewLayout()
     setupShareButtonLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
@@ -138,15 +121,8 @@ final class CakeShopCollectionCell: HighlightableCell {
     setupCakeShopTypeStackViewLayout()
   }
   
-  private func setupCakkViewLayout() {
-    addSubview(cakkView)
-    cakkView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-    }
-  }
-  
   private func setupShareButtonLayout() {
-    cakkView.addSubview(shareButton)
+    addSubview(shareButton)
     shareButton.snp.makeConstraints {
       $0.top.trailing.equalToSuperview().inset(Metric.padding)
       $0.width.height.equalTo(Metric.shareButtonSize)
@@ -154,7 +130,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private func setupHeaderStackViewLayout() {
-    cakkView.addSubview(headerStackView)
+    addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.top.leading.equalToSuperview().inset(Metric.padding)
       $0.trailing.equalTo(shareButton.snp.leading).inset(Metric.headerStackViewRightPadding)
@@ -178,7 +154,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private func setupLocationLabelLayout() {
-    cakkView.addSubview(locationLabel)
+    addSubview(locationLabel)
     locationLabel.snp.makeConstraints {
       $0.top.equalTo(headerStackView.snp.bottom).offset(Metric.locationLabelTopPadding)
       $0.leading.trailing.equalToSuperview().inset(Metric.padding)
@@ -186,25 +162,42 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private func setupCakeShopTypeStackViewLayout() {
-    cakkView.addSubview(cakeShopTypeStackView)
+    addSubview(cakeShopTypeStackView)
     cakeShopTypeStackView.snp.makeConstraints {
       $0.leading.bottom.equalToSuperview().inset(Metric.padding)
     }
   }
   
-  // Setup View
   private func setupView() {
-    setupContentView()
+    setupBaseView()
+    setupShopNameLabel()
+    setupDistrictLabel()
+    setupLocationLabel()
+    setupCakeShopTypeStackView()
   }
   
-  private func setupContentView() {
-    cakkView.backgroundColor = UIColor(hex: 0xF8F5E9)
-    cakkView.borderColor = UIColor(hex: 0xE3E0D5)
-    cakkView.cornerRadius = Metric.cornerRadius
+  private func setupBaseView() {
+    backgroundColor = R.color.white()
+    layer.cornerRadius = Metric.cornerRadius
+    layer.borderWidth = 1
+    layer.borderColor = R.color.gray_20()?.cgColor
   }
   
-  private func configureCakeShopTypeStackView(_ types: [CakeShopType]) {
+  private func setupShopNameLabel() {
+    shopNameLabel.text = cakeShop.name
+  }
+  
+  private func setupDistrictLabel() {
+    districtLocationLabel.text = cakeShop.district.koreanName
+  }
+  
+  private func setupLocationLabel() {
+    locationLabel.text = cakeShop.location
+  }
+  
+  private func setupCakeShopTypeStackView() {
     cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
+    let types = cakeShop.cakeShopTypes
     
     if types.isEmpty {
       let chip = LabelChip()
@@ -238,35 +231,35 @@ final class CakeShopCollectionCell: HighlightableCell {
   }
   
   private func bind() {
-    bindInput()
-    bindOutput()
-  }
-  
-  private func bindInput() {
     shareButton.tapPublisher
       .sink { [weak self] in
         self?.shareButtonTapHandler?()
       }
       .store(in: &cancellableBag)
   }
-  
-  private func bindOutput() { }
 }
 
-
-// MARK: - Preview
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-struct CakeListCellPreview: PreviewProvider {
+struct CakeShopPopUpView_Preview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
-      let cell = CakeShopCollectionCell()
-      cell.configure(SampleData.cakeShopList.first!)
-      return cell
+      CakeShopPopUpView(cakeShop: .init(
+        id: 0,
+        createdAt: "",
+        modifiedAt: "",
+        name: "이름이름이름",
+        city: "도봉구",
+        district: .dobong,
+        location: "주소주소주소",
+        latitude: 0,
+        longitude: 0,
+        cakeShopTypes: [.character, .figure, .flower],
+        url: ""))
     }
-    .frame(width: 328, height: 158)
+    .frame(height: 158)
     .previewLayout(.sizeThatFits)
   }
 }

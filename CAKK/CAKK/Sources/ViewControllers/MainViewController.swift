@@ -38,11 +38,15 @@ final class MainViewController: UIViewController {
     
     static let hideDetailBottomSheetButtonSize = 40.f
     static let hideDetailBottomSheetButtonCornerRadius = 20.f
+    
+    static let cakeShopPopupViewBottomInset = 12.f
+    static let cakeShopPopupViewHeight = 158.f
   }
 
   
   // MARK: - Properties
 
+  private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
@@ -73,6 +77,7 @@ final class MainViewController: UIViewController {
   }
   
   private var shopDetailViewController: ShopDetailViewController?
+  private var cakeShopPopupView: CakeShopPopUpView?
   
   
   // MARK: - UI
@@ -105,10 +110,26 @@ final class MainViewController: UIViewController {
     $0.alpha = 0
   }
   
+  private let refreshButton = CapsuleStyleButton(
+    iconImage: UIImage(systemName: "arrow.counterclockwise") ?? .init(),
+    text: "이 지역 재검색"
+  ).then {
+    $0.isEnabled = false
+  }
+  
   private var isTableViewPanning: Bool = false
 
   
   // MARK: - LifeCycle
+  
+  init(viewModel: MainViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -121,12 +142,14 @@ final class MainViewController: UIViewController {
   private func setup() {
     setupLayouts()
     setupView()
-    bind()
+    
+    bind(viewModel)
   }
   
   // Setup Layout
   private func setupLayouts() {
     setupNaverMapViewLayout()
+    setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
   }
   
@@ -137,11 +160,19 @@ final class MainViewController: UIViewController {
     }
   }
   
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+    }
+  }
+  
   private func setupHideDetailBottomSheetButtonLayout() {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+      $0.centerY.equalTo(refreshButton)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
@@ -151,10 +182,8 @@ final class MainViewController: UIViewController {
   // Setup View
   private func setupView() {
     setupBaseView()
-    setupCakeShopListBottomSheet()
     setupMapView()
     setupSeeLocationButton()
-//    setupCakeShopListBottomSheet()
   }
   
   private func setupBaseView() {
@@ -164,10 +193,10 @@ final class MainViewController: UIViewController {
   private func setupMapView() {
     cakkMapView.mapView.addCameraDelegate(delegate: self)
     cakkMapView.didTappedMarker = { [weak self] cakeShop in
-      self?.showCakeShopDetail(cakeShop)
+      self?.showCakeShopPopupView(cakeShop)
     }
     cakkMapView.didUnselectMarker = { [weak self] in
-      self?.hideCakeShopDetail()
+      self?.hideCakeShopPopupView()
     }
   }
   
@@ -179,13 +208,46 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private func setupCakeShopListBottomSheet() {
-    // TODO: 변경
-    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(with: .init(count: 3, color: .black, borderColor: .black, districts: [.jongno]))
+  // Bind
+  private func bind(_ viewModel: MainViewModel) {
+    hideDetailBottomSheetButton.tapPublisher
+      .sink { [weak self] _ in
+        self?.cakkMapView.unselectMarker()
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        if cakeShops.isEmpty == false {
+          self?.showCakeShopList(cakeShops)
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .averageCoordinates
+      .sink { [weak self] coordinate in
+        self?.cakkMapView.moveCamera(
+          .init(lat: coordinate.lat, lng: coordinate.lon),
+          zoomLevel: 12)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  @objc private func seeLocation() {
+    cakeShopListBottomSheet.move(to: .half)
+  }
+  
+  private func showCakeShopList(_ cakeShops: [CakeShop]) {
+    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
     cakkMapView.bind(to: cakeListViewController.viewModel)
+    refreshButton.isEnabled = false
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
-      self?.showCakeShopDetail(cakeShop)
+      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
+      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
+      self?.showCakeShopPopupView(cakeShop)
     }
     self.cakeListViewController = cakeListViewController
     
@@ -206,46 +268,33 @@ final class MainViewController: UIViewController {
     cakeShopListBottomSheet.appearance = bottomSheetAppearance
   }
   
-  // Bind
-  private func bind() {
-    bindHideCakeShopDetailButton()
+  private func showCakeShopPopupView(_ cakeShop: CakeShop) {
+    cakeShopPopupView?.removeFromSuperview()
+    
+    let cakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
+    view.addSubview(cakeShopPopupView)
+    cakeShopPopupView.snp.makeConstraints {
+      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.bottom.equalTo(cakeShopListBottomSheet.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
+      $0.height.equalTo(Metric.cakeShopPopupViewHeight)
+    }
+    
+    cakeShopPopupView.shareButtonTapHandler = { [weak self] in
+      let items = [cakeShop.name, cakeShop.location, cakeShop.url]
+      
+      let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+      self?.present(activity, animated: true)
+    }
+    
+    self.cakeShopPopupView = cakeShopPopupView
   }
   
-  private func bindHideCakeShopDetailButton() {
-    hideDetailBottomSheetButton.tapPublisher
-      .sink { [weak self] _ in
-        self?.hideCakeShopDetail()
-        self?.cakkMapView.unselectMarker()
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  @objc private func seeLocation() {
-    cakeShopListBottomSheet.move(to: .half)
-  }
-  
-  private func showCakeShopDetail(_ cakeShop: CakeShop) {
-    hideCakeShopDetail()
-    
-    let shopDetailViewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
-    self.shopDetailViewController = shopDetailViewController
-    
-    cakeShopDetailBottomSheet.configure(
-      parentViewController: self,
-      contentViewController: shopDetailViewController)
-    
-    cakeShopDetailBottomSheet.appearance = bottomSheetAppearance
-    
-    shopDetailViewController.notifyViewWillShow()
-    cakeShopListBottomSheet.hide()
-    cakeShopDetailBottomSheet.show(.half)
-    isDetailViewShown = true
-  }
-
-  private func hideCakeShopDetail() {
-    cakeShopListBottomSheet.show()
-    cakeShopDetailBottomSheet.hide()
-    isDetailViewShown = false
+  private func hideCakeShopPopupView() {
+    UIView.animate(withDuration: 0.1) { [weak self] in
+      self?.cakeShopPopupView?.alpha = 0
+    } completion: { [weak self] _ in
+      self?.cakeShopPopupView?.removeFromSuperview()
+    }
   }
 }
 
@@ -255,7 +304,12 @@ extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
     if isDetailViewShown == false {
       cakeShopListBottomSheet.move(to: .tip)
+      refreshButton.isEnabled = true
     }
+  }
+  
+  func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+    refreshButton.isEnabled = true
   }
 }
 
@@ -265,7 +319,8 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    MainViewController()
+    let viewModel = MainViewModel(districts: [.dobong, .dongdaemun], service: .init(type: .stub))
+    MainViewController(viewModel: viewModel)
       .toPreview()
       .ignoresSafeArea()
   }

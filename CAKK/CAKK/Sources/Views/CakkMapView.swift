@@ -40,7 +40,7 @@ final class CakkMapView: NMFNaverMapView {
   
   // MARK: - Public
   
-  func bind(to viewModel: CakeShopListViewModel) {
+  public func bind(to viewModel: CakeShopListViewModel) {
     viewModel.output.cakeShops
       .sink { [weak self] cakeShops in
         guard let self = self else { return }
@@ -56,9 +56,19 @@ final class CakkMapView: NMFNaverMapView {
       .store(in: &cancellableBag)
   }
   
-  func unselectMarker() {
+  public func unselectMarker() {
     selectedMarker?.iconImage = MarkerImage.pin
     selectedMarker = nil
+  }
+  
+  public func moveCamera(_ position: NMGLatLng, zoomLevel: Double?) {
+    if let zoomLevel = zoomLevel {
+      mapView.zoomLevel = zoomLevel
+    }
+    
+    let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+    cameraUpdate.animation = .easeIn
+    mapView.moveCamera(cameraUpdate)
   }
   
   // MARK: - Private
@@ -124,7 +134,7 @@ final class CakkMapView: NMFNaverMapView {
   
   // 특정 마커 선택 시 이미지 변경, 카메라 이동
   private func selectMarker(_ marker: NMFMarker) {
-    moveCamera(marker.position)
+    moveCamera(marker.position, zoomLevel: nil)
     
     marker.iconImage = MarkerImage.selectedPin
     
@@ -133,12 +143,6 @@ final class CakkMapView: NMFNaverMapView {
     }
     
     selectedMarker = marker
-  }
-  
-  private func moveCamera(_ position: NMGLatLng) {
-    let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-    cameraUpdate.animation = .easeIn
-    mapView.moveCamera(cameraUpdate)
   }
 }
 
