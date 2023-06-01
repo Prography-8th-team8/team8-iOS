@@ -22,21 +22,21 @@ extension CakeShopType {
   var localizedString: String {
     switch self {
     case .lettering:
-      return "레터링"
+      return "✏️ 레터링"
     case .character:
-      return "캐릭터"
+      return "🤖 캐릭터"
     case .mealbox:
-      return "도시락"
+      return "🍱 도시락"
     case .tiara:
-      return "티아라"
+      return "👑 티아라"
     case .rice:
-      return "떡케이크"
+      return "🍡 떡케이크"
     case .flower:
-      return "플라워"
+      return "💐 플라워"
     case .photo:
-      return "포토"
+      return "🖼️ 포토"
     case .figure:
-      return "피규어"
+      return "🪆 피규어"
     }
   }
 }

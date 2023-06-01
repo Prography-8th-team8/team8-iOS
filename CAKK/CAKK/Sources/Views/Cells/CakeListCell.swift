@@ -181,10 +181,10 @@ final class CakeShopCollectionCell: HighlightableCell {
     
     if types.isEmpty {
       let chip = LabelChip()
-      chip.title = "카테고리를 추천해 주세요!"
+      chip.title = "등록된 카테고리가 없어요 😓"
       chip.isBackgroundSynced = false
-      chip.titleColor = R.color.pink_100()
-      chip.backgroundColor = R.color.pink_15()
+      chip.titleColor = R.color.brown_100()
+      chip.backgroundColor = R.color.brown_10()
       cakeShopTypeStackView.addArrangedSubview(chip)
       return
     }
