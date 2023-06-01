@@ -145,6 +145,7 @@ final class MainViewController: UIViewController {
   // Setup Layout
   private func setupLayouts() {
     setupNaverMapViewLayout()
+    setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
   }
   
@@ -155,11 +156,19 @@ final class MainViewController: UIViewController {
     }
   }
   
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+    }
+  }
+  
   private func setupHideDetailBottomSheetButtonLayout() {
     view.addSubview(hideDetailBottomSheetButton)
     hideDetailBottomSheetButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+      $0.centerY.equalTo(refreshButton)
       $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
     }
     
@@ -170,7 +179,6 @@ final class MainViewController: UIViewController {
   private func setupView() {
     setupBaseView()
     setupMapView()
-    setupRefreshButtonLayout()
     setupSeeLocationButton()
   }
   
@@ -185,14 +193,6 @@ final class MainViewController: UIViewController {
     }
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopDetail()
-    }
-  }
-  
-  private func setupRefreshButtonLayout() {
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
     }
   }
   
