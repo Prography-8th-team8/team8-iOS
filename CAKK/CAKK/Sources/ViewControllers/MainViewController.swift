@@ -218,8 +218,16 @@ final class MainViewController: UIViewController {
       .sink { [weak self] cakeShops in
         if cakeShops.isEmpty == false {
           self?.showCakeShopList(cakeShops)
-          self?.refreshButton.isEnabled = false
         }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .averageCoordinates
+      .sink { [weak self] coordinate in
+        self?.cakkMapView.moveCamera(
+          .init(lat: coordinate.lat, lng: coordinate.lon),
+          zoomLevel: 12)
       }
       .store(in: &cancellableBag)
   }
@@ -231,6 +239,7 @@ final class MainViewController: UIViewController {
   private func showCakeShopList(_ cakeShops: [CakeShop]) {
     let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
     cakkMapView.bind(to: cakeListViewController.viewModel)
+    refreshButton.isEnabled = false
     
     cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
       self?.showCakeShopDetail(cakeShop)
@@ -256,6 +265,7 @@ final class MainViewController: UIViewController {
   
   private func showCakeShopDetail(_ cakeShop: CakeShop) {
     hideCakeShopDetail()
+    refreshButton.isEnabled = false
     
     let shopDetailViewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
     self.shopDetailViewController = shopDetailViewController
@@ -285,6 +295,7 @@ extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
     if isDetailViewShown == false {
       cakeShopListBottomSheet.move(to: .tip)
+      refreshButton.isEnabled = true
     }
   }
   

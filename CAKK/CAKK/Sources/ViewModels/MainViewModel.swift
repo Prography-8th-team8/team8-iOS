@@ -18,7 +18,7 @@ class MainViewModel: ViewModelType {
   
   struct Output {
     var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
-    var averageCoordinates = PassthroughSubject<Int, Never>()
+    var averageCoordinates = PassthroughSubject<(lat: Double, lon: Double), Never>()
   }
   
   private(set) var input: Input!
@@ -58,7 +58,11 @@ class MainViewModel: ViewModelType {
       } receiveValue: { cakeShops in
         // TODO: - MVP 에서는 그냥 모두 불러와서 필터링 하는 방식으로 사용중. 서버 들어오면 필터 로직은 서버가 가지기 때문에 삭제 필요함.
         let filteredCakeShops = cakeShops.filter { districts.contains($0.district) }
+        let lat = filteredCakeShops.map { $0.latitude }.reduce(0, +) / Double(filteredCakeShops.count)
+        let lon = filteredCakeShops.map { $0.longitude }.reduce(0, +) / Double(filteredCakeShops.count)
+        
         output.cakeShops.send(filteredCakeShops)
+        output.averageCoordinates.send((lat, lon))
       }
       .store(in: &cancellableBag)
     
