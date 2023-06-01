@@ -18,6 +18,7 @@ class MainViewModel: ViewModelType {
   
   struct Output {
     var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
+    var averageCoordinates = PassthroughSubject<Int, Never>()
   }
   
   private(set) var input: Input!
