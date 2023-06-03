@@ -90,7 +90,7 @@ final class CAKKNetworkingTests: XCTestCase {
     let expectedData = SampleData.blogPosts
     
     // when
-    sut.request(.fetchBlogReviews(id: 0, numberOfPosts: 0), type: BlogPostResponse.self)
+    sut.request(.fetchBlogReviews(id: 0), type: BlogPostResponse.self)
       .sink { completion in
         if case let .failure(error) = completion {
           XCTFail("DistrictCountResponse 객체 디코딩 실패: \(error)")
