@@ -45,7 +45,7 @@ final class CAKKNetworkingTests: XCTestCase {
   func test_케이크상세정보_Response_객체가_정상적으로_디코딩_된다() {
     // given
     let expectation = XCTestExpectation()
-    let expectatedData = SampleData.cakeShopDetail
+    let expectedData = SampleData.cakeShopDetail
     
     // when
     sut.request(.fetchCakeShopDetail(id: 0), type: CakeShopDetailResponse.self)
@@ -55,7 +55,7 @@ final class CAKKNetworkingTests: XCTestCase {
         }
       } receiveValue: { response in
         // then
-        XCTAssertEqual(response.name, expectatedData?.name)
+        XCTAssertEqual(response.name, expectedData?.name)
         expectation.fulfill()
       }
       .store(in: &cancellableBag)
@@ -66,7 +66,7 @@ final class CAKKNetworkingTests: XCTestCase {
   func test_지역별_가게_갯수_Response_객체가_정상적으로_디코딩_된다() {
     // given
     let expectation = XCTestExpectation()
-    let expectatedData = SampleData.districtCount
+    let expectedData = SampleData.districtCount
     
     // when
     sut.request(.fetchDistrictCounts, type: DistrictCountResponse.self)
@@ -76,7 +76,28 @@ final class CAKKNetworkingTests: XCTestCase {
         }
       } receiveValue: { response in
         // then
-        XCTAssertEqual(response.count, expectatedData?.count)
+        XCTAssertEqual(response.count, expectedData?.count)
+        expectation.fulfill()
+      }
+      .store(in: &cancellableBag)
+    
+    wait(for: [expectation], timeout: 2)
+  }
+  
+  func test_블로그_포스팅_Response_객체가_정상적으로_디코딩_된다() {
+    // given
+    let expectation = XCTestExpectation()
+    let expectedData = SampleData.blogPosts
+    
+    // when
+    sut.request(.fetchBlogReviews(id: 0, numberOfPosts: 0), type: BlogPostResponse.self)
+      .sink { completion in
+        if case let .failure(error) = completion {
+          XCTFail("DistrictCountResponse 객체 디코딩 실패: \(error)")
+        }
+      } receiveValue: { response in
+        // then
+        XCTAssertEqual(response.blogPosts.count, expectedData?.blogPosts.count)
         expectation.fulfill()
       }
       .store(in: &cancellableBag)
