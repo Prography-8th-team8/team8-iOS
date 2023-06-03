@@ -12,7 +12,7 @@ enum CakeAPI {
   case fetchCakeShopList(districts: [District])
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
-  case fetchBlogReviews(cakeShopName: String)
+  case fetchBlogReviews(id: Int, numberOfPosts: Int? = nil)
   case fetchCakeShopImage(id: Int)
 }
 
@@ -60,8 +60,12 @@ extension CakeAPI: TargetType {
     case .fetchCakeShopDetail:
       return .requestPlain
       
-    case .fetchBlogReviews(cakeShopName: let name):
-      let parameters: Parameters = ["name": name]
+    case .fetchBlogReviews(id: let id, numberOfPosts: let numberOfPosts):
+      var parameters: Parameters = ["id": id]
+      if let numberOfPosts = numberOfPosts {
+        parameters["num"] = numberOfPosts
+      }
+      
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
       
@@ -83,10 +87,10 @@ extension CakeAPI: TargetType {
       return SampleData.districtCountData
     case .fetchCakeShopDetail:
       return SampleData.cakeShopDetailData
-      
-    // TODO: 블로그리뷰, 샵 이미지는 아직 명세 정해지지 않음
     case .fetchBlogReviews:
-      return Data()
+      return SampleData.blogPostsData
+      
+    // TODO: 샵 이미지는 아직 명세 정해지지 않음
     case .fetchCakeShopImage:
       return Data()
     }
