@@ -12,7 +12,8 @@ enum CakeAPI {
   case fetchCakeShopList(districts: [District])
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
-  case fetchBlogReviews(cakeShopName: String)
+  /// numberOfPosts을 지정하지 않으면 포스팅 갯수의 기본값은 3임
+  case fetchBlogReviews(id: Int, numberOfPosts: Int? = nil)
   case fetchCakeShopImage(id: Int)
 }
 
@@ -29,8 +30,8 @@ extension CakeAPI: TargetType {
       return "/district/count"
     case .fetchCakeShopDetail(id: let id):
       return "/\(id)"
-    case .fetchBlogReviews:
-      return "/blog"
+    case .fetchBlogReviews(id: let id):
+      return "/\(id)/blog"
     case .fetchCakeShopImage(id: let id):
       return "/image/\(id)"
     }
@@ -60,10 +61,13 @@ extension CakeAPI: TargetType {
     case .fetchCakeShopDetail:
       return .requestPlain
       
-    case .fetchBlogReviews(cakeShopName: let name):
-      let parameters: Parameters = ["name": name]
-      let encoding = URLEncoding(destination: .queryString)
-      return .requestParameters(parameters: parameters, encoding: encoding)
+    case .fetchBlogReviews(id: _, numberOfPosts: let numberOfPosts):
+      if let numberOfPosts = numberOfPosts {
+        let parameters: Parameters = ["num": numberOfPosts]
+        let encoding = URLEncoding(destination: .queryString)
+        return .requestParameters(parameters: parameters, encoding: encoding)
+      }
+      return .requestPlain
       
     case .fetchCakeShopImage:
       return .requestPlain
@@ -83,10 +87,10 @@ extension CakeAPI: TargetType {
       return SampleData.districtCountData
     case .fetchCakeShopDetail:
       return SampleData.cakeShopDetailData
-      
-    // TODO: 블로그리뷰, 샵 이미지는 아직 명세 정해지지 않음
     case .fetchBlogReviews:
-      return Data()
+      return SampleData.blogPostsData
+      
+    // TODO: 샵 이미지는 아직 명세 정해지지 않음
     case .fetchCakeShopImage:
       return Data()
     }

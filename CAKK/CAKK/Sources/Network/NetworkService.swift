@@ -13,8 +13,9 @@ protocol NetworkServiceProtocol: AnyObject {
   func request<T: Decodable>(_ target: API, type: T.Type) -> AnyPublisher<T, Error>
 }
 
-/// 사용 예시
+/// 각 API에 따른 요청을 처리하는 네트워크 서비스
 ///
+/// 사용 예시
 /// ```
 /// NetworkService<CakeAPI>(type: .stub)
 ///  .request(.fetchCakeShopList(districts: [.gangnam]), type: CakeShopResponse.self)

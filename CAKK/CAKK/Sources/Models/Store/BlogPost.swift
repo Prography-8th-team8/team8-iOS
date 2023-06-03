@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct BlogPost: Codable {
+struct BlogPostResponse: Decodable {
+  let blogPosts: [BlogPost]
+}
+
+struct BlogPost: Decodable {
   let title: String
   let link: String
   let description: String
