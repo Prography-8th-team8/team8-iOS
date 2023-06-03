@@ -30,8 +30,8 @@ extension CakeAPI: TargetType {
       return "/district/count"
     case .fetchCakeShopDetail(id: let id):
       return "/\(id)"
-    case .fetchBlogReviews:
-      return "/blog"
+    case .fetchBlogReviews(id: let id):
+      return "/\(id)/blog"
     case .fetchCakeShopImage(id: let id):
       return "/image/\(id)"
     }
@@ -61,13 +61,13 @@ extension CakeAPI: TargetType {
     case .fetchCakeShopDetail:
       return .requestPlain
       
-    case .fetchBlogReviews(id: let id, numberOfPosts: let numberOfPosts):
-      var parameters: Parameters = ["id": id]
+    case .fetchBlogReviews(id: _, numberOfPosts: let numberOfPosts):
       if let numberOfPosts = numberOfPosts {
-        parameters["num"] = numberOfPosts
+        let parameters: Parameters = ["num": numberOfPosts]
+        let encoding = URLEncoding(destination: .queryString)
+        return .requestParameters(parameters: parameters, encoding: encoding)
       }
-      let encoding = URLEncoding(destination: .queryString)
-      return .requestParameters(parameters: parameters, encoding: encoding)
+      return .requestPlain
       
     case .fetchCakeShopImage:
       return .requestPlain
