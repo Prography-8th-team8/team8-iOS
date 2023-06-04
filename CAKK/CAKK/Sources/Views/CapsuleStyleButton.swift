@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class CapsuleStyleButton: UIButton {
+class CapsuleStyleButton: UIButton {
   
   // MARK: - Constants
   
@@ -35,14 +35,14 @@ final class CapsuleStyleButton: UIButton {
   
   // MARK: - UI
   
-  private let iconImageView = UIImageView().then {
+  let iconImageView = UIImageView().then {
     $0.tintColor = .white
   }
   
-  private let buttonLabel = UILabel().then {
-    $0.text = "새로 고침"
+  let buttonLabel = UILabel().then {
     $0.textColor = .white
     $0.font = .pretendard(size: Metric.fontSize, weight: .bold)
+    $0.textAlignment = .center
   }
   
   // MARK: - LifeCycle

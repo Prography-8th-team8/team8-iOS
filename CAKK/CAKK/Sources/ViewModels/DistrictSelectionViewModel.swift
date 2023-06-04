@@ -13,12 +13,12 @@ class DistrictSelectionViewModel: ViewModelType {
   // MARK: - Properties
   
   struct Input {
-    var selectDistrict = PassthroughSubject<IndexPath, Never>()
+    let selectDistrict = PassthroughSubject<IndexPath, Never>()
   }
   
   struct Output {
-    var districtSections = CurrentValueSubject<[DistrictSection], Never>([])
-    var selectedDistrictSection = PassthroughSubject<DistrictSection, Never>()
+    let districtSections = CurrentValueSubject<[DistrictSection], Never>([])
+    let selectedDistrictSection = PassthroughSubject<DistrictSection, Never>()
   }
   
   private(set) var input: Input!

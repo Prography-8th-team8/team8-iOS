@@ -13,14 +13,14 @@ class CakeShopListViewModel: ViewModelType {
   // MARK: - Properties
   
   struct Input {
-    var selectCakeShop = PassthroughSubject<IndexPath, Never>()
+    let selectCakeShop = PassthroughSubject<IndexPath, Never>()
   }
   
   struct Output {
-    var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
-    var presentCakeShopDetail = PassthroughSubject<CakeShop, Never>()
-    var isLoading = CurrentValueSubject<Bool, Never>(false)
-    var hasNoData = CurrentValueSubject<Bool, Never>(false)
+    let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
+    let presentCakeShopDetail = PassthroughSubject<CakeShop, Never>()
+    let isLoading = CurrentValueSubject<Bool, Never>(false)
+    let hasNoData = CurrentValueSubject<Bool, Never>(false)
   }
   
   private(set) var input: Input!
