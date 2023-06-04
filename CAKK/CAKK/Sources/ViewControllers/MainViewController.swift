@@ -99,7 +99,7 @@ final class MainViewController: UIViewController {
   }
   
   private lazy var seeLocationButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "map")!,
+    iconImage: UIImage(systemName: "map"),
     text: Constants.seeLocationButtonText
   ).then {
     $0.isHidden = true
@@ -125,10 +125,11 @@ final class MainViewController: UIViewController {
   }
   
   private let refreshButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "arrow.counterclockwise") ?? .init(),
+    iconImage: R.image.refresh(),
     text: "이 지역 재검색"
   ).then {
     $0.isEnabled = false
+    $0.backgroundColor = UIColor(hex: 0x4963E9)
   }
   
   private var isTableViewPanning: Bool = false
