@@ -88,6 +88,7 @@ class MainViewModel: ViewModelType {
       }
       .store(in: &cancellableBag)
     
+    loadCakeShops([.dobong])
     
     self.input = input
     self.output = output
