@@ -84,6 +84,15 @@ final class MainViewController: UIViewController {
   
   private let cakkMapView = CakkMapView(frame: .zero)
   
+  private lazy var locationButton = UIButton().then {
+    $0.setImage(R.image.scope(), for: .normal)
+    $0.imageEdgeInsets = UIEdgeInsets(common: 10)
+    $0.backgroundColor = .white
+    $0.layer.cornerRadius = 20
+    $0.layer.borderWidth = 1
+    $0.layer.borderColor = UIColor.black.cgColor
+  }
+  
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map")!,
     text: Constants.seeLocationButtonText
@@ -151,6 +160,7 @@ final class MainViewController: UIViewController {
     setupNaverMapViewLayout()
     setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
+    setupLocationButtonLayout()
   }
   
   private func setupNaverMapViewLayout() {
@@ -177,6 +187,15 @@ final class MainViewController: UIViewController {
     }
     
     hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
+  }
+  
+  private func setupLocationButtonLayout() {
+    view.addSubview(locationButton)
+    locationButton.snp.makeConstraints {
+      $0.width.height.equalTo(40)
+      $0.centerY.equalTo(refreshButton)
+      $0.trailing.equalToSuperview().inset(20)
+    }
   }
   
   // Setup View
@@ -213,6 +232,12 @@ final class MainViewController: UIViewController {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.cakkMapView.unselectMarker()
+      }
+      .store(in: &cancellableBag)
+    
+    locationButton.tapPublisher
+      .sink {
+        print("위치 선택")
       }
       .store(in: &cancellableBag)
     
