@@ -89,15 +89,6 @@ final class MainViewController: UIViewController {
   
   private let cakkMapView = CakkMapView(frame: .zero)
   
-  private lazy var locationButton = UIButton().then {
-    $0.setImage(R.image.scope(), for: .normal)
-    $0.imageEdgeInsets = UIEdgeInsets(common: 10)
-    $0.backgroundColor = .white
-    $0.layer.cornerRadius = 20
-    $0.layer.borderWidth = 1
-    $0.layer.borderColor = UIColor.lightGray.cgColor
-  }
-  
   private lazy var seeLocationButton = CapsuleStyleButton(
     iconImage: UIImage(systemName: "map"),
     text: Constants.seeLocationButtonText
@@ -130,6 +121,17 @@ final class MainViewController: UIViewController {
   ).then {
     $0.isEnabled = false
     $0.backgroundColor = UIColor(hex: 0x4963E9)
+    $0.addShadow(to: .bottom)
+  }
+  
+  private lazy var currentLocationButton = UIButton().then {
+    $0.setImage(R.image.scope(), for: .normal)
+    $0.imageEdgeInsets = UIEdgeInsets(common: 10)
+    $0.backgroundColor = .white
+    $0.layer.cornerRadius = 20
+    $0.layer.borderWidth = 1
+    $0.layer.borderColor = UIColor.lightGray.cgColor
+    $0.addShadow(to: .bottom)
   }
   
   private var isTableViewPanning: Bool = false
@@ -196,8 +198,8 @@ final class MainViewController: UIViewController {
   }
   
   private func setupLocationButtonLayout() {
-    view.addSubview(locationButton)
-    locationButton.snp.makeConstraints {
+    view.addSubview(currentLocationButton)
+    currentLocationButton.snp.makeConstraints {
       $0.width.height.equalTo(40)
       $0.centerY.equalTo(refreshButton)
       $0.trailing.equalToSuperview().inset(20)
@@ -241,7 +243,7 @@ final class MainViewController: UIViewController {
       }
       .store(in: &cancellableBag)
     
-    locationButton.tapPublisher
+    currentLocationButton.tapPublisher
       .sink { [weak self] _ in
         guard let self = self else { return }
         switch self.locationPermissionStatus {
