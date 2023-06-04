@@ -1,5 +1,5 @@
 //
-//  OnboardingViewController.swift
+//  DistrictSelectionViewController.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/05/06.
@@ -12,7 +12,7 @@ import Then
 
 import Combine
 
-class OnboardingViewController: UIViewController {
+class DistrictSelectionViewController: UIViewController {
   
   // MARK: - Constants
   
@@ -47,7 +47,7 @@ class OnboardingViewController: UIViewController {
   
   // MARK: - Types
   
-  typealias ViewModel = OnboardingViewModel
+  typealias ViewModel = DistrictSelectionViewModel
   typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
   
   
@@ -80,7 +80,7 @@ class OnboardingViewController: UIViewController {
     $0.textColor = .black.withAlphaComponent(0.6)
     $0.textAlignment = .left
   }
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: OnboardingViewController.layout).then {
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: DistrictSelectionViewController.layout).then {
     $0.delaysContentTouches = false
     $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
     $0.backgroundColor = .clear
@@ -190,12 +190,9 @@ class OnboardingViewController: UIViewController {
       }
       .store(in: &cancellableBag)
     
-    viewModel.output.presentMainView
-      .sink { [weak self] districtSection in
-        guard let self else { return }
-        let vc = DIContainer.shared.makeMainViewController(districts: districtSection.districts)
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+    viewModel.output.selectedDistrictSection
+      .sink { [weak self] _ in
+        self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
   }
@@ -204,7 +201,7 @@ class OnboardingViewController: UIViewController {
 
 // MARK: - Extensions
 
-extension OnboardingViewController: UICollectionViewDelegate {
+extension DistrictSelectionViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     viewModel.input
@@ -220,7 +217,7 @@ import SwiftUI
 
 struct OnboardingViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    OnboardingViewController(viewModel: .init()).toPreview()
+    DistrictSelectionViewController(viewModel: .init()).toPreview()
       .ignoresSafeArea()
   }
 }

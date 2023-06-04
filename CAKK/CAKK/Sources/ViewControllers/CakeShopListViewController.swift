@@ -243,7 +243,14 @@ final class CakeShopListViewController: UIViewController {
     bindOutput()
   }
   
-  private func bindInput() { }
+  private func bindInput() {
+    changeDistrictButton
+      .tapPublisher
+      .sink { [weak self] _ in
+        self?.showChangeDistrictView()
+      }
+      .store(in: &cancellableBag)
+  }
   
   private func bindOutput() {
     viewModel.output
@@ -297,6 +304,13 @@ final class CakeShopListViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
+  }
+  
+  private func showChangeDistrictView() {
+    let viewController = DIContainer.shared.makeDistrictSelectionController()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
+      self.present(viewController, animated: true)
+    }))
   }
 }
 
