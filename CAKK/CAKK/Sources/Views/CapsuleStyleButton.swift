@@ -47,7 +47,7 @@ final class CapsuleStyleButton: UIButton {
   
   // MARK: - LifeCycle
 
-  init(iconImage: UIImage, text: String) {
+  init(iconImage: UIImage?, text: String) {
     super.init(frame: .zero)
     setup(iconImage, text)
   }
@@ -65,7 +65,7 @@ final class CapsuleStyleButton: UIButton {
   
   // MARK: - Private
   
-  private func setup(_ iconImage: UIImage, _ text: String) {
+  private func setup(_ iconImage: UIImage?, _ text: String) {
     setupLayout()
     setupViewStyle()
     setupComponent(iconImage, text)
@@ -73,9 +73,11 @@ final class CapsuleStyleButton: UIButton {
   
   private func setupViewStyle() {
     backgroundColor = R.color.black()
+    layer.borderWidth = 2
+    layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 0.1)
   }
 
-  private func setupComponent(_ iconImage: UIImage, _ text: String) {
+  private func setupComponent(_ iconImage: UIImage?, _ text: String) {
     buttonLabel.text = text
     iconImageView.image = iconImage
   }
