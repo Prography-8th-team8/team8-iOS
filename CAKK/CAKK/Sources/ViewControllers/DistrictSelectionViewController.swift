@@ -157,8 +157,6 @@ class DistrictSelectionViewController: UIViewController {
   }
   
   private func setupCollectionView() {
-    collectionView.delegate = self
-    
     dataSource = DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
@@ -177,7 +175,17 @@ class DistrictSelectionViewController: UIViewController {
     bindOutput()
   }
   
-  private func bindInput() { }
+  private func bindInput() {
+    collectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        guard let self = self else { return }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        self.viewModel.input
+          .selectDistrict
+          .send(indexPath)
+      }
+      .store(in: &cancellableBag)
+  }
   
   private func bindOutput() {
     viewModel.output.districtSections
@@ -198,19 +206,7 @@ class DistrictSelectionViewController: UIViewController {
   }
 }
 
-
-// MARK: - Extensions
-
-extension DistrictSelectionViewController: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    viewModel.input
-      .selectDistrict
-      .send(indexPath)
-  }
-}
-
-
+// MARK: - Preview
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
