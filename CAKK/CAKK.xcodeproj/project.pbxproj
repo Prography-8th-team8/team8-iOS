@@ -49,6 +49,7 @@
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
 		8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */; };
 		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
+		B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */; };
 		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
 		B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */; };
 		B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* CakkMapView.swift */; };
@@ -144,6 +145,7 @@
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopTypeChip.swift; sourceTree = "<group>"; };
 		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
+		B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleStyleLoadingButton.swift; sourceTree = "<group>"; };
 		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		B424E9FF29DC10D400B0C1CE /* SafeAreaGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeAreaGuide.swift; sourceTree = "<group>"; };
 		B43889B42A15B21700476BFC /* CakkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkMapView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				B4FB8E802A0F71EA00DBF193 /* Detail */,
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
+				B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
@@ -731,6 +734,7 @@
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
+				B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */,
 				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
