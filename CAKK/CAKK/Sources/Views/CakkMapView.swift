@@ -76,7 +76,7 @@ final class CakkMapView: NMFNaverMapView {
   private func setupMapView() {
     mapView.touchDelegate = self
     showZoomControls = false
-    mapView.logoAlign = .rightTop
+    mapView.logoAlign = .leftTop
   }
   
   private func updateMarkers(with cakeShops: [CakeShop]) {
