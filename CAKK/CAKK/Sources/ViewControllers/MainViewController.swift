@@ -117,14 +117,24 @@ final class MainViewController: UIViewController {
     $0.alpha = 0
   }
   
-  private let refreshButton = CapsuleStyleButton(
+  private let refreshButton = CapsuleStyleLoadingButton(
     iconImage: R.image.refresh(),
-    text: "이 지역 재검색"
-  ).then {
-    $0.isEnabled = false
-    $0.backgroundColor = UIColor(hex: 0x4963E9)
+    loadingIconImage: UIImage(systemName: "ellipsis"),
+    title: "이 지역 재검색",
+    loadingTitle: "로딩 중...").then {
+      $0.isEnabled = false
+      $0.backgroundColor = UIColor(hex: 0x4963E9)
     $0.addShadow(to: .bottom)
   }
+  
+//  CapsuleStyleButton(
+//    iconImage: R.image.refresh(),
+//    text: "이 지역 재검색"
+//  ).then {
+//    $0.isEnabled = false
+//    $0.backgroundColor = UIColor(hex: 0x4963E9)
+//    $0.addShadow(to: .bottom)
+//  }
   
   private lazy var currentLocationButton = UIButton().then {
     $0.setImage(R.image.scope(), for: .normal)
@@ -186,6 +196,7 @@ final class MainViewController: UIViewController {
     refreshButton.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+      $0.width.equalTo(120)
     }
   }
   
@@ -274,6 +285,7 @@ final class MainViewController: UIViewController {
       .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
       .sink { [weak self] bounds in
         self?.viewModel.input.searchByMapBounds.send(bounds)
+        self?.refreshButton.status = .loading
       }
       .store(in: &cancellableBag)
   }
@@ -282,6 +294,8 @@ final class MainViewController: UIViewController {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
+        self?.refreshButton.status = .done
+        
         if cakeShops.isEmpty == false {
           self?.showCakeShopList(cakeShops)
         }
