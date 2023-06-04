@@ -71,12 +71,18 @@ final class CakkMapView: NMFNaverMapView {
     mapView.moveCamera(cameraUpdate)
   }
   
+  public func moveCameraToCurrentPosition() {
+    let location = mapView.locationOverlay.location
+    moveCamera(location, zoomLevel: nil)
+  }
+  
   // MARK: - Private
   
   private func setupMapView() {
     mapView.touchDelegate = self
     showZoomControls = false
-    mapView.logoAlign = .rightTop
+    mapView.logoAlign = .leftTop
+    mapView.positionMode = .normal
   }
   
   private func updateMarkers(with cakeShops: [CakeShop]) {

@@ -49,6 +49,11 @@ final class MainViewController: UIViewController {
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
+  private let locationManager = CLLocationManager()
+  private var locationPermissionStatus: CLAuthorizationStatus {
+    locationManager.authorizationStatus
+  }
+  
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
@@ -85,7 +90,7 @@ final class MainViewController: UIViewController {
   private let cakkMapView = CakkMapView(frame: .zero)
   
   private lazy var seeLocationButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "map")!,
+    iconImage: UIImage(systemName: "map"),
     text: Constants.seeLocationButtonText
   ).then {
     $0.isHidden = true
@@ -111,10 +116,22 @@ final class MainViewController: UIViewController {
   }
   
   private let refreshButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "arrow.counterclockwise") ?? .init(),
+    iconImage: R.image.refresh(),
     text: "이 지역 재검색"
   ).then {
     $0.isEnabled = false
+    $0.backgroundColor = UIColor(hex: 0x4963E9)
+    $0.addShadow(to: .bottom)
+  }
+  
+  private lazy var currentLocationButton = UIButton().then {
+    $0.setImage(R.image.scope(), for: .normal)
+    $0.imageEdgeInsets = UIEdgeInsets(common: 10)
+    $0.backgroundColor = .white
+    $0.layer.cornerRadius = 20
+    $0.layer.borderWidth = 1
+    $0.layer.borderColor = UIColor.lightGray.cgColor
+    $0.addShadow(to: .bottom)
   }
   
   private var isTableViewPanning: Bool = false
@@ -151,6 +168,7 @@ final class MainViewController: UIViewController {
     setupNaverMapViewLayout()
     setupRefreshButtonLayout()
     setupHideDetailBottomSheetButtonLayout()
+    setupLocationButtonLayout()
   }
   
   private func setupNaverMapViewLayout() {
@@ -177,6 +195,15 @@ final class MainViewController: UIViewController {
     }
     
     hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
+  }
+  
+  private func setupLocationButtonLayout() {
+    view.addSubview(currentLocationButton)
+    currentLocationButton.snp.makeConstraints {
+      $0.width.height.equalTo(40)
+      $0.centerY.equalTo(refreshButton)
+      $0.trailing.equalToSuperview().inset(20)
+    }
   }
   
   // Setup View
@@ -213,6 +240,20 @@ final class MainViewController: UIViewController {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.cakkMapView.unselectMarker()
+      }
+      .store(in: &cancellableBag)
+    
+    currentLocationButton.tapPublisher
+      .sink { [weak self] _ in
+        guard let self = self else { return }
+        switch self.locationPermissionStatus {
+        // 권한 부여 상태: 현재 위치로 지도 카메라 이동
+        case .authorizedAlways, .authorizedWhenInUse:
+          self.cakkMapView.moveCameraToCurrentPosition()
+        // 권한 미부여 상태: 설정으로 이동하게 유도
+        default:
+          self.askUserToPermissionSetting()
+        }
       }
       .store(in: &cancellableBag)
     
@@ -295,6 +336,20 @@ final class MainViewController: UIViewController {
     } completion: { [weak self] _ in
       self?.cakeShopPopupView?.removeFromSuperview()
     }
+  }
+  
+  private func askUserToPermissionSetting() {
+    showAskAlert(title: "위치 권한이 필요해요",
+                 message: "설정으로 이동해서 권한을 부여해주세요",
+                 completion: { isConfirmed in
+      guard isConfirmed else { return }
+      self.moveUserToSetting()
+    })
+  }
+  
+  private func moveUserToSetting() {
+    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+    UIApplication.shared.open(settingsURL)
   }
 }
 

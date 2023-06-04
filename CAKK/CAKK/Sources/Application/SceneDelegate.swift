@@ -7,8 +7,6 @@
 
 import UIKit
 
-import CoreLocation
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   // MARK: - Constants
