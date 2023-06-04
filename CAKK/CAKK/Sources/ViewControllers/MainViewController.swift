@@ -269,6 +269,13 @@ final class MainViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
+    
+    refreshButton.tapPublisher
+      .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
+      .sink { [weak self] bounds in
+        self?.viewModel.input.searchByMapBounds.send(bounds)
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -437,5 +444,20 @@ struct ViewControllerPreView: PreviewProvider {
     MainViewController(viewModel: viewModel)
       .toPreview()
       .ignoresSafeArea()
+  }
+}
+
+
+
+import Combine
+
+extension Publisher where Failure == Never {
+  func assign<Root: AnyObject>(
+    to keyPath: ReferenceWritableKeyPath<Root, Output>,
+    onWeak object: Root
+  ) -> AnyCancellable {
+    sink { [weak object] value in
+      object?[keyPath: keyPath] = value
+    }
   }
 }

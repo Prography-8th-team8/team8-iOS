@@ -8,12 +8,15 @@
 import UIKit
 import Combine
 
+import NMapsGeometry
+
 class MainViewModel: ViewModelType {
   
   // MARK: - Properties
   
   struct Input {
     let cameraMove = PassthroughSubject<Coordinates, Never>()
+    let searchByMapBounds = PassthroughSubject<NMGLatLngBounds, Never>()
   }
   
   struct Output {
@@ -79,8 +82,35 @@ class MainViewModel: ViewModelType {
       }
       .store(in: &cancellableBag)
     
+    input.searchByMapBounds
+      .sink { [weak self] bounds in
+        self?.loadCakeShops(by: bounds)
+      }
+      .store(in: &cancellableBag)
+    
+    
     self.input = input
     self.output = output
+  }
+  
+  private func loadCakeShops(by bounds: NMGLatLngBounds) {
+    let latitudeRange = (bounds.southWestLat...bounds.northEastLat)
+    let longitudeRange = (bounds.southWestLng...bounds.northEastLng)
+    
+    service.request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
+      .map { cakeShops in
+        cakeShops.filter { cakeShop in
+          latitudeRange.contains(cakeShop.latitude) &&
+          longitudeRange.contains(cakeShop.longitude)
+        }
+      }
+      .sink { error in
+        print(error)
+      } receiveValue: { [weak self] filteredCakeShops in
+        self?.output.cakeShops.send(filteredCakeShops)
+      }
+      .store(in: &cancellableBag)
+
   }
   
   private func loadCakeShops(_ districts: [District]) {
