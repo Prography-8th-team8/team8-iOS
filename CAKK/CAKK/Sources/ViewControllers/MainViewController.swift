@@ -252,12 +252,7 @@ final class MainViewController: UIViewController {
           self.cakkMapView.moveCameraToCurrentPosition()
         // 권한 미부여 상태: 설정으로 이동하게 유도
         default:
-          self.showAskAlert(title: "위치 권한이 필요해요",
-                            message: "설정으로 이동해서 권한을 부여해주세요",
-                            completion: { isConfirmed in
-            guard isConfirmed else { return }
-            self.moveUserToSetting()
-          })
+          self.askUserToPermissionSetting()
         }
       }
       .store(in: &cancellableBag)
@@ -341,6 +336,15 @@ final class MainViewController: UIViewController {
     } completion: { [weak self] _ in
       self?.cakeShopPopupView?.removeFromSuperview()
     }
+  }
+  
+  private func askUserToPermissionSetting() {
+    showAskAlert(title: "위치 권한이 필요해요",
+                 message: "설정으로 이동해서 권한을 부여해주세요",
+                 completion: { isConfirmed in
+      guard isConfirmed else { return }
+      self.moveUserToSetting()
+    })
   }
   
   private func moveUserToSetting() {
