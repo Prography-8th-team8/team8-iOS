@@ -317,14 +317,14 @@ final class MainViewController: UIViewController {
     }
     self.cakeListViewController = cakeListViewController
     
-    // Appearance
-    cakeShopListBottomSheet.appearance = bottomSheetAppearance
-    
     // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
       contentViewController: cakeListViewController
     )
+    
+    // Appearance
+    cakeShopListBottomSheet.appearance = bottomSheetAppearance
     
     // Layout
     cakeShopListBottomSheet.snp.makeConstraints {
@@ -335,31 +335,58 @@ final class MainViewController: UIViewController {
   }
   
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
-    cakeShopPopupView?.removeFromSuperview()
-    
-    let cakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
-    view.addSubview(cakeShopPopupView)
-    cakeShopPopupView.snp.makeConstraints {
+    let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
+    view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
+    newCakeShopPopupView.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
       $0.bottom.equalTo(cakeShopListBottomSheet.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
       $0.height.equalTo(Metric.cakeShopPopupViewHeight)
     }
+    view.layoutIfNeeded()
     
-    cakeShopPopupView.shareButtonTapHandler = { [weak self] in
+//    // animation
+    var startTransform = CGAffineTransform.identity
+    startTransform = startTransform.scaledBy(x: 0.8, y: 0.8)
+    startTransform = startTransform.translatedBy(x: 0, y: Metric.cakeShopPopupViewHeight) /// height만큼 내림
+    newCakeShopPopupView.transform = startTransform
+    newCakeShopPopupView.alpha = 0
+
+    var endTransform = CGAffineTransform.identity
+    endTransform = endTransform.scaledBy(x: 1, y: 1)
+    endTransform = endTransform.translatedBy(x: 0, y: 0)
+
+    UIView.animate(
+      withDuration: 0.6,
+      delay: 0,
+      usingSpringWithDamping: 0.7,
+      initialSpringVelocity: 0.7) {
+        newCakeShopPopupView.transform = endTransform
+        newCakeShopPopupView.alpha = 1
+      }
+    
+    newCakeShopPopupView.shareButtonTapHandler = { [weak self] in
       let items = [cakeShop.name, cakeShop.location, cakeShop.url]
       
       let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
       self?.present(activity, animated: true)
     }
     
-    self.cakeShopPopupView = cakeShopPopupView
+    hideCakeShopPopupView { [weak self] in
+      self?.cakeShopPopupView = newCakeShopPopupView
+    }
   }
   
-  private func hideCakeShopPopupView() {
-    UIView.animate(withDuration: 0.1) { [weak self] in
-      self?.cakeShopPopupView?.alpha = 0
+  private func hideCakeShopPopupView(_ completion: (() -> Void)? = nil) {
+    UIView.animate(withDuration: 0.2) { [weak self] in
+      self?.cakeShopPopupView?.transform = .init(translationX: 0, y: -20)
     } completion: { [weak self] _ in
-      self?.cakeShopPopupView?.removeFromSuperview()
+      UIView.animate(withDuration: 0.2) { [weak self] in
+        self?.cakeShopPopupView?.transform = .init(translationX: 0, y: Metric.cakeShopPopupViewHeight)
+        self?.cakeShopPopupView?.alpha = 0
+      } completion: { [weak self] _ in
+        self?.cakeShopPopupView?.removeFromSuperview()
+        completion?()
+      }
     }
   }
   

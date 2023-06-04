@@ -246,6 +246,7 @@ final class CakeShopListViewController: UIViewController {
   private func bindInput() {
     changeDistrictButton
       .tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
         self?.showChangeDistrictView()
       }
