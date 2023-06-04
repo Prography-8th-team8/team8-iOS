@@ -10,8 +10,8 @@
 		8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */; };
 		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
 		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
-		8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */; };
-		8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */; };
+		8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */; };
+		8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */; };
 		8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* DistrictSection.swift */; };
 		8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */; };
 		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
@@ -30,6 +30,10 @@
 		8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */; };
 		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
 		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
+		8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */; };
+		8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A252A2C66D300C56A55 /* UserDefault.swift */; };
+		8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */; };
+		8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */; };
 		8E5A33812A21088A00355FF1 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A33802A21088A00355FF1 /* NoDataView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */; };
@@ -98,8 +102,8 @@
 		8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPickerCollectionCell.swift; sourceTree = "<group>"; };
 		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionViewController.swift; sourceTree = "<group>"; };
+		8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionViewModel.swift; sourceTree = "<group>"; };
 		8E02B7832A057F3B003AE7AF /* DistrictSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSection.swift; sourceTree = "<group>"; };
 		8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Common.swift"; sourceTree = "<group>"; };
 		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
@@ -109,6 +113,10 @@
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
 		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
+		8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A252A2C66D300C56A55 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		8E5A33802A21088A00355FF1 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E9E192329CEDD4F00CFF157 /* CAKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +265,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		8E533A292A2C7F2500C56A55 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				8E533A252A2C66D300C56A55 /* UserDefault.swift */,
+				8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */,
+				8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		8E9E191A29CEDD4F00CFF157 = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
-				8E02B77F2A0554CF003AE7AF /* OnboardingViewController.swift */,
+				8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */,
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
 				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
 				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
@@ -384,6 +402,7 @@
 				B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */,
 				B455C4352A07EB2F00FB8403 /* District.swift */,
 				8E02B7832A057F3B003AE7AF /* DistrictSection.swift */,
+				8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */,
 			);
 			path = District;
 			sourceTree = "<group>";
@@ -425,6 +444,7 @@
 				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
 				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
 				B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */,
+				8E533A292A2C7F2500C56A55 /* UserDefaults */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -434,7 +454,7 @@
 			children = (
 				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
 				8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */,
-				8E02B7812A057DD3003AE7AF /* OnboardingViewModel.swift */,
+				8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */,
 				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
 				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 			);
@@ -665,13 +685,14 @@
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
+				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
 				B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */,
-				8E02B7802A0554CF003AE7AF /* OnboardingViewController.swift in Sources */,
+				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
 				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
@@ -686,6 +707,7 @@
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
+				8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */,
 				B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */,
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
 				B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */,
@@ -705,10 +727,12 @@
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
-				8E02B7822A057DD3003AE7AF /* OnboardingViewModel.swift in Sources */,
+				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
+				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				B424EA0029DC10D400B0C1CE /* SafeAreaGuide.swift in Sources */,
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
+				8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */,
 				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
 				8E5A33812A21088A00355FF1 /* NoDataView.swift in Sources */,

@@ -17,6 +17,8 @@ import NMapsMap
 
 import BottomSheetView
 
+import CoreLocation
+
 final class MainViewController: UIViewController {
   
   // MARK: - Constants
@@ -48,6 +50,8 @@ final class MainViewController: UIViewController {
 
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
+  
+  private var locationManager: CLLocationManager?
   
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
@@ -142,6 +146,7 @@ final class MainViewController: UIViewController {
   private func setup() {
     setupLayouts()
     setupView()
+    setupLocationManager()
     
     bind(viewModel)
   }
@@ -208,14 +213,27 @@ final class MainViewController: UIViewController {
     }
   }
   
+  // Setup ETC
+  private func setupLocationManager() {
+    locationManager = CLLocationManager()
+    locationManager?.delegate = self
+  }
+  
   // Bind
   private func bind(_ viewModel: MainViewModel) {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.cakkMapView.unselectMarker()
       }
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindOutput() {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
@@ -226,11 +244,18 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
     
     viewModel.output
-      .averageCoordinates
+      .cameraCoordinates
       .sink { [weak self] coordinate in
         self?.cakkMapView.moveCamera(
-          .init(lat: coordinate.lat, lng: coordinate.lon),
+          .init(lat: coordinate.latitude, lng: coordinate.longitude),
           zoomLevel: 12)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .showDistrictSelectionView
+      .sink { [weak self] _ in
+        self?.showChangeDistrictView()
       }
       .store(in: &cancellableBag)
   }
@@ -296,6 +321,14 @@ final class MainViewController: UIViewController {
       self?.cakeShopPopupView?.removeFromSuperview()
     }
   }
+  
+  private func showChangeDistrictView() {
+    let viewController = DIContainer.shared.makeDistrictSelectionController()
+    viewController.modalPresentationStyle = .fullScreen
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
+      self.present(viewController, animated: true)
+    }))
+  }
 }
 
 // MARK: - MapView Extensions
@@ -310,8 +343,36 @@ extension MainViewController: NMFMapViewCameraDelegate {
   
   func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
     refreshButton.isEnabled = true
+    
+    
+    // Save my last position
+    if reason == NMFMapChangedByGesture {
+      let coordinates = Coordinates(
+        latitude: mapView.cameraPosition.target.lat,
+        longitude: mapView.cameraPosition.target.lng)
+
+      viewModel.input
+        .cameraMove
+        .send(coordinates)
+    }
   }
 }
+
+// MARK: - LocationAuth Extensions
+
+extension MainViewController: CLLocationManagerDelegate {
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    switch manager.authorizationStatus {
+    case .authorizedAlways, .authorizedWhenInUse:
+      viewModel.loadMyFinalPosition()
+    case .denied, .restricted:
+      viewModel.setSelectedDistrict()
+    default:
+      locationManager?.requestWhenInUseAuthorization()
+    }
+  }
+}
+
 
 // MARK: - Preview
 

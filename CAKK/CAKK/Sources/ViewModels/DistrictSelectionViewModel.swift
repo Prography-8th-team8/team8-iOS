@@ -1,5 +1,5 @@
 //
-//  OnboardingViewModel.swift
+//  DistrictSelectionViewModel.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/05/06.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OnboardingViewModel: ViewModelType {
+class DistrictSelectionViewModel: ViewModelType {
   
   // MARK: - Properties
   
@@ -18,7 +18,7 @@ class OnboardingViewModel: ViewModelType {
   
   struct Output {
     var districtSections = CurrentValueSubject<[DistrictSection], Never>([])
-    var presentMainView = PassthroughSubject<DistrictSection, Never>()
+    var selectedDistrictSection = PassthroughSubject<DistrictSection, Never>()
   }
   
   private(set) var input: Input!
@@ -42,8 +42,12 @@ class OnboardingViewModel: ViewModelType {
     
     input.selectDistrict
       .sink { indexPath in
-        let districtSection = output.districtSections.value[indexPath.row]
-        output.presentMainView.send(districtSection)
+        let selectedDistrictSection = output.districtSections.value[indexPath.row]
+        output.selectedDistrictSection.send(selectedDistrictSection)
+        
+        if let section = DistrictSection.section(rawValue: indexPath.row) {
+          DistrictUserDefaults.shared.updateSelected(districtSection: section)
+        }
       }
       .store(in: &cancellableBag)
     
@@ -57,6 +61,6 @@ class OnboardingViewModel: ViewModelType {
   
   private func fetchDistrictSections() {
     output.districtSections
-      .send(DistrictSection.items())
+      .send(DistrictSection.section.allCases.map { $0.value() })
   }
 }

@@ -29,9 +29,9 @@ final class DIContainer {
     return MainViewController(viewModel: viewModel)
   }
   
-  func makeOnboardingViewController() -> OnboardingViewController {
-    let viewModel = OnboardingViewModel()
-    return OnboardingViewController(viewModel: viewModel)
+  func makeDistrictSelectionController() -> DistrictSelectionViewController {
+    let viewModel = DistrictSelectionViewModel()
+    return DistrictSelectionViewController(viewModel: viewModel)
   }
   
   func makeShopDetailViewController(with cakeShop: CakeShop) -> ShopDetailViewController {
