@@ -56,8 +56,9 @@ class CakeShopListViewModel: ViewModelType {
     
     input.selectCakeShop
       .sink { indexPath in
-        let cakeShop = output.cakeShops.value[indexPath.row]
-        output.presentCakeShopDetail.send(cakeShop)
+        if let cakeShop = output.cakeShops.value[safe: indexPath.row] {
+          output.presentCakeShopDetail.send(cakeShop)
+        }
       }
       .store(in: &cancellableBag)
     

@@ -42,8 +42,9 @@ class DistrictSelectionViewModel: ViewModelType {
     
     input.selectDistrict
       .sink { indexPath in
-        let selectedDistrictSection = output.districtSections.value[indexPath.row]
-        output.selectedDistrictSection.send(selectedDistrictSection)
+        if let selectedDistrictSection = output.districtSections.value[safe: indexPath.row] {
+          output.selectedDistrictSection.send(selectedDistrictSection)
+        }
         
         if let section = DistrictSection.section(rawValue: indexPath.row) {
           DistrictUserDefaults.shared.updateSelected(districtSection: section)
