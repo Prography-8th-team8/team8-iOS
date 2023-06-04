@@ -13,13 +13,13 @@ class MainViewModel: ViewModelType {
   // MARK: - Properties
   
   struct Input {
-    var cameraMove = PassthroughSubject<Coordinates, Never>()
+    let cameraMove = PassthroughSubject<Coordinates, Never>()
   }
   
   struct Output {
-    var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
-    var cameraCoordinates = PassthroughSubject<Coordinates, Never>()
-    var showDistrictSelectionView = PassthroughSubject<Void, Never>()
+    let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
+    let cameraCoordinates = PassthroughSubject<Coordinates, Never>()
+    let showDistrictSelectionView = PassthroughSubject<Void, Never>()
   }
   
   private(set) var input: Input!
