@@ -90,7 +90,7 @@ final class MainViewController: UIViewController {
     $0.backgroundColor = .white
     $0.layer.cornerRadius = 20
     $0.layer.borderWidth = 1
-    $0.layer.borderColor = UIColor.black.cgColor
+    $0.layer.borderColor = UIColor.lightGray.cgColor
   }
   
   private lazy var seeLocationButton = CapsuleStyleButton(
@@ -236,8 +236,8 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
     
     locationButton.tapPublisher
-      .sink {
-        print("위치 선택")
+      .sink { [weak self] _ in
+        self?.cakkMapView.moveCameraToCurrentPosition()
       }
       .store(in: &cancellableBag)
     
