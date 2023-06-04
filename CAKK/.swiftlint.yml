@@ -4,6 +4,7 @@ disabled_rules:
 - identifier_name
 - vertical_whitespace
 - type_name
+- file_length
 
 included:
 

@@ -276,7 +276,10 @@ final class MainViewController: UIViewController {
       .cakeShops
       .sink { [weak self] cakeShops in
         if cakeShops.isEmpty == false {
-          self?.showCakeShopList(cakeShops)
+          // bind가 viewDidLoad 시점에 불리기 때문에 레이아웃이 이상하게 동작하는 경우를 방지하기 위해서 2초 delay를 줌
+          DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: .init(block: { [weak self] in
+            self?.showCakeShopList(cakeShops)
+          }))
         }
       }
       .store(in: &cancellableBag)
@@ -314,6 +317,9 @@ final class MainViewController: UIViewController {
     }
     self.cakeListViewController = cakeListViewController
     
+    // Appearance
+    cakeShopListBottomSheet.appearance = bottomSheetAppearance
+    
     // Configuration
     cakeShopListBottomSheet.configure(
       parentViewController: self,
@@ -326,9 +332,6 @@ final class MainViewController: UIViewController {
         .inset(Metric.cakkMapBottomInset)
         .priority(.low)
     }
-    
-    // Appearance
-    cakeShopListBottomSheet.appearance = bottomSheetAppearance
   }
   
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
