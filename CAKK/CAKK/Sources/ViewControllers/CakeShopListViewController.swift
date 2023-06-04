@@ -216,7 +216,6 @@ final class CakeShopListViewController: UIViewController {
   
   private func setupCollectionView() {
     collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
-    collectionView.delegate = self
     
     dataSource = DataSource(
       collectionView: collectionView,
@@ -249,6 +248,12 @@ final class CakeShopListViewController: UIViewController {
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
         self?.showChangeDistrictView()
+      }
+      .store(in: &cancellableBag)
+    
+    collectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        self?.viewModel.input.selectCakeShop.send(indexPath)
       }
       .store(in: &cancellableBag)
   }
@@ -312,12 +317,6 @@ final class CakeShopListViewController: UIViewController {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
       self.present(viewController, animated: true)
     }))
-  }
-}
-
-extension CakeShopListViewController: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    viewModel.input.selectCakeShop.send(indexPath)
   }
 }
 

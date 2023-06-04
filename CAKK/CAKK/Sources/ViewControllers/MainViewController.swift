@@ -25,7 +25,6 @@ final class MainViewController: UIViewController {
   
   enum Constants {
     static let refreshButtonText: String = "새로 고침"
-    static let seeLocationButtonText: String = "지도 보기"
   }
   
   enum Metric {
@@ -33,8 +32,6 @@ final class MainViewController: UIViewController {
     static let verticalPadding = 24.f
     
     static let cakkMapBottomInset = 10.f
-    
-    static let seeLocationButtonBottomInset = 28.f
     
     static let bottomSheetTipModeHeight = 58.f
     
@@ -91,14 +88,6 @@ final class MainViewController: UIViewController {
   
   private let cakkMapView = CakkMapView(frame: .zero)
   
-  private lazy var seeLocationButton = CapsuleStyleButton(
-    iconImage: UIImage(systemName: "map"),
-    text: Constants.seeLocationButtonText
-  ).then {
-    $0.isHidden = true
-    $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
-  }
-  
   private let cakeShopListBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopListBottomSheetLayout
   }
@@ -126,15 +115,6 @@ final class MainViewController: UIViewController {
       $0.backgroundColor = UIColor(hex: 0x4963E9)
     $0.addShadow(to: .bottom)
   }
-  
-//  CapsuleStyleButton(
-//    iconImage: R.image.refresh(),
-//    text: "이 지역 재검색"
-//  ).then {
-//    $0.isEnabled = false
-//    $0.backgroundColor = UIColor(hex: 0x4963E9)
-//    $0.addShadow(to: .bottom)
-//  }
   
   private lazy var currentLocationButton = UIButton().then {
     $0.setImage(R.image.scope(), for: .normal)
@@ -224,7 +204,6 @@ final class MainViewController: UIViewController {
   private func setupView() {
     setupBaseView()
     setupMapView()
-    setupSeeLocationButton()
   }
   
   private func setupBaseView() {
@@ -238,14 +217,6 @@ final class MainViewController: UIViewController {
     }
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopPopupView()
-    }
-  }
-  
-  private func setupSeeLocationButton() {
-    view.addSubview(seeLocationButton)
-    seeLocationButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.bottom.equalToSuperview().inset(Metric.seeLocationButtonBottomInset)
     }
   }
   
@@ -320,10 +291,6 @@ final class MainViewController: UIViewController {
         self?.showChangeDistrictView()
       }
       .store(in: &cancellableBag)
-  }
-  
-  @objc private func seeLocation() {
-    cakeShopListBottomSheet.move(to: .half)
   }
   
   private func showCakeShopList(_ cakeShops: [CakeShop]) {
@@ -488,20 +455,5 @@ struct ViewControllerPreView: PreviewProvider {
     MainViewController(viewModel: viewModel)
       .toPreview()
       .ignoresSafeArea()
-  }
-}
-
-
-
-import Combine
-
-extension Publisher where Failure == Never {
-  func assign<Root: AnyObject>(
-    to keyPath: ReferenceWritableKeyPath<Root, Output>,
-    onWeak object: Root
-  ) -> AnyCancellable {
-    sink { [weak object] value in
-      object?[keyPath: keyPath] = value
-    }
   }
 }
