@@ -33,11 +33,6 @@ class SplashViewController: UIViewController {
   }
   
   
-  // MARK: - Properties
-  
-  private var locationManager: CLLocationManager?
-  
-  
   // MARK: - UI
   
   private var gridAnimations = [LottieAnimationView]()
@@ -75,20 +70,12 @@ class SplashViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     playAnimations()
-    requestLocationPermission()
-  }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    stopAnimations()
   }
   
   
   // MARK: - Public
   
   public func startSplash(completion: @escaping () -> Void) {
-    playAnimations()
-    
     DispatchQueue.main.asyncAfter(
       deadline: .now() + Constants.splashDuration,
       execute: .init(block: {
@@ -112,15 +99,8 @@ class SplashViewController: UIViewController {
   // MARK: - Private
   
   private func setup() {
-    setupLocationManager()
-    
     setupLayout()
     setupView()
-  }
-  
-  private func setupLocationManager() {
-    locationManager = CLLocationManager()
-    locationManager?.delegate = self
   }
   
   private func setupLayout() {
@@ -184,57 +164,7 @@ class SplashViewController: UIViewController {
   private func setupBaseView() {
     view.backgroundColor = UIColor(named: "AccentColor")
   }
-  
-  private func requestLocationPermission() {
-    locationManager?.requestWhenInUseAuthorization()
-  }
-  
-  private func replaceRoot(viewController: UIViewController) {
-    if let keyWindow = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
-      keyWindow.switchRootViewController(viewController)
-    }
-  }
 }
-
-extension UIWindow {
-  func switchRootViewController(_ viewController: UIViewController, animated: Bool = true, duration: TimeInterval = 0.5, options: UIView.AnimationOptions = .curveEaseInOut, completion: (() -> Void)? = nil) {
-    guard animated else {
-      rootViewController = viewController
-      return
-    }
-    
-    UIView.transition(with: self, duration: duration, options: options, animations: {
-      let oldState = UIView.areAnimationsEnabled
-      UIView.setAnimationsEnabled(false)
-      self.rootViewController = viewController
-      UIView.setAnimationsEnabled(oldState)
-    }, completion: { _ in
-      completion?()
-    })
-  }
-}
-
-extension SplashViewController: CLLocationManagerDelegate {
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    switch manager.authorizationStatus {
-    case .authorizedAlways, .authorizedWhenInUse:
-      // 권한 허용시 메인 뷰컨으로 이동
-      startSplash { [weak self] in
-        self?.replaceRoot(viewController: DIContainer.shared.makeMainViewController(districts: [.dobong, .dongdaemun, .dongjak]))
-      }
-    case .denied, .restricted:
-      // 권한 허용 안되면 지역 선택으로 이동
-      startSplash { [weak self] in
-        self?.replaceRoot(viewController: DIContainer.shared.makeOnboardingViewController())
-      }
-    case .notDetermined:
-      break
-    default:
-      break
-    }
-  }
-}
-
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
