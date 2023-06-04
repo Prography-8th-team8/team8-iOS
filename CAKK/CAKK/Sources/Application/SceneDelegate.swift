@@ -22,15 +22,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   var window: UIWindow?
   
+  
   // MARK: - LifeCycle
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     
-    let splashViewController = SplashViewController()
-    window.rootViewController = splashViewController
-    self.window = window
+    let mainViewController = DIContainer.shared.makeMainViewController(districts: [])
+    window.rootViewController = mainViewController
     window.makeKeyAndVisible()
+    self.window = window
+    
+    startSplash(on: mainViewController)
+  }
+  
+  
+  // MARK: - Methods
+  
+  private func startSplash(on superViewController: UIViewController) {
+    let splashViewController = SplashViewController()
+    splashViewController.modalPresentationStyle = .overFullScreen
+    superViewController.present(splashViewController, animated: false)
+    splashViewController.startSplash {
+      UIView.animate(withDuration: Constants.splashFadeOutDuration) {
+        splashViewController.view.alpha = 0
+      } completion: { _ in
+        splashViewController.dismiss(animated: false)
+      }
+    }
   }
 }
