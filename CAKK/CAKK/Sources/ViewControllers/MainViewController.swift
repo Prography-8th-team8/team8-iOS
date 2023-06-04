@@ -17,6 +17,8 @@ import NMapsMap
 
 import BottomSheetView
 
+import CoreLocation
+
 final class MainViewController: UIViewController {
   
   // MARK: - Constants
@@ -31,7 +33,7 @@ final class MainViewController: UIViewController {
     static let verticalPadding = 24.f
     
     static let cakkMapBottomInset = 10.f
-
+    
     static let seeLocationButtonBottomInset = 28.f
     
     static let bottomSheetTipModeHeight = 58.f
@@ -42,14 +44,14 @@ final class MainViewController: UIViewController {
     static let cakeShopPopupViewBottomInset = 12.f
     static let cakeShopPopupViewHeight = 158.f
   }
-
+  
   
   // MARK: - Properties
-
+  
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  private let locationManager = CLLocationManager()
+  private var locationManager = CLLocationManager()
   private var locationPermissionStatus: CLAuthorizationStatus {
     locationManager.authorizationStatus
   }
@@ -96,7 +98,7 @@ final class MainViewController: UIViewController {
     $0.isHidden = true
     $0.addTarget(self, action: #selector(seeLocation), for: .touchUpInside)
   }
-
+  
   private let cakeShopListBottomSheet = BottomSheetView().then {
     $0.layout = MainViewController.cakeShopListBottomSheetLayout
   }
@@ -135,7 +137,7 @@ final class MainViewController: UIViewController {
   }
   
   private var isTableViewPanning: Bool = false
-
+  
   
   // MARK: - LifeCycle
   
@@ -152,13 +154,14 @@ final class MainViewController: UIViewController {
     super.viewDidLoad()
     setup()
   }
-
-
+  
+  
   // MARK: - Private
   
   private func setup() {
     setupLayouts()
     setupView()
+    setupLocationManager()
     
     bind(viewModel)
   }
@@ -235,8 +238,18 @@ final class MainViewController: UIViewController {
     }
   }
   
+  // Setup ETC
+  private func setupLocationManager() {
+    locationManager.delegate = self
+  }
+  
   // Bind
   private func bind(_ viewModel: MainViewModel) {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
     hideDetailBottomSheetButton.tapPublisher
       .sink { [weak self] _ in
         self?.cakkMapView.unselectMarker()
@@ -247,16 +260,18 @@ final class MainViewController: UIViewController {
       .sink { [weak self] _ in
         guard let self = self else { return }
         switch self.locationPermissionStatus {
-        // 권한 부여 상태: 현재 위치로 지도 카메라 이동
+          // 권한 부여 상태: 현재 위치로 지도 카메라 이동
         case .authorizedAlways, .authorizedWhenInUse:
           self.cakkMapView.moveCameraToCurrentPosition()
-        // 권한 미부여 상태: 설정으로 이동하게 유도
+          // 권한 미부여 상태: 설정으로 이동하게 유도
         default:
           self.askUserToPermissionSetting()
         }
       }
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindOutput() {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
@@ -267,11 +282,18 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
     
     viewModel.output
-      .averageCoordinates
+      .cameraCoordinates
       .sink { [weak self] coordinate in
         self?.cakkMapView.moveCamera(
-          .init(lat: coordinate.lat, lng: coordinate.lon),
+          .init(lat: coordinate.latitude, lng: coordinate.longitude),
           zoomLevel: 12)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .showDistrictSelectionView
+      .sink { [weak self] _ in
+        self?.showChangeDistrictView()
       }
       .store(in: &cancellableBag)
   }
@@ -338,6 +360,14 @@ final class MainViewController: UIViewController {
     }
   }
   
+  private func showChangeDistrictView() {
+    let viewController = DIContainer.shared.makeDistrictSelectionController()
+    viewController.modalPresentationStyle = .fullScreen
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
+      self.present(viewController, animated: true)
+    }))
+  }
+  
   private func askUserToPermissionSetting() {
     showAskAlert(title: "위치 권한이 필요해요",
                  message: "설정으로 이동해서 권한을 부여해주세요",
@@ -353,6 +383,7 @@ final class MainViewController: UIViewController {
   }
 }
 
+
 // MARK: - MapView Extensions
 
 extension MainViewController: NMFMapViewCameraDelegate {
@@ -365,8 +396,36 @@ extension MainViewController: NMFMapViewCameraDelegate {
   
   func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
     refreshButton.isEnabled = true
+    
+    
+    // Save my last position
+    if reason == NMFMapChangedByGesture {
+      let coordinates = Coordinates(
+        latitude: mapView.cameraPosition.target.lat,
+        longitude: mapView.cameraPosition.target.lng)
+      
+      viewModel.input
+        .cameraMove
+        .send(coordinates)
+    }
   }
 }
+
+// MARK: - LocationAuth Extensions
+
+extension MainViewController: CLLocationManagerDelegate {
+  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    switch manager.authorizationStatus {
+    case .authorizedAlways, .authorizedWhenInUse:
+      viewModel.loadMyFinalPosition()
+    case .denied, .restricted:
+      viewModel.setSelectedDistrict()
+    default:
+      locationManager.requestWhenInUseAuthorization()
+    }
+  }
+}
+
 
 // MARK: - Preview
 

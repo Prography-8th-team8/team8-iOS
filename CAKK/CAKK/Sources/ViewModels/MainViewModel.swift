@@ -13,12 +13,13 @@ class MainViewModel: ViewModelType {
   // MARK: - Properties
   
   struct Input {
-    
+    var cameraMove = PassthroughSubject<Coordinates, Never>()
   }
   
   struct Output {
     var cakeShops = CurrentValueSubject<[CakeShop], Never>([])
-    var averageCoordinates = PassthroughSubject<(lat: Double, lon: Double), Never>()
+    var cameraCoordinates = PassthroughSubject<Coordinates, Never>()
+    var showDistrictSelectionView = PassthroughSubject<Void, Never>()
   }
   
   private(set) var input: Input!
@@ -40,12 +41,49 @@ class MainViewModel: ViewModelType {
   }
   
   
+  // MARK: - Public
+  
+  public func setSelectedDistrict() {
+    if DistrictUserDefaults.shared.selectedDistrictSection == nil {
+      output.showDistrictSelectionView.send(Void())
+    } else {
+      loadMyFinalPosition()
+    }
+  }
+  
+  public func loadMyFinalPosition() {
+    let lat = CoordinatesUserDefaults.shared.latitude
+    let lon = CoordinatesUserDefaults.shared.longitude
+    let lastCoordinates = Coordinates.init(latitude: lat, longitude: lon)
+    
+    output.cameraCoordinates.send(lastCoordinates)
+  }
+  
+  
   // MARK: - Private
   
   private func setupInputOutput() {
     let input = Input()
     let output = Output()
     
+    input.cameraMove
+      .debounce(for: 1, scheduler: DispatchQueue.main)
+      .sink { coordinates in
+        CoordinatesUserDefaults.shared.update(coordinates: coordinates)
+      }
+      .store(in: &cancellableBag)
+    
+    DistrictUserDefaults.shared.selectedDistrictSectionPublisher
+      .sink { [weak self] section in
+        self?.loadCakeShops(section.value().districts)
+      }
+      .store(in: &cancellableBag)
+    
+    self.input = input
+    self.output = output
+  }
+  
+  private func loadCakeShops(_ districts: [District]) {
     let service = service
     let districts = districts
     
@@ -55,18 +93,15 @@ class MainViewModel: ViewModelType {
       .flatMap { service.request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self) }
       .sink { error in
         print(error)
-      } receiveValue: { cakeShops in
+      } receiveValue: { [weak self] cakeShops in
         // TODO: - MVP 에서는 그냥 모두 불러와서 필터링 하는 방식으로 사용중. 서버 들어오면 필터 로직은 서버가 가지기 때문에 삭제 필요함.
         let filteredCakeShops = cakeShops.filter { districts.contains($0.district) }
         let lat = filteredCakeShops.map { $0.latitude }.reduce(0, +) / Double(filteredCakeShops.count)
         let lon = filteredCakeShops.map { $0.longitude }.reduce(0, +) / Double(filteredCakeShops.count)
         
-        output.cakeShops.send(filteredCakeShops)
-        output.averageCoordinates.send((lat, lon))
+        self?.output.cakeShops.send(filteredCakeShops)
+        self?.output.cameraCoordinates.send(Coordinates(latitude: lat, longitude: lon))
       }
       .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
   }
 }
