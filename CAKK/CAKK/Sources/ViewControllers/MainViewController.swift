@@ -49,6 +49,11 @@ final class MainViewController: UIViewController {
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
+  private let locationManager = CLLocationManager()
+  private var locationPermissionStatus: CLAuthorizationStatus {
+    locationManager.authorizationStatus
+  }
+  
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
@@ -237,7 +242,20 @@ final class MainViewController: UIViewController {
     
     locationButton.tapPublisher
       .sink { [weak self] _ in
-        self?.cakkMapView.moveCameraToCurrentPosition()
+        guard let self = self else { return }
+        switch self.locationPermissionStatus {
+        // 권한 부여 상태: 현재 위치로 지도 카메라 이동
+        case .authorizedAlways, .authorizedWhenInUse:
+          self.cakkMapView.moveCameraToCurrentPosition()
+        // 권한 미부여 상태: 설정으로 이동하게 유도
+        default:
+          self.showAskAlert(title: "위치 권한이 필요해요",
+                            message: "설정으로 이동해서 권한을 부여해주세요",
+                            completion: { isConfirmed in
+            guard isConfirmed else { return }
+            self.moveUserToSetting()
+          })
+        }
       }
       .store(in: &cancellableBag)
     
@@ -320,6 +338,11 @@ final class MainViewController: UIViewController {
     } completion: { [weak self] _ in
       self?.cakeShopPopupView?.removeFromSuperview()
     }
+  }
+  
+  private func moveUserToSetting() {
+    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+    UIApplication.shared.open(settingsURL)
   }
 }
 
