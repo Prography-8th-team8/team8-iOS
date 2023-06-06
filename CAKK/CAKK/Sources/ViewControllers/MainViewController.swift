@@ -99,6 +99,7 @@ final class MainViewController: UIViewController {
   private lazy var cakeShopListFloatingPanel = FloatingPanelController().then {
     $0.layout = CakeShopListFloatingPanelLayout()
     $0.surfaceView.appearance = cakeShopListSurfaceAppearance
+    $0.surfaceView.grabberHandlePadding = 12
   }
   
 //  private let cakeShopDetailBottomSheet = BottomSheetView().then {
