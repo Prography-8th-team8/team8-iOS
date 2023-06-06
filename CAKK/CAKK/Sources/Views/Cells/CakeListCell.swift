@@ -244,6 +244,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   private func bindInput() {
     shareButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.shareButtonTapHandler?()
       }
