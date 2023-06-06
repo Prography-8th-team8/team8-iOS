@@ -72,7 +72,9 @@ final class CakkMapView: NMFNaverMapView {
   }
   
   public func moveCameraToCurrentPosition() {
-    let location = mapView.locationOverlay.location
+    guard let coordinates = LocationDataManager.shared.currentCoordinates else { return }
+    
+    let location = NMGLatLng(lat: coordinates.latitude, lng: coordinates.longitude)
     moveCamera(location, zoomLevel: nil)
   }
   
