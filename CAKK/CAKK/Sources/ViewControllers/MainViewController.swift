@@ -17,8 +17,6 @@ import NMapsMap
 
 import BottomSheetView
 
-import CoreLocation
-
 final class MainViewController: UIViewController {
   
   // MARK: - Constants
@@ -48,11 +46,6 @@ final class MainViewController: UIViewController {
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  private var locationManager = CLLocationManager()
-  private var locationPermissionStatus: CLAuthorizationStatus {
-    locationManager.authorizationStatus
-  }
-  
   static let cakeShopListBottomSheetLayout = BottomSheetLayout(
     half: .fractional(0.5),
     tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
@@ -80,7 +73,6 @@ final class MainViewController: UIViewController {
     }
   }
   
-  private var shopDetailViewController: ShopDetailViewController?
   private var cakeShopPopupView: CakeShopPopUpView?
   
   
@@ -222,7 +214,14 @@ final class MainViewController: UIViewController {
   
   // Setup ETC
   private func setupLocationManager() {
-    locationManager.delegate = self
+    switch LocationDataManager.shared.authorizationStatus {
+    case .authorizedAlways, .authorizedWhenInUse:
+      viewModel.loadMyFinalPosition()
+    case .denied, .restricted:
+      viewModel.setSelectedDistrict()
+    default:
+      break
+    }
   }
   
   // Bind
@@ -241,7 +240,7 @@ final class MainViewController: UIViewController {
     currentLocationButton.tapPublisher
       .sink { [weak self] _ in
         guard let self = self else { return }
-        switch self.locationPermissionStatus {
+        switch LocationDataManager.shared.authorizationStatus {
           // 권한 부여 상태: 현재 위치로 지도 카메라 이동
         case .authorizedAlways, .authorizedWhenInUse:
           self.cakkMapView.moveCameraToCurrentPosition()
@@ -332,25 +331,7 @@ final class MainViewController: UIViewController {
     }
     view.layoutIfNeeded()
     
-//    // animation
-    var startTransform = CGAffineTransform.identity
-    startTransform = startTransform.scaledBy(x: 0.8, y: 0.8)
-    startTransform = startTransform.translatedBy(x: 0, y: Metric.cakeShopPopupViewHeight) /// height만큼 내림
-    newCakeShopPopupView.transform = startTransform
-    newCakeShopPopupView.alpha = 0
-
-    var endTransform = CGAffineTransform.identity
-    endTransform = endTransform.scaledBy(x: 1, y: 1)
-    endTransform = endTransform.translatedBy(x: 0, y: 0)
-
-    UIView.animate(
-      withDuration: 0.6,
-      delay: 0,
-      usingSpringWithDamping: 0.7,
-      initialSpringVelocity: 0.7) {
-        newCakeShopPopupView.transform = endTransform
-        newCakeShopPopupView.alpha = 1
-      }
+    applyAnimation(to: newCakeShopPopupView)
     
     newCakeShopPopupView.shareButtonTapHandler = { [weak self] in
       let items = [cakeShop.name, cakeShop.location, cakeShop.url]
@@ -362,6 +343,27 @@ final class MainViewController: UIViewController {
     hideCakeShopPopupView { [weak self] in
       self?.cakeShopPopupView = newCakeShopPopupView
     }
+  }
+  
+  private func applyAnimation(to popupView: CakeShopPopUpView) {
+    var startTransform = CGAffineTransform.identity
+    startTransform = startTransform.scaledBy(x: 0.8, y: 0.8)
+    startTransform = startTransform.translatedBy(x: 0, y: Metric.cakeShopPopupViewHeight) /// height만큼 내림
+    popupView.transform = startTransform
+    popupView.alpha = 0
+    
+    var endTransform = CGAffineTransform.identity
+    endTransform = endTransform.scaledBy(x: 1, y: 1)
+    endTransform = endTransform.translatedBy(x: 0, y: 0)
+    
+    UIView.animate(
+      withDuration: 0.6,
+      delay: 0,
+      usingSpringWithDamping: 0.7,
+      initialSpringVelocity: 0.7) {
+        popupView.transform = endTransform
+        popupView.alpha = 1
+      }
   }
   
   private func hideCakeShopPopupView(_ completion: (() -> Void)? = nil) {
@@ -425,21 +427,6 @@ extension MainViewController: NMFMapViewCameraDelegate {
       viewModel.input
         .cameraMove
         .send(coordinates)
-    }
-  }
-}
-
-// MARK: - LocationAuth Extensions
-
-extension MainViewController: CLLocationManagerDelegate {
-  func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    switch manager.authorizationStatus {
-    case .authorizedAlways, .authorizedWhenInUse:
-      viewModel.loadMyFinalPosition()
-    case .denied, .restricted:
-      viewModel.setSelectedDistrict()
-    default:
-      locationManager.requestWhenInUseAuthorization()
     }
   }
 }
