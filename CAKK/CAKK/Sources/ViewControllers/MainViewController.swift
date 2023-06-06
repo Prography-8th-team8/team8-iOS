@@ -326,17 +326,11 @@ final class MainViewController: UIViewController {
       .sink { [weak self] isLoading in
         if isLoading {
           self?.refreshButton.status = .loading
+          self?.hideCakeShopPopupView { [weak self] in
+            self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
+          }
         } else {
           self?.refreshButton.status = .done
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .loadingCakeShops
-      .sink { [weak self] isLoading in
-        if isLoading {
-          self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
         }
       }
       .store(in: &cancellableBag)
@@ -484,8 +478,11 @@ final class MainViewController: UIViewController {
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
     if viewModel.output.loadingCakeShops.value == false {
-//      cakeShopListFloatingPanel.move(to: .tip, animated: true)
       refreshButton.isEnabled = true
+    }
+    
+    if reason == NMFMapChangedByGesture {
+      cakeShopListFloatingPanel.move(to: .tip, animated: true)
     }
   }
   
