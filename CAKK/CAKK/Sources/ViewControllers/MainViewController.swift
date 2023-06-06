@@ -237,6 +237,7 @@ final class MainViewController: UIViewController {
   private func setupCakeShopListFloatingPanel() {
     cakeShopListFloatingPanel.set(contentViewController: .init())
     cakeShopListFloatingPanel.addPanel(toParent: self)
+    cakeShopListFloatingPanel.delegate = self
   }
   
   // Setup ETC
@@ -373,9 +374,10 @@ final class MainViewController: UIViewController {
     let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
     view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
     newCakeShopPopupView.snp.makeConstraints {
-      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
       $0.bottom.equalTo(cakeShopListFloatingPanel.surfaceView.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
       $0.height.equalTo(Metric.cakeShopPopupViewHeight)
+      $0.width.equalTo(cakeShopListFloatingPanel.surfaceView).inset(Metric.horizontalPadding)
+      $0.centerX.equalTo(cakeShopListFloatingPanel.surfaceView)
     }
     view.layoutIfNeeded()
 
@@ -502,6 +504,18 @@ extension MainViewController: NMFMapViewCameraDelegate {
       viewModel.input
         .cameraMove
         .send(coordinates)
+    }
+  }
+}
+
+extension MainViewController: FloatingPanelControllerDelegate {
+  func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
+    if newCollection.verticalSizeClass == .compact {
+      return CakeShopListFloatingPanelLandscapeLayout()
+    } else if newCollection.verticalSizeClass == .regular && newCollection.horizontalSizeClass == .regular {
+      return CakeShopListFloatingPanelLandscapeLayout()
+    } else {
+      return CakeShopListFloatingPanelLayout()
     }
   }
 }

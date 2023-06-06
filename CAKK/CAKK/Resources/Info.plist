@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>내 위치 확인을 위해 권한이 필요합니다.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>내 위치 확인을 위해 권한이 필요합니다.</string>
+	<key>NMFClientId</key>
+	<string>$(NAVERMAP_API_KEY)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -23,8 +21,6 @@
 		<string>Pretendard-Bold.otf</string>
 		<string>Pretendard-Black.otf</string>
 	</array>
-	<key>NMFClientId</key>
-	<string>$(NAVERMAP_API_KEY)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
