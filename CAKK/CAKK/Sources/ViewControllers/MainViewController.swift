@@ -269,12 +269,14 @@ final class MainViewController: UIViewController {
   
   private func bindInput() {
     hideDetailBottomSheetButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
         self?.cakkMapView.unselectMarker()
       }
       .store(in: &cancellableBag)
     
     currentLocationButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
         guard let self = self else { return }
         switch LocationDataManager.shared.authorizationStatus {
@@ -289,6 +291,7 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
     
     refreshButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
       .sink { [weak self] bounds in
         self?.viewModel.input.searchByMapBounds.send(bounds)
