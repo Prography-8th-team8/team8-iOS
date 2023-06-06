@@ -317,6 +317,17 @@ final class MainViewController: UIViewController {
       .loadingCakeShops
       .sink { [weak self] isLoading in
         if isLoading {
+          self?.cakkMapView.isUserInteractionEnabled = false
+        } else {
+          self?.cakkMapView.isUserInteractionEnabled = true
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .loadingCakeShops
+      .sink { [weak self] isLoading in
+        if isLoading {
           self?.cakeShopListBottomSheet.hide()
         }
       }
