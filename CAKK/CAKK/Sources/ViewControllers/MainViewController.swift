@@ -137,6 +137,10 @@ final class MainViewController: UIViewController {
     setup()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
   
   // MARK: - Private
   
@@ -216,7 +220,13 @@ final class MainViewController: UIViewController {
   private func setupLocationManager() {
     switch LocationDataManager.shared.authorizationStatus {
     case .authorizedAlways, .authorizedWhenInUse:
-      viewModel.loadMyFinalPosition()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+        self?.viewModel.loadMyFinalPosition()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+          self?.loadInitialCakeShops()
+        }))
+      }))
     case .denied, .restricted:
       viewModel.setSelectedDistrict()
     default:
@@ -401,6 +411,14 @@ final class MainViewController: UIViewController {
     guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
     UIApplication.shared.open(settingsURL)
   }
+  
+  private func loadInitialCakeShops() {
+    let mapBounds = cakkMapView.mapView.contentBounds
+    
+    viewModel.input
+      .searchByMapBounds
+      .send(mapBounds)
+  }
 }
 
 
@@ -416,7 +434,6 @@ extension MainViewController: NMFMapViewCameraDelegate {
   
   func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
     refreshButton.isEnabled = true
-    
     
     // Save my last position
     if reason == NMFMapChangedByGesture {
