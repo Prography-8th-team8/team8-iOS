@@ -341,35 +341,6 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
   }
   
-//  private func showCakeShopList(_ cakeShops: [CakeShop]) {
-//    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
-//    cakkMapView.bind(to: cakeListViewController.viewModel)
-//    refreshButton.isEnabled = false
-//
-//    cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
-//      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
-//      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
-//      self?.showCakeShopPopupView(cakeShop)
-//    }
-//    self.cakeListViewController = cakeListViewController
-//
-//    // Configuration
-//    cakeShopListBottomSheet.configure(
-//      parentViewController: self,
-//      contentViewController: cakeListViewController
-//    )
-//
-//    // Appearance
-//    cakeShopListBottomSheet.appearance = bottomSheetAppearance
-//
-//    // Layout
-//    cakeShopListBottomSheet.snp.makeConstraints {
-//      $0.top.equalTo(cakkMapView.snp.bottom)
-//        .inset(Metric.cakkMapBottomInset)
-//        .priority(.low)
-//    }
-//  }
-  
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
     let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
     view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
@@ -523,6 +494,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
 
 // MARK: - Preview
 
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
@@ -533,3 +505,4 @@ struct ViewControllerPreView: PreviewProvider {
       .ignoresSafeArea()
   }
 }
+#endif

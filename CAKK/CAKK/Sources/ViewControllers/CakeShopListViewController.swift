@@ -322,6 +322,7 @@ final class CakeShopListViewController: UIViewController {
 
 // MARK: - Preview
 
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
@@ -336,3 +337,4 @@ struct CakeListViewControllerPreview: PreviewProvider {
       .ignoresSafeArea()
   }
 }
+#endif

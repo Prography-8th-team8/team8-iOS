@@ -166,6 +166,8 @@ class SplashViewController: UIViewController {
   }
 }
 
+// MARK: - Preview
+
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 

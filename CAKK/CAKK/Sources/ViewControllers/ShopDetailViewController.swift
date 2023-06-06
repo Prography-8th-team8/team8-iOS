@@ -264,6 +264,7 @@ final class ShopDetailViewController: UIViewController {
 
 // MARK: - Preview
 
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 struct ShopDetailViewControllerPreView: PreviewProvider {
@@ -277,3 +278,4 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
     ).toPreview()
   }
 }
+#endif
