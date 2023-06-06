@@ -269,7 +269,6 @@ final class MainViewController: UIViewController {
       .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
       .sink { [weak self] bounds in
         self?.viewModel.input.searchByMapBounds.send(bounds)
-        self?.refreshButton.status = .loading
       }
       .store(in: &cancellableBag)
   }
@@ -278,8 +277,6 @@ final class MainViewController: UIViewController {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
-        self?.refreshButton.status = .done
-        
         if cakeShops.isEmpty == false {
           // bind가 viewDidLoad 시점에 불리기 때문에 레이아웃이 이상하게 동작하는 경우를 방지하기 위해서 2초 delay를 줌
           DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: .init(block: { [weak self] in
@@ -302,6 +299,26 @@ final class MainViewController: UIViewController {
       .showDistrictSelectionView
       .sink { [weak self] _ in
         self?.showChangeDistrictView()
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .loadingCakeShops
+      .sink { [weak self] isLoading in
+        if isLoading {
+          self?.refreshButton.status = .loading
+        } else {
+          self?.refreshButton.status = .done
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .loadingCakeShops
+      .sink { [weak self] isLoading in
+        if isLoading {
+          self?.cakeShopListBottomSheet.hide()
+        }
       }
       .store(in: &cancellableBag)
   }
@@ -430,7 +447,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    if isDetailViewShown == false {
+    if viewModel.output.loadingCakeShops.value == false {
       cakeShopListBottomSheet.move(to: .tip)
       refreshButton.isEnabled = true
     }

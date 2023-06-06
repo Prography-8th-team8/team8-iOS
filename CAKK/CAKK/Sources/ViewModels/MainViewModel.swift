@@ -23,6 +23,7 @@ class MainViewModel: ViewModelType {
     let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
     let cameraCoordinates = PassthroughSubject<Coordinates, Never>()
     let showDistrictSelectionView = PassthroughSubject<Void, Never>()
+    let loadingCakeShops = CurrentValueSubject<Bool, Never>(false)
   }
   
   private(set) var input: Input!
@@ -104,17 +105,22 @@ class MainViewModel: ViewModelType {
     let latitudeRange = (bounds.southWestLat...bounds.northEastLat)
     let longitudeRange = (bounds.southWestLng...bounds.northEastLng)
     
-    service.request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
+    output.loadingCakeShops.send(true)
+    
+    service
+      .request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
       .map { cakeShops in
         cakeShops.filter { cakeShop in
           latitudeRange.contains(cakeShop.latitude) &&
           longitudeRange.contains(cakeShop.longitude)
         }
       }
-      .sink { error in
+      .sink { [weak self] error in
         print(error)
+        self?.output.loadingCakeShops.send(false)
       } receiveValue: { [weak self] filteredCakeShops in
         self?.output.cakeShops.send(filteredCakeShops)
+        self?.output.loadingCakeShops.send(false)
       }
       .store(in: &cancellableBag)
 
