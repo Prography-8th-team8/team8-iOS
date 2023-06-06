@@ -28,7 +28,8 @@ target 'CAKK' do
   pod 'NMapsMap',   '~> 3.16.2'
   
   # UI
-  pod 'BottomSheetView', :git => 'git@github.com:qwerty3345/BottomSheetView.git', :branch => 'main'
+  # pod 'BottomSheetView', :git => 'git@github.com:qwerty3345/BottomSheetView.git', :branch => 'main'
+  pod 'FloatingPanel', '~> 2.6.0'
   
   # Combine
   pod 'CombineCocoa', '~> 0.4.1'

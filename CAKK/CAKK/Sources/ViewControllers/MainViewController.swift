@@ -15,7 +15,7 @@ import Then
 
 import NMapsMap
 
-import BottomSheetView
+import FloatingPanel
 
 final class MainViewController: UIViewController {
   
@@ -46,23 +46,23 @@ final class MainViewController: UIViewController {
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  static let cakeShopListBottomSheetLayout = BottomSheetLayout(
-    half: .fractional(0.5),
-    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
+//  static let cakeShopListBottomSheetLayout = BottomSheetLayout(
+//    half: .fractional(0.5),
+//    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
+//
+//  static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
+//    tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
   
-  static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
-    tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
-  
-  private var bottomSheetAppearance: BottomSheetAppearance {
-    var appearance = BottomSheetAppearance()
-    appearance.shadowColor = UIColor.black.cgColor
-    appearance.shadowOpacity = 0.1
-    appearance.shadowRadius = 20
-    appearance.shadowOffset = .init(width: 0, height: -8)
-    appearance.ignoreSafeArea = [.top]
-    
-    return appearance
-  }
+//  private var bottomSheetAppearance: BottomSheetAppearance {
+//    var appearance = BottomSheetAppearance()
+//    appearance.shadowColor = UIColor.black.cgColor
+//    appearance.shadowOpacity = 0.1
+//    appearance.shadowRadius = 20
+//    appearance.shadowOffset = .init(width: 0, height: -8)
+//    appearance.ignoreSafeArea = [.top]
+//
+//    return appearance
+//  }
   
   private var isDetailViewShown = false {
     didSet {
@@ -75,19 +75,36 @@ final class MainViewController: UIViewController {
   
   private var cakeShopPopupView: CakeShopPopUpView?
   
+  private let cakeShopListSurfaceAppearance = SurfaceAppearance().then { appearance in
+    appearance.cornerRadius = 20
+    
+    // Shadows
+    let shadow = SurfaceAppearance.Shadow()
+    shadow.color = UIColor.black
+    shadow.offset = CGSize(width: 0, height: -8)
+    shadow.radius = 20
+    shadow.spread = 8
+    shadow.opacity = 0.1
+    appearance.shadows = [shadow]
+  }
+  
   
   // MARK: - UI
   
   private let cakkMapView = CakkMapView(frame: .zero)
   
-  private let cakeShopListBottomSheet = BottomSheetView().then {
-    $0.layout = MainViewController.cakeShopListBottomSheetLayout
+//  private let cakeShopListBottomSheet = BottomSheetView().then {
+//    $0.layout = MainViewController.cakeShopListBottomSheetLayout
+//  }
+  private lazy var cakeShopListFloatingPanel = FloatingPanelController().then {
+    $0.layout = CakeShopListFloatingPanelLayout()
+    $0.surfaceView.appearance = cakeShopListSurfaceAppearance
+    $0.surfaceView.grabberHandlePadding = 12
   }
-  private var cakeListViewController: CakeShopListViewController?
   
-  private let cakeShopDetailBottomSheet = BottomSheetView().then {
-    $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
-  }
+//  private let cakeShopDetailBottomSheet = BottomSheetView().then {
+//    $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
+//  }
   
   private let hideDetailBottomSheetButton = UIButton().then {
     $0.backgroundColor = .white
@@ -200,6 +217,7 @@ final class MainViewController: UIViewController {
   private func setupView() {
     setupBaseView()
     setupMapView()
+    setupCakeShopListFloatingPanel()
   }
   
   private func setupBaseView() {
@@ -214,6 +232,11 @@ final class MainViewController: UIViewController {
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopPopupView()
     }
+  }
+  
+  private func setupCakeShopListFloatingPanel() {
+    cakeShopListFloatingPanel.set(contentViewController: .init())
+    cakeShopListFloatingPanel.addPanel(toParent: self)
   }
   
   // Setup ETC
@@ -278,10 +301,7 @@ final class MainViewController: UIViewController {
       .cakeShops
       .sink { [weak self] cakeShops in
         if cakeShops.isEmpty == false {
-          // bind가 viewDidLoad 시점에 불리기 때문에 레이아웃이 이상하게 동작하는 경우를 방지하기 위해서 2초 delay를 줌
-          DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: .init(block: { [weak self] in
-            self?.showCakeShopList(cakeShops)
-          }))
+          self?.showCakeShopListFloatingPanel(cakeShops)
         }
       }
       .store(in: &cancellableBag)
@@ -307,84 +327,84 @@ final class MainViewController: UIViewController {
       .sink { [weak self] isLoading in
         if isLoading {
           self?.refreshButton.status = .loading
+          self?.hideCakeShopPopupView { [weak self] in
+            self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
+          }
         } else {
           self?.refreshButton.status = .done
         }
       }
       .store(in: &cancellableBag)
-    
-    viewModel.output
-      .loadingCakeShops
-      .sink { [weak self] isLoading in
-        if isLoading {
-          self?.cakkMapView.isUserInteractionEnabled = false
-        } else {
-          self?.cakkMapView.isUserInteractionEnabled = true
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .loadingCakeShops
-      .sink { [weak self] isLoading in
-        if isLoading {
-          self?.cakeShopListBottomSheet.hide()
-        }
-      }
-      .store(in: &cancellableBag)
   }
   
-  private func showCakeShopList(_ cakeShops: [CakeShop]) {
-    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
-    cakkMapView.bind(to: cakeListViewController.viewModel)
-    refreshButton.isEnabled = false
-    
-    cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
-      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
-      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
-      self?.showCakeShopPopupView(cakeShop)
-    }
-    self.cakeListViewController = cakeListViewController
-    
-    // Configuration
-    cakeShopListBottomSheet.configure(
-      parentViewController: self,
-      contentViewController: cakeListViewController
-    )
-    
-    // Appearance
-    cakeShopListBottomSheet.appearance = bottomSheetAppearance
-    
-    // Layout
-    cakeShopListBottomSheet.snp.makeConstraints {
-      $0.top.equalTo(cakkMapView.snp.bottom)
-        .inset(Metric.cakkMapBottomInset)
-        .priority(.low)
-    }
-  }
+//  private func showCakeShopList(_ cakeShops: [CakeShop]) {
+//    let cakeListViewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
+//    cakkMapView.bind(to: cakeListViewController.viewModel)
+//    refreshButton.isEnabled = false
+//
+//    cakeListViewController.cakeShopItemSelectAction = { [weak self] cakeShop in
+//      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
+//      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
+//      self?.showCakeShopPopupView(cakeShop)
+//    }
+//    self.cakeListViewController = cakeListViewController
+//
+//    // Configuration
+//    cakeShopListBottomSheet.configure(
+//      parentViewController: self,
+//      contentViewController: cakeListViewController
+//    )
+//
+//    // Appearance
+//    cakeShopListBottomSheet.appearance = bottomSheetAppearance
+//
+//    // Layout
+//    cakeShopListBottomSheet.snp.makeConstraints {
+//      $0.top.equalTo(cakkMapView.snp.bottom)
+//        .inset(Metric.cakkMapBottomInset)
+//        .priority(.low)
+//    }
+//  }
   
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
     let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
     view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
     newCakeShopPopupView.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.bottom.equalTo(cakeShopListBottomSheet.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
+      $0.bottom.equalTo(cakeShopListFloatingPanel.surfaceView.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
       $0.height.equalTo(Metric.cakeShopPopupViewHeight)
     }
     view.layoutIfNeeded()
-    
+
     applyAnimation(to: newCakeShopPopupView)
-    
+
     newCakeShopPopupView.shareButtonTapHandler = { [weak self] in
       let items = [cakeShop.name, cakeShop.location, cakeShop.url]
-      
+
       let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
       self?.present(activity, animated: true)
     }
-    
+
     hideCakeShopPopupView { [weak self] in
       self?.cakeShopPopupView = newCakeShopPopupView
     }
+    
+    cakeShopListFloatingPanel.move(to: .tip, animated: true)
+  }
+  
+  private func showCakeShopListFloatingPanel(_ cakeShops: [CakeShop]) {
+    let viewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
+    viewController.cakeShopItemSelectAction = { [weak self] cakeShop in
+      let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
+      self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
+      self?.showCakeShopPopupView(cakeShop)
+      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    }
+    cakkMapView.bind(to: viewController.viewModel)
+    
+    cakeShopListFloatingPanel.set(contentViewController: viewController)
+    cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
+    cakeShopListFloatingPanel.move(to: .tip, animated: true)
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {
@@ -459,8 +479,11 @@ final class MainViewController: UIViewController {
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
     if viewModel.output.loadingCakeShops.value == false {
-      cakeShopListBottomSheet.move(to: .tip)
       refreshButton.isEnabled = true
+    }
+    
+    if reason == NMFMapChangedByGesture {
+      cakeShopListFloatingPanel.move(to: .tip, animated: true)
     }
   }
   
