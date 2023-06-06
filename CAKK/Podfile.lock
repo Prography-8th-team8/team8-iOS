@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (5.7.1)
-  - BottomSheetView (0.1.7)
   - CombineCocoa (0.4.1)
+  - FloatingPanel (2.6.1)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
   - Moya/Combine (15.0.0):
@@ -17,8 +17,8 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
-  - "BottomSheetView (from `git@github.com:qwerty3345/BottomSheetView.git`, branch `main`)"
   - CombineCocoa (~> 0.4.1)
+  - FloatingPanel (~> 2.6.0)
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
   - Moya/Combine (~> 15.0.0)
@@ -32,6 +32,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - CombineCocoa
+    - FloatingPanel
     - Kingfisher
     - lottie-ios
     - Moya
@@ -42,20 +43,10 @@ SPEC REPOS:
     - SwiftLint
     - Then
 
-EXTERNAL SOURCES:
-  BottomSheetView:
-    :branch: main
-    :git: "git@github.com:qwerty3345/BottomSheetView.git"
-
-CHECKOUT OPTIONS:
-  BottomSheetView:
-    :commit: a10218b168e2ff8e056c3cf6e15cb52909b6a2c0
-    :git: "git@github.com:qwerty3345/BottomSheetView.git"
-
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
-  BottomSheetView: 92f6914e3c75f2639d5fa92dba060d7ea89c5062
   CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
+  FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -66,6 +57,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 2775b09c693786870ec51a18f285e8b5348c889c
+PODFILE CHECKSUM: eb7fc3132914b62c83ef4b2912762218b7edc7b3
 
 COCOAPODS: 1.11.3
