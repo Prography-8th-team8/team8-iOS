@@ -9,22 +9,16 @@ import Combine
 
 class CoordinatesUserDefaults {
   
-  // MARK: - Constants
-  
-  enum Constants {
-    static let seoulCoordinates = Coordinates(latitude: 37.541, longitude: 126.986)
-  }
-  
   // MARK: - Properties
   
   static let shared = CoordinatesUserDefaults()
   
   public var lastCoordinatesPublisher = PassthroughSubject<Coordinates, Never>()
   
-  @UserDefault(key: "coordinte.latitude", defaultValue: Constants.seoulCoordinates.latitude)
+  @UserDefault(key: "coordinte.latitude", defaultValue: 0)
   private(set) var latitude: Double
   
-  @UserDefault(key: "coordinate.longitude", defaultValue: Constants.seoulCoordinates.longitude)
+  @UserDefault(key: "coordinate.longitude", defaultValue: 0)
   private(set) var longitude: Double
   
   

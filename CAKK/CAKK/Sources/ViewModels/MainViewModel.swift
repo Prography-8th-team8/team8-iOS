@@ -55,10 +55,18 @@ class MainViewModel: ViewModelType {
   }
   
   public func loadMyFinalPosition() {
-    let lat = CoordinatesUserDefaults.shared.latitude
-    let lon = CoordinatesUserDefaults.shared.longitude
-    let lastCoordinates = Coordinates.init(latitude: lat, longitude: lon)
+    let latitude = CoordinatesUserDefaults.shared.latitude
+    let longitude = CoordinatesUserDefaults.shared.longitude
+
+    // 저장된 위,경도가 없을 시 사용자의 현재 위치로 카메라 이동
+    guard latitude != 0, longitude != 0 else {
+      if let userCoordinates = LocationDataManager.shared.currentCoordinates {
+        output.cameraCoordinates.send(userCoordinates)
+      }
+      return
+    }
     
+    let lastCoordinates = Coordinates.init(latitude: latitude, longitude: longitude)
     output.cameraCoordinates.send(lastCoordinates)
   }
   
