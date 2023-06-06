@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */; };
+		8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */; };
 		8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */; };
 		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
 		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
@@ -105,6 +106,7 @@
 		25D8AB54899F07BA2131476A /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
 		4EB6733EC10247F2ECF3689E /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
 		8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPickerCollectionCell.swift; sourceTree = "<group>"; };
 		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				8E3FF2E92A0E813300865E36 /* Cells */,
 				8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */,
 				8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */,
+				8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
 				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,
 				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
+				8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */,
 				B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */,
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
@@ -921,10 +925,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "내 위치 확인을 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 위치 확인을 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -955,10 +961,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "내 위치 확인을 위해 권한이 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "내 위치 확인을 위해 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
