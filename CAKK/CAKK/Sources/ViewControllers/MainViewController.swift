@@ -218,20 +218,24 @@ final class MainViewController: UIViewController {
   
   // Setup ETC
   private func setupLocationManager() {
-    switch LocationDataManager.shared.authorizationStatus {
-    case .authorizedAlways, .authorizedWhenInUse:
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
-        self?.viewModel.loadMyFinalPosition()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
-          self?.loadInitialCakeShops()
-        }))
-      }))
-    case .denied, .restricted:
-      viewModel.setSelectedDistrict()
-    default:
-      break
-    }
+    LocationDataManager.shared.didChangeAuthorization
+      .sink { [weak self] status in
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+            self?.viewModel.loadMyFinalPosition()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+              self?.loadInitialCakeShops()
+            }))
+          }))
+        case .denied, .restricted:
+          self?.viewModel.setSelectedDistrict()
+        default:
+          break
+        }
+      }
+      .store(in: &cancellableBag)
   }
   
   // Bind
