@@ -107,6 +107,13 @@ final class MainViewController: UIViewController {
     super.viewDidLoad()
     setup()
   }
+  
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    
+    updateFloatingPanelLayout()
+    updateMapViewInset()
+  }
 
   
   // MARK: - Private
@@ -309,6 +316,9 @@ final class MainViewController: UIViewController {
     }
     cakkMapView.bind(to: viewController.viewModel)
     
+    updateFloatingPanelLayout()
+    updateMapViewInset()
+    
     cakeShopListFloatingPanel.set(contentViewController: viewController)
     cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
     cakeShopListFloatingPanel.move(to: .tip, animated: true)
@@ -391,6 +401,19 @@ final class MainViewController: UIViewController {
       cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
     }
   }
+  
+  private func updateFloatingPanelLayout() {
+    let verticalSizeClass = traitCollection.verticalSizeClass
+    let horizontalSizeClass = traitCollection.horizontalSizeClass
+    
+    if verticalSizeClass == .compact || (verticalSizeClass == .regular && horizontalSizeClass == .regular) {
+      cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLandscapeLayout()
+    } else {
+      cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLayout()
+    }
+    
+    cakeShopListFloatingPanel.invalidateLayout()
+  }
 }
 
 
@@ -426,18 +449,6 @@ extension MainViewController: NMFMapViewCameraDelegate {
 // MARK: - FloatingPanelControllerDelegate
 
 extension MainViewController: FloatingPanelControllerDelegate {
-  func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
-    if newCollection.verticalSizeClass == .compact {
-      return CakeShopListFloatingPanelLandscapeLayout()
-    }
-    
-    if newCollection.verticalSizeClass == .regular && newCollection.horizontalSizeClass == .regular {
-      return CakeShopListFloatingPanelLandscapeLayout()
-    }
-    
-    return CakeShopListFloatingPanelLayout()
-  }
-  
   func floatingPanelDidMove(_ fpc: FloatingPanelController) {
     // Show and hide cakeShopPopupView
     UIView.animate(withDuration: 0.3) {
@@ -447,8 +458,6 @@ extension MainViewController: FloatingPanelControllerDelegate {
         self.cakeShopPopupView?.alpha = 1
       }
     }
-    
-    updateMapViewInset()
   }
 }
 
