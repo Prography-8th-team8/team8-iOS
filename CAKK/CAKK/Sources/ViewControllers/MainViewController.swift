@@ -363,7 +363,7 @@ final class MainViewController: UIViewController {
   
   private func askUserToPermissionSetting() {
     showAskAlert(title: "위치 권한이 필요해요",
-                 message: "설정으로 이동해서 권한을 부여해주세요",
+                 message: "현재 내 위치로 이동하기 위해 권한이 필요해요.\n설정에서 위치 권한을 허용 해주세요",
                  completion: { isConfirmed in
       guard isConfirmed else { return }
       self.moveUserToSetting()
