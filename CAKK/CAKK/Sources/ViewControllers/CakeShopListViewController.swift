@@ -228,6 +228,8 @@ final class CakeShopListViewController: UIViewController {
           let items = [item.name, item.location, item.url]
           
           let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+          activity.modalPresentationStyle = .popover
+          activity.popoverPresentationController?.sourceView = cell.shareButton
           self?.present(activity, animated: true)
         }
         return cell

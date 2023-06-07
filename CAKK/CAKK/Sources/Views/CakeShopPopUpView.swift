@@ -81,7 +81,7 @@ class CakeShopPopUpView: UIView {
     $0.alignment = .leading
   }
   
-  private let shareButton = UIButton().then {
+  public let shareButton = UIButton().then {
     $0.tintColor = R.color.white()
     $0.backgroundColor = R.color.black()
     $0.setImage(R.image.share_thick(), for: .normal)

@@ -293,6 +293,8 @@ final class MainViewController: UIViewController {
       let items = [cakeShop.name, cakeShop.location, cakeShop.url]
 
       let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+      activity.modalPresentationStyle = .popover
+      activity.popoverPresentationController?.sourceView = newCakeShopPopupView.shareButton
       self?.present(activity, animated: true)
     }
 
