@@ -56,7 +56,7 @@ final class CakeShopListViewController: UIViewController {
   let viewModel: ViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  public var cakeShopItemSelectAction: ((CakeShop) -> Void)?
+  public var cakeShopItemSelectHandler: ((CakeShop) -> Void)?
   private var dataSource: DataSource!
   private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
   
@@ -257,6 +257,7 @@ final class CakeShopListViewController: UIViewController {
     collectionView.didSelectItemPublisher
       .sink { [weak self] indexPath in
         self?.viewModel.input.selectCakeShop.send(indexPath)
+        self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
       }
       .store(in: &cancellableBag)
   }
@@ -295,7 +296,7 @@ final class CakeShopListViewController: UIViewController {
     viewModel.output
       .presentCakeShopDetail
       .sink { [weak self] cakeShop in
-        self?.cakeShopItemSelectAction?(cakeShop)
+        self?.cakeShopItemSelectHandler?(cakeShop)
       }
       .store(in: &cancellableBag)
     

@@ -301,7 +301,7 @@ final class MainViewController: UIViewController {
   
   private func showCakeShopListFloatingPanel(_ cakeShops: [CakeShop]) {
     let viewController = DIContainer.shared.makeCakeShopListViewController(initialCakeShops: cakeShops)
-    viewController.cakeShopItemSelectAction = { [weak self] cakeShop in
+    viewController.cakeShopItemSelectHandler = { [weak self] cakeShop in
       let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
       self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
       self?.showCakeShopPopupView(cakeShop)
