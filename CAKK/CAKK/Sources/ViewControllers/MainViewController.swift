@@ -301,8 +301,6 @@ final class MainViewController: UIViewController {
     hideCakeShopPopupView { [weak self] in
       self?.cakeShopPopupView = newCakeShopPopupView
     }
-    
-    cakeShopListFloatingPanel.move(to: .tip, animated: true)
   }
   
   private func showCakeShopListFloatingPanel(_ cakeShops: [CakeShop]) {
@@ -311,7 +309,7 @@ final class MainViewController: UIViewController {
       let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
       self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
       self?.showCakeShopPopupView(cakeShop)
-      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+      self?.cakeShopListFloatingPanel.move(to: .half, animated: true)
     }
     cakkMapView.bind(to: viewController.viewModel)
     
