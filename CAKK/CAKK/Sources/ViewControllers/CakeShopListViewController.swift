@@ -317,6 +317,9 @@ final class CakeShopListViewController: UIViewController {
   
   private func showChangeDistrictView() {
     let viewController = DIContainer.shared.makeDistrictSelectionController()
+    viewController.modalPresentationStyle = .popover
+    viewController.preferredContentSize = .init(width: 335, height: 520)
+    viewController.popoverPresentationController?.sourceView = changeDistrictButton
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.present(viewController, animated: true)
     }

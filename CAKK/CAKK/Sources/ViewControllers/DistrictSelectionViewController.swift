@@ -23,6 +23,7 @@ class DistrictSelectionViewController: UIViewController {
     static let descriptionLabelTopPadding = 12.f
     
     static let collectionViewTopPadding = 40.f
+    static let collectionViewBottomInset = 20.f
   }
   
   private var collectionViewLayout: UICollectionViewCompositionalLayout {
@@ -73,6 +74,7 @@ class DistrictSelectionViewController: UIViewController {
     $0.font = .pretendard(size: 20, weight: .bold)
     $0.textColor = .black
     $0.textAlignment = .left
+    $0.numberOfLines = 2
   }
   private let descriptionLabel = UILabel().then {
     $0.text = "서울의 케이샵을 지역별로 정리했어요."
@@ -86,6 +88,8 @@ class DistrictSelectionViewController: UIViewController {
     $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.alwaysBounceVertical = false
+    $0.showsVerticalScrollIndicator = false
+    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
   }
   
   
