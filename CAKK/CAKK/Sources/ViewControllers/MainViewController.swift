@@ -382,6 +382,21 @@ final class MainViewController: UIViewController {
       .searchByMapBounds
       .send(mapBounds)
   }
+  
+  private func updateMapViewInset() {
+    let floatingPanelHeight = view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY)
+    let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
+    
+    if traitCollection.verticalSizeClass == .compact {
+      cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
+    }
+    
+    if traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular {
+      cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+    }
+    
+    cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
+  }
 }
 
 
@@ -430,6 +445,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
   }
   
   func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+    // Show and hide cakeShopPopupView
     UIView.animate(withDuration: 0.3) {
       if fpc.state == .full {
         self.cakeShopPopupView?.alpha = 0
@@ -437,6 +453,8 @@ extension MainViewController: FloatingPanelControllerDelegate {
         self.cakeShopPopupView?.alpha = 1
       }
     }
+    
+    updateMapViewInset()
   }
 }
 
