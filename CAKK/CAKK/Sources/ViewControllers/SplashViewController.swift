@@ -121,7 +121,7 @@ class SplashViewController: UIViewController {
   
   private func setupAnimationViewLayout() {
     /// 애니메이션 가로 비율이 더 길어서 가로로 여러번 붙여 그리드 사이즈 문제 해결
-    for _ in 0...5 {
+    (0...5).forEach { _ in
       let animationView =  LottieAnimationView(name: Constants.animationName)
       animationView.contentMode = .scaleAspectFill
       animationView.loopMode = .loop

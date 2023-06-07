@@ -25,7 +25,7 @@ class DistrictSelectionViewController: UIViewController {
     static let collectionViewTopPadding = 40.f
   }
   
-  static var layout: UICollectionViewCompositionalLayout {
+  private var collectionViewLayout: UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(0.5),
       heightDimension: .estimated(120))
@@ -53,11 +53,11 @@ class DistrictSelectionViewController: UIViewController {
   
   // MARK: - Properties
   
-  public var viewModel: ViewModel!
-  private var dataSource: DataSource!
+  private let viewModel: ViewModel
+  private lazy var dataSource: DataSource = makeDataSource()
   private var cancellableBag = Set<AnyCancellable>()
   
-  private var regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
+  private let regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
     cell.configure(item)
   }
   
@@ -68,19 +68,20 @@ class DistrictSelectionViewController: UIViewController {
   
   // MARK: - UI
   
-  let titleLabel = UILabel().then {
+  private let titleLabel = UILabel().then {
     $0.text = "내게 맞는 케이크샵은 어디에 있을까요?"
     $0.font = .pretendard(size: 20, weight: .bold)
     $0.textColor = .black
     $0.textAlignment = .left
   }
-  let descriptionLabel = UILabel().then {
+  private let descriptionLabel = UILabel().then {
     $0.text = "서울의 케이샵을 지역별로 정리했어요."
     $0.font = .pretendard(size: 16)
     $0.textColor = .black.withAlphaComponent(0.6)
     $0.textAlignment = .left
   }
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: DistrictSelectionViewController.layout).then {
+  private lazy var collectionView = UICollectionView(frame: .zero,
+                                                     collectionViewLayout: collectionViewLayout).then {
     $0.delaysContentTouches = false
     $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
     $0.backgroundColor = .clear
@@ -149,15 +150,14 @@ class DistrictSelectionViewController: UIViewController {
   // Setup Views
   private func setupView() {
     setupBaseView()
-    setupCollectionView()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .white
   }
   
-  private func setupCollectionView() {
-    dataSource = DataSource(
+  private func makeDataSource() -> DataSource {
+    return DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueConfiguredReusableCell(
@@ -190,11 +190,7 @@ class DistrictSelectionViewController: UIViewController {
   private func bindOutput() {
     viewModel.output.districtSections
       .sink { [weak self] districtSections in
-        let section: [Section] = [.regionSelector]
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
-        snapshot.appendSections(section)
-        snapshot.appendItems(districtSections)
-        self?.dataSource.apply(snapshot)
+        self?.applySnapshot(with: districtSections)
       }
       .store(in: &cancellableBag)
     
@@ -203,6 +199,14 @@ class DistrictSelectionViewController: UIViewController {
         self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
+  }
+  
+  private func applySnapshot(with districtSections: [DistrictSection]) {
+    let section: [Section] = [.regionSelector]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(districtSections)
+    dataSource.apply(snapshot)
   }
 }
 
