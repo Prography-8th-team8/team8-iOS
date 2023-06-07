@@ -241,6 +241,7 @@ final class DetailInfoView: UIView {
   }
 }
 
+
 // MARK: - Preview
 
 #if canImport(SwiftUI) && DEBUG

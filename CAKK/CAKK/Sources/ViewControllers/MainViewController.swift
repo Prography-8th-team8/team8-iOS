@@ -402,27 +402,31 @@ extension MainViewController: NMFMapViewCameraDelegate {
     refreshButton.isEnabled = true
     
     // Save my last position
-    if reason == NMFMapChangedByGesture {
-      let coordinates = Coordinates(
-        latitude: mapView.cameraPosition.target.lat,
-        longitude: mapView.cameraPosition.target.lng)
-      
-      viewModel.input
-        .cameraMove
-        .send(coordinates)
-    }
+    guard reason == NMFMapChangedByGesture else { return }
+    
+    let coordinates = Coordinates(
+      latitude: mapView.cameraPosition.target.lat,
+      longitude: mapView.cameraPosition.target.lng)
+    
+    viewModel.input
+      .cameraMove
+      .send(coordinates)
   }
 }
+
+// MARK: - FloatingPanelControllerDelegate
 
 extension MainViewController: FloatingPanelControllerDelegate {
   func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout {
     if newCollection.verticalSizeClass == .compact {
       return CakeShopListFloatingPanelLandscapeLayout()
-    } else if newCollection.verticalSizeClass == .regular && newCollection.horizontalSizeClass == .regular {
-      return CakeShopListFloatingPanelLandscapeLayout()
-    } else {
-      return CakeShopListFloatingPanelLayout()
     }
+    
+    if newCollection.verticalSizeClass == .regular && newCollection.horizontalSizeClass == .regular {
+      return CakeShopListFloatingPanelLandscapeLayout()
+    }
+    
+    return CakeShopListFloatingPanelLayout()
   }
 }
 

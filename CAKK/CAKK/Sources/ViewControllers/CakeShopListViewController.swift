@@ -46,13 +46,30 @@ final class CakeShopListViewController: UIViewController {
   typealias ViewModel = CakeShopListViewModel
   typealias DataSource = UICollectionViewDiffableDataSource<Section, CakeShop>
   
+  enum Section {
+    case cakeShop
+  }
   
   // MARK: - Properties
   
-  private(set) var viewModel: ViewModel
+  let viewModel: ViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  static var layout: UICollectionViewCompositionalLayout {
+  public var cakeShopItemSelectAction: ((CakeShop) -> Void)?
+  private var dataSource: DataSource!
+  private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
+  
+  
+  // MARK: - UI
+  
+  lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
+    $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
+    $0.backgroundColor = .clear
+    $0.layer.cornerRadius = Metric.collectionViewCornerRadius
+    $0.delaysContentTouches = false
+  }
+  
+  private var collectionViewLayout: UICollectionViewCompositionalLayout = {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
       heightDimension: .estimated(Metric.collectionViewItemEstimatedHeight))
@@ -65,25 +82,7 @@ final class CakeShopListViewController: UIViewController {
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = Metric.collectionViewItemSpacing
     return UICollectionViewCompositionalLayout(section: section)
-  }
-  
-  enum Section {
-    case cakeShop
-  }
-  
-  public var cakeShopItemSelectAction: ((CakeShop) -> Void)?
-  private var dataSource: DataSource!
-  private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
-  
-  
-  // MARK: - UI
-  
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CakeShopListViewController.layout).then {
-    $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
-    $0.backgroundColor = .clear
-    $0.layer.cornerRadius = Metric.collectionViewCornerRadius
-    $0.delaysContentTouches = false
-  }
+  }()
   
   private let headerView = UIView()
   

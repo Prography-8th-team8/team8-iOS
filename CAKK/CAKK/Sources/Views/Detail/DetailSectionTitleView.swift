@@ -30,8 +30,6 @@ final class DetailSectionTitleView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Public
-  
   // MARK: - Private
   
   private func setup(title: String,
