@@ -430,6 +430,16 @@ extension MainViewController: FloatingPanelControllerDelegate {
     
     return CakeShopListFloatingPanelLayout()
   }
+  
+  func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+    UIView.animate(withDuration: 0.3) {
+      if fpc.state == .full {
+        self.cakeShopPopupView?.alpha = 0
+      } else {
+        self.cakeShopPopupView?.alpha = 1
+      }
+    }
+  }
 }
 
 
