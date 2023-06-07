@@ -7,9 +7,9 @@
 
 import Foundation
 
+typealias DistrictCountResponse = [DistrictCount]
+
 struct DistrictCount: Decodable {
   let district: District
   let count: Int
 }
-
-typealias DistrictCountResponse = [DistrictCount]

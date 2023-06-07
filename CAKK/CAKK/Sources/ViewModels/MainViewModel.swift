@@ -48,11 +48,12 @@ class MainViewModel: ViewModelType {
   // MARK: - Public
   
   public func setSelectedDistrict() {
-    if DistrictUserDefaults.shared.selectedDistrictSection == nil {
+    guard DistrictUserDefaults.shared.selectedDistrictSection != nil else {
       output.showDistrictSelectionView.send(Void())
-    } else {
-      loadMyFinalPosition()
+      return
     }
+    
+    loadMyFinalPosition()
   }
   
   public func loadMyFinalPosition() {
