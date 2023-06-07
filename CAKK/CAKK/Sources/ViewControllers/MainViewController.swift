@@ -231,6 +231,7 @@ final class MainViewController: UIViewController {
     
     refreshButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .map { [weak self] in self?.cakkMapView.mapView.contentInset = .zero }
       .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
       .sink { [weak self] bounds in
         self?.viewModel.input.searchByMapBounds.send(bounds)
