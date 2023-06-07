@@ -33,9 +33,6 @@ final class MainViewController: UIViewController {
     
     static let bottomSheetTipModeHeight = 58.f
     
-    static let hideDetailBottomSheetButtonSize = 40.f
-    static let hideDetailBottomSheetButtonCornerRadius = 20.f
-    
     static let cakeShopPopupViewBottomInset = 12.f
     static let cakeShopPopupViewHeight = 158.f
   }
@@ -45,33 +42,6 @@ final class MainViewController: UIViewController {
   
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
-  
-//  static let cakeShopListBottomSheetLayout = BottomSheetLayout(
-//    half: .fractional(0.5),
-//    tip: .absolute(CakeShopListViewController.Metric.headerViewHeight))
-//
-//  static let cakeShopDetailBottomSheetLayout = BottomSheetLayout(
-//    tip: .absolute(280)) // 임시로 safeArea보다 아래로 내려가게 설정 - BottomSheetView 기능 수정되면 변경 예정
-  
-//  private var bottomSheetAppearance: BottomSheetAppearance {
-//    var appearance = BottomSheetAppearance()
-//    appearance.shadowColor = UIColor.black.cgColor
-//    appearance.shadowOpacity = 0.1
-//    appearance.shadowRadius = 20
-//    appearance.shadowOffset = .init(width: 0, height: -8)
-//    appearance.ignoreSafeArea = [.top]
-//
-//    return appearance
-//  }
-  
-  private var isDetailViewShown = false {
-    didSet {
-      let alpha = isDetailViewShown ? 1.f : 0.f
-      UIView.animate(withDuration: 0.3) {
-        self.hideDetailBottomSheetButton.alpha = alpha
-      }
-    }
-  }
   
   private var cakeShopPopupView: CakeShopPopUpView?
   
@@ -93,26 +63,10 @@ final class MainViewController: UIViewController {
   
   private let cakkMapView = CakkMapView(frame: .zero)
   
-//  private let cakeShopListBottomSheet = BottomSheetView().then {
-//    $0.layout = MainViewController.cakeShopListBottomSheetLayout
-//  }
   private lazy var cakeShopListFloatingPanel = FloatingPanelController().then {
     $0.layout = CakeShopListFloatingPanelLayout()
     $0.surfaceView.appearance = cakeShopListSurfaceAppearance
     $0.surfaceView.grabberHandlePadding = 12
-  }
-  
-//  private let cakeShopDetailBottomSheet = BottomSheetView().then {
-//    $0.layout = MainViewController.cakeShopDetailBottomSheetLayout
-//  }
-  
-  private let hideDetailBottomSheetButton = UIButton().then {
-    $0.backgroundColor = .white
-    $0.tintColor = .black
-    $0.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
-    $0.layer.borderWidth = 1
-    $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-    $0.alpha = 0
   }
   
   private let refreshButton = CapsuleStyleLoadingButton(
@@ -173,7 +127,6 @@ final class MainViewController: UIViewController {
   private func setupLayouts() {
     setupNaverMapViewLayout()
     setupRefreshButtonLayout()
-    setupHideDetailBottomSheetButtonLayout()
     setupLocationButtonLayout()
   }
   
@@ -191,17 +144,6 @@ final class MainViewController: UIViewController {
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
       $0.width.equalTo(120)
     }
-  }
-  
-  private func setupHideDetailBottomSheetButtonLayout() {
-    view.addSubview(hideDetailBottomSheetButton)
-    hideDetailBottomSheetButton.snp.makeConstraints {
-      $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.centerY.equalTo(refreshButton)
-      $0.width.height.equalTo(Metric.hideDetailBottomSheetButtonSize)
-    }
-    
-    hideDetailBottomSheetButton.layer.cornerRadius = Metric.hideDetailBottomSheetButtonCornerRadius
   }
   
   private func setupLocationButtonLayout() {
@@ -269,13 +211,6 @@ final class MainViewController: UIViewController {
   }
   
   private func bindInput() {
-    hideDetailBottomSheetButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] _ in
-        self?.cakkMapView.unselectMarker()
-      }
-      .store(in: &cancellableBag)
-    
     currentLocationButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
