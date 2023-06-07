@@ -26,6 +26,7 @@ final class CakeShopListViewController: UIViewController {
     static let collectionViewItemEstimatedHeight = 158.f
     static let collectionViewItemSpacing = 12.f
     static let collectionViewHorizontalPadding = 16.f
+    static let collectionViewBottomInset = 44.f
     
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
@@ -67,6 +68,7 @@ final class CakeShopListViewController: UIViewController {
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
     $0.delaysContentTouches = false
+    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
   }
   
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
