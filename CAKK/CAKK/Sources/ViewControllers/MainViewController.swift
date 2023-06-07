@@ -425,7 +425,7 @@ extension MainViewController: NMFMapViewCameraDelegate {
       refreshButton.isEnabled = true
     }
     
-    if reason == NMFMapChangedByGesture {
+    if reason == NMFMapChangedByGesture && viewModel.output.loadingCakeShops.value == false {
       cakeShopListFloatingPanel.move(to: .tip, animated: true)
     }
   }
