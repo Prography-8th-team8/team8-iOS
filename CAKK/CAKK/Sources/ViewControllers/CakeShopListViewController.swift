@@ -314,9 +314,9 @@ final class CakeShopListViewController: UIViewController {
   
   private func showChangeDistrictView() {
     let viewController = DIContainer.shared.makeDistrictSelectionController()
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.present(viewController, animated: true)
-    }))
+    }
   }
 }
 

@@ -246,13 +246,13 @@ final class MainViewController: UIViewController {
       .sink { [weak self] status in
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
-          DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.viewModel.loadMyFinalPosition()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
               self?.loadInitialCakeShops()
-            }))
-          }))
+            }
+          }
         case .denied, .restricted:
           self?.viewModel.setSelectedDistrict()
         default:
@@ -421,9 +421,9 @@ final class MainViewController: UIViewController {
   private func showChangeDistrictView() {
     let viewController = DIContainer.shared.makeDistrictSelectionController()
     viewController.modalPresentationStyle = .fullScreen
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: .init(block: {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.present(viewController, animated: true)
-    }))
+    }
   }
   
   private func askUserToPermissionSetting() {

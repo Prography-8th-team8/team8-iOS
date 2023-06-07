@@ -76,11 +76,9 @@ class SplashViewController: UIViewController {
   // MARK: - Public
   
   public func startSplash(completion: @escaping () -> Void) {
-    DispatchQueue.main.asyncAfter(
-      deadline: .now() + Constants.splashDuration,
-      execute: .init(block: {
-        completion()
-      }))
+    DispatchQueue.main.asyncAfter(deadline: .now() + Constants.splashDuration) {
+      completion()
+    }
   }
   
   public func playAnimations() {
