@@ -107,11 +107,7 @@ final class MainViewController: UIViewController {
     super.viewDidLoad()
     setup()
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
+
   
   // MARK: - Private
   
@@ -389,13 +385,11 @@ final class MainViewController: UIViewController {
     
     if traitCollection.verticalSizeClass == .compact {
       cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
-    }
-    
-    if traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular {
+    } else if traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular {
       cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+    } else {
+      cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
     }
-    
-    cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
   }
 }
 
