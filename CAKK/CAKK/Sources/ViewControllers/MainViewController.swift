@@ -183,8 +183,13 @@ final class MainViewController: UIViewController {
   private func setupMapView() {
     cakkMapView.mapView.addCameraDelegate(delegate: self)
     cakkMapView.didTappedMarker = { [weak self] cakeShop in
-      self?.showCakeShopPopupView(cakeShop)
-      self?.cakeShopListFloatingPanel.move(to: .half, animated: true)
+      guard let self else { return }
+      self.showCakeShopPopupView(cakeShop)
+      
+      /// Landscape 모드일때 그리고 cakeShopListFloatingPanel이 full 상태일때 .half로 이동
+      if self.isLandscapeMode && self.cakeShopListFloatingPanel.state == .full {
+        self.cakeShopListFloatingPanel.move(to: .half, animated: true)
+      }
     }
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopPopupView()
