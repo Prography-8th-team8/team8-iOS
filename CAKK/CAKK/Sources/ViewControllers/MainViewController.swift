@@ -58,6 +58,17 @@ final class MainViewController: UIViewController {
     appearance.shadows = [shadow]
   }
   
+  private var isLandscapeMode: Bool {
+    let verticalSizeClass = traitCollection.verticalSizeClass
+    let horizontalSizeClass = traitCollection.horizontalSizeClass
+    
+    if verticalSizeClass == .compact || (verticalSizeClass == .regular && horizontalSizeClass == .regular) {
+      return true
+    } else {
+      return false
+    }
+  }
+  
   
   // MARK: - UI
   
@@ -173,6 +184,7 @@ final class MainViewController: UIViewController {
     cakkMapView.mapView.addCameraDelegate(delegate: self)
     cakkMapView.didTappedMarker = { [weak self] cakeShop in
       self?.showCakeShopPopupView(cakeShop)
+      self?.cakeShopListFloatingPanel.move(to: .half, animated: true)
     }
     cakkMapView.didUnselectMarker = { [weak self] in
       self?.hideCakeShopPopupView()
@@ -404,10 +416,7 @@ final class MainViewController: UIViewController {
   }
   
   private func updateFloatingPanelLayout() {
-    let verticalSizeClass = traitCollection.verticalSizeClass
-    let horizontalSizeClass = traitCollection.horizontalSizeClass
-    
-    if verticalSizeClass == .compact || (verticalSizeClass == .regular && horizontalSizeClass == .regular) {
+    if isLandscapeMode {
       cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLandscapeLayout()
     } else {
       cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLayout()
@@ -426,7 +435,9 @@ extension MainViewController: NMFMapViewCameraDelegate {
       refreshButton.isEnabled = true
     }
     
-    if reason == NMFMapChangedByGesture && viewModel.output.loadingCakeShops.value == false {
+    if reason == NMFMapChangedByGesture &&
+        viewModel.output.loadingCakeShops.value == false &&
+        isLandscapeMode == false {
       cakeShopListFloatingPanel.move(to: .tip, animated: true)
     }
   }

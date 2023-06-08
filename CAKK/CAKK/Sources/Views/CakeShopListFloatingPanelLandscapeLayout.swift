@@ -16,6 +16,10 @@ class CakeShopListFloatingPanelLandscapeLayout: FloatingPanelLayout {
     .tip: FloatingPanelLayoutAnchor(absoluteInset: 100, edge: .bottom, referenceGuide: .safeArea)
   ]
   
+  func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+    return 0
+  }
+  
   func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
     return [
       surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0),
