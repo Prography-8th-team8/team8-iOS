@@ -7,27 +7,188 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		692A133ACF8625C3585C314F /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA447CC047F9925B04D0B1A /* Pods_CAKK.framework */; };
+		8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */; };
+		8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */; };
+		8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */; };
+		8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */; };
+		8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */; };
+		8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */; };
+		8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */; };
+		8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* DistrictSection.swift */; };
+		8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */; };
+		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
+		8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
+		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
+		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
+		8E37754729F7CA2F00166198 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79A29F7BDF100D3F5BF /* Pretendard-SemiBold.otf */; };
+		8E37754829F7CA2F00166198 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79829F7BDF100D3F5BF /* Pretendard-Bold.otf */; };
+		8E37754929F7CA2F00166198 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79929F7BDF100D3F5BF /* Pretendard-Regular.otf */; };
+		8E37754A29F7CA2F00166198 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79B29F7BDF100D3F5BF /* Pretendard-ExtraLight.otf */; };
+		8E37754B29F7CA2F00166198 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79C29F7BDF100D3F5BF /* Pretendard-Light.otf */; };
+		8E37754C29F7CA2F00166198 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */; };
+		8E37754D29F7CA2F00166198 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79729F7BDF100D3F5BF /* Pretendard-Black.otf */; };
+		8E37754E29F7CA2F00166198 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79629F7BDF000D3F5BF /* Pretendard-ExtraBold.otf */; };
+		8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */; };
+		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
+		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
+		8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */; };
+		8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A252A2C66D300C56A55 /* UserDefault.swift */; };
+		8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */; };
+		8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */; };
+		8E5A33812A21088A00355FF1 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A33802A21088A00355FF1 /* NoDataView.swift */; };
+		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
+		8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */; };
 		8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */; };
 		8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */; };
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
 		8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E192F29CEDD5000CFF157 /* Assets.xcassets */; };
 		8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */; };
-		C22922FA8C8219A5F0773CB8 /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */; };
+		8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */; };
+		8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */; };
+		8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */; };
+		8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */; };
+		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
+		8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */; };
+		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
+		B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */; };
+		B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */; };
+		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
+		B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* CakkMapView.swift */; };
+		B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */; };
+		B43889C62A15E02300476BFC /* district_count_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B43889C52A15E02300476BFC /* district_count_sample.json */; };
+		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
+		B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B452B84C2A075E9700784A17 /* UIView+Shadow.swift */; };
+		B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41C2A079B6E00FB8403 /* NetworkService.swift */; };
+		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
+		B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42B2A07E62500FB8403 /* CakeShop.swift */; };
+		B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */; };
+		B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4322A07E99500FB8403 /* CakeShopType.swift */; };
+		B455C4362A07EB2F00FB8403 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4352A07EB2F00FB8403 /* District.swift */; };
+		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
+		B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C43A2A07F12F00FB8403 /* SampleData.swift */; };
+		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
+		B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */; };
+		B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */; };
+		B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */; };
+		B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */; };
+		B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */; };
+		B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */; };
+		B490C33B2A0FE942008A2736 /* cake_shop_detail_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */; };
+		B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C33D2A0FF066008A2736 /* ViewModelType.swift */; };
+		B49966442A2AECC600967ED3 /* blog_post_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B49966432A2AECC600967ED3 /* blog_post_sample.json */; };
+		B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */; };
+		B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */; };
+		B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */; };
+		B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A66FC62A1E5F7800D3581D /* BlogPost.swift */; };
+		B4AEF5E22A2F12C30041C84B /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AEF5E12A2F12C30041C84B /* LocationDataManager.swift */; };
+		B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */; };
+		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
+		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
+		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
+		B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */; };
+		B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B43889BE2A15DB4600476BFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9E191B29CEDD4F00CFF157 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9E192229CEDD4F00CFF157;
+			remoteInfo = CAKK;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		313C71033A79E107F0516F4D /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
+		574B78DA9405858A768D91FC /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
+		8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
+		8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPickerCollectionCell.swift; sourceTree = "<group>"; };
+		8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
+		8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionViewController.swift; sourceTree = "<group>"; };
+		8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionViewModel.swift; sourceTree = "<group>"; };
+		8E02B7832A057F3B003AE7AF /* DistrictSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSection.swift; sourceTree = "<group>"; };
+		8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Common.swift"; sourceTree = "<group>"; };
+		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
+		8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListViewModel.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
+		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
+		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
+		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
+		8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A252A2C66D300C56A55 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		8E5A33802A21088A00355FF1 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		8E9E192329CEDD4F00CFF157 /* CAKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8E9E192F29CEDD5000CFF157 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9E193229CEDD5000CFF157 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA186ECD8D0556A62647C120 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
+		8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = grid_animation.json; sourceTree = "<group>"; };
+		8EB7B79629F7BDF000D3F5BF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		8EB7B79729F7BDF100D3F5BF /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		8EB7B79829F7BDF100D3F5BF /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		8EB7B79929F7BDF100D3F5BF /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		8EB7B79A29F7BDF100D3F5BF /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		8EB7B79B29F7BDF100D3F5BF /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		8EB7B79C29F7BDF100D3F5BF /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
+		8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopPopUpView.swift; sourceTree = "<group>"; };
+		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopTypeChip.swift; sourceTree = "<group>"; };
+		ADA447CC047F9925B04D0B1A /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
+		B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleStyleLoadingButton.swift; sourceTree = "<group>"; };
+		B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeIndex.swift"; sourceTree = "<group>"; };
+		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
+		B43889B42A15B21700476BFC /* CakkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkMapView.swift; sourceTree = "<group>"; };
+		B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CAKKNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAKKNetworkingTests.swift; sourceTree = "<group>"; };
+		B43889C52A15E02300476BFC /* district_count_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = district_count_sample.json; sourceTree = "<group>"; };
+		B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		B452B84C2A075E9700784A17 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		B455C41C2A079B6E00FB8403 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
+		B455C42B2A07E62500FB8403 /* CakeShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShop.swift; sourceTree = "<group>"; };
+		B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictCountResponse.swift; sourceTree = "<group>"; };
+		B455C4322A07E99500FB8403 /* CakeShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopType.swift; sourceTree = "<group>"; };
+		B455C4352A07EB2F00FB8403 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
+		B455C43A2A07F12F00FB8403 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeShopListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleStyleButton.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
+		B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
+		B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuButton.swift; sourceTree = "<group>"; };
+		B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailResponse.swift; sourceTree = "<group>"; };
+		B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_detail_sample.json; sourceTree = "<group>"; };
+		B490C33D2A0FF066008A2736 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		B49966432A2AECC600967ED3 /* blog_post_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blog_post_sample.json; sourceTree = "<group>"; };
+		B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Seperator.swift"; sourceTree = "<group>"; };
+		B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Scroll.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B4A66FC62A1E5F7800D3581D /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
+		B4AEF5E12A2F12C30041C84B /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSectionTitleView.swift; sourceTree = "<group>"; };
+		B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModel.swift; sourceTree = "<group>"; };
+		DEE984FEEA1786E8B1A4D862 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,30 +196,65 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C22922FA8C8219A5F0773CB8 /* Pods_CAKK.framework in Frameworks */,
+				692A133ACF8625C3585C314F /* Pods_CAKK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B43889B72A15DB4600476BFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C743335D81C0C4633076B76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADA447CC047F9925B04D0B1A /* Pods_CAKK.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8E32CE9B29CEE2DF00905FD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B4FB8E802A0F71EA00DBF193 /* Detail */,
+				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
+				B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */,
+				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
+				8E37755029F7CFAD00166198 /* LabelChip.swift */,
+				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
+				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
+				B43889B42A15B21700476BFC /* CakkMapView.swift */,
+				8E5A33802A21088A00355FF1 /* NoDataView.swift */,
+				8E3FF2E92A0E813300865E36 /* Cells */,
+				8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */,
+				8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */,
+				8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8E32CE9C29CEE30A00905FD6 /* Services */ = {
+		8E32CE9C29CEE30A00905FD6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B455C41C2A079B6E00FB8403 /* NetworkService.swift */,
+				B455C41E2A079C4B00FB8403 /* CakeAPI.swift */,
+				B455C4392A07F07F00FB8403 /* Tests */,
 			);
-			path = Services;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8E32CE9E29CEE5F100905FD6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B4E3F1FD2A303CB90047D3CC /* Manager */,
+				B46F9DCB29DAE51100113979 /* Extensions */,
+				8E33EC1229F7F04600931195 /* UIViewPreview.swift */,
+				B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -67,17 +263,39 @@
 			isa = PBXGroup;
 			children = (
 				8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */,
+				8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		8E3FF2E92A0E813300865E36 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */,
+				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8E533A292A2C7F2500C56A55 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				8E533A252A2C66D300C56A55 /* UserDefault.swift */,
+				8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */,
+				8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		8E9E191A29CEDD4F00CFF157 = {
 			isa = PBXGroup;
 			children = (
 				8E9E192529CEDD4F00CFF157 /* CAKK */,
+				B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */,
 				8E9E192429CEDD4F00CFF157 /* Products */,
 				D911E24E8132FA565E4A398E /* Pods */,
-				C6D3D3CA626E37FD40B6895E /* Frameworks */,
+				4C743335D81C0C4633076B76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9E192329CEDD4F00CFF157 /* CAKK.app */,
+				B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,11 +320,11 @@
 		8E9E193A29CEDDAD00CFF157 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
-				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
-				8E32CE9C29CEE30A00905FD6 /* Services */,
+				B4F1F41F2A17AF5F00DA6358 /* Application */,
+				8E32CE9C29CEE30A00905FD6 /* Network */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
+				B4FB8E7F2A0F700800DBF193 /* ViewModels */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
 				8E32CE9E29CEE5F100905FD6 /* Utils */,
 				8E32CE9F29CEE63800905FD6 /* SupportingFiles */,
@@ -119,6 +338,9 @@
 				8E9E192F29CEDD5000CFF157 /* Assets.xcassets */,
 				8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */,
 				8E9E193429CEDD5000CFF157 /* Info.plist */,
+				8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */,
+				8EB7B78929F6AC2F00D3F5BF /* LottieAnimations */,
+				8EB7B79529F7BDE200D3F5BF /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -126,7 +348,11 @@
 		8E9E193C29CEDDDE00CFF157 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EC8F62629E03980003F032E /* SplashViewController.swift */,
+				8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */,
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
+				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
+				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -134,23 +360,145 @@
 		8E9E193D29CEDDE700CFF157 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B455C4312A07E98A00FB8403 /* Store */,
+				B455C4342A07EB2000FB8403 /* District */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C6D3D3CA626E37FD40B6895E /* Frameworks */ = {
+		8EB7B78929F6AC2F00D3F5BF /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
-				95EE7CB3943C47DA554CB543 /* Pods_CAKK.framework */,
+				8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */,
 			);
-			name = Frameworks;
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
+		8EB7B79529F7BDE200D3F5BF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8EB7B79729F7BDF100D3F5BF /* Pretendard-Black.otf */,
+				8EB7B79629F7BDF000D3F5BF /* Pretendard-ExtraBold.otf */,
+				8EB7B79829F7BDF100D3F5BF /* Pretendard-Bold.otf */,
+				8EB7B79A29F7BDF100D3F5BF /* Pretendard-SemiBold.otf */,
+				8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */,
+				8EB7B79929F7BDF100D3F5BF /* Pretendard-Regular.otf */,
+				8EB7B79C29F7BDF100D3F5BF /* Pretendard-Light.otf */,
+				8EB7B79B29F7BDF100D3F5BF /* Pretendard-ExtraLight.otf */,
+				8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */ = {
+			isa = PBXGroup;
+			children = (
+				B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */,
+			);
+			path = CAKKNetworkingTests;
+			sourceTree = "<group>";
+		};
+		B455C4312A07E98A00FB8403 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				B455C42B2A07E62500FB8403 /* CakeShop.swift */,
+				B455C4322A07E99500FB8403 /* CakeShopType.swift */,
+				B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */,
+				B4A66FC62A1E5F7800D3581D /* BlogPost.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		B455C4342A07EB2000FB8403 /* District */ = {
+			isa = PBXGroup;
+			children = (
+				B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */,
+				B455C4352A07EB2F00FB8403 /* District.swift */,
+				8E02B7832A057F3B003AE7AF /* DistrictSection.swift */,
+				8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */,
+			);
+			path = District;
+			sourceTree = "<group>";
+		};
+		B455C4392A07F07F00FB8403 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */,
+				B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */,
+				B43889C52A15E02300476BFC /* district_count_sample.json */,
+				B49966432A2AECC600967ED3 /* blog_post_sample.json */,
+				B455C43A2A07F12F00FB8403 /* SampleData.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		B46F9DCB29DAE51100113979 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */,
+				B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */,
+				8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */,
+				8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */,
+				8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */,
+				8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */,
+				B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */,
+				B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */,
+				B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */,
+				B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */,
+				B49BC9282A0BCDE4009BD434 /* UIView+Border.swift */,
+				B452B84C2A075E9700784A17 /* UIView+Shadow.swift */,
+				B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */,
+				B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B4E3F1FD2A303CB90047D3CC /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B4AEF5E12A2F12C30041C84B /* LocationDataManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B4F1F41F2A17AF5F00DA6358 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */,
+				8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */,
+				B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */,
+				8E533A292A2C7F2500C56A55 /* UserDefaults */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		B4FB8E7F2A0F700800DBF193 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
+				8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */,
+				8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */,
+				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
+				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B4FB8E802A0F71EA00DBF193 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */,
+				B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */,
+				B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		D911E24E8132FA565E4A398E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FA186ECD8D0556A62647C120 /* Pods-CAKK.debug.xcconfig */,
-				313C71033A79E107F0516F4D /* Pods-CAKK.release.xcconfig */,
+				DEE984FEEA1786E8B1A4D862 /* Pods-CAKK.debug.xcconfig */,
+				574B78DA9405858A768D91FC /* Pods-CAKK.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -162,11 +510,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9E193729CEDD5000CFF157 /* Build configuration list for PBXNativeTarget "CAKK" */;
 			buildPhases = (
-				11A400219A23A8911158B287 /* [CP] Check Pods Manifest.lock */,
+				E9DA18105EF79101F83EF7F1 /* [CP] Check Pods Manifest.lock */,
 				8E32CE9D29CEE58C00905FD6 /* SwiftLint */,
+				8EB7B78C29F6CAC400D3F5BF /* r.swift */,
 				8E9E191F29CEDD4F00CFF157 /* Sources */,
 				8E9E192029CEDD4F00CFF157 /* Frameworks */,
 				8E9E192129CEDD4F00CFF157 /* Resources */,
+				58279871B9A19AD1A871C617 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,6 +526,24 @@
 			productName = CAKK;
 			productReference = 8E9E192329CEDD4F00CFF157 /* CAKK.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B43889B92A15DB4600476BFC /* CAKKNetworkingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B43889C22A15DB4600476BFC /* Build configuration list for PBXNativeTarget "CAKKNetworkingTests" */;
+			buildPhases = (
+				B43889B62A15DB4600476BFC /* Sources */,
+				B43889B72A15DB4600476BFC /* Frameworks */,
+				B43889B82A15DB4600476BFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B43889BF2A15DB4600476BFC /* PBXTargetDependency */,
+			);
+			name = CAKKNetworkingTests;
+			productName = CAKKNetworkingTests;
+			productReference = B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -189,6 +557,10 @@
 				TargetAttributes = {
 					8E9E192229CEDD4F00CFF157 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					B43889B92A15DB4600476BFC = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 8E9E192229CEDD4F00CFF157;
 					};
 				};
 			};
@@ -206,6 +578,7 @@
 			projectRoot = "";
 			targets = (
 				8E9E192229CEDD4F00CFF157 /* CAKK */,
+				B43889B92A15DB4600476BFC /* CAKKNetworkingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -215,16 +588,93 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B43889C62A15E02300476BFC /* district_count_sample.json in Resources */,
+				8E37754A29F7CA2F00166198 /* Pretendard-ExtraLight.otf in Resources */,
+				8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */,
+				8E37754B29F7CA2F00166198 /* Pretendard-Light.otf in Resources */,
+				8E37754829F7CA2F00166198 /* Pretendard-Bold.otf in Resources */,
+				8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */,
 				8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */,
+				8E37754729F7CA2F00166198 /* Pretendard-SemiBold.otf in Resources */,
+				B490C33B2A0FE942008A2736 /* cake_shop_detail_sample.json in Resources */,
+				8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */,
+				8E37754929F7CA2F00166198 /* Pretendard-Regular.otf in Resources */,
 				8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */,
+				B49966442A2AECC600967ED3 /* blog_post_sample.json in Resources */,
+				8E37754E29F7CA2F00166198 /* Pretendard-ExtraBold.otf in Resources */,
+				8E37754C29F7CA2F00166198 /* Pretendard-Thin.otf in Resources */,
+				8E37754D29F7CA2F00166198 /* Pretendard-Black.otf in Resources */,
+				B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */,
 				8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B43889B82A15DB4600476BFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11A400219A23A8911158B287 /* [CP] Check Pods Manifest.lock */ = {
+		58279871B9A19AD1A871C617 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E32CE9D29CEE58C00905FD6 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		8EB7B78C29F6CAC400D3F5BF /* r.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = r.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
+		E9DA18105EF79101F83EF7F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,24 +696,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8E32CE9D29CEE58C00905FD6 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -271,13 +703,88 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
+				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,
+				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
+				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
+				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
+				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */,
+				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
+				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
+				B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */,
+				8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */,
+				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
+				B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */,
+				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
+				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
+				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
+				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
+				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,
+				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
+				8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */,
+				B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */,
+				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
+				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
+				B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */,
+				B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */,
+				B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */,
+				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
+				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
+				B46F9DCA29DACF2400113979 /* CapsuleStyleButton.swift in Sources */,
+				8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */,
+				B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */,
+				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
+				B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */,
+				8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */,
+				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
+				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
+				8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */,
+				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
+				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
+				B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */,
+				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,
 				8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */,
+				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
+				8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */,
+				8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */,
+				8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */,
+				8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */,
+				B4AEF5E22A2F12C30041C84B /* LocationDataManager.swift in Sources */,
+				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
+				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
+				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
+				B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */,
+				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
+				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
+				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
+				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
+				8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */,
+				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,
+				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
+				8E5A33812A21088A00355FF1 /* NoDataView.swift in Sources */,
+				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B43889B62A15DB4600476BFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B43889BF2A15DB4600476BFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9E192229CEDD4F00CFF157 /* CAKK */;
+			targetProxy = B43889BE2A15DB4600476BFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */ = {
@@ -293,7 +800,9 @@
 /* Begin XCBuildConfiguration section */
 		8E9E193529CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -347,6 +856,8 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -354,7 +865,9 @@
 		};
 		8E9E193629CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -401,6 +914,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -409,29 +924,38 @@
 		};
 		8E9E193829CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA186ECD8D0556A62647C120 /* Pods-CAKK.debug.xcconfig */;
+			baseConfigurationReference = DEE984FEEA1786E8B1A4D862 /* Pods-CAKK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치는 현재 사용자의 위치를 바탕으로 가까운 케이크샵을 찾는데 사용됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치는 현재 사용자의 위치를 바탕으로 가까운 케이크샵을 찾는데 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prography.CAKK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -440,32 +964,85 @@
 		};
 		8E9E193929CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 313C71033A79E107F0516F4D /* Pods-CAKK.release.xcconfig */;
+			baseConfigurationReference = 574B78DA9405858A768D91FC /* Pods-CAKK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 497P4L97SV;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = TZ3VZ8CUCV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CAKK/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "케이크크";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 위치는 현재 사용자의 위치를 바탕으로 가까운 케이크샵을 찾는데 사용됩니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치는 현재 사용자의 위치를 바탕으로 가까운 케이크샵을 찾는데 사용됩니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prography.CAKK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B43889C02A15DB4600476BFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 497P4L97SV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MasonKim.CAKKNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CAKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CAKK";
+			};
+			name = Debug;
+		};
+		B43889C12A15DB4600476BFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 497P4L97SV;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MasonKim.CAKKNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CAKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CAKK";
 			};
 			name = Release;
 		};
@@ -486,6 +1063,15 @@
 			buildConfigurations = (
 				8E9E193829CEDD5000CFF157 /* Debug */,
 				8E9E193929CEDD5000CFF157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B43889C22A15DB4600476BFC /* Build configuration list for PBXNativeTarget "CAKKNetworkingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B43889C02A15DB4600476BFC /* Debug */,
+				B43889C12A15DB4600476BFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

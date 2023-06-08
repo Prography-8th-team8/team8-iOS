@@ -1,8 +1,13 @@
 disabled_rules:
 - trailing_whitespace
 - line_length
+- identifier_name
+- vertical_whitespace
+- type_name
+- file_length
 
 included:
 
 excluded:
 - Pods
+- R.generated.swift
