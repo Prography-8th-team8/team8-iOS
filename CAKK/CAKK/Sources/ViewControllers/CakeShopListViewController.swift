@@ -26,6 +26,7 @@ final class CakeShopListViewController: UIViewController {
     static let collectionViewItemEstimatedHeight = 158.f
     static let collectionViewItemSpacing = 12.f
     static let collectionViewHorizontalPadding = 16.f
+    static let collectionViewBottomInset = 44.f
     
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
@@ -55,7 +56,7 @@ final class CakeShopListViewController: UIViewController {
   let viewModel: ViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
-  public var cakeShopItemSelectAction: ((CakeShop) -> Void)?
+  public var cakeShopItemSelectHandler: ((CakeShop) -> Void)?
   private var dataSource: DataSource!
   private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
   
@@ -67,6 +68,7 @@ final class CakeShopListViewController: UIViewController {
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
     $0.delaysContentTouches = false
+    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
   }
   
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
@@ -106,9 +108,10 @@ final class CakeShopListViewController: UIViewController {
   }
   
   private let changeDistrictButton = UIButton().then {
-    $0.setTitle("지역 변경", for: .normal)
+    $0.setTitle("지역 이동", for: .normal)
     $0.titleLabel?.font = .pretendard(size: Metric.changeDistrictFontSize, weight: .bold)
     $0.setTitleColor(R.color.pink_TBD(), for: .normal)
+    $0.setTitleColor(R.color.pink_30(), for: .highlighted)
     $0.backgroundColor = R.color.pink_15()
     $0.layer.cornerRadius = Metric.changeDistrictCornerRadius
   }
@@ -228,6 +231,8 @@ final class CakeShopListViewController: UIViewController {
           let items = [item.name, item.location, item.url]
           
           let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+          activity.modalPresentationStyle = .popover
+          activity.popoverPresentationController?.sourceView = cell.shareButton
           self?.present(activity, animated: true)
         }
         return cell
@@ -253,6 +258,7 @@ final class CakeShopListViewController: UIViewController {
     collectionView.didSelectItemPublisher
       .sink { [weak self] indexPath in
         self?.viewModel.input.selectCakeShop.send(indexPath)
+        self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
       }
       .store(in: &cancellableBag)
   }
@@ -291,7 +297,7 @@ final class CakeShopListViewController: UIViewController {
     viewModel.output
       .presentCakeShopDetail
       .sink { [weak self] cakeShop in
-        self?.cakeShopItemSelectAction?(cakeShop)
+        self?.cakeShopItemSelectHandler?(cakeShop)
       }
       .store(in: &cancellableBag)
     
@@ -313,6 +319,9 @@ final class CakeShopListViewController: UIViewController {
   
   private func showChangeDistrictView() {
     let viewController = DIContainer.shared.makeDistrictSelectionController()
+    viewController.modalPresentationStyle = .popover
+    viewController.preferredContentSize = .init(width: 335, height: 520)
+    viewController.popoverPresentationController?.sourceView = changeDistrictButton
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.present(viewController, animated: true)
     }
