@@ -84,11 +84,11 @@ final class MainViewController: UIViewController {
     iconImage: R.image.refresh(),
     loadingIconImage: UIImage(systemName: "ellipsis"),
     title: "이 지역 재검색",
-    loadingTitle: "로딩 중...").then {
+    loadingTitle: "로딩 중").then {
       $0.isEnabled = false
       $0.backgroundColor = UIColor(hex: 0x4963E9)
-    $0.addShadow(to: .bottom)
-  }
+      $0.addShadow(to: .bottom)
+    }
   
   private lazy var currentLocationButton = UIButton().then {
     $0.setImage(R.image.scope(), for: .normal)
