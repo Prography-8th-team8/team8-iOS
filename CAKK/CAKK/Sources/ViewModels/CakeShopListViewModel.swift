@@ -20,7 +20,6 @@ class CakeShopListViewModel: ViewModelType {
     let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
     let presentCakeShopDetail = PassthroughSubject<CakeShop, Never>()
     let isLoading = CurrentValueSubject<Bool, Never>(false)
-    let hasNoData = CurrentValueSubject<Bool, Never>(false)
   }
   
   private(set) var input: Input!
