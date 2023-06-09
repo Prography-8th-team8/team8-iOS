@@ -118,9 +118,9 @@ final class CakeShopListViewController: UIViewController {
   
   private let loadingView = UIActivityIndicatorView()
   
-  private var noDataView = NoDataView(
-    title: "표시할 데이터가 없어요!",
-    subTitle: "빠른 시일내에 준비하겠습니다."
+  private var emptyStateView = EmptyStateView(
+    title: "근처 케이크샵이 없네요..",
+    subTitle: "다른 곳으로 이동 후 새로고침을 눌러보세요!"
   )
   
 
@@ -201,8 +201,8 @@ final class CakeShopListViewController: UIViewController {
   }
   
   private func setupNoDataViewLayout() {
-    view.addSubview(noDataView)
-    noDataView.snp.makeConstraints {
+    view.addSubview(emptyStateView)
+    emptyStateView.snp.makeConstraints {
       $0.center.equalToSuperview()
     }
   }
@@ -284,12 +284,12 @@ final class CakeShopListViewController: UIViewController {
       .store(in: &cancellableBag)
     
     viewModel.output
-      .hasNoData
-      .sink { [weak self] hasNoData in
-        if hasNoData {
-          self?.noDataView.isHidden = false
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        if cakeShops.isEmpty {
+          self?.emptyStateView.isHidden = false
         } else {
-          self?.noDataView.isHidden = true
+          self?.emptyStateView.isHidden = true
         }
       }
       .store(in: &cancellableBag)
