@@ -12,6 +12,10 @@ import Then
 
 import Combine
 
+import EasyTipView
+
+import CoreLocation
+
 final class CakeShopListViewController: UIViewController {
   
   // MARK: - Constants
@@ -59,6 +63,9 @@ final class CakeShopListViewController: UIViewController {
   public var cakeShopItemSelectHandler: ((CakeShop) -> Void)?
   private var dataSource: DataSource!
   private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
+  
+  @UserDefault(key: "app.isfirstopen", defaultValue: true)
+  private var isFirstOpen: Bool
   
   
   // MARK: - UI
@@ -138,6 +145,11 @@ final class CakeShopListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    showToolTip()
   }
 
   
@@ -325,6 +337,36 @@ final class CakeShopListViewController: UIViewController {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
       self.present(viewController, animated: true)
     }
+  }
+  
+  private func showToolTip() {
+    var locationAuthorized = {
+      let locationManager = CLLocationManager()
+      switch locationManager.authorizationStatus {
+      case .authorizedAlways, .authorizedWhenInUse:
+        return true
+      default:
+        return false
+      }
+    }()
+    
+    if isFirstOpen && locationAuthorized {
+      var preferences = EasyTipView.Preferences()
+      preferences.drawing.font = .systemFont(ofSize: 13, weight: .semibold)
+      preferences.drawing.foregroundColor = .white
+      preferences.drawing.backgroundColor = .black
+      preferences.drawing.arrowPosition = .top
+      preferences.drawing.cornerRadius = 14
+      
+      EasyTipView.show(
+        forView: self.changeDistrictButton,
+        withinSuperview: self.view,
+        text: "지역별로 케이크샵을 모아봤어요!",
+        preferences: preferences,
+        delegate: nil)
+    }
+    
+    isFirstOpen = false
   }
 }
 

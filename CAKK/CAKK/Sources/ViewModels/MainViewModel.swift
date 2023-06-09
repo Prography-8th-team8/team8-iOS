@@ -20,7 +20,7 @@ class MainViewModel: ViewModelType {
   }
   
   struct Output {
-    let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
+    let cakeShops = PassthroughSubject<[CakeShop], Never>()
     let cameraCoordinates = PassthroughSubject<Coordinates, Never>()
     let showDistrictSelectionView = PassthroughSubject<Void, Never>()
     let loadingCakeShops = CurrentValueSubject<Bool, Never>(false)
