@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.7.1)
   - CombineCocoa (0.4.1)
+  - EasyTipView (2.1.0)
   - FloatingPanel (2.6.1)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
@@ -18,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - CombineCocoa (~> 0.4.1)
+  - EasyTipView (~> 2.1)
   - FloatingPanel (~> 2.6.0)
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
@@ -32,6 +34,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - CombineCocoa
+    - EasyTipView
     - FloatingPanel
     - Kingfisher
     - lottie-ios
@@ -46,6 +49,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
+  EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
@@ -57,6 +61,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 5af1c7f1d60bcd056b9bbc4daca7217e8801bd29
+PODFILE CHECKSUM: be9a1f85900646c6b598f2ed42210514c87cb405
 
 COCOAPODS: 1.11.3
