@@ -260,9 +260,7 @@ final class MainViewController: UIViewController {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
-        if cakeShops.isEmpty == false {
-          self?.showCakeShopListFloatingPanel(cakeShops)
-        }
+        self?.showCakeShopListFloatingPanel(cakeShops)
       }
       .store(in: &cancellableBag)
     

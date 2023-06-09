@@ -86,7 +86,8 @@ class MainViewModel: ViewModelType {
       }
       .store(in: &cancellableBag)
     
-    DistrictUserDefaults.shared.selectedDistrictSectionPublisher
+    DistrictUserDefaults.shared
+      .selectedDistrictSectionPublisher
       .sink { [weak self] section in
         self?.loadCakeShops(section.value().districts)
       }
