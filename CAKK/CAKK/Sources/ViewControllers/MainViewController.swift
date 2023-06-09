@@ -333,7 +333,6 @@ final class MainViewController: UIViewController {
     cakkMapView.bind(to: viewController.viewModel)
     
     updateFloatingPanelLayout()
-    updateMapViewInset()
     
     cakeShopListFloatingPanel.set(contentViewController: viewController)
     cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
@@ -409,9 +408,7 @@ final class MainViewController: UIViewController {
     let floatingPanelHeight = view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY)
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
-    if traitCollection.verticalSizeClass == .compact {
-      cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
-    } else if traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular {
+    if isLandscapeMode {
       cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
     } else {
       cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
@@ -473,6 +470,8 @@ extension MainViewController: FloatingPanelControllerDelegate {
         self.cakeShopPopupView?.alpha = 1
       }
     }
+    
+    updateMapViewInset()
   }
 }
 
