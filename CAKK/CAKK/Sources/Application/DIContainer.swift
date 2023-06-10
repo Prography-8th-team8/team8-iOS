@@ -5,7 +5,7 @@
 //  Created by Mason Kim on 2023/05/19.
 //
 
-import Foundation
+import UIKit
 
 final class DIContainer {
   
@@ -24,9 +24,10 @@ final class DIContainer {
     return SplashViewController()
   }
   
-  func makeMainViewController(districts: [District]) -> MainViewController {
+  func makeMainViewController(districts: [District]) -> UINavigationController {
     let viewModel = MainViewModel(districts: districts, service: networkService)
-    return MainViewController(viewModel: viewModel)
+    let controller = MainViewController(viewModel: viewModel)
+    return UINavigationController(rootViewController: controller)
   }
   
   func makeDistrictSelectionController() -> DistrictSelectionViewController {

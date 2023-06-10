@@ -10,11 +10,12 @@ import Combine
 
 final class ShopDetailViewModel: ViewModelType {
   struct Input {
-    let viewWillShow = PassthroughSubject<Void, Never>()
+    let viewDidLoad = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
-    let cakeShopDetail = PassthroughSubject<CakeShop, Never>()
+    let cakeShopDetail = PassthroughSubject<CakeShopDetailResponse, Never>()
+    let failToFetchDetail = PassthroughSubject<Void, Never>()
   }
   
   // MARK: - Properties
@@ -43,20 +44,19 @@ final class ShopDetailViewModel: ViewModelType {
     let input = Input()
     let output = Output()
     
-    input.viewWillShow
-      .flatMap { [weak self] in
-        guard let self = self else {
-          return Empty<CakeShopDetailResponse, any Error>().eraseToAnyPublisher()
+    input.viewDidLoad
+      .flatMap { [weak service] in
+        return service?.request(
+          .fetchCakeShopDetail(id: self.cakeShop.id),
+          type: CakeShopDetailResponse.self) ?? Empty().eraseToAnyPublisher()
+      }
+      .sink(receiveCompletion: { completion in
+        if case .failure = completion {
+          output.failToFetchDetail.send()
         }
-        return self.service.request(.fetchCakeShopDetail(id: self.cakeShop.id),
-                                    type: CakeShopDetailResponse.self)
-      }
-      .catch { _ in
-        return Empty<CakeShopDetailResponse, Never>()
-      }
-      .sink { _ in
-        output.cakeShopDetail.send(self.cakeShop)
-      }
+      }, receiveValue: { cakeShopDetail in
+        output.cakeShopDetail.send(cakeShopDetail)
+      })
       .store(in: &cancellableBag)
     
     self.input = input

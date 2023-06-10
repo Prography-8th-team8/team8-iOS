@@ -307,15 +307,8 @@ final class MainViewController: UIViewController {
     view.layoutIfNeeded()
 
     applyAnimation(to: newCakeShopPopupView)
-
-    newCakeShopPopupView.shareButtonTapHandler = { [weak self] in
-      let items = [cakeShop.name, cakeShop.location, cakeShop.url]
-
-      let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
-      activity.modalPresentationStyle = .popover
-      activity.popoverPresentationController?.sourceView = newCakeShopPopupView.shareButton
-      self?.present(activity, animated: true)
-    }
+    configureMoveToDetailTapAction(to: newCakeShopPopupView, with: cakeShop)
+    configureShareButtonTapHandler(to: newCakeShopPopupView, with: cakeShop)
 
     hideCakeShopPopupView { [weak self] in
       self?.cakeShopPopupView = newCakeShopPopupView
@@ -358,6 +351,30 @@ final class MainViewController: UIViewController {
         popupView.transform = endTransform
         popupView.alpha = 1
       }
+  }
+  
+  private func configureMoveToDetailTapAction(to popupView: CakeShopPopUpView,
+                                              with cakeShop: CakeShop) {
+    popupView
+      .controlEventPublisher(for: .touchUpInside)
+      .sink { [weak self] _ in
+        let detailController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
+        self?.navigationController?.pushViewController(detailController, animated: true)
+        
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func configureShareButtonTapHandler(to popupView: CakeShopPopUpView,
+                                              with cakeShop: CakeShop) {
+    popupView.shareButtonTapHandler = { [weak self] in
+      let items = [cakeShop.name, cakeShop.location, cakeShop.url]
+      
+      let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
+      activity.modalPresentationStyle = .popover
+      activity.popoverPresentationController?.sourceView = popupView.shareButton
+      self?.present(activity, animated: true)
+    }
   }
   
   private func hideCakeShopPopupView(_ completion: (() -> Void)? = nil) {
