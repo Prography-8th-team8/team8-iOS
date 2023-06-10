@@ -11,7 +11,7 @@ struct BlogPostResponse: Decodable {
   let blogPosts: [BlogPost]
 }
 
-struct BlogPost: Decodable {
+struct BlogPost: Decodable, Hashable {
   let title: String
   let link: String
   let description: String

@@ -20,11 +20,19 @@ final class ShopDetailViewController: UIViewController {
     static let skeletonText = "-"
   }
   
+  enum Section {
+    case blogPost
+  }
+  
+  typealias BlogPostDataSource = UICollectionViewDiffableDataSource<Section, BlogPost>
+  
   // MARK: - Properties
   
   private let viewModel: ShopDetailViewModel
   
   private var cancellableBag = Set<AnyCancellable>()
+  
+  private lazy var blogPostDataSource = makeBlogPostDataSource()
   
   // MARK: - UI
   
@@ -131,6 +139,17 @@ final class ShopDetailViewController: UIViewController {
   
   private let blogReviewTitleView = DetailSectionTitleView(title: "블로그 리뷰")
   
+  private lazy var blogPostCollectionView = UICollectionView(
+    frame: .zero,
+    collectionViewLayout: blogPostCollectionViewLayout).then {
+      $0.registerCell(cellClass: BlogPostCell.self)
+  }
+  private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
+    $0.itemSize = CGSize(width: view.bounds.width, height: 150)
+  }
+  // 블로그 포스팅 컬렉션뷰의 사이즈가 내부 컨텐츠의 사이즈와 동일하게 하기 위한 constraints
+  private var blogPostCollectionViewHeightConstraint: Constraint?
+  
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
   }
@@ -172,7 +191,7 @@ final class ShopDetailViewController: UIViewController {
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     
-    // TODO: - 일단 상세정보 없으니까 가림.
+    // TODO: - 일단 영업시간.. 같은 상세정보가 없으니 가림.
     //    setupDetailInfoViewLayout()
     
     setupBlogReviewViewLayout()
@@ -235,6 +254,11 @@ final class ShopDetailViewController: UIViewController {
   private func setupBlogReviewViewLayout() {
     contentStackView.addArrangedSubview(separatorView)
     contentStackView.addArrangedSubview(blogReviewTitleView)
+    contentStackView.addArrangedSubview(blogPostCollectionView)
+    
+    blogPostCollectionView.snp.makeConstraints {
+      blogPostCollectionViewHeightConstraint = $0.height.equalTo(0).constraint
+    }
   }
   
   private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
@@ -273,8 +297,15 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private func setupBlogReviewsView(with cakeShopDetail: CakeShopDetailResponse) {
-    
+  private func makeBlogPostDataSource() -> BlogPostDataSource {
+    return BlogPostDataSource(
+      collectionView: blogPostCollectionView,
+      cellProvider: { collectionView, indexPath, item in
+        let cell = collectionView.dequeueReusableCell(cellClass: BlogPostCell.self,
+                                                      for: indexPath)
+        cell.configure(with: item)
+        return cell
+      })
   }
   
   private func setActivityIndicator(toAnimate isAnimate: Bool) {
@@ -292,6 +323,26 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func applySnapshot(with blogPosts: [BlogPost]) {
+    let section: [Section] = [.blogPost]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, BlogPost>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(blogPosts)
+    
+    blogPostDataSource.apply(snapshot) { [weak self] in
+      self?.updateBlogPostCollectionViewHeight()
+    }
+  }
+ 
+  // 컬렉션뷰의 내부의 컨텐츠 사이즈와 동일하게 해줌 (스크롤이 안되는, 전체를 감싸는 스택뷰처럼 처리함)
+  private func updateBlogPostCollectionViewHeight() {
+    blogPostCollectionViewHeightConstraint?.update(
+      offset: blogPostCollectionView.contentSize.height)
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
+    }
+  }
+  
   // MARK: - Bind
   
   private func bind() {
@@ -304,6 +355,12 @@ final class ShopDetailViewController: UIViewController {
         self.nameLabel.text = cakeShopDetail.name
         self.addressLabel.text = cakeShopDetail.address
         self.setupCakeShopTypeChips(with: cakeShopDetail)
+        
+        // 기본 모든 블로그 포스팅 중 3개만 표시함
+        if let blogPosts = cakeShopDetail.blogPosts?.prefix(3).map({ $0 }) {
+          applySnapshot(with: blogPosts)
+        }
+        
         self.setActivityIndicator(toAnimate: false)
       }
       .store(in: &cancellableBag)
