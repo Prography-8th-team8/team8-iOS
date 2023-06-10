@@ -28,3 +28,16 @@ struct BlogPost: Decodable {
     case postDate = "postdate"
   }
 }
+
+// MARK: - 문자열의 불필요한 HTML 태그 삭제
+
+extension BlogPost {
+  func removingHTMLTags() -> BlogPost {
+    BlogPost(title: title.removingHTMLTags(),
+             link: link,
+             description: description.removingHTMLTags(),
+             bloggerName: bloggerName.removingHTMLTags(),
+             bloggerLink: bloggerLink,
+             postDate: postDate.removingHTMLTags())
+  }
+}
