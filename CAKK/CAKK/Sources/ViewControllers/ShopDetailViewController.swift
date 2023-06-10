@@ -59,7 +59,7 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
-                       naviMenuButton,
+//                       naviMenuButton,
                        shareMenuButton]
   ).then {
     $0.axis = .horizontal
@@ -128,12 +128,6 @@ final class ShopDetailViewController: UIViewController {
     super.viewDidLoad()
     setup()
     bind()
-  }
-  
-  // MARK: - Public
-  
-  func notifyViewWillShow() {
-    viewModel.input.viewWillShow.send()
   }
   
   // MARK: - Private
@@ -214,6 +208,10 @@ final class ShopDetailViewController: UIViewController {
     view.addSubview(indicatorContainerView)
     indicatorContainerView.addSubview(indicatorView)
     setActivityIndicator(toAnimate: true)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      self.setActivityIndicator(toAnimate: false)
+    }
   }
   
   private func setupView() {
@@ -221,8 +219,8 @@ final class ShopDetailViewController: UIViewController {
     title = "상세정보"
   }
   
-  private func setupCakeShopTypeChips(with cakeShop: CakeShop) {
-    let chipViews = cakeShop.cakeShopTypes.map {
+  private func setupCakeShopTypeChips(with cakeShopDetail: CakeShopDetailResponse) {
+    let chipViews = cakeShopDetail.cakeShopTypes.map {
       CakeShopTypeChip($0)
     }
     
@@ -249,14 +247,25 @@ final class ShopDetailViewController: UIViewController {
   // MARK: - Bind
   
   private func bind() {
+    viewModel.input.viewDidLoad.send()
+    
     viewModel.output.cakeShopDetail
-      .sink { [weak self] cakeShop in
+      .sink { [weak self] cakeShopDetail in
         guard let self else { return }
 
-        self.nameLabel.text = cakeShop.name
-        self.addressLabel.text = cakeShop.location
-        self.setupCakeShopTypeChips(with: cakeShop)
+        self.nameLabel.text = cakeShopDetail.name
+        self.addressLabel.text = cakeShopDetail.address
+        self.setupCakeShopTypeChips(with: cakeShopDetail)
         self.setActivityIndicator(toAnimate: false)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.failToFetchDetail
+      .sink { [weak self] in
+        guard let self else { return }
+        self.showFailAlert(with: "상세 정보를 불러오지 못했어요.") {
+          self.navigationController?.popViewController(animated: true)
+        }
       }
       .store(in: &cancellableBag)
   }
@@ -274,7 +283,7 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
         ShopDetailViewController(
           viewModel: ShopDetailViewModel(
             cakeShop: SampleData.cakeShopList.first!,
-            service: NetworkService<CakeAPI>()))
+            service: NetworkService<CakeAPI>(type: .stub)))
     ).toPreview()
   }
 }
