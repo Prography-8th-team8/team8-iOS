@@ -54,6 +54,9 @@
 		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
 		B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */; };
 		B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */; };
+		B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0502A34CA6A0068843B /* BlogPostCell.swift */; };
+		B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */; };
+		B41EF0552A34E63C0068843B /* UICollectionView+RegisterDeque.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0542A34E63B0068843B /* UICollectionView+RegisterDeque.swift */; };
 		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
 		B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* CakkMapView.swift */; };
 		B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */; };
@@ -152,6 +155,9 @@
 		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
 		B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleStyleLoadingButton.swift; sourceTree = "<group>"; };
 		B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeIndex.swift"; sourceTree = "<group>"; };
+		B41EF0502A34CA6A0068843B /* BlogPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCell.swift; sourceTree = "<group>"; };
+		B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingHTMLTags.swift"; sourceTree = "<group>"; };
+		B41EF0542A34E63B0068843B /* UICollectionView+RegisterDeque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+RegisterDeque.swift"; sourceTree = "<group>"; };
 		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		B43889B42A15B21700476BFC /* CakkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkMapView.swift; sourceTree = "<group>"; };
 		B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CAKKNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +227,7 @@
 		8E32CE9B29CEE2DF00905FD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8E3FF2E92A0E813300865E36 /* Cells */,
 				8E53F1BC2A333373002F871C /* FloatingPanelLayout */,
 				B4FB8E802A0F71EA00DBF193 /* Detail */,
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
@@ -230,9 +237,9 @@
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
 				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
 				B43889B42A15B21700476BFC /* CakkMapView.swift */,
-				8E3FF2E92A0E813300865E36 /* Cells */,
 				8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */,
 				8E53F1BA2A332936002F871C /* EmptyStateView.swift */,
+				B41EF0502A34CA6A0068843B /* BlogPostCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -445,6 +452,7 @@
 			children = (
 				B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */,
 				B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */,
+				B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */,
 				8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */,
 				8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */,
 				8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */,
@@ -457,6 +465,7 @@
 				B452B84C2A075E9700784A17 /* UIView+Shadow.swift */,
 				B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */,
 				B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */,
+				B41EF0542A34E63B0068843B /* UICollectionView+RegisterDeque.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -748,8 +757,10 @@
 				8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
+				B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */,
 				8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */,
 				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
+				B41EF0552A34E63C0068843B /* UICollectionView+RegisterDeque.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
 				B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
@@ -769,6 +780,7 @@
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
+				B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */,
 				8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */,
 				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
