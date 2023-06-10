@@ -75,7 +75,7 @@ final class ShopDetailViewController: UIViewController {
   ]).then {
     $0.alignment = .center
     $0.axis = .horizontal
-    $0.spacing = 8
+    $0.spacing = 4
   }
   
   private let addressContainerView = UIView()
@@ -88,13 +88,12 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
-//                       naviMenuButton,
+                       //                       naviMenuButton,
                        shareMenuButton]
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
     $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5))
-//    $0.isHidden = true // TODO: - MVP에서 메뉴 버튼 숨기기?
   }
   
   private lazy var headerStackView = UIStackView(
@@ -128,10 +127,9 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  private let detailInfoView = DetailInfoView().then {
-    // TODO: - 일단 상세정보 없으니까 가림.
-    $0.isHidden = true
-  }
+  private let detailInfoView = DetailInfoView()
+  
+  private let blogReviewTitleView = DetailSectionTitleView(title: "블로그 리뷰")
   
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
@@ -142,7 +140,7 @@ final class ShopDetailViewController: UIViewController {
     $0.color = .gray
     $0.style = .medium
   }
-    
+  
   // MARK: - LifeCycle
   
   init(viewModel: ShopDetailViewModel) {
@@ -173,7 +171,11 @@ final class ShopDetailViewController: UIViewController {
     setupHeaderStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
-    setupDetailInfoView()
+    
+    // TODO: - 일단 상세정보 없으니까 가림.
+    //    setupDetailInfoViewLayout()
+    
+    setupBlogReviewViewLayout()
     setupActivityIndicator()
   }
   
@@ -195,12 +197,12 @@ final class ShopDetailViewController: UIViewController {
     shopImageView.snp.makeConstraints {
       $0.height.equalTo(view.frame.width * 0.5)
     }
-    contentStackView.setCustomSpacing(40, after: shopImageView)
+    contentStackView.setCustomSpacing(48, after: shopImageView)
   }
   
   private func setupHeaderStackViewLayout() {
     contentStackView.addArrangedSubview(headerStackView)
-    contentStackView.setCustomSpacing(40, after: headerStackView)
+    contentStackView.setCustomSpacing(38, after: headerStackView)
     addSeperatorLineView()
     
     // 스택뷰 내부의 주소 부분을 중간으로 잡기 위한 containerView 구성
@@ -225,9 +227,14 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.setCustomSpacing(20, after: keywordScrollView)
   }
   
-  private func setupDetailInfoView() {
+  private func setupDetailInfoViewLayout() {
     contentStackView.addArrangedSubview(separatorView)
     contentStackView.addArrangedSubview(detailInfoView)
+  }
+  
+  private func setupBlogReviewViewLayout() {
+    contentStackView.addArrangedSubview(separatorView)
+    contentStackView.addArrangedSubview(blogReviewTitleView)
   }
   
   private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
@@ -266,6 +273,10 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func setupBlogReviewsView(with cakeShopDetail: CakeShopDetailResponse) {
+    
+  }
+  
   private func setActivityIndicator(toAnimate isAnimate: Bool) {
     guard isAnimate != indicatorView.isAnimating else { return }
     
@@ -289,7 +300,7 @@ final class ShopDetailViewController: UIViewController {
     viewModel.output.cakeShopDetail
       .sink { [weak self] cakeShopDetail in
         guard let self else { return }
-
+        
         self.nameLabel.text = cakeShopDetail.name
         self.addressLabel.text = cakeShopDetail.address
         self.setupCakeShopTypeChips(with: cakeShopDetail)
