@@ -46,12 +46,41 @@ final class ShopDetailViewController: UIViewController {
     $0.textAlignment = .center
   }
   
+  // 주소
   private let addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
     $0.text = Constants.skeletonText
-    $0.textAlignment = .center
+    $0.textAlignment = .right
   }
   
+  private var dotLabel: UILabel {
+    return UILabel().then {
+      $0.textColor = R.color.stroke()
+      $0.text = "·"
+    }
+  }
+  
+  private let copyAddressButton = UIButton().then {
+    $0.setAttributedTitle(
+      NSAttributedString(
+        string: "주소 복사",
+        attributes: [.font: UIFont.pretendard(weight: .bold)]), for: .normal
+    )
+  }
+  
+  private lazy var addressStackView = UIStackView(arrangedSubviews: [
+    addressLabel,
+    dotLabel,
+    copyAddressButton
+  ]).then {
+    $0.alignment = .center
+    $0.axis = .horizontal
+    $0.spacing = 8
+  }
+  
+  private let addressContainerView = UIView()
+  
+  // 메뉴 버튼
   private let callMenuButton = DetailMenuButton(image: R.image.call(), title: "전화하기")
   private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
   private let naviMenuButton = DetailMenuButton(image: R.image.navi(), title: "길 안내")
@@ -70,14 +99,15 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var headerStackView = UIStackView(
     arrangedSubviews: [nameLabel,
-                       addressLabel,
+                       addressContainerView,
                        menuButtonStackView]
   ).then {
     $0.axis = .vertical
     $0.spacing = 12
-    $0.setCustomSpacing(32, after: addressLabel)
+    $0.setCustomSpacing(32, after: addressContainerView)
   }
   
+  // 키워드
   private let keywordTitleView = DetailSectionTitleView(title: "키워드")
   
   private let keywordScrollView = UIScrollView().then {
@@ -172,6 +202,13 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.addArrangedSubview(headerStackView)
     contentStackView.setCustomSpacing(40, after: headerStackView)
     addSeperatorLineView()
+    
+    // 스택뷰 내부의 주소 부분을 중간으로 잡기 위한 containerView 구성
+    addressContainerView.addSubview(addressStackView)
+    addressStackView.snp.makeConstraints {
+      $0.verticalEdges.equalToSuperview()
+      $0.centerX.equalToSuperview()
+    }
   }
   
   private func setupKeywordTitleLabelLayout() {
