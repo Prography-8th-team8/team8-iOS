@@ -19,6 +19,7 @@ final class DetailMenuButton: UIButton {
     $0.isUserInteractionEnabled = false
   }
   let menuImageView = UIImageView().then {
+    $0.tintColor = .black
     $0.isUserInteractionEnabled = false
     $0.contentMode = .scaleAspectFit
   }
