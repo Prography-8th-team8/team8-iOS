@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CakeShopPopUpView: UIView {
+class CakeShopPopUpView: UIControl {
   
   // MARK: - Constants
   
