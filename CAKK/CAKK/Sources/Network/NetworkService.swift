@@ -35,13 +35,15 @@ final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
   
   // MARK: - LifeCycle
   
-  init(type: NetworkServiceType = .server) {
+  init(type: NetworkServiceType = .server, isLogEnabled: Bool = false) {
+    let plugins = isLogEnabled ? [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))] : []
+    
     switch type {
     case .server:
-      self.provider = MoyaProvider<Target>()
+      self.provider = MoyaProvider<Target>(plugins: plugins)
     case .stub:
       /// 서비스의 타입이 stub 일 경우, 1초 후에 sampleData 를 반환하는 provider를 생성
-      self.provider = MoyaProvider<Target>(stubClosure: MoyaProvider.delayedStub(1.0))
+      self.provider = MoyaProvider<Target>(stubClosure: MoyaProvider.delayedStub(1.0), plugins: plugins)
     }
   }
   
