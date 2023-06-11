@@ -21,6 +21,10 @@ final class ShopDetailViewController: UIViewController {
     static let skeletonText = "-"
   }
   
+  enum Metric {
+    static let horizontalPadding = 14.f
+  }
+  
   enum Section {
     case blogPost
   }
@@ -59,7 +63,12 @@ final class ShopDetailViewController: UIViewController {
   private let addressLabel = UILabel().then {
     $0.font = .pretendard(size: 16)
     $0.text = Constants.skeletonText
-    $0.textAlignment = .right
+    $0.textAlignment = .center
+    // 텍스트가 길면 사이즈가 줄어들 수 있게함
+    $0.adjustsFontSizeToFitWidth = true
+    $0.minimumScaleFactor = 0.7
+    $0.lineBreakMode = .byTruncatingTail
+    $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal) // 줄어들게 하기 위해 우선순위 낮춤
   }
   
   private var dotLabel: UILabel {
@@ -148,7 +157,7 @@ final class ShopDetailViewController: UIViewController {
   }
   private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
     $0.minimumLineSpacing = 0
-    $0.itemSize = CGSize(width: view.bounds.width - 28, height: 150)
+    $0.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
   }
   // 블로그 포스팅 컬렉션뷰의 사이즈가 내부 컨텐츠의 사이즈와 동일하게 하기 위한 constraints
   private var blogPostCollectionViewHeightConstraint: Constraint?
@@ -240,7 +249,10 @@ final class ShopDetailViewController: UIViewController {
     addressContainerView.addSubview(addressStackView)
     addressStackView.snp.makeConstraints {
       $0.verticalEdges.equalToSuperview()
+      // 중간 지점에 오면서, 동시에 안쪽으로 패딩을 주기 위함
       $0.centerX.equalToSuperview()
+      $0.leading.greaterThanOrEqualToSuperview().inset(Metric.horizontalPadding)
+      $0.trailing.lessThanOrEqualToSuperview().inset(Metric.horizontalPadding)
     }
   }
   
@@ -386,6 +398,14 @@ final class ShopDetailViewController: UIViewController {
         
         let safariViewController = SFSafariViewController(url: url)
         self?.present(safariViewController, animated: true)
+      }
+      .store(in: &cancellableBag)
+    
+    // 클립보드에 복사
+    copyAddressButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak addressLabel] in
+        UIPasteboard.general.string = addressLabel?.text ?? ""
       }
       .store(in: &cancellableBag)
   }
