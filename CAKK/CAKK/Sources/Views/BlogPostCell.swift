@@ -60,6 +60,7 @@ final class BlogPostCell: HighlightableCell {
   
   private func setup() {
     setupLayout()
+    setupView()
   }
   
   private func setupLayout() {
@@ -78,7 +79,7 @@ final class BlogPostCell: HighlightableCell {
     addSubview(stackView)
     stackView.snp.makeConstraints {
       $0.verticalEdges.equalToSuperview().inset(20)
-      $0.horizontalEdges.equalToSuperview().inset(14)
+      $0.horizontalEdges.equalToSuperview()
     }
   }
   
@@ -96,6 +97,10 @@ final class BlogPostCell: HighlightableCell {
         attributes: [.font: UIFont.pretendard(size: 12),
                      .foregroundColor: R.color.gray_60() ?? .gray]))
     })
+  }
+  
+  private func setupView() {
+    addBorder(to: .top, color: R.color.gray_5())
   }
 }
 

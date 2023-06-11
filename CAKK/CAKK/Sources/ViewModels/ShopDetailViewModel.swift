@@ -11,10 +11,12 @@ import Combine
 final class ShopDetailViewModel: ViewModelType {
   struct Input {
     let viewDidLoad = PassthroughSubject<Void, Never>()
+    let loadMoreBlogPosts = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
     let cakeShopDetail = PassthroughSubject<CakeShopDetailResponse, Never>()
+    let blogPostsToShow = PassthroughSubject<[BlogPost], Never>()
     let failToFetchDetail = PassthroughSubject<Void, Never>()
   }
   
@@ -26,6 +28,8 @@ final class ShopDetailViewModel: ViewModelType {
   private let service: NetworkService<CakeAPI>
   
   private let cakeShop: CakeShop
+  
+  private var numberOfBlogPostsToShow = 3
   
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -56,6 +60,32 @@ final class ShopDetailViewModel: ViewModelType {
         }
       }, receiveValue: { cakeShopDetail in
         output.cakeShopDetail.send(cakeShopDetail)
+      })
+      .store(in: &cancellableBag)
+    
+    input.loadMoreBlogPosts
+      .prepend(()) // 초기에 한 번 값을 발행
+      .filter { [weak self] in
+        // 15개 이상은 블로그 포스팅을 fetch 하지 않음
+        (self?.numberOfBlogPostsToShow ?? 0) < 15
+      }
+      .flatMap { [weak self] in
+        guard let self = self else { return Empty<BlogPostResponse, Error>().eraseToAnyPublisher() }
+        return self.service.request(
+          .fetchBlogReviews(id: self.cakeShop.id, numberOfPosts: self.numberOfBlogPostsToShow),
+          type: BlogPostResponse.self)
+      }
+      .sink(receiveCompletion: { completion in
+        if case .failure(let error) = completion {
+          print(error)
+        }
+      }, receiveValue: { [weak self] blogPostResponse in
+        // 불필요한 HTML 태그를 지우고 내보냄
+        let blogPostsWithoutHTMLTags = blogPostResponse.blogPosts.map {
+          $0.removingHTMLTags()
+        }
+        output.blogPostsToShow.send(blogPostsWithoutHTMLTags)
+        self?.numberOfBlogPostsToShow += 3
       })
       .store(in: &cancellableBag)
     

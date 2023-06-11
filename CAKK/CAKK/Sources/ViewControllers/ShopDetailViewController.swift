@@ -143,12 +143,23 @@ final class ShopDetailViewController: UIViewController {
     frame: .zero,
     collectionViewLayout: blogPostCollectionViewLayout).then {
       $0.registerCell(cellClass: BlogPostCell.self)
+      $0.addBorder(to: .bottom, color: R.color.gray_5())
   }
   private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
-    $0.itemSize = CGSize(width: view.bounds.width, height: 150)
+    $0.minimumLineSpacing = 0
+    $0.itemSize = CGSize(width: view.bounds.width - 28, height: 150)
   }
   // 블로그 포스팅 컬렉션뷰의 사이즈가 내부 컨텐츠의 사이즈와 동일하게 하기 위한 constraints
   private var blogPostCollectionViewHeightConstraint: Constraint?
+  
+  private let loadMoreBlogPostsButton = UIButton().then {
+    $0.titleLabel?.font = .pretendard(size: 14, weight: .bold)
+    $0.layer.borderColor = R.color.gray_5()?.cgColor
+    $0.layer.borderWidth = 2
+    $0.layer.cornerRadius = 8
+    $0.setTitle("블로그 리뷰 더 보기", for: .normal)
+    $0.setTitleColor(.black, for: .normal)
+  }
   
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
@@ -259,6 +270,11 @@ final class ShopDetailViewController: UIViewController {
     blogPostCollectionView.snp.makeConstraints {
       blogPostCollectionViewHeightConstraint = $0.height.equalTo(0).constraint
     }
+    
+    contentStackView.addArrangedSubview(loadMoreBlogPostsButton)
+    loadMoreBlogPostsButton.snp.makeConstraints {
+      $0.height.equalTo(48)
+    }
   }
   
   private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
@@ -346,8 +362,23 @@ final class ShopDetailViewController: UIViewController {
   // MARK: - Bind
   
   private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
     viewModel.input.viewDidLoad.send()
     
+    loadMoreBlogPostsButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        guard let self else { return }
+        self.viewModel.input.loadMoreBlogPosts.send()
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() {
     viewModel.output.cakeShopDetail
       .sink { [weak self] cakeShopDetail in
         guard let self else { return }
@@ -355,12 +386,6 @@ final class ShopDetailViewController: UIViewController {
         self.nameLabel.text = cakeShopDetail.name
         self.addressLabel.text = cakeShopDetail.address
         self.setupCakeShopTypeChips(with: cakeShopDetail)
-        
-        // 기본 모든 블로그 포스팅 중 3개만 표시함
-        if let blogPosts = cakeShopDetail.blogPosts?.prefix(3).map({ $0 }) {
-          applySnapshot(with: blogPosts)
-        }
-        
         self.setActivityIndicator(toAnimate: false)
       }
       .store(in: &cancellableBag)
@@ -371,6 +396,12 @@ final class ShopDetailViewController: UIViewController {
         self.showFailAlert(with: "상세 정보를 불러오지 못했어요.") {
           self.navigationController?.popViewController(animated: true)
         }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.blogPostsToShow
+      .sink { [weak self] blogPosts in
+        self?.applySnapshot(with: blogPosts)
       }
       .store(in: &cancellableBag)
   }
