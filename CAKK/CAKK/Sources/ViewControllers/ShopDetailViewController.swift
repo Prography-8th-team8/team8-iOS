@@ -404,8 +404,9 @@ final class ShopDetailViewController: UIViewController {
     // 클립보드에 복사
     copyAddressButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak addressLabel] in
-        UIPasteboard.general.string = addressLabel?.text ?? ""
+      .sink { [weak self] in
+        UIPasteboard.general.string = self?.addressLabel.text ?? ""
+        self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
       }
       .store(in: &cancellableBag)
   }
