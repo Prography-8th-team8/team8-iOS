@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 import SnapKit
 import Then
@@ -374,6 +375,17 @@ final class ShopDetailViewController: UIViewController {
       .sink { [weak self] in
         guard let self else { return }
         self.viewModel.input.loadMoreBlogPosts.send()
+      }
+      .store(in: &cancellableBag)
+    
+    // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
+    blogPostCollectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        guard let blogPost = self?.blogPostDataSource.itemIdentifier(for: indexPath),
+              let url = URL(string: blogPost.link) else { return }
+        
+        let safariViewController = SFSafariViewController(url: url)
+        self?.present(safariViewController, animated: true)
       }
       .store(in: &cancellableBag)
   }
