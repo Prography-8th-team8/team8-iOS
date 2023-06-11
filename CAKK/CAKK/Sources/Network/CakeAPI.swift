@@ -13,7 +13,7 @@ enum CakeAPI {
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
   /// numberOfPosts을 지정하지 않으면 포스팅 갯수의 기본값은 3임
-  case fetchBlogReviews(id: Int, numberOfPosts: Int? = nil)
+  case fetchBlogReviews(id: Int, numberOfPosts: Int = 3)
   case fetchCakeShopImage(id: Int)
 }
 
@@ -30,7 +30,7 @@ extension CakeAPI: TargetType {
       return "/district/count"
     case .fetchCakeShopDetail(id: let id):
       return "/\(id)"
-    case .fetchBlogReviews(id: let id):
+    case .fetchBlogReviews(id: let id, numberOfPosts: _):
       return "/\(id)/blog"
     case .fetchCakeShopImage(id: let id):
       return "/image/\(id)"
@@ -62,12 +62,9 @@ extension CakeAPI: TargetType {
       return .requestPlain
       
     case .fetchBlogReviews(id: _, numberOfPosts: let numberOfPosts):
-      if let numberOfPosts = numberOfPosts {
-        let parameters: Parameters = ["num": numberOfPosts]
-        let encoding = URLEncoding(destination: .queryString)
-        return .requestParameters(parameters: parameters, encoding: encoding)
-      }
-      return .requestPlain
+      let parameters: Parameters = ["num": numberOfPosts]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
       
     case .fetchCakeShopImage:
       return .requestPlain
