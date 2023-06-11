@@ -178,6 +178,9 @@ final class MainViewController: UIViewController {
   
   private func setupBaseView() {
     view.backgroundColor = .systemBackground
+    let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    backButtonItem.tintColor = .black
+    navigationItem.backBarButtonItem = backButtonItem
   }
   
   private func setupMapView() {
