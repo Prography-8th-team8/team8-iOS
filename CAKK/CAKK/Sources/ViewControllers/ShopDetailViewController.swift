@@ -287,6 +287,7 @@ final class ShopDetailViewController: UIViewController {
     contentStackView.addArrangedSubview(loadMoreBlogPostsButton)
     loadMoreBlogPostsButton.snp.makeConstraints {
       $0.height.equalTo(48)
+      $0.horizontalEdges.equalTo(blogPostCollectionView).inset(Metric.horizontalPadding)
     }
   }
   
