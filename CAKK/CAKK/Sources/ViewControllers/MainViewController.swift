@@ -440,7 +440,11 @@ final class MainViewController: UIViewController {
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
     if isLandscapeMode {
-      cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+      if cakeShopListFloatingPanel.state == .tip {
+        cakkMapView.mapView.contentInset = .zero
+      } else {
+        cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+      }
     } else {
       cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
     }
