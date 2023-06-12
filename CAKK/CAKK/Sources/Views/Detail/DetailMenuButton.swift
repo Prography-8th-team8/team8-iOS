@@ -27,6 +27,7 @@ final class DetailMenuButton: UIButton {
   private lazy var stackView = UIStackView(
     arrangedSubviews: [menuImageView, menuTitleLabel]
   ).then {
+    $0.isUserInteractionEnabled = false
     $0.axis = .vertical
     $0.alignment = .center
     $0.distribution = .fill
