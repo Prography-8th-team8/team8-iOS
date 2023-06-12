@@ -119,9 +119,18 @@ final class MainViewController: UIViewController {
     setup()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: false)
+  }
+  
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-    
     updateFloatingPanelLayout()
     updateMapViewInset()
   }
@@ -332,7 +341,10 @@ final class MainViewController: UIViewController {
     
     cakeShopListFloatingPanel.set(contentViewController: viewController)
     cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
-    cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    }
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {
