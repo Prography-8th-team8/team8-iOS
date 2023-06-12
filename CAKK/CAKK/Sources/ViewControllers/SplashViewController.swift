@@ -22,21 +22,21 @@ class SplashViewController: UIViewController {
     static let description = "위치 기반 스마트한 케이크샵 검색"
     static let animationName = "grid_animation"
   }
-
+  
   enum Metric {
     static let descriptionLabelBottomMargin = 24.f
     static let gridAnimationSpacing = -18.f
     static let logoStackViewSpacing = 20.f
-
-    static let descriptionLabelFontSize = 16.f
-    static let descriptionLabelInset = 12.f
+    
+    static let subtitleLabelFontSize = 16.f
+    static let subtitleLabelInset = 12.f
   }
   
   
   // MARK: - UI
   
   private var gridAnimations = [LottieAnimationView]()
-  private var animationStackView = UIStackView().then {
+  private lazy var animationStackView = UIStackView().then {
     $0.spacing = Metric.gridAnimationSpacing
     $0.axis = .vertical
     $0.distribution = .fillEqually
@@ -45,18 +45,20 @@ class SplashViewController: UIViewController {
     $0.axis = .vertical
     $0.spacing = Metric.logoStackViewSpacing
   }
-  private var descriptionContainerView = UIView().then {
+  private var subtitleContainerView = UIView().then {
     $0.backgroundColor = .white.withAlphaComponent(0.2)
     $0.layer.cornerRadius = 20
+    $0.alpha = 0
   }
-  private var descriptionLabel = UILabel().then {
-    $0.font = .pretendard(size: Metric.descriptionLabelFontSize, weight: .bold)
+  private var subtitleLabel = UILabel().then {
+    $0.font = .pretendard(size: Metric.subtitleLabelFontSize, weight: .bold)
     $0.text = Constants.description
     $0.textColor = .white
   }
   private var logoImageView = UIImageView().then {
     $0.image = R.image.logo()
     $0.contentMode = .scaleAspectFill
+    $0.transform = .init(scaleX: 0, y: 0)
   }
   
   
@@ -82,15 +84,13 @@ class SplashViewController: UIViewController {
   }
   
   public func playAnimations() {
-    gridAnimations.forEach { animationView in
-      animationView.play()
-    }
+    playGridAnimation()
+    playLogoAnimation()
+    playSubTitleAnimation()
   }
   
   public func stopAnimations() {
-    gridAnimations.forEach { animationView in
-      animationView.stop()
-    }
+    stopGridAnimation()
   }
   
   
@@ -109,7 +109,7 @@ class SplashViewController: UIViewController {
     setupLogoImageViewLayout()
     
     setupDescriptionContainerViewLayout()
-    setupDescriptionLabelLayout()
+    setupSubtitleLabelLayout()
   }
   
   private func setupAnimationStackViewLayout() {
@@ -145,22 +145,49 @@ class SplashViewController: UIViewController {
   }
   
   private func setupDescriptionContainerViewLayout() {
-    logoStackView.addArrangedSubview(descriptionContainerView)
+    logoStackView.addArrangedSubview(subtitleContainerView)
   }
   
-  private func setupDescriptionLabelLayout() {
-    descriptionContainerView.addSubview(descriptionLabel)
-    descriptionLabel.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(Metric.descriptionLabelInset)
+  private func setupSubtitleLabelLayout() {
+    subtitleContainerView.addSubview(subtitleLabel)
+    subtitleLabel.snp.makeConstraints {
+      $0.edges.equalToSuperview().inset(Metric.subtitleLabelInset)
     }
   }
-
+  
   private func setupView() {
     setupBaseView()
   }
   
   private func setupBaseView() {
     view.backgroundColor = UIColor(named: "AccentColor")
+  }
+  
+  private func playGridAnimation() {
+    gridAnimations.forEach { animationView in
+      animationView.play()
+    }
+  }
+  
+  private func stopGridAnimation() {
+    gridAnimations.forEach { animationView in
+      animationView.stop()
+    }
+  }
+  
+  private func playLogoAnimation() {
+    UIView.animate(withDuration: 0.7,
+                   delay: 0,
+                   usingSpringWithDamping: 0.7,
+                   initialSpringVelocity: 0.7) {
+      self.logoImageView.transform = .init(scaleX: 1, y: 1)
+    }
+  }
+  
+  private func playSubTitleAnimation() {
+    UIView.animate(withDuration: 0.5) {
+      self.subtitleContainerView.alpha = 1
+    }
   }
 }
 
@@ -171,11 +198,9 @@ import SwiftUI
 
 struct SplashViewPreview: PreviewProvider {
   static var previews: some View {
-    UIViewPreview {
-      let splashViewController = SplashViewController()
-      return splashViewController.view
-    }
-    .ignoresSafeArea()
+    SplashViewController()
+      .toPreview()
+      .ignoresSafeArea()
   }
 }
 #endif
