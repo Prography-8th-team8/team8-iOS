@@ -332,7 +332,10 @@ final class MainViewController: UIViewController {
     
     cakeShopListFloatingPanel.set(contentViewController: viewController)
     cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
-    cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    }
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {
