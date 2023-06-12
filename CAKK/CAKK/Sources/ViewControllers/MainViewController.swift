@@ -339,9 +339,7 @@ final class MainViewController: UIViewController {
     cakkMapView.bind(to: viewController.viewModel)
     
     updateFloatingPanelLayout()
-    
     cakeShopListFloatingPanel.set(contentViewController: viewController)
-    cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
       self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
