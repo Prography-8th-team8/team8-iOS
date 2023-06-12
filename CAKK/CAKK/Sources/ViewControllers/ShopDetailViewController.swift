@@ -373,6 +373,22 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func showBlogPostSafariController(of indexPath: IndexPath) {
+    guard let blogPost = blogPostDataSource.itemIdentifier(for: indexPath),
+          let url = URL(string: blogPost.link) else { return }
+    
+    let safariViewController = SFSafariViewController(url: url)
+    present(safariViewController, animated: true)
+  }
+  
+  private func makePhoneCall() {
+    guard let phoneNumber = viewModel.output.cakeShopDetail.value?.phoneNumber,
+          phoneNumber.isEmpty == false,
+          let phoneNumberURL = URL(string: "tel://\(phoneNumber)") else { return }
+    
+    UIApplication.shared.open(phoneNumberURL)
+  }
+  
   // MARK: - Bind
   
   private func bind() {
@@ -386,19 +402,14 @@ final class ShopDetailViewController: UIViewController {
     loadMoreBlogPostsButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
-        guard let self else { return }
-        self.viewModel.input.loadMoreBlogPosts.send()
+        self?.viewModel.input.loadMoreBlogPosts.send()
       }
       .store(in: &cancellableBag)
     
     // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
     blogPostCollectionView.didSelectItemPublisher
       .sink { [weak self] indexPath in
-        guard let blogPost = self?.blogPostDataSource.itemIdentifier(for: indexPath),
-              let url = URL(string: blogPost.link) else { return }
-        
-        let safariViewController = SFSafariViewController(url: url)
-        self?.present(safariViewController, animated: true)
+        self?.showBlogPostSafariController(of: indexPath)
       }
       .store(in: &cancellableBag)
     
@@ -408,6 +419,13 @@ final class ShopDetailViewController: UIViewController {
       .sink { [weak self] in
         UIPasteboard.general.string = self?.addressLabel.text ?? ""
         self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
+      }
+      .store(in: &cancellableBag)
+    
+    callMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        self?.makePhoneCall()
       }
       .store(in: &cancellableBag)
   }
@@ -422,6 +440,10 @@ final class ShopDetailViewController: UIViewController {
         self.addressLabel.text = cakeShopDetail.address
         self.setupCakeShopTypeChips(with: cakeShopDetail)
         self.setActivityIndicator(toAnimate: false)
+        
+        if cakeShopDetail.phoneNumber.isEmpty {
+          callMenuButton.isHidden = true
+        }
       }
       .store(in: &cancellableBag)
     
