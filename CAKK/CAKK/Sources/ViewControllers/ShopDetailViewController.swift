@@ -415,7 +415,8 @@ final class ShopDetailViewController: UIViewController {
   private func bindOutput() {
     viewModel.output.cakeShopDetail
       .sink { [weak self] cakeShopDetail in
-        guard let self else { return }
+        guard let self,
+              let cakeShopDetail else { return }
         
         self.nameLabel.text = cakeShopDetail.name
         self.addressLabel.text = cakeShopDetail.address

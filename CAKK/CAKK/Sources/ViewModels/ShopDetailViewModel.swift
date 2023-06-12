@@ -15,7 +15,7 @@ final class ShopDetailViewModel: ViewModelType {
   }
   
   struct Output {
-    let cakeShopDetail = PassthroughSubject<CakeShopDetailResponse, Never>()
+    let cakeShopDetail = CurrentValueSubject<CakeShopDetailResponse?, Never>(nil)
     let blogPostsToShow = PassthroughSubject<[BlogPost], Never>()
     let failToFetchDetail = PassthroughSubject<Void, Never>()
   }
