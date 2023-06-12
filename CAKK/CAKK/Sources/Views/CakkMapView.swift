@@ -83,7 +83,7 @@ final class CakkMapView: NMFNaverMapView {
   private func setupMapView() {
     mapView.touchDelegate = self
     showZoomControls = false
-    mapView.logoAlign = .leftTop
+    mapView.logoAlign = .rightBottom
     mapView.positionMode = .normal
   }
   

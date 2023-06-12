@@ -35,7 +35,7 @@ class CakeShopPopUpView: UIControl {
     static let cakeShopTypeStackViewSpacing = 4.f
     
     static let shareButtonSize = 28.f
-    static let shareButtonImagePadding = 7.f
+    static let shareButtonImagePadding = 5.f
   }
   
   
@@ -84,7 +84,7 @@ class CakeShopPopUpView: UIControl {
   public let shareButton = UIButton().then {
     $0.tintColor = R.color.white()
     $0.backgroundColor = R.color.black()
-    $0.setImage(R.image.share_thick(), for: .normal)
+    $0.setImage(R.image.share_square(), for: .normal)
     $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
     $0.layer.cornerRadius = Metric.shareButtonSize / 2
   }

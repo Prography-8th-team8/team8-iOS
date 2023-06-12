@@ -119,9 +119,18 @@ final class MainViewController: UIViewController {
     setup()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: false)
+  }
+  
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-    
     updateFloatingPanelLayout()
     updateMapViewInset()
   }
@@ -300,7 +309,8 @@ final class MainViewController: UIViewController {
   
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
     let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
-    view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
+    view.insertSubview(newCakeShopPopupView, belowSubview: cakeShopListFloatingPanel.view)
+    
     newCakeShopPopupView.snp.makeConstraints {
       $0.bottom.equalTo(cakeShopListFloatingPanel.surfaceView.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
       $0.height.equalTo(Metric.cakeShopPopupViewHeight)
@@ -329,10 +339,11 @@ final class MainViewController: UIViewController {
     cakkMapView.bind(to: viewController.viewModel)
     
     updateFloatingPanelLayout()
-    
     cakeShopListFloatingPanel.set(contentViewController: viewController)
-    cakeShopListFloatingPanel.track(scrollView: viewController.collectionView)
-    cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+    }
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {
@@ -429,7 +440,11 @@ final class MainViewController: UIViewController {
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
     if isLandscapeMode {
-      cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+      if cakeShopListFloatingPanel.state == .tip {
+        cakkMapView.mapView.contentInset = .zero
+      } else {
+        cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth, bottom: 0, right: 0)
+      }
     } else {
       cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight, right: 0)
     }
