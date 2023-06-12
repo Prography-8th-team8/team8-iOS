@@ -5,6 +5,7 @@ disabled_rules:
 - vertical_whitespace
 - type_name
 - file_length
+- type_body_length
 
 included:
 
