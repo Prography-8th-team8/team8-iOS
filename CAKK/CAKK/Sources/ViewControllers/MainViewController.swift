@@ -309,7 +309,8 @@ final class MainViewController: UIViewController {
   
   private func showCakeShopPopupView(_ cakeShop: CakeShop) {
     let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
-    view.insertSubview(newCakeShopPopupView, aboveSubview: cakeShopPopupView ?? cakkMapView)
+    view.insertSubview(newCakeShopPopupView, belowSubview: cakeShopListFloatingPanel.view)
+    
     newCakeShopPopupView.snp.makeConstraints {
       $0.bottom.equalTo(cakeShopListFloatingPanel.surfaceView.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
       $0.height.equalTo(Metric.cakeShopPopupViewHeight)
