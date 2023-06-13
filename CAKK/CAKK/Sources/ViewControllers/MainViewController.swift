@@ -100,6 +100,8 @@ final class MainViewController: UIViewController {
     $0.addShadow(to: .bottom)
   }
   
+//  private let showMapButton = CapsuleStyleButton(iconImage: <#T##UIImage?#>, text: <#T##String#>)
+  
   private var isTableViewPanning: Bool = false
   
   

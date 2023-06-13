@@ -89,7 +89,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   public let shareButton = UIButton().then {
     $0.tintColor = .init(hex: 0x525252)
     $0.backgroundColor = .init(hex: 0xDFDCCD)
-    $0.setImage(R.image.share_square(), for: .normal)
+    $0.setImage(R.image.arrow_right_square(), for: .normal)
     $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
     $0.layer.cornerRadius = Metric.shareButtonSize / 2
   }

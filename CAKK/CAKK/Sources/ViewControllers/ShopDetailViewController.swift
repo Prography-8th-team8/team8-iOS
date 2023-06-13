@@ -99,10 +99,10 @@ final class ShopDetailViewController: UIViewController {
   private let addressContainerView = UIView()
   
   // 메뉴 버튼
-  private let callMenuButton = DetailMenuButton(image: R.image.call(), title: "전화하기")
+  private let callMenuButton = DetailMenuButton(image: R.image.phone(), title: "전화하기")
   private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
-  private let naviMenuButton = DetailMenuButton(image: R.image.navi(), title: "길 안내")
-  private let shareMenuButton = DetailMenuButton(image: R.image.share(), title: "공유하기")
+  private let naviMenuButton = DetailMenuButton(image: R.image.pin_map(), title: "길 안내")
+  private let shareMenuButton = DetailMenuButton(image: R.image.arrow_up_square(), title: "공유하기")
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
