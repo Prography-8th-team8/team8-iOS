@@ -78,6 +78,7 @@ final class MainViewController: UIViewController {
     $0.layout = CakeShopListFloatingPanelLayout()
     $0.surfaceView.appearance = cakeShopListSurfaceAppearance
     $0.surfaceView.grabberHandlePadding = 12
+    $0.contentMode = .fitToBounds
   }
   
   private let refreshButton = CapsuleStyleLoadingButton(
@@ -340,10 +341,8 @@ final class MainViewController: UIViewController {
     
     updateFloatingPanelLayout()
     cakeShopListFloatingPanel.set(contentViewController: viewController)
-    
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
-    }
+    cakeShopListFloatingPanel.view.layoutIfNeeded()
+    cakeShopListFloatingPanel.move(to: .tip, animated: true)
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {

@@ -111,6 +111,8 @@ class MainViewModel: ViewModelType {
     
     service
       .request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
+      .subscribe(on: DispatchQueue.global())
+      .receive(on: DispatchQueue.main)
       .map { cakeShops in
         cakeShops.filter { cakeShop in
           latitudeRange.contains(cakeShop.latitude) &&
@@ -132,6 +134,8 @@ class MainViewModel: ViewModelType {
     let service = service
     let districts = districts
     
+    output.loadingCakeShops.send(true)
+    
     Just(Void())
       .subscribe(on: DispatchQueue.global())
       .receive(on: DispatchQueue.main)
@@ -144,6 +148,7 @@ class MainViewModel: ViewModelType {
         let lat = filteredCakeShops.map { $0.latitude }.reduce(0, +) / Double(filteredCakeShops.count)
         let lon = filteredCakeShops.map { $0.longitude }.reduce(0, +) / Double(filteredCakeShops.count)
         
+        self?.output.loadingCakeShops.send(false)
         self?.output.cakeShops.send(filteredCakeShops)
         self?.output.cameraCoordinates.send(Coordinates(latitude: lat, longitude: lon))
       }
