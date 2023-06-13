@@ -78,7 +78,6 @@ final class MainViewController: UIViewController {
     $0.layout = CakeShopListFloatingPanelLayout()
     $0.surfaceView.appearance = cakeShopListSurfaceAppearance
     $0.surfaceView.grabberHandlePadding = 12
-    $0.contentMode = .fitToBounds
   }
   
   private let refreshButton = CapsuleStyleLoadingButton(
@@ -210,7 +209,7 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListFloatingPanel() {
-    cakeShopListFloatingPanel.set(contentViewController: .init())
+    cakeShopListFloatingPanel.set(contentViewController: nil)
     cakeShopListFloatingPanel.addPanel(toParent: self)
     cakeShopListFloatingPanel.delegate = self
   }
@@ -471,8 +470,11 @@ extension MainViewController: NMFMapViewCameraDelegate {
     
     if reason == NMFMapChangedByGesture &&
         viewModel.output.loadingCakeShops.value == false &&
+        cakeShopListFloatingPanel.contentViewController != nil &&
         isLandscapeMode == false {
-      cakeShopListFloatingPanel.move(to: .tip, animated: true)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+        self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+      }
     }
   }
   
