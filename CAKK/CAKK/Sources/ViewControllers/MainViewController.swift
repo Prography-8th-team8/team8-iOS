@@ -210,7 +210,7 @@ final class MainViewController: UIViewController {
   }
   
   private func setupCakeShopListFloatingPanel() {
-    cakeShopListFloatingPanel.set(contentViewController: .init())
+    cakeShopListFloatingPanel.set(contentViewController: nil)
     cakeShopListFloatingPanel.addPanel(toParent: self)
     cakeShopListFloatingPanel.delegate = self
   }
@@ -471,6 +471,7 @@ extension MainViewController: NMFMapViewCameraDelegate {
     
     if reason == NMFMapChangedByGesture &&
         viewModel.output.loadingCakeShops.value == false &&
+        cakeShopListFloatingPanel.contentViewController != nil &&
         isLandscapeMode == false {
       cakeShopListFloatingPanel.move(to: .tip, animated: true)
     }
