@@ -85,7 +85,7 @@ final class DetailInfoView: UIView {
     $0.addTarget(self, action: #selector(showAndHideWeekendBusinessHours), for: .touchUpInside)
   }
   
-  private let businessTimeIconImageView = UIImageView(image: R.image.time()).then {
+  private let businessTimeIconImageView = UIImageView(image: R.image.clock()).then {
     $0.contentMode = .scaleAspectFit
     $0.snp.makeConstraints { imageView in
       imageView.width.height.equalTo(20)
@@ -103,7 +103,7 @@ final class DetailInfoView: UIView {
   }
   
   private let businessTimeToggleImageView = UIImageView().then {
-    $0.image = R.image.toggle_arrow_closed()
+    $0.image = R.image.chevron_up()
     $0.contentMode = .scaleAspectFit
     $0.snp.makeConstraints { imageView in
       imageView.width.height.equalTo(16)
@@ -222,7 +222,7 @@ final class DetailInfoView: UIView {
       $0.isHidden = isBusinessTimeExpanded
     }
     
-    let toggleImage = isBusinessTimeExpanded ? R.image.toggle_arrow_closed() : R.image.toggle_arrow_opened()
+    let toggleImage = isBusinessTimeExpanded ? R.image.chevron_up() : R.image.chevron_down()
     businessTimeToggleImageView.image = toggleImage
     
     isBusinessTimeExpanded.toggle()

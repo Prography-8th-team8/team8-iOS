@@ -12,8 +12,8 @@ import NMapsMap
 final class CakkMapView: NMFNaverMapView {
   
   private enum MarkerImage {
-    static let pin = NMFOverlayImage(image: R.image.map_pin() ?? .checkmark)
-    static let selectedPin = NMFOverlayImage(image: R.image.map_pin_selected() ?? .checkmark)
+    static let pin = NMFOverlayImage(image: R.image.pin_cake_black()!)
+    static let selectedPin = NMFOverlayImage(image: R.image.pin_cake_pink()!)
   }
   
   // MARK: - Properties
