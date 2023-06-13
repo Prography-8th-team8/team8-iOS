@@ -340,10 +340,8 @@ final class MainViewController: UIViewController {
     
     updateFloatingPanelLayout()
     cakeShopListFloatingPanel.set(contentViewController: viewController)
-    
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-      self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
-    }
+    cakeShopListFloatingPanel.view.layoutIfNeeded()
+    cakeShopListFloatingPanel.move(to: .tip, animated: true)
   }
   
   private func applyAnimation(to popupView: CakeShopPopUpView) {
