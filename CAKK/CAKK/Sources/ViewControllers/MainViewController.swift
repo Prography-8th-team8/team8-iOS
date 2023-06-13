@@ -473,7 +473,9 @@ extension MainViewController: NMFMapViewCameraDelegate {
         viewModel.output.loadingCakeShops.value == false &&
         cakeShopListFloatingPanel.contentViewController != nil &&
         isLandscapeMode == false {
-      cakeShopListFloatingPanel.move(to: .tip, animated: true)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+        self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+      }
     }
   }
   
