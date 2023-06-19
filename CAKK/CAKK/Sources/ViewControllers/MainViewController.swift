@@ -85,7 +85,6 @@ final class MainViewController: UIViewController {
     loadingIconImage: UIImage(systemName: "ellipsis"),
     title: "이 지역 재검색",
     loadingTitle: "로딩 중").then {
-      $0.isEnabled = false
       $0.backgroundColor = UIColor(hex: 0x4963E9)
       $0.addShadow(to: .bottom)
     }
@@ -274,6 +273,7 @@ final class MainViewController: UIViewController {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
+        self?.refreshButton.hideWithAnimation()
         self?.showCakeShopListFloatingPanel(cakeShops)
       }
       .store(in: &cancellableBag)
@@ -298,6 +298,7 @@ final class MainViewController: UIViewController {
       .loadingCakeShops
       .sink { [weak self] isLoading in
         if isLoading {
+          self?.refreshButton.showWithAnimation()
           self?.refreshButton.status = .loading
           self?.hideCakeShopPopupView { [weak self] in
             self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
@@ -466,10 +467,6 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    if viewModel.output.loadingCakeShops.value == false {
-      refreshButton.isEnabled = true
-    }
-    
     if reason == NMFMapChangedByGesture &&
         viewModel.output.loadingCakeShops.value == false &&
         cakeShopListFloatingPanel.contentViewController != nil &&
@@ -481,7 +478,10 @@ extension MainViewController: NMFMapViewCameraDelegate {
   }
   
   func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
-    refreshButton.isEnabled = true
+    if viewModel.output.loadingCakeShops.value == false &&
+        reason == NMFMapChangedByGesture {
+      refreshButton.showWithAnimation()
+    }
     
     // Save my last position
     guard reason == NMFMapChangedByGesture else { return }

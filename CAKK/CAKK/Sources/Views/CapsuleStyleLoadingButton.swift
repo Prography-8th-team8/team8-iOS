@@ -48,6 +48,26 @@ class CapsuleStyleLoadingButton: CapsuleStyleButton {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - Public
+  
+  public func showWithAnimation() {
+    if alpha == 0 {
+      UIView.animate(withDuration: 0.3) {
+        self.alpha = 1
+      }
+    }
+  }
+  
+  public func hideWithAnimation() {
+    if alpha == 1 {
+      UIView.animate(withDuration: 0.3) {
+        self.alpha = 0
+      }
+    }
+  }
+  
+  
   // MARK: - Private Methods
   
   private func updateByStatus() {
