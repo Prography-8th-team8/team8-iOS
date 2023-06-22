@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A9790945069FD1CBA5D438B /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A125FE054D114D33BA15F8C4 /* Pods_CAKK.framework */; };
 		8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */; };
 		8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */; };
 		8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */; };
@@ -50,9 +51,8 @@
 		8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */; };
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
 		8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */; };
-		9DCE9692E7469DC171CD4B61 /* Pods_CAKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F95E16A262C7005B5CD102 /* Pods_CAKK.framework */; };
 		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
-		B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */; };
+		B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* RefreshButton.swift */; };
 		B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */; };
 		B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0502A34CA6A0068843B /* BlogPostCell.swift */; };
 		B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */; };
@@ -106,9 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02CDE4F66E7DECF1D1F09046 /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
-		24F95E16A262C7005B5CD102 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		40353133AF65755B081FFF29 /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
+		442CB9E0B3BEB4AC07BF1321 /* Pods-CAKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.release.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.release.xcconfig"; sourceTree = "<group>"; };
 		8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListFloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
 		8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionPickerCollectionCell.swift; sourceTree = "<group>"; };
@@ -154,8 +152,10 @@
 		8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopPopUpView.swift; sourceTree = "<group>"; };
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopTypeChip.swift; sourceTree = "<group>"; };
+		9F7C7B736F7112561BBE257C /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
+		A125FE054D114D33BA15F8C4 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
-		B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleStyleLoadingButton.swift; sourceTree = "<group>"; };
+		B401B7842A2C9275003B0393 /* RefreshButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
 		B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeIndex.swift"; sourceTree = "<group>"; };
 		B41EF0502A34CA6A0068843B /* BlogPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCell.swift; sourceTree = "<group>"; };
 		B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingHTMLTags.swift"; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DCE9692E7469DC171CD4B61 /* Pods_CAKK.framework in Frameworks */,
+				0A9790945069FD1CBA5D438B /* Pods_CAKK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +225,7 @@
 				8E53F1BC2A333373002F871C /* FloatingPanelLayout */,
 				B4FB8E802A0F71EA00DBF193 /* Detail */,
 				B46F9DC929DACF2400113979 /* CapsuleStyleButton.swift */,
-				B401B7842A2C9275003B0393 /* CapsuleStyleLoadingButton.swift */,
+				B401B7842A2C9275003B0393 /* RefreshButton.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
 				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
@@ -304,7 +304,7 @@
 				B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */,
 				8E9E192429CEDD4F00CFF157 /* Products */,
 				D911E24E8132FA565E4A398E /* Pods */,
-				B1D1578010A6C7331C84B60F /* Frameworks */,
+				F332F94DDD5995EDEB0A4F82 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -397,14 +397,6 @@
 				8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		B1D1578010A6C7331C84B60F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				24F95E16A262C7005B5CD102 /* Pods_CAKK.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */ = {
@@ -517,10 +509,18 @@
 		D911E24E8132FA565E4A398E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				40353133AF65755B081FFF29 /* Pods-CAKK.debug.xcconfig */,
-				02CDE4F66E7DECF1D1F09046 /* Pods-CAKK.release.xcconfig */,
+				9F7C7B736F7112561BBE257C /* Pods-CAKK.debug.xcconfig */,
+				442CB9E0B3BEB4AC07BF1321 /* Pods-CAKK.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F332F94DDD5995EDEB0A4F82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A125FE054D114D33BA15F8C4 /* Pods_CAKK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -530,13 +530,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E9E193729CEDD5000CFF157 /* Build configuration list for PBXNativeTarget "CAKK" */;
 			buildPhases = (
-				BECE0F974354DD0E2A337C7C /* [CP] Check Pods Manifest.lock */,
+				A416072C29B34CB46F92395C /* [CP] Check Pods Manifest.lock */,
 				8E32CE9D29CEE58C00905FD6 /* SwiftLint */,
 				8EB7B78C29F6CAC400D3F5BF /* r.swift */,
 				8E9E191F29CEDD4F00CFF157 /* Sources */,
 				8E9E192029CEDD4F00CFF157 /* Frameworks */,
 				8E9E192129CEDD4F00CFF157 /* Resources */,
-				9909A7900586FFCE396DEF27 /* [CP] Embed Pods Frameworks */,
+				538F34489588DCAC993036E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -639,6 +639,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		538F34489588DCAC993036E5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8E32CE9D29CEE58C00905FD6 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -677,24 +694,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
-		9909A7900586FFCE396DEF27 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CAKK/Pods-CAKK-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BECE0F974354DD0E2A337C7C /* [CP] Check Pods Manifest.lock */ = {
+		A416072C29B34CB46F92395C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -779,7 +779,7 @@
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
-				B401B7852A2C9275003B0393 /* CapsuleStyleLoadingButton.swift in Sources */,
+				B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */,
 				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
@@ -948,7 +948,7 @@
 		};
 		8E9E193829CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40353133AF65755B081FFF29 /* Pods-CAKK.debug.xcconfig */;
+			baseConfigurationReference = 9F7C7B736F7112561BBE257C /* Pods-CAKK.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -988,7 +988,7 @@
 		};
 		8E9E193929CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02CDE4F66E7DECF1D1F09046 /* Pods-CAKK.release.xcconfig */;
+			baseConfigurationReference = 442CB9E0B3BEB4AC07BF1321 /* Pods-CAKK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
