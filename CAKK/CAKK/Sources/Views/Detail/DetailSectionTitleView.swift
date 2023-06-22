@@ -19,7 +19,7 @@ final class DetailSectionTitleView: UIView {
     $0.text = "-"
   }
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(title: String, topMargin: CGFloat = 40, bottomMargin: CGFloat = 16) {
     super.init(frame: .zero)

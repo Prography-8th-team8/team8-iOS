@@ -9,11 +9,13 @@ import UIKit
 
 class CakeShopTypeChip: LabelChip {
   
+  
   // MARK: - Properties
   
   private var cakeShopType: CakeShopType
   
-  // MARK: - LifeCycles
+  
+  // MARK: - Initialization
   
   init(_ cakeShopType: CakeShopType) {
     self.cakeShopType = cakeShopType

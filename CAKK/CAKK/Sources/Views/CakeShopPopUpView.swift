@@ -90,7 +90,7 @@ class CakeShopPopUpView: UIControl {
   }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(cakeShop: CakeShop) {
     self.cakeShop = cakeShop

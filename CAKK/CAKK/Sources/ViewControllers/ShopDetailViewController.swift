@@ -15,6 +15,7 @@ import Combine
 
 final class ShopDetailViewController: UIViewController {
   
+  
   // MARK: - Constants
   
   enum Constants {
@@ -25,11 +26,15 @@ final class ShopDetailViewController: UIViewController {
     static let horizontalPadding = 14.f
   }
   
+  
+  // MARK: - Types
+  
   enum Section {
     case blogPost
   }
   
   typealias BlogPostDataSource = UICollectionViewDiffableDataSource<Section, BlogPost>
+  
   
   // MARK: - Properties
   
@@ -38,6 +43,7 @@ final class ShopDetailViewController: UIViewController {
   private var cancellableBag = Set<AnyCancellable>()
   
   private lazy var blogPostDataSource = makeBlogPostDataSource()
+  
   
   // MARK: - UI
   
@@ -181,7 +187,8 @@ final class ShopDetailViewController: UIViewController {
     $0.style = .medium
   }
   
-  // MARK: - LifeCycle
+  
+  // MARK: - Initialization
   
   init(viewModel: ShopDetailViewModel) {
     self.viewModel = viewModel
@@ -192,13 +199,137 @@ final class ShopDetailViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
     bind()
   }
   
+  
   // MARK: - Private
+  
+  private func setActivityIndicator(toAnimate isAnimate: Bool) {
+    guard isAnimate != indicatorView.isAnimating else { return }
+    
+    let alpha: CGFloat = isAnimate ? 1.0 : 0.0
+    UIView.animate(withDuration: 0.5) {
+      self.indicatorContainerView.alpha = alpha
+    }
+    
+    if isAnimate {
+      indicatorView.startAnimating()
+    } else {
+      indicatorView.stopAnimating()
+    }
+  }
+  
+  // 컬렉션뷰의 내부의 컨텐츠 사이즈와 동일하게 해줌 (스크롤이 안되는, 전체를 감싸는 스택뷰처럼 처리함)
+  private func updateBlogPostCollectionViewHeight() {
+    blogPostCollectionViewHeightConstraint?.update(
+      offset: blogPostCollectionView.contentSize.height)
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
+    }
+  }
+  
+  private func showBlogPostSafariController(of indexPath: IndexPath) {
+    guard let blogPost = blogPostDataSource.itemIdentifier(for: indexPath),
+          let url = URL(string: blogPost.link) else { return }
+    
+    let safariViewController = SFSafariViewController(url: url)
+    present(safariViewController, animated: true)
+  }
+  
+  private func makePhoneCall() {
+    guard let phoneNumber = viewModel.output.cakeShopDetail.value?.phoneNumber,
+          phoneNumber.isEmpty == false,
+          let phoneNumberURL = URL(string: "tel://\(phoneNumber)") else { return }
+    
+    UIApplication.shared.open(phoneNumberURL)
+  }
+  
+  // MARK: - Bind
+  
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
+    viewModel.input.viewDidLoad.send()
+    
+    loadMoreBlogPostsButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        self?.viewModel.input.loadMoreBlogPosts.send()
+      }
+      .store(in: &cancellableBag)
+    
+    // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
+    blogPostCollectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        self?.showBlogPostSafariController(of: indexPath)
+      }
+      .store(in: &cancellableBag)
+    
+    // 클립보드에 복사
+    copyAddressButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        UIPasteboard.general.string = self?.addressLabel.text ?? ""
+        self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
+      }
+      .store(in: &cancellableBag)
+    
+    callMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        self?.makePhoneCall()
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() {
+    viewModel.output.cakeShopDetail
+      .sink { [weak self] cakeShopDetail in
+        guard let self,
+              let cakeShopDetail else { return }
+        
+        self.nameLabel.text = cakeShopDetail.name
+        self.addressLabel.text = cakeShopDetail.address
+        self.setupCakeShopTypeChips(with: cakeShopDetail)
+        self.setActivityIndicator(toAnimate: false)
+        
+        if cakeShopDetail.phoneNumber.isEmpty {
+          callMenuButton.isHidden = true
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.failToFetchDetail
+      .sink { [weak self] in
+        guard let self else { return }
+        self.showFailAlert(with: "상세 정보를 불러오지 못했어요.") {
+          self.navigationController?.popViewController(animated: true)
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.blogPostsToShow
+      .sink { [weak self] blogPosts in
+        self?.applySnapshot(with: blogPosts)
+      }
+      .store(in: &cancellableBag)
+  }
+}
+
+
+// MARK: - UI & Layout
+
+extension ShopDetailViewController {
   
   private func setup() {
     setupLayout()
@@ -326,6 +457,12 @@ final class ShopDetailViewController: UIViewController {
       keywordContentStackView.addArrangedSubview($0)
     }
   }
+}
+
+
+// MARK: - DataSource & Snapshot
+
+extension ShopDetailViewController {
   
   private func makeBlogPostDataSource() -> BlogPostDataSource {
     return BlogPostDataSource(
@@ -338,21 +475,6 @@ final class ShopDetailViewController: UIViewController {
       })
   }
   
-  private func setActivityIndicator(toAnimate isAnimate: Bool) {
-    guard isAnimate != indicatorView.isAnimating else { return }
-    
-    let alpha: CGFloat = isAnimate ? 1.0 : 0.0
-    UIView.animate(withDuration: 0.5) {
-      self.indicatorContainerView.alpha = alpha
-    }
-    
-    if isAnimate {
-      indicatorView.startAnimating()
-    } else {
-      indicatorView.stopAnimating()
-    }
-  }
-  
   private func applySnapshot(with blogPosts: [BlogPost]) {
     let section: [Section] = [.blogPost]
     var snapshot = NSDiffableDataSourceSnapshot<Section, BlogPost>()
@@ -363,105 +485,7 @@ final class ShopDetailViewController: UIViewController {
       self?.updateBlogPostCollectionViewHeight()
     }
   }
- 
-  // 컬렉션뷰의 내부의 컨텐츠 사이즈와 동일하게 해줌 (스크롤이 안되는, 전체를 감싸는 스택뷰처럼 처리함)
-  private func updateBlogPostCollectionViewHeight() {
-    blogPostCollectionViewHeightConstraint?.update(
-      offset: blogPostCollectionView.contentSize.height)
-    UIView.animate(withDuration: 0.3) {
-      self.view.layoutIfNeeded()
-    }
-  }
   
-  private func showBlogPostSafariController(of indexPath: IndexPath) {
-    guard let blogPost = blogPostDataSource.itemIdentifier(for: indexPath),
-          let url = URL(string: blogPost.link) else { return }
-    
-    let safariViewController = SFSafariViewController(url: url)
-    present(safariViewController, animated: true)
-  }
-  
-  private func makePhoneCall() {
-    guard let phoneNumber = viewModel.output.cakeShopDetail.value?.phoneNumber,
-          phoneNumber.isEmpty == false,
-          let phoneNumberURL = URL(string: "tel://\(phoneNumber)") else { return }
-    
-    UIApplication.shared.open(phoneNumberURL)
-  }
-  
-  // MARK: - Bind
-  
-  private func bind() {
-    bindInput()
-    bindOutput()
-  }
-  
-  private func bindInput() {
-    viewModel.input.viewDidLoad.send()
-    
-    loadMoreBlogPostsButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        self?.viewModel.input.loadMoreBlogPosts.send()
-      }
-      .store(in: &cancellableBag)
-    
-    // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
-    blogPostCollectionView.didSelectItemPublisher
-      .sink { [weak self] indexPath in
-        self?.showBlogPostSafariController(of: indexPath)
-      }
-      .store(in: &cancellableBag)
-    
-    // 클립보드에 복사
-    copyAddressButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        UIPasteboard.general.string = self?.addressLabel.text ?? ""
-        self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
-      }
-      .store(in: &cancellableBag)
-    
-    callMenuButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        self?.makePhoneCall()
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func bindOutput() {
-    viewModel.output.cakeShopDetail
-      .sink { [weak self] cakeShopDetail in
-        guard let self,
-              let cakeShopDetail else { return }
-        
-        self.nameLabel.text = cakeShopDetail.name
-        self.addressLabel.text = cakeShopDetail.address
-        self.setupCakeShopTypeChips(with: cakeShopDetail)
-        self.setActivityIndicator(toAnimate: false)
-        
-        if cakeShopDetail.phoneNumber.isEmpty {
-          callMenuButton.isHidden = true
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output.failToFetchDetail
-      .sink { [weak self] in
-        guard let self else { return }
-        self.showFailAlert(with: "상세 정보를 불러오지 못했어요.") {
-          self.navigationController?.popViewController(animated: true)
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output.blogPostsToShow
-      .sink { [weak self] blogPosts in
-        self?.applySnapshot(with: blogPosts)
-      }
-      .store(in: &cancellableBag)
-  }
 }
 
 // MARK: - Preview

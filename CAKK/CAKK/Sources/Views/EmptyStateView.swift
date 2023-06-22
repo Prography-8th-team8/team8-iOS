@@ -53,7 +53,7 @@ final class EmptyStateView: UIView {
   }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(title: String? = "",
        subTitle: String? = "") {

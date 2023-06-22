@@ -128,7 +128,7 @@ final class DetailInfoView: UIView {
     $0.spacing = 8
   }
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init() {
     super.init(frame: .zero)

@@ -20,6 +20,7 @@ final class ShopDetailViewModel: ViewModelType {
     let failToFetchDetail = PassthroughSubject<Void, Never>()
   }
   
+  
   // MARK: - Properties
   
   private(set) var input: Input!
@@ -33,7 +34,8 @@ final class ShopDetailViewModel: ViewModelType {
   
   private var cancellableBag = Set<AnyCancellable>()
   
-  // MARK: - LifeCycle
+  
+  // MARK: - Initialization
   
   init(cakeShop: CakeShop, service: NetworkService<CakeAPI>) {
     self.service = service
@@ -41,6 +43,7 @@ final class ShopDetailViewModel: ViewModelType {
     
     bindInputs()
   }
+  
   
   // MARK: - Private
   

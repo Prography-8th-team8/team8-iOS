@@ -47,7 +47,7 @@ class RegionPickerCollectionCell: HighlightableCell {
   }
   
   
-  // MARK: - LifeCycles
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)

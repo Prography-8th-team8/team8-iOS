@@ -9,6 +9,7 @@ import UIKit
 
 final class BlogPostCell: HighlightableCell {
   
+  
   // MARK: - UI
   
   private let stackView = UIStackView().then {
@@ -35,7 +36,7 @@ final class BlogPostCell: HighlightableCell {
   }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -46,6 +47,7 @@ final class BlogPostCell: HighlightableCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
   // MARK: - Public
   
   func configure(with blogPost: BlogPost) {
@@ -55,6 +57,7 @@ final class BlogPostCell: HighlightableCell {
     contentLabel.text = blogPost.description
     setupbloggerNamePostDateLabelText(of: blogPost)
   }
+  
   
   // MARK: - Private
   

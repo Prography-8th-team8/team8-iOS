@@ -30,7 +30,7 @@ class CakeShopListViewModel: ViewModelType {
   private let service: NetworkService<CakeAPI>
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(initialCakeShops: [CakeShop],
        service: NetworkService<CakeAPI>) {

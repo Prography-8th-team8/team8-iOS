@@ -22,7 +22,7 @@ class HighlightableCell: UICollectionViewCell {
   }
   
   
-  // MARK: - LifeCycles
+  // MARK: - Properties
   
   override var isHighlighted: Bool {
     didSet {
@@ -35,7 +35,7 @@ class HighlightableCell: UICollectionViewCell {
   }
 
   
-  // MARK: - Methods
+  // MARK: - Private
   
   private func highlightCell() {
     UIView.animate(withDuration: Constant.highlightDuration,

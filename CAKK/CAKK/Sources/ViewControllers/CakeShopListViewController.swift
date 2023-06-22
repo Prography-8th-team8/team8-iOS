@@ -61,7 +61,7 @@ final class CakeShopListViewController: UIViewController {
   private var cancellableBag = Set<AnyCancellable>()
   
   public var cakeShopItemSelectHandler: ((CakeShop) -> Void)?
-  private var dataSource: DataSource!
+  private lazy var dataSource: DataSource = makeDataSource()
   private var cakeShopCellRegistration = UICollectionView.CellRegistration<CakeShopCollectionCell, CakeShop> { _, _, _ in }
   
   @UserDefault(key: "app.isfirstopen", defaultValue: true)
@@ -71,7 +71,7 @@ final class CakeShopListViewController: UIViewController {
   // MARK: - UI
   
   lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
-    $0.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
+    $0.registerCell(cellClass: CakeShopCollectionCell.self)
     $0.backgroundColor = .clear
     $0.layer.cornerRadius = Metric.collectionViewCornerRadius
     $0.delaysContentTouches = false
@@ -131,7 +131,7 @@ final class CakeShopListViewController: UIViewController {
   )
   
 
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -142,9 +142,13 @@ final class CakeShopListViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -155,12 +159,131 @@ final class CakeShopListViewController: UIViewController {
   
   // MARK: - Private
   
+  // Bind
+  
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
+    changeDistrictButton
+      .tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] _ in
+        self?.showChangeDistrictView()
+      }
+      .store(in: &cancellableBag)
+    
+    collectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        self?.viewModel.input.selectCakeShop.send(indexPath)
+        self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() {
+    viewModel.output
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        self?.applySnapshot(with: cakeShops)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .cakeShops
+      .map { $0.count.description }
+      .sink { [weak self] count in
+        self?.numberOfCakeShopLabel.text = "\(count)개의 케이크샵"
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .cakeShops
+      .sink { [weak self] cakeShops in
+        if cakeShops.isEmpty {
+          self?.emptyStateView.isHidden = false
+        } else {
+          self?.emptyStateView.isHidden = true
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .presentCakeShopDetail
+      .sink { [weak self] cakeShop in
+        self?.cakeShopItemSelectHandler?(cakeShop)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .isLoading
+      .sink { [weak self] isLoading in
+        if isLoading {
+          self?.collectionView.isHidden = true
+          self?.loadingView.isHidden = false
+          self?.loadingView.startAnimating()
+        } else {
+          self?.collectionView.isHidden = false
+          self?.loadingView.isHidden = true
+          self?.loadingView.stopAnimating()
+        }
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func showChangeDistrictView() {
+    let viewController = DIContainer.shared.makeDistrictSelectionController()
+    viewController.modalPresentationStyle = .popover
+    viewController.preferredContentSize = .init(width: 335, height: 520)
+    viewController.popoverPresentationController?.sourceView = changeDistrictButton
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+      self.present(viewController, animated: true)
+    }
+  }
+  
+  private func showToolTip() {
+    let locationAuthorized = {
+      let locationManager = CLLocationManager()
+      switch locationManager.authorizationStatus {
+      case .authorizedAlways, .authorizedWhenInUse:
+        return true
+      default:
+        return false
+      }
+    }()
+    
+    if isFirstOpen && locationAuthorized {
+      var preferences = EasyTipView.Preferences()
+      preferences.drawing.font = .systemFont(ofSize: 13, weight: .semibold)
+      preferences.drawing.foregroundColor = .white
+      preferences.drawing.backgroundColor = .black
+      preferences.drawing.arrowPosition = .top
+      preferences.drawing.cornerRadius = 14
+      
+      EasyTipView.show(
+        forView: self.changeDistrictButton,
+        withinSuperview: self.view,
+        text: "지역별로 케이크샵을 모아봤어요!",
+        preferences: preferences,
+        delegate: nil)
+    }
+    
+    isFirstOpen = false
+  }
+}
+
+
+// MARK: - UI & Layout
+
+extension CakeShopListViewController {
+  
   private func setup() {
     setupLayout()
     setupView()
-    bind()
   }
-
+  
   // Setup Layouts
   private func setupLayout() {
     setupHeaderViewLayout()
@@ -221,17 +344,21 @@ final class CakeShopListViewController: UIViewController {
   
   // Setup Views
   private func setupView() {
-    setupCollectionView()
+    setupBaseView()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .white
   }
+}
+
+
+// MARK: - DataSource & Snapshot
+
+extension CakeShopListViewController {
   
-  private func setupCollectionView() {
-    collectionView.register(CakeShopCollectionCell.self, forCellWithReuseIdentifier: CakeShopCollectionCell.identifier)
-    
-    dataSource = DataSource(
+  private func makeDataSource() -> DataSource {
+    DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueConfiguredReusableCell(
@@ -251,122 +378,12 @@ final class CakeShopListViewController: UIViewController {
       })
   }
   
-  // Bind
-  
-  private func bind() {
-    bindInput()
-    bindOutput()
-  }
-  
-  private func bindInput() {
-    changeDistrictButton
-      .tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] _ in
-        self?.showChangeDistrictView()
-      }
-      .store(in: &cancellableBag)
-    
-    collectionView.didSelectItemPublisher
-      .sink { [weak self] indexPath in
-        self?.viewModel.input.selectCakeShop.send(indexPath)
-        self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func bindOutput() {
-    viewModel.output
-      .cakeShops
-      .sink { [weak self] cakeShops in
-        let section: [Section] = [.cakeShop]
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CakeShop>()
-        snapshot.appendSections(section)
-        snapshot.appendItems(cakeShops)
-        self?.dataSource.apply(snapshot)
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .cakeShops
-      .map { $0.count.description }
-      .sink { [weak self] count in
-        self?.numberOfCakeShopLabel.text = "\(count)개의 케이크샵"
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .cakeShops
-      .sink { [weak self] cakeShops in
-        if cakeShops.isEmpty {
-          self?.emptyStateView.isHidden = false
-        } else {
-          self?.emptyStateView.isHidden = true
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .presentCakeShopDetail
-      .sink { [weak self] cakeShop in
-        self?.cakeShopItemSelectHandler?(cakeShop)
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .isLoading
-      .sink { [weak self] isLoading in
-        if isLoading {
-          self?.collectionView.isHidden = true
-          self?.loadingView.isHidden = false
-          self?.loadingView.startAnimating()
-        } else {
-          self?.collectionView.isHidden = false
-          self?.loadingView.isHidden = true
-          self?.loadingView.stopAnimating()
-        }
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func showChangeDistrictView() {
-    let viewController = DIContainer.shared.makeDistrictSelectionController()
-    viewController.modalPresentationStyle = .popover
-    viewController.preferredContentSize = .init(width: 335, height: 520)
-    viewController.popoverPresentationController?.sourceView = changeDistrictButton
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-      self.present(viewController, animated: true)
-    }
-  }
-  
-  private func showToolTip() {
-    var locationAuthorized = {
-      let locationManager = CLLocationManager()
-      switch locationManager.authorizationStatus {
-      case .authorizedAlways, .authorizedWhenInUse:
-        return true
-      default:
-        return false
-      }
-    }()
-    
-    if isFirstOpen && locationAuthorized {
-      var preferences = EasyTipView.Preferences()
-      preferences.drawing.font = .systemFont(ofSize: 13, weight: .semibold)
-      preferences.drawing.foregroundColor = .white
-      preferences.drawing.backgroundColor = .black
-      preferences.drawing.arrowPosition = .top
-      preferences.drawing.cornerRadius = 14
-      
-      EasyTipView.show(
-        forView: self.changeDistrictButton,
-        withinSuperview: self.view,
-        text: "지역별로 케이크샵을 모아봤어요!",
-        preferences: preferences,
-        delegate: nil)
-    }
-    
-    isFirstOpen = false
+  private func applySnapshot(with cakeShops: [CakeShop]) {
+    let section: [Section] = [.cakeShop]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, CakeShop>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(cakeShops)
+    dataSource.apply(snapshot)
   }
 }
 
