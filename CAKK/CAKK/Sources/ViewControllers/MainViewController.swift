@@ -254,7 +254,7 @@ final class MainViewController: UIViewController {
             self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
           }
         } else {
-          self?.refreshButton.stopLoading()ㄹ
+          self?.refreshButton.stopLoading()
         }
       }
       .store(in: &cancellableBag)
