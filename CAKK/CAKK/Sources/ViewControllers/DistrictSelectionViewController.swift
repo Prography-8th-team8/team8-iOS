@@ -221,7 +221,7 @@ import SwiftUI
 
 struct OnboardingViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    DistrictSelectionViewController(viewModel: .init()).toPreview()
+    DIContainer.shared.makeDistrictSelectionController().toPreview()
       .ignoresSafeArea()
   }
 }

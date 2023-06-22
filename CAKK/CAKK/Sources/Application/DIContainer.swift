@@ -31,7 +31,7 @@ final class DIContainer {
   }
   
   func makeDistrictSelectionController() -> DistrictSelectionViewController {
-    let viewModel = DistrictSelectionViewModel()
+    let viewModel = DistrictSelectionViewModel(service: networkService)
     return DistrictSelectionViewController(viewModel: viewModel)
   }
   

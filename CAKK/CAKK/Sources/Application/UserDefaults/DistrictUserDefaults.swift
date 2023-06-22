@@ -13,7 +13,7 @@ class DistrictUserDefaults {
   
   static let shared = DistrictUserDefaults()
   
-  public var selectedDistrictSectionPublisher = PassthroughSubject<DistrictSection.section, Never>()
+  public var selectedDistrictSectionPublisher = PassthroughSubject<DistrictSection.Section, Never>()
   
   @UserDefault(key: "district.section.selected", defaultValue: 0)
   private(set) var selectedDistrictSection: Int?
@@ -26,7 +26,7 @@ class DistrictUserDefaults {
   
   // MARK: - Methods
   
-  public func updateSelected(districtSection: DistrictSection.section) {
+  public func updateSelected(districtSection: DistrictSection.Section) {
     // update userDefaults
     selectedDistrictSection = districtSection.rawValue
     // notify

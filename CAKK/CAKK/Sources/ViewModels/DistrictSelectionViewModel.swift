@@ -25,10 +25,13 @@ class DistrictSelectionViewModel: ViewModelType {
   private(set) var output: Output!
   private var cancellableBag = Set<AnyCancellable>()
   
+  private let service: NetworkService<CakeAPI>
+  
   
   // MARK: - LifeCycles
   
-  init() {
+  init(service: NetworkService<CakeAPI>) {
+    self.service = service
     setupInputOutput()
     setupData()
   }
@@ -46,7 +49,7 @@ class DistrictSelectionViewModel: ViewModelType {
           output.selectedDistrictSection.send(selectedDistrictSection)
         }
         
-        if let section = DistrictSection.section(rawValue: indexPath.row) {
+        if let section = DistrictSection.Section(rawValue: indexPath.row) {
           DistrictUserDefaults.shared.updateSelected(districtSection: section)
         }
       }
@@ -57,11 +60,27 @@ class DistrictSelectionViewModel: ViewModelType {
   }
   
   private func setupData() {
-    fetchDistrictSections()
+    loadDistricts()
   }
   
-  private func fetchDistrictSections() {
-    output.districtSections
-      .send(DistrictSection.section.allCases.map { $0.value() })
+  private func loadDistricts() {
+    service
+      .request(.fetchDistrictCounts, type: DistrictCountResponse.self)
+      .receive(on: DispatchQueue.main)
+      .map { districtCountResponse in
+        return DistrictSection.convert(from: districtCountResponse)
+      }
+      .sink { completion in
+        switch completion {
+        case .finished:
+          break
+        case .failure(let error):
+          print(error)
+        }
+      } receiveValue: { [weak self] districtSections in
+        self?.output.districtSections
+          .send(districtSections)
+      }
+      .store(in: &cancellableBag)
   }
 }
