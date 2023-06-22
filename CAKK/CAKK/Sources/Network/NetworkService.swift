@@ -33,7 +33,7 @@ final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
   private let provider: MoyaProvider<Target>
   private let decoder = JSONDecoder()
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(type: NetworkServiceType = .server, isLogEnabled: Bool = false) {
     let plugins = isLogEnabled ? [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))] : []

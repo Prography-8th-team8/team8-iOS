@@ -11,10 +11,14 @@ import NMapsMap
 
 final class CakkMapView: NMFNaverMapView {
   
+  
+  // MARK: - Constants
+  
   private enum MarkerImage {
     static let pin = NMFOverlayImage(image: R.image.pin_cake_black()!)
     static let selectedPin = NMFOverlayImage(image: R.image.pin_cake_pink()!)
   }
+  
   
   // MARK: - Properties
   
@@ -26,7 +30,8 @@ final class CakkMapView: NMFNaverMapView {
   var didTappedMarker: ((CakeShop) -> Void)?
   var didUnselectMarker: (() -> Void)?
   
-  // MARK: - LifeCycle
+  
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -37,6 +42,7 @@ final class CakkMapView: NMFNaverMapView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
   
   // MARK: - Public
   
@@ -77,6 +83,7 @@ final class CakkMapView: NMFNaverMapView {
     let location = NMGLatLng(lat: coordinates.latitude, lng: coordinates.longitude)
     moveCamera(location, zoomLevel: nil)
   }
+  
   
   // MARK: - Private
   
@@ -153,6 +160,7 @@ final class CakkMapView: NMFNaverMapView {
     selectedMarker = marker
   }
 }
+
 
 // MARK: - NMFMapViewTouchDelegate
 

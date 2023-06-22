@@ -19,7 +19,7 @@ class DistrictUserDefaults {
   private(set) var selectedDistrictSection: Int?
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   private init() { }
   

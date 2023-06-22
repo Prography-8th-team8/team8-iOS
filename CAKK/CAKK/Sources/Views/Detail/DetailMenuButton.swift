@@ -34,7 +34,7 @@ final class DetailMenuButton: UIButton {
     $0.spacing = 8
   }
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(image: UIImage?, title: String) {
     super.init(frame: .zero)

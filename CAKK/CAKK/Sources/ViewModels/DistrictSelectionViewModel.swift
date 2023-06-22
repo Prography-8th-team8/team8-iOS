@@ -28,7 +28,7 @@ class DistrictSelectionViewModel: ViewModelType {
   private let service: NetworkService<CakeAPI>
   
   
-  // MARK: - LifeCycles
+  // MARK: - Initialization
   
   init(service: NetworkService<CakeAPI>) {
     self.service = service

@@ -104,7 +104,7 @@ final class MainViewController: UIViewController {
   private var isTableViewPanning: Bool = false
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(viewModel: MainViewModel) {
     self.viewModel = viewModel
@@ -115,9 +115,13 @@ final class MainViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind(viewModel)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -143,76 +147,6 @@ final class MainViewController: UIViewController {
     setupLayouts()
     setupView()
     setupLocationManager()
-    
-    bind(viewModel)
-  }
-  
-  // Setup Layout
-  private func setupLayouts() {
-    setupNaverMapViewLayout()
-    setupRefreshButtonLayout()
-    setupLocationButtonLayout()
-  }
-  
-  private func setupNaverMapViewLayout() {
-    view.addSubview(cakkMapView)
-    cakkMapView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-    }
-  }
-  
-  private func setupRefreshButtonLayout() {
-    view.addSubview(refreshButton)
-    refreshButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
-      $0.width.equalTo(120)
-    }
-  }
-  
-  private func setupLocationButtonLayout() {
-    view.addSubview(currentLocationButton)
-    currentLocationButton.snp.makeConstraints {
-      $0.width.height.equalTo(40)
-      $0.centerY.equalTo(refreshButton)
-      $0.trailing.equalToSuperview().inset(20)
-    }
-  }
-  
-  // Setup View
-  private func setupView() {
-    setupBaseView()
-    setupMapView()
-    setupCakeShopListFloatingPanel()
-  }
-  
-  private func setupBaseView() {
-    view.backgroundColor = .systemBackground
-    let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-    backButtonItem.tintColor = .black
-    navigationItem.backBarButtonItem = backButtonItem
-  }
-  
-  private func setupMapView() {
-    cakkMapView.mapView.addCameraDelegate(delegate: self)
-    cakkMapView.didTappedMarker = { [weak self] cakeShop in
-      guard let self else { return }
-      self.showCakeShopPopupView(cakeShop)
-      
-      /// Landscape 모드일때 그리고 cakeShopListFloatingPanel이 full 상태일때 .half로 이동
-      if self.isLandscapeMode && self.cakeShopListFloatingPanel.state == .full {
-        self.cakeShopListFloatingPanel.move(to: .half, animated: true)
-      }
-    }
-    cakkMapView.didUnselectMarker = { [weak self] in
-      self?.hideCakeShopPopupView()
-    }
-  }
-  
-  private func setupCakeShopListFloatingPanel() {
-    cakeShopListFloatingPanel.set(contentViewController: nil)
-    cakeShopListFloatingPanel.addPanel(toParent: self)
-    cakeShopListFloatingPanel.delegate = self
   }
   
   // Setup ETC
@@ -460,6 +394,81 @@ final class MainViewController: UIViewController {
     
     cakeShopListFloatingPanel.invalidateLayout()
   }
+}
+
+
+// MARK: - UI & Layout
+
+extension MainViewController {
+  
+  // Setup Layout
+  private func setupLayouts() {
+    setupNaverMapViewLayout()
+    setupRefreshButtonLayout()
+    setupLocationButtonLayout()
+  }
+  
+  private func setupNaverMapViewLayout() {
+    view.addSubview(cakkMapView)
+    cakkMapView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+  }
+  
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
+      $0.width.equalTo(120)
+    }
+  }
+  
+  private func setupLocationButtonLayout() {
+    view.addSubview(currentLocationButton)
+    currentLocationButton.snp.makeConstraints {
+      $0.width.height.equalTo(40)
+      $0.centerY.equalTo(refreshButton)
+      $0.trailing.equalToSuperview().inset(20)
+    }
+  }
+  
+  // Setup View
+  private func setupView() {
+    setupBaseView()
+    setupMapView()
+    setupCakeShopListFloatingPanel()
+  }
+  
+  private func setupBaseView() {
+    view.backgroundColor = .systemBackground
+    let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    backButtonItem.tintColor = .black
+    navigationItem.backBarButtonItem = backButtonItem
+  }
+  
+  private func setupMapView() {
+    cakkMapView.mapView.addCameraDelegate(delegate: self)
+    cakkMapView.didTappedMarker = { [weak self] cakeShop in
+      guard let self else { return }
+      self.showCakeShopPopupView(cakeShop)
+      
+      /// Landscape 모드일때 그리고 cakeShopListFloatingPanel이 full 상태일때 .half로 이동
+      if self.isLandscapeMode && self.cakeShopListFloatingPanel.state == .full {
+        self.cakeShopListFloatingPanel.move(to: .half, animated: true)
+      }
+    }
+    cakkMapView.didUnselectMarker = { [weak self] in
+      self?.hideCakeShopPopupView()
+    }
+  }
+  
+  private func setupCakeShopListFloatingPanel() {
+    cakeShopListFloatingPanel.set(contentViewController: nil)
+    cakeShopListFloatingPanel.addPanel(toParent: self)
+    cakeShopListFloatingPanel.delegate = self
+  }
+  
 }
 
 

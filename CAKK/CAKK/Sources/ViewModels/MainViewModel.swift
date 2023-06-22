@@ -35,7 +35,7 @@ class MainViewModel: ViewModelType {
   private let service: NetworkService<CakeAPI>
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(districts: [District], service: NetworkService<CakeAPI>) {
     self.districts = districts

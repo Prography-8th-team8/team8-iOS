@@ -30,7 +30,7 @@ class CapsuleStyleLoadingButton: CapsuleStyleButton {
     }
   }
   
-  // MARK: - Lifecycle
+  // MARK: - Initialization
   
   init(iconImage: UIImage?,
        loadingIconImage: UIImage?,
@@ -68,7 +68,7 @@ class CapsuleStyleLoadingButton: CapsuleStyleButton {
   }
   
   
-  // MARK: - Private Methods
+  // MARK: - Private
   
   private func updateByStatus() {
     switch status {

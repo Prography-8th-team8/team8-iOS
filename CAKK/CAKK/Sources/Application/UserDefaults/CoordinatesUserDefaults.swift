@@ -22,7 +22,7 @@ class CoordinatesUserDefaults {
   private(set) var longitude: Double
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   private init() { }
   

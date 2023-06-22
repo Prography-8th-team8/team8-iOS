@@ -26,6 +26,34 @@ class DistrictSelectionViewController: UIViewController {
     static let collectionViewBottomInset = 20.f
   }
   
+  // MARK: - Types
+  
+  typealias ViewModel = DistrictSelectionViewModel
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
+  
+  enum Section {
+    case regionSelector
+  }
+  
+  // MARK: - Properties
+  
+  private let viewModel: ViewModel
+  private lazy var dataSource: DataSource = makeDataSource()
+  private var cancellableBag = Set<AnyCancellable>()
+  
+  // MARK: - UI
+  
+  private lazy var collectionView = UICollectionView(frame: .zero,
+                                                     collectionViewLayout: collectionViewLayout).then {
+    $0.delaysContentTouches = false
+    $0.register(RegionPickerCollectionCell.self,
+                forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
+    $0.backgroundColor = .clear
+    $0.alwaysBounceVertical = false
+    $0.showsVerticalScrollIndicator = false
+    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
+  }
+  
   private var collectionViewLayout: UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(0.5),
@@ -45,29 +73,9 @@ class DistrictSelectionViewController: UIViewController {
     return UICollectionViewCompositionalLayout(section: section)
   }
   
-  
-  // MARK: - Types
-  
-  typealias ViewModel = DistrictSelectionViewModel
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
-  
-  
-  // MARK: - Properties
-  
-  private let viewModel: ViewModel
-  private lazy var dataSource: DataSource = makeDataSource()
-  private var cancellableBag = Set<AnyCancellable>()
-  
   private let regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
     cell.configure(item)
   }
-  
-  enum Section {
-    case regionSelector
-  }
-  
-  
-  // MARK: - UI
   
   private let titleLabel = UILabel().then {
     $0.text = "내게 맞는 케이크샵은 어디에 있을까요?"
@@ -82,18 +90,9 @@ class DistrictSelectionViewController: UIViewController {
     $0.textColor = .black.withAlphaComponent(0.6)
     $0.textAlignment = .left
   }
-  private lazy var collectionView = UICollectionView(frame: .zero,
-                                                     collectionViewLayout: collectionViewLayout).then {
-    $0.delaysContentTouches = false
-    $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
-    $0.backgroundColor = .clear
-    $0.alwaysBounceVertical = false
-    $0.showsVerticalScrollIndicator = false
-    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
-  }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -104,19 +103,67 @@ class DistrictSelectionViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    bind()
   }
   
-  // MARK: - Public
   
   // MARK: - Private
+  
+  // Bind
+  private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
+    collectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        guard let self = self else { return }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        self.viewModel.input
+          .selectDistrict
+          .send(indexPath)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() {
+    viewModel.output.districtSections
+      .sink { [weak self] districtSections in
+        self?.applySnapshot(with: districtSections)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.selectedDistrictSection
+      .sink { [weak self] _ in
+        self?.dismiss(animated: true)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func applySnapshot(with districtSections: [DistrictSection]) {
+    let section: [Section] = [.regionSelector]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(districtSections)
+    dataSource.apply(snapshot)
+  }
+}
+
+
+// MARK: - UI & Layout
+
+extension DistrictSelectionViewController {
   
   private func setup() {
     setupLayout()
     setupView()
-    bind()
   }
   
   // Setup Layouts
@@ -171,46 +218,6 @@ class DistrictSelectionViewController: UIViewController {
         cell.configure(item)
         return cell
       })
-  }
-  
-  // Bind
-  private func bind() {
-    bindInput()
-    bindOutput()
-  }
-  
-  private func bindInput() {
-    collectionView.didSelectItemPublisher
-      .sink { [weak self] indexPath in
-        guard let self = self else { return }
-        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-        self.viewModel.input
-          .selectDistrict
-          .send(indexPath)
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func bindOutput() {
-    viewModel.output.districtSections
-      .sink { [weak self] districtSections in
-        self?.applySnapshot(with: districtSections)
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output.selectedDistrictSection
-      .sink { [weak self] _ in
-        self?.dismiss(animated: true)
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func applySnapshot(with districtSections: [DistrictSection]) {
-    let section: [Section] = [.regionSelector]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, DistrictSection>()
-    snapshot.appendSections(section)
-    snapshot.appendItems(districtSections)
-    dataSource.apply(snapshot)
   }
 }
 

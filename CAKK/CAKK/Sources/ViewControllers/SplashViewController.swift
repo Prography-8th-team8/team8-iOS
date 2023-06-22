@@ -75,7 +75,7 @@ class SplashViewController: UIViewController {
   }
   
   
-  // MARK: - Public
+  // MARK: - Public Methods
   
   public func startSplash(completion: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + Constants.splashDuration) {
@@ -91,11 +91,12 @@ class SplashViewController: UIViewController {
   
   public func stopAnimations() {
     stopGridAnimation()
-  }
-  
-  
-  // MARK: - Private
-  
+  } 
+}
+
+// MARK: - UI & Layout
+
+extension SplashViewController {
   private func setup() {
     setupLayout()
     setupView()

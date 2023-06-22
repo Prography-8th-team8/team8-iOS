@@ -45,7 +45,8 @@ class CapsuleStyleButton: UIButton {
     $0.textAlignment = .center
   }
   
-  // MARK: - LifeCycle
+  
+  // MARK: - Initialization
 
   init(iconImage: UIImage?, text: String) {
     super.init(frame: .zero)
@@ -55,6 +56,9 @@ class CapsuleStyleButton: UIButton {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  
+  // MARK: - LifeCycle
   
   override func layoutSubviews() {
     super.layoutSubviews()
