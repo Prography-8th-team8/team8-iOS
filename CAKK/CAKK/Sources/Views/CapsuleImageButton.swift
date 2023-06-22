@@ -1,15 +1,16 @@
 //
-//  CapsuleStyleButton.swift
+//  CapsuleImageButton.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/04/03.
 //
 
 import UIKit
+
 import SnapKit
 import Then
 
-class CapsuleStyleButton: UIButton {
+class CapsuleImageButton: UIButton {
   
   // MARK: - Properties
   
@@ -87,7 +88,7 @@ class CapsuleStyleButton: UIButton {
   
   // MARK: - Initialization
 
-  init(iconImage: UIImage?,
+  init(iconImage: UIImage,
        text: String,
        spacing: CGFloat = 4,
        horizontalPadding: CGFloat = 0,

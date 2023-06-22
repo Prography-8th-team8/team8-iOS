@@ -48,7 +48,7 @@ final class CakeShopListViewController: UIViewController {
   
   // MARK: - Types
   
-  typealias ViewModel = CakeShopListViewModel
+  typealias ViewModel = MainViewModel
   typealias DataSource = UICollectionViewDiffableDataSource<Section, CakeShop>
   
   enum Section {
@@ -57,7 +57,7 @@ final class CakeShopListViewController: UIViewController {
   
   // MARK: - Properties
   
-  let viewModel: ViewModel
+  weak var viewModel: ViewModel?
   private var cancellableBag = Set<AnyCancellable>()
   
   public var cakeShopItemSelectHandler: ((CakeShop) -> Void)?
@@ -148,7 +148,7 @@ final class CakeShopListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    bind()
+    bind(viewModel)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -161,12 +161,14 @@ final class CakeShopListViewController: UIViewController {
   
   // Bind
   
-  private func bind() {
-    bindInput()
-    bindOutput()
+  private func bind(_ viewModel: ViewModel?) {
+    bindInput(viewModel)
+    bindOutput(viewModel)
   }
   
-  private func bindInput() {
+  private func bindInput(_ viewModel: ViewModel?) {
+    guard let viewModel else { return }
+    
     changeDistrictButton
       .tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
@@ -175,22 +177,24 @@ final class CakeShopListViewController: UIViewController {
       }
       .store(in: &cancellableBag)
     
-    collectionView.didSelectItemPublisher
-      .sink { [weak self] indexPath in
-        self?.viewModel.input.selectCakeShop.send(indexPath)
-        self?.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+    collectionView
+      .didSelectItemPublisher
+      .sink { indexPath in
+        viewModel.input.selectCakeShop.send(indexPath)
       }
       .store(in: &cancellableBag)
   }
   
-  private func bindOutput() {
+  private func bindOutput(_ viewModel: ViewModel?) {
+    guard let viewModel else { return }
+    
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
         self?.applySnapshot(with: cakeShops)
       }
       .store(in: &cancellableBag)
-    
+
     viewModel.output
       .cakeShops
       .map { $0.count.description }
@@ -198,7 +202,7 @@ final class CakeShopListViewController: UIViewController {
         self?.numberOfCakeShopLabel.text = "\(count)개의 케이크샵"
       }
       .store(in: &cancellableBag)
-    
+
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
@@ -209,16 +213,9 @@ final class CakeShopListViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
-    
+
     viewModel.output
-      .presentCakeShopDetail
-      .sink { [weak self] cakeShop in
-        self?.cakeShopItemSelectHandler?(cakeShop)
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output
-      .isLoading
+      .loadingCakeShops
       .sink { [weak self] isLoading in
         if isLoading {
           self?.collectionView.isHidden = true
@@ -360,7 +357,9 @@ extension CakeShopListViewController {
   private func makeDataSource() -> DataSource {
     DataSource(
       collectionView: collectionView,
-      cellProvider: { collectionView, indexPath, item in
+      cellProvider: { [weak self] collectionView, indexPath, item in
+        guard let self else { return UICollectionViewCell() }
+        
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: self.cakeShopCellRegistration,
           for: indexPath,
@@ -379,6 +378,8 @@ extension CakeShopListViewController {
   }
   
   private func applySnapshot(with cakeShops: [CakeShop]) {
+    collectionView.scrollToTop(animated: false)
+    
     let section: [Section] = [.cakeShop]
     var snapshot = NSDiffableDataSourceSnapshot<Section, CakeShop>()
     snapshot.appendSections(section)
@@ -394,10 +395,7 @@ import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    let viewModel = CakeShopListViewModel(
-      initialCakeShops: [],
-      service: .init(type: .stub)
-    )
+    let viewModel = MainViewModel(districts: [], service: .init())
     
     CakeShopListViewController(viewModel: viewModel)
       .toPreview()

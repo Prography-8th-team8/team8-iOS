@@ -40,8 +40,7 @@ final class DIContainer {
     return ShopDetailViewController(viewModel: viewModel)
   }
   
-  func makeCakeShopListViewController(initialCakeShops: [CakeShop]) -> CakeShopListViewController {
-    let viewModel = CakeShopListViewModel(initialCakeShops: initialCakeShops, service: networkService)
-    return CakeShopListViewController(viewModel: viewModel)
+  func makeCakeShopListViewController(mainViewModel: MainViewModel) -> CakeShopListViewController {
+    return CakeShopListViewController(viewModel: mainViewModel)
   }
 }

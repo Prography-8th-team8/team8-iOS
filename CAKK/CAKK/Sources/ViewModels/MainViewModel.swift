@@ -17,13 +17,16 @@ class MainViewModel: ViewModelType {
   struct Input {
     let cameraMove = PassthroughSubject<Coordinates, Never>()
     let searchByMapBounds = PassthroughSubject<NMGLatLngBounds, Never>()
+    let selectCakeShop = PassthroughSubject<IndexPath, Never>()
+    let selectCakeShopMarker = PassthroughSubject<CakeShop, Never>()
   }
   
   struct Output {
-    let cakeShops = PassthroughSubject<[CakeShop], Never>()
+    let cakeShops = CurrentValueSubject<[CakeShop], Never>([])
     let cameraCoordinates = PassthroughSubject<Coordinates, Never>()
     let showDistrictSelectionView = PassthroughSubject<Void, Never>()
     let loadingCakeShops = CurrentValueSubject<Bool, Never>(false)
+    let selectedCakeShop = PassthroughSubject<CakeShop?, Never>()
   }
   
   private(set) var input: Input!
@@ -93,6 +96,19 @@ class MainViewModel: ViewModelType {
       }
       .store(in: &cancellableBag)
     
+    input.selectCakeShop
+      .map { output.cakeShops.value[$0.row] }
+      .sink { cakeShop in
+        output.selectedCakeShop.send(cakeShop)
+      }
+      .store(in: &cancellableBag)
+    
+    input.selectCakeShopMarker
+      .sink { cakeShop in
+        output.selectedCakeShop.send(cakeShop)
+      }
+      .store(in: &cancellableBag)
+    
     input.searchByMapBounds
       .sink { [weak self] bounds in
         self?.loadCakeShops(by: bounds)
@@ -119,9 +135,14 @@ class MainViewModel: ViewModelType {
           longitudeRange.contains(cakeShop.longitude)
         }
       }
-      .sink { [weak self] error in
-        print(error)
-        self?.output.loadingCakeShops.send(false)
+      .sink { [weak self] completion in
+        switch completion {
+        case .finished:
+          break
+        case .failure(let error):
+          print(error)
+          self?.output.loadingCakeShops.send(false)
+        }
       } receiveValue: { [weak self] filteredCakeShops in
         self?.output.cakeShops.send(filteredCakeShops)
         self?.output.loadingCakeShops.send(false)
