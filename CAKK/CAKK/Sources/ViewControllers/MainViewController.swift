@@ -109,6 +109,10 @@ final class MainViewController: UIViewController {
       $0.tintColor = R.color.white()
       $0.backgroundColor = .init(hex: 0x141C3B)
       $0.alpha = 0
+      $0.layer.shadowColor = UIColor.black.cgColor
+      $0.layer.shadowOpacity = 0.15
+      $0.layer.shadowRadius = 4
+      $0.layer.shadowOffset = .init(width: 0, height: 4)
     }
   
   private var isTableViewPanning: Bool = false
