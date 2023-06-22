@@ -11,16 +11,32 @@ import Then
 
 class CapsuleStyleButton: UIButton {
   
-  // MARK: - Constants
+  // MARK: - Properties
   
-  enum Metric {
-    static let fontSize = 12.f
-    static let horizontalInset = 12.f
-    static let refreshImageViewVerticalInset = 12.f
-    static let refreshLabelSpacing = 4.f
+  public var font: UIFont = .pretendard(size: 14, weight: .bold) {
+    didSet {
+      buttonLabel.font = font
+    }
   }
   
-  // MARK: - Properties
+  public override var tintColor: UIColor! {
+    didSet {
+      imageView?.tintColor = tintColor
+      titleLabel?.textColor = tintColor
+    }
+  }
+  
+  public var borderColor: UIColor = .clear {
+    didSet {
+      layer.borderColor = borderColor.cgColor
+    }
+  }
+  
+  public var borderWidth: CGFloat = 0 {
+    didSet {
+      layer.borderWidth = borderWidth
+    }
+  }
   
   override var isEnabled: Bool {
     didSet {
@@ -32,23 +48,56 @@ class CapsuleStyleButton: UIButton {
     }
   }
   
+  override var isHighlighted: Bool {
+    didSet {
+      UIView.animate(withDuration: 0.1) {
+        if self.isHighlighted {
+          self.alpha = 0.3
+        } else {
+          self.alpha = 1
+        }
+      }
+    }
+  }
+  
+  private let spacing: CGFloat
+  private let horizontalPadding: CGFloat
+  private let verticalPadding: CGFloat
+  private let imageSize: CGSize
+  
   
   // MARK: - UI
   
+  lazy var stackView = UIStackView().then {
+    $0.spacing = self.spacing
+    $0.isUserInteractionEnabled = false
+  }
+  
   let iconImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
     $0.tintColor = .white
   }
   
-  let buttonLabel = UILabel().then {
+  lazy var buttonLabel = UILabel().then {
     $0.textColor = .white
-    $0.font = .pretendard(size: Metric.fontSize, weight: .bold)
+    $0.font = self.font
     $0.textAlignment = .center
   }
   
   
   // MARK: - Initialization
 
-  init(iconImage: UIImage?, text: String) {
+  init(iconImage: UIImage?,
+       text: String,
+       spacing: CGFloat = 4,
+       horizontalPadding: CGFloat = 0,
+       verticalPadding: CGFloat = 0,
+       imageSize: CGSize = .init(width: 20, height: 20)) {
+    self.spacing = spacing
+    self.horizontalPadding = horizontalPadding
+    self.verticalPadding = verticalPadding
+    self.imageSize = imageSize
+
     super.init(frame: .zero)
     setup(iconImage, text)
   }
@@ -71,14 +120,7 @@ class CapsuleStyleButton: UIButton {
   
   private func setup(_ iconImage: UIImage?, _ text: String) {
     setupLayout()
-    setupViewStyle()
     setupComponent(iconImage, text)
-  }
-  
-  private func setupViewStyle() {
-    backgroundColor = R.color.black()
-    layer.borderWidth = 2
-    layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 0.1)
   }
 
   private func setupComponent(_ iconImage: UIImage?, _ text: String) {
@@ -87,17 +129,17 @@ class CapsuleStyleButton: UIButton {
   }
   
   private func setupLayout() {
-    addSubview(iconImageView)
-    iconImageView.snp.makeConstraints {
-      $0.top.bottom.equalToSuperview().inset(Metric.refreshImageViewVerticalInset)
-      $0.left.equalToSuperview().inset(Metric.horizontalInset)
+    addSubview(stackView)
+    stackView.snp.makeConstraints {
+      $0.horizontalEdges.equalToSuperview().inset(self.horizontalPadding)
+      $0.verticalEdges.equalToSuperview().inset(self.verticalPadding)
     }
     
-    addSubview(buttonLabel)
-    buttonLabel.snp.makeConstraints {
-      $0.centerY.equalToSuperview()
-      $0.right.equalToSuperview().inset(Metric.horizontalInset)
-      $0.left.equalTo(iconImageView.snp.right).offset(Metric.refreshLabelSpacing)
+    stackView.addArrangedSubview(iconImageView)
+    stackView.addArrangedSubview(buttonLabel)
+    
+    iconImageView.snp.makeConstraints {
+      $0.width.height.equalTo(self.imageSize)
     }
   }
   

@@ -35,6 +35,9 @@ final class MainViewController: UIViewController {
     
     static let cakeShopPopupViewBottomInset = 12.f
     static let cakeShopPopupViewHeight = 158.f
+    
+    static let showMapButtonWidth = 80.f
+    static let showMapButtonBottomInset = 20.f
   }
   
   
@@ -80,9 +83,7 @@ final class MainViewController: UIViewController {
     $0.surfaceView.grabberHandlePadding = 12
   }
   
-  private let refreshButton = CapsuleStyleLoadingButton(
-    iconImage: R.image.refresh(),
-    loadingIconImage: UIImage(systemName: "ellipsis"),
+  private let refreshButton = RefreshButton(
     title: "이 지역 재검색",
     loadingTitle: "로딩 중").then {
       $0.backgroundColor = UIColor(hex: 0x4963E9)
@@ -99,7 +100,16 @@ final class MainViewController: UIViewController {
     $0.addShadow(to: .bottom)
   }
   
-//  private let showMapButton = CapsuleStyleButton(iconImage: <#T##UIImage?#>, text: <#T##String#>)
+  private let showMapButton = CapsuleStyleButton(
+    iconImage: R.image.map()!,
+    text: "지도",
+    spacing: 8,
+    horizontalPadding: 20,
+    verticalPadding: 10).then {
+      $0.tintColor = R.color.white()
+      $0.backgroundColor = .init(hex: 0x141C3B)
+      $0.alpha = 0
+    }
   
   private var isTableViewPanning: Bool = false
   
@@ -199,6 +209,13 @@ final class MainViewController: UIViewController {
       .compactMap { [weak self] in self?.cakkMapView.mapView.contentBounds }
       .sink { [weak self] bounds in
         self?.viewModel.input.searchByMapBounds.send(bounds)
+      }
+      .store(in: &cancellableBag)
+    
+    showMapButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] _ in
+        self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
       }
       .store(in: &cancellableBag)
   }
@@ -433,6 +450,15 @@ extension MainViewController {
     }
   }
   
+  private func setupShowMapButtonLayout() {
+    view.addSubview(showMapButton)
+    showMapButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Metric.showMapButtonBottomInset)
+    }
+  }
+  
+  
   // Setup View
   private func setupView() {
     setupBaseView()
@@ -467,8 +493,9 @@ extension MainViewController {
     cakeShopListFloatingPanel.set(contentViewController: nil)
     cakeShopListFloatingPanel.addPanel(toParent: self)
     cakeShopListFloatingPanel.delegate = self
+    
+    setupShowMapButtonLayout()
   }
-  
 }
 
 
@@ -513,8 +540,10 @@ extension MainViewController: FloatingPanelControllerDelegate {
     UIView.animate(withDuration: 0.3) {
       if fpc.state == .full {
         self.cakeShopPopupView?.alpha = 0
+        self.showMapButton.alpha = 1
       } else {
         self.cakeShopPopupView?.alpha = 1
+        self.showMapButton.alpha = 0
       }
     }
     

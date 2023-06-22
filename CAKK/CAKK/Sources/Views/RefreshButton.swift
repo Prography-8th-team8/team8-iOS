@@ -1,5 +1,5 @@
 //
-//  CapsuleStyleLoadingButton.swift
+//  RefreshButton.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/06/04.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CapsuleStyleLoadingButton: CapsuleStyleButton {
+class RefreshButton: CapsuleStyleButton {
   
   // MARK: - Constants
   
@@ -18,8 +18,8 @@ class CapsuleStyleLoadingButton: CapsuleStyleButton {
   
   // MARK: - Properties
   
-  private let iconImage: UIImage?
-  private let loadingIconImage: UIImage?
+  private let iconImage = R.image.refresh()
+  private let loadingIconImage = UIImage(systemName: "ellipsis")
   
   private let title: String
   private let loadingTitle: String
@@ -32,16 +32,20 @@ class CapsuleStyleLoadingButton: CapsuleStyleButton {
   
   // MARK: - Initialization
   
-  init(iconImage: UIImage?,
-       loadingIconImage: UIImage?,
-       title: String,
+  init(title: String,
        loadingTitle: String) {
-    self.iconImage = iconImage
-    self.loadingIconImage = loadingIconImage
     self.title = title
     self.loadingTitle = loadingTitle
     
-    super.init(iconImage: iconImage, text: title)
+    super.init(
+      iconImage: iconImage,
+      text: title,
+      spacing: 4,
+      horizontalPadding: 12,
+      verticalPadding: 10)
+    font = .pretendard(size: 12, weight: .bold)
+    borderColor = .init(hex: 0x4963E9)
+    borderWidth = 1
   }
   
   required init?(coder: NSCoder) {
