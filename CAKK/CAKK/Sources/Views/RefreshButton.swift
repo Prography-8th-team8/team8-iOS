@@ -16,10 +16,10 @@ class RefreshButton: UIButton {
   
   enum Metric {
     static let imageSize = 20.f
-    static let height = 36.f
+    static let height = 40.f
     static let spacing = 4.f
     static let horizontalPadding = 12.f
-    static let loadingViewSize = 40.f
+    static let loadingViewSize = 36.f
   }
   
   
@@ -29,12 +29,12 @@ class RefreshButton: UIButton {
   
   override var isHighlighted: Bool {
     didSet {
-      UIView.animate(withDuration: 0.1) {
-        if self.isHighlighted {
-          self.alpha = 0.3
-        } else {
-          self.alpha = 1
-        }
+      if isHighlighted {
+        iconImageView.alpha = 0.3
+        label.alpha = 0.3
+      } else {
+        iconImageView.alpha = 1
+        label.alpha = 1
       }
     }
   }
@@ -153,6 +153,8 @@ class RefreshButton: UIButton {
   public func hide() {
     UIView.animate(withDuration: 0.2) {
       self.alpha = 0
+    } completion: { [weak self] _ in
+      self?.stopLoading()
     }
   }
   
@@ -171,11 +173,6 @@ class RefreshButton: UIButton {
     label.text = title
     iconImageView.alpha = 1
   }
-  
-  
-  // MARK: - Private Method
-  
-  
 }
 
 #if canImport(SwiftUI) && DEBUG
