@@ -6,46 +6,71 @@
 //
 
 import UIKit
+import Then
+import Lottie
 
-class RefreshButton: CapsuleStyleButton {
+class RefreshButton: UIButton {
+  
   
   // MARK: - Constants
   
-  enum Status {
-    case loading
-    case done
+  enum Metric {
+    static let imageSize = 20.f
+    static let height = 36.f
+    static let spacing = 4.f
+    static let horizontalPadding = 12.f
+    static let loadingViewSize = 40.f
   }
+  
   
   // MARK: - Properties
   
-  private let iconImage = R.image.refresh()
-  private let loadingIconImage = UIImage(systemName: "ellipsis")
+  private let title = "이 지역 재검색"
   
-  private let title: String
-  private let loadingTitle: String
-  
-  var status: Status = .done {
+  override var isHighlighted: Bool {
     didSet {
-      updateByStatus()
+      UIView.animate(withDuration: 0.1) {
+        if self.isHighlighted {
+          self.alpha = 0.3
+        } else {
+          self.alpha = 1
+        }
+      }
     }
   }
   
-  // MARK: - Initialization
+  override var intrinsicContentSize: CGSize {
+    return .init(
+      width: label.intrinsicContentSize.width + Metric.spacing + Metric.horizontalPadding * 2,
+      height: Metric.height)
+  }
   
-  init(title: String,
-       loadingTitle: String) {
-    self.title = title
-    self.loadingTitle = loadingTitle
-    
-    super.init(
-      iconImage: iconImage,
-      text: title,
-      spacing: 4,
-      horizontalPadding: 12,
-      verticalPadding: 10)
-    font = .pretendard(size: 12, weight: .bold)
-    borderColor = .init(hex: 0x4963E9)
-    borderWidth = 1
+  
+  // MARK: - UI
+  
+  private let iconImageView = UIImageView().then {
+    $0.image = R.image.refresh()
+    $0.tintColor = R.color.white()
+  }
+  
+  private let label = UILabel().then {
+    $0.textColor = R.color.white()
+    $0.font = .pretendard(size: 12, weight: .bold)
+  }
+  
+  private let loadingView = LottieAnimationView(name: "loading_dot").then {
+    $0.contentMode = .scaleAspectFit
+    $0.loopMode = .loop
+    $0.alpha = 0
+    $0.stop()
+  }
+  
+  
+  // MARK: - Initializers
+  
+  init() {
+    super.init(frame: .zero)
+    setup()
   }
   
   required init?(coder: NSCoder) {
@@ -53,56 +78,114 @@ class RefreshButton: CapsuleStyleButton {
   }
   
   
-  // MARK: - Public
+  // MARK: - Setups
   
-  public func showWithAnimation() {
-    if alpha == 0 {
-      UIView.animate(withDuration: 0.3) {
-        self.alpha = 1
-      }
-    }
-  }
-  
-  public func hideWithAnimation() {
-    if alpha == 1 {
-      UIView.animate(withDuration: 0.3) {
-        self.alpha = 0
-      }
-    }
+  private func setup() {
+    setupLayout()
+    setupView()
   }
   
   
-  // MARK: - Private
+  // MARK: - Setup Layout
   
-  private func updateByStatus() {
-    switch status {
-    case .loading:
-      updateTitle(with: status)
-      updateIconImage(with: status)
-    case .done:
-      // 버튼이 사라지기 전에 UI가 완료 상태로 업데이트 되지 않도록 0.2초 지연을 줌
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-        self.updateTitle(with: self.status)
-        self.updateIconImage(with: self.status)
-      }
+  private func setupLayout() {
+    setupImageViewLayout()
+    setupLabelLayout()
+    setupLoadingViewLayout()
+  }
+  
+  private func setupImageViewLayout() {
+    addSubview(iconImageView)
+    iconImageView.snp.makeConstraints {
+      $0.centerY.equalToSuperview()
+      $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.width.height.equalTo(Metric.imageSize)
     }
   }
   
-  private func updateIconImage(with status: Status) {
-    let iconImage = status == .loading ? loadingIconImage : iconImage
-    UIView.transition(with: iconImageView,
-                      duration: 0.3,
-                      options: .transitionFlipFromLeft) {
-      self.iconImageView.image = iconImage
+  private func setupLabelLayout() {
+    addSubview(label)
+    label.snp.makeConstraints {
+      $0.centerY.equalTo(iconImageView.snp.centerY)
+      $0.leading.equalTo(iconImageView.snp.trailing).offset(Metric.spacing)
+      $0.trailing.equalToSuperview().inset(Metric.horizontalPadding)
     }
   }
   
-  private func updateTitle(with status: Status) {
-    let buttonTitle = status == .loading ? loadingTitle : title
-    UIView.transition(with: buttonLabel,
-                      duration: 0.3,
-                      options: .transitionFlipFromLeft) {
-      self.buttonLabel.text = buttonTitle
+  private func setupLoadingViewLayout() {
+    addSubview(loadingView)
+    loadingView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+      $0.width.height.equalTo(Metric.loadingViewSize)
+    }
+  }
+  
+  
+  // MARK: - Setup View
+  
+  private func setupView() {
+    setupBaseView()
+    setupLabel()
+  }
+  
+  private func setupBaseView() {
+    backgroundColor = .init(hex: 0x4963E9)
+    layer.borderWidth = 1
+    layer.borderColor = UIColor(hex: 0x5B73EB).cgColor
+    layer.cornerRadius = Metric.height / 2
+    addShadow(to: .bottom)
+  }
+  
+  private func setupLabel() {
+    label.text = title
+  }
+  
+  
+  
+  // MARK: - Public Method
+  
+  public func show() {
+    UIView.animate(withDuration: 0.2) {
+      self.alpha = 1
+    }
+  }
+  
+  public func hide() {
+    UIView.animate(withDuration: 0.2) {
+      self.alpha = 0
+    }
+  }
+  
+  public func startLoading() {
+    loadingView.alpha = 1
+    loadingView.play()
+    
+    label.text = ""
+    iconImageView.alpha = 0
+  }
+  
+  public func stopLoading() {
+    loadingView.alpha = 0
+    loadingView.stop()
+    
+    label.text = title
+    iconImageView.alpha = 1
+  }
+  
+  
+  // MARK: - Private Method
+  
+  
+}
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct RefreshButton_Preview: PreviewProvider {
+  static var previews: some View {
+    UIViewPreview {
+      RefreshButton()
     }
   }
 }
+#endif

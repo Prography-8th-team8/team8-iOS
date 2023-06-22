@@ -83,12 +83,7 @@ final class MainViewController: UIViewController {
     $0.surfaceView.grabberHandlePadding = 12
   }
   
-  private let refreshButton = RefreshButton(
-    title: "이 지역 재검색",
-    loadingTitle: "로딩 중").then {
-      $0.backgroundColor = UIColor(hex: 0x4963E9)
-      $0.addShadow(to: .bottom)
-    }
+  private let refreshButton = RefreshButton()
   
   private lazy var currentLocationButton = UIButton().then {
     $0.setImage(R.image.scope(), for: .normal)
@@ -228,7 +223,7 @@ final class MainViewController: UIViewController {
     viewModel.output
       .cakeShops
       .sink { [weak self] cakeShops in
-        self?.refreshButton.hideWithAnimation()
+        self?.refreshButton.hide()
         self?.showCakeShopListFloatingPanel(cakeShops)
       }
       .store(in: &cancellableBag)
@@ -253,13 +248,13 @@ final class MainViewController: UIViewController {
       .loadingCakeShops
       .sink { [weak self] isLoading in
         if isLoading {
-          self?.refreshButton.showWithAnimation()
-          self?.refreshButton.status = .loading
+          self?.refreshButton.show()
+          self?.refreshButton.startLoading()
           self?.hideCakeShopPopupView { [weak self] in
             self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
           }
         } else {
-          self?.refreshButton.status = .done
+          self?.refreshButton.stopLoading()ㄹ
         }
       }
       .store(in: &cancellableBag)
@@ -441,7 +436,6 @@ extension MainViewController {
     refreshButton.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
-      $0.width.equalTo(120)
     }
   }
   
@@ -520,7 +514,7 @@ extension MainViewController: NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
     if viewModel.output.loadingCakeShops.value == false &&
         reason == NMFMapChangedByGesture {
-      refreshButton.showWithAnimation()
+      refreshButton.show()
     }
     
     // Save my last position
