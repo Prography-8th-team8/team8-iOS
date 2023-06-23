@@ -97,7 +97,7 @@ class MainViewModel: ViewModelType {
       .store(in: &cancellableBag)
     
     input.selectCakeShop
-      .map { output.cakeShops.value[$0.row] }
+      .map { output.cakeShops.value[safe: $0.row] }
       .sink { cakeShop in
         output.selectedCakeShop.send(cakeShop)
       }
