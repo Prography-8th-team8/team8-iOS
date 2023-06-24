@@ -317,7 +317,8 @@ extension CakeShopListViewController {
   private func setupHeaderViewLayout() {
     view.addSubview(headerView)
     headerView.snp.makeConstraints {
-      $0.top.leading.trailing.equalToSuperview()
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.padding)
+      $0.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.headerViewHeight)
     }
   }
