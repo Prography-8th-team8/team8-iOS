@@ -19,11 +19,11 @@ struct CakeShop: Decodable, Hashable {
   let location: String
   let latitude: Double
   let longitude: Double
-  let cakeShopTypes: [CakeShopType]
+  let cakeCategories: [CakeCategory]
   let url: String?
   
   enum CodingKeys: String, CodingKey {
     case id, createdAt, modifiedAt, name, city, district, location, latitude, longitude, url
-    case cakeShopTypes = "storeTypes"
+    case cakeCategories = "storeTypes"
   }
 }

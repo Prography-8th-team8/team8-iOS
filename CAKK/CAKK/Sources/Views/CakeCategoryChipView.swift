@@ -1,5 +1,5 @@
 //
-//  CakeShopTypeChip.swift
+//  CakeCategoryChipView.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/05/09.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-class CakeShopTypeChip: LabelChip {
+class CakeCategoryChipView: LabelChip {
   
   
   // MARK: - Properties
   
-  private var cakeShopType: CakeShopType
+  private var cakeCategory: CakeCategory
   
   
   // MARK: - Initialization
   
-  init(_ cakeShopType: CakeShopType) {
-    self.cakeShopType = cakeShopType
+  init(_ cakeCategory: CakeCategory) {
+    self.cakeCategory = cakeCategory
     super.init(frame: .zero)
     setup()
   }
@@ -39,8 +39,8 @@ class CakeShopTypeChip: LabelChip {
   }
   
   private func setupChipView() {
-    title = cakeShopType.localizedString
-    titleColor = cakeShopType.color
+    title = cakeCategory.localizedString
+    titleColor = cakeCategory.color
     isBackgroundSynced = true
   }
 }
@@ -50,13 +50,13 @@ class CakeShopTypeChip: LabelChip {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-struct CakeShopTypeChipPreview: PreviewProvider {
+struct CakeCategoryChipPreview: PreviewProvider {
   static var previews: some View {
     VStack {
-      ForEach(CakeShopType.allCases, id: \.self) { type in
+      ForEach(CakeCategory.allCases, id: \.self) { type in
         UIViewPreview {
-          let cakeShopTypeChip = CakeShopTypeChip(type)
-          return cakeShopTypeChip
+          let cakeCategoryChip = CakeCategoryChipView(type)
+          return cakeCategoryChip
         }
       }
     }

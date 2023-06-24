@@ -37,7 +37,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     static let locationLabelTopPadding = 12.f
     static let locationLabelNumberOfLines = 3
     
-    static let cakeShopTypeStackViewSpacing = 4.f
+    static let cakeCategoryStackViewSpacing = 4.f
     
     static let shareButtonSize = 28.f
     static let shareButtonImagePadding = 5.f
@@ -80,9 +80,9 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.numberOfLines = Metric.locationLabelNumberOfLines
   }
   
-  private let cakeShopTypeStackView = UIStackView().then {
+  private let cakeCategoryStackView = UIStackView().then {
     $0.axis = .horizontal
-    $0.spacing = Metric.cakeShopTypeStackViewSpacing
+    $0.spacing = Metric.cakeCategoryStackViewSpacing
     $0.alignment = .leading
   }
   
@@ -115,7 +115,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     districtLocationLabel.text = item.district.koreanName
     locationLabel.text = item.location
     
-    configureCakeShopTypeStackView(item.cakeShopTypes)
+    configureCakeCategoryStackView(item.cakeCategories)
   }
 
   
@@ -135,7 +135,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     setupStackViewDividerLayout()
     setupDistrictLabelLayout()
     setupLocationLabelLayout()
-    setupCakeShopTypeStackViewLayout()
+    setupCakeCategoriesStackViewLayout()
   }
   
   private func setupCakkViewLayout() {
@@ -185,9 +185,9 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
-  private func setupCakeShopTypeStackViewLayout() {
-    cakkView.addSubview(cakeShopTypeStackView)
-    cakeShopTypeStackView.snp.makeConstraints {
+  private func setupCakeCategoriesStackViewLayout() {
+    cakkView.addSubview(cakeCategoryStackView)
+    cakeCategoryStackView.snp.makeConstraints {
       $0.leading.bottom.equalToSuperview().inset(Metric.padding)
     }
   }
@@ -203,8 +203,8 @@ final class CakeShopCollectionCell: HighlightableCell {
     cakkView.cornerRadius = Metric.cornerRadius
   }
   
-  private func configureCakeShopTypeStackView(_ types: [CakeShopType]) {
-    cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
+  private func configureCakeCategoryStackView(_ types: [CakeCategory]) {
+    cakeCategoryStackView.subviews.forEach { $0.removeFromSuperview() }
     
     if types.isEmpty {
       let chip = LabelChip()
@@ -212,14 +212,14 @@ final class CakeShopCollectionCell: HighlightableCell {
       chip.isBackgroundSynced = false
       chip.titleColor = R.color.brown_100()
       chip.backgroundColor = R.color.brown_10()
-      cakeShopTypeStackView.addArrangedSubview(chip)
+      cakeCategoryStackView.addArrangedSubview(chip)
       return
     }
     
     for (index, type) in types.enumerated() {
       if index < 3 {
-        let chip = CakeShopTypeChip(type)
-        cakeShopTypeStackView.addArrangedSubview(chip)
+        let chip = CakeCategoryChipView(type)
+        cakeCategoryStackView.addArrangedSubview(chip)
       } else {
         // at the end of the loop
         if index == types.count - 1 {
@@ -231,7 +231,7 @@ final class CakeShopCollectionCell: HighlightableCell {
           supplementaryChip.titleColor = .white
           supplementaryChip.backgroundColor = .black
           
-          cakeShopTypeStackView.addArrangedSubview(supplementaryChip)
+          cakeCategoryStackView.addArrangedSubview(supplementaryChip)
         }
       }
     }

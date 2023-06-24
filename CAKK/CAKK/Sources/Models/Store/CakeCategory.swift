@@ -1,5 +1,5 @@
 //
-//  CakeShopType.swift
+//  CakeCategory.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/05/07.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CakeShopType: String, Decodable, CaseIterable {
+enum CakeCategory: String, Decodable, CaseIterable {
   case lettering = "LETTERING"
   case character = "CHARACTER"
   case mealbox = "MEALBOX"
@@ -18,7 +18,7 @@ enum CakeShopType: String, Decodable, CaseIterable {
   case figure = "FIGURE"
 }
 
-extension CakeShopType {
+extension CakeCategory {
   var localizedString: String {
     switch self {
     case .lettering:
@@ -41,7 +41,7 @@ extension CakeShopType {
   }
 }
 
-extension CakeShopType {
+extension CakeCategory {
   var color: UIColor {
     switch self {
     case .lettering:

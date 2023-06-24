@@ -18,7 +18,6 @@
 		8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* DistrictSection.swift */; };
 		8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */; };
 		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
-		8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
 		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
@@ -33,9 +32,9 @@
 		8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */; };
 		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
 		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
-		8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */; };
+		8E533A222A2C652200C56A55 /* DistrictUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A212A2C652200C56A55 /* DistrictUserDefault.swift */; };
 		8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A252A2C66D300C56A55 /* UserDefault.swift */; };
-		8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */; };
+		8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A272A2C7E9300C56A55 /* CoordinatesUserDefault.swift */; };
 		8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */; };
 		8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E53F1BA2A332936002F871C /* EmptyStateView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
@@ -46,12 +45,18 @@
 		8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E192F29CEDD5000CFF157 /* Assets.xcassets */; };
 		8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */; };
 		8EA64A8A2A44ABC2001CE498 /* loading_dot.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EA64A892A44ABC2001CE498 /* loading_dot.json */; };
+		8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */; };
+		8EAB80FA2A4557CF00D9FA41 /* CakeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */; };
+		8EAB811B2A45DCA800D9FA41 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB811A2A45DCA800D9FA41 /* FilterButton.swift */; };
+		8EAB811D2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB811C2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift */; };
+		8EAB811F2A46141F00D9FA41 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */; };
+		8EAB81212A46148B00D9FA41 /* FilteredCategoryUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB81202A46148B00D9FA41 /* FilteredCategoryUserDefault.swift */; };
 		8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */; };
 		8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */; };
 		8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */; };
 		8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */; };
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
-		8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */; };
+		8EE842C62A0A33D8001F7E3D /* CakeCategoryChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */; };
 		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
 		B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7842A2C9275003B0393 /* RefreshButton.swift */; };
 		B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */; };
@@ -68,7 +73,7 @@
 		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
 		B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42B2A07E62500FB8403 /* CakeShop.swift */; };
 		B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */; };
-		B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4322A07E99500FB8403 /* CakeShopType.swift */; };
+		B455C4332A07E99500FB8403 /* CakeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4322A07E99500FB8403 /* CakeCategory.swift */; };
 		B455C4362A07EB2F00FB8403 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C4352A07EB2F00FB8403 /* District.swift */; };
 		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
 		B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C43A2A07F12F00FB8403 /* SampleData.swift */; };
@@ -118,15 +123,14 @@
 		8E02B7832A057F3B003AE7AF /* DistrictSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSection.swift; sourceTree = "<group>"; };
 		8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Common.swift"; sourceTree = "<group>"; };
 		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
-		8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopListViewModel.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
 		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
-		8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A212A2C652200C56A55 /* DistrictUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictUserDefault.swift; sourceTree = "<group>"; };
 		8E533A252A2C66D300C56A55 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
-		8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesUserDefaults.swift; sourceTree = "<group>"; };
+		8E533A272A2C7E9300C56A55 /* CoordinatesUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesUserDefault.swift; sourceTree = "<group>"; };
 		8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		8E53F1BA2A332936002F871C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -139,6 +143,12 @@
 		8E9E193229CEDD5000CFF157 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EA64A892A44ABC2001CE498 /* loading_dot.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_dot.json; sourceTree = "<group>"; };
+		8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryCell.swift; sourceTree = "<group>"; };
+		8EAB811A2A45DCA800D9FA41 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		8EAB811C2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		8EAB81202A46148B00D9FA41 /* FilteredCategoryUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryUserDefault.swift; sourceTree = "<group>"; };
 		8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = grid_animation.json; sourceTree = "<group>"; };
 		8EB7B79629F7BDF000D3F5BF /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -153,7 +163,7 @@
 		8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
 		8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopPopUpView.swift; sourceTree = "<group>"; };
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopTypeChip.swift; sourceTree = "<group>"; };
+		8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryChipView.swift; sourceTree = "<group>"; };
 		9F7C7B736F7112561BBE257C /* Pods-CAKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CAKK.debug.xcconfig"; path = "Target Support Files/Pods-CAKK/Pods-CAKK.debug.xcconfig"; sourceTree = "<group>"; };
 		A125FE054D114D33BA15F8C4 /* Pods_CAKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CAKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
@@ -173,7 +183,7 @@
 		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
 		B455C42B2A07E62500FB8403 /* CakeShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShop.swift; sourceTree = "<group>"; };
 		B455C42D2A07E79400FB8403 /* DistrictCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictCountResponse.swift; sourceTree = "<group>"; };
-		B455C4322A07E99500FB8403 /* CakeShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopType.swift; sourceTree = "<group>"; };
+		B455C4322A07E99500FB8403 /* CakeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategory.swift; sourceTree = "<group>"; };
 		B455C4352A07EB2F00FB8403 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
 		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
 		B455C43A2A07F12F00FB8403 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -230,12 +240,13 @@
 				B401B7842A2C9275003B0393 /* RefreshButton.swift */,
 				8E33EE2129F8E97C00931195 /* CapsuleView.swift */,
 				8E37755029F7CFAD00166198 /* LabelChip.swift */,
-				8EE842C52A0A33D8001F7E3D /* CakeShopTypeChip.swift */,
+				8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */,
 				8E3FF2E72A0E408800865E36 /* CakkView.swift */,
 				B43889B42A15B21700476BFC /* CakkMapView.swift */,
 				8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */,
 				8E53F1BA2A332936002F871C /* EmptyStateView.swift */,
 				B41EF0502A34CA6A0068843B /* BlogPostCell.swift */,
+				8EAB811A2A45DCA800D9FA41 /* FilterButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,6 +287,7 @@
 				8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */,
 				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
 				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
+				8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -284,8 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				8E533A252A2C66D300C56A55 /* UserDefault.swift */,
-				8E533A212A2C652200C56A55 /* DistrictUserDefaults.swift */,
-				8E533A272A2C7E9300C56A55 /* CoordinatesUserDefaults.swift */,
+				8E533A212A2C652200C56A55 /* DistrictUserDefault.swift */,
+				8E533A272A2C7E9300C56A55 /* CoordinatesUserDefault.swift */,
+				8EAB81202A46148B00D9FA41 /* FilteredCategoryUserDefault.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -295,6 +308,7 @@
 			children = (
 				8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */,
 				8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */,
+				8EAB811C2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift */,
 			);
 			path = FloatingPanelLayout;
 			sourceTree = "<group>";
@@ -364,6 +378,8 @@
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
 				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
 				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
+				8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */,
+				8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -414,7 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				B455C42B2A07E62500FB8403 /* CakeShop.swift */,
-				B455C4322A07E99500FB8403 /* CakeShopType.swift */,
+				B455C4322A07E99500FB8403 /* CakeCategory.swift */,
 				B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */,
 				B4A66FC62A1E5F7800D3581D /* BlogPost.swift */,
 			);
@@ -493,7 +509,6 @@
 				B490C33D2A0FF066008A2736 /* ViewModelType.swift */,
 				8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */,
 				8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */,
-				8E1C984A2A12972000CF57E5 /* CakeShopListViewModel.swift */,
 				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 			);
 			path = ViewModels;
@@ -732,12 +747,12 @@
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
-				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefaults.swift in Sources */,
+				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */,
-				8EE842C62A0A33D8001F7E3D /* CakeShopTypeChip.swift in Sources */,
+				8EE842C62A0A33D8001F7E3D /* CakeCategoryChipView.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
 				B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */,
 				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
@@ -748,10 +763,12 @@
 				8E02B77A2A054BC2003AE7AF /* RegionPickerCollectionCell.swift in Sources */,
 				8E0137AD2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift in Sources */,
 				B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */,
+				8EAB80FA2A4557CF00D9FA41 /* CakeCategoryCell.swift in Sources */,
 				8E02B77E2A054CAF003AE7AF /* UIColor+Hex.swift in Sources */,
 				B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */,
 				B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */,
 				B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */,
+				8EAB811D2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift in Sources */,
 				B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */,
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */,
@@ -765,9 +782,9 @@
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
 				B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */,
-				8E1C984B2A12972000CF57E5 /* CakeShopListViewModel.swift in Sources */,
 				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
 				B41EF0552A34E63C0068843B /* UICollectionView+RegisterDeque.swift in Sources */,
+				8EAB811F2A46141F00D9FA41 /* FilterViewModel.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
 				B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
@@ -782,15 +799,18 @@
 				B46CF5B22A35E97400A025FC /* UIViewController+Toast.swift in Sources */,
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
-				B455C4332A07E99500FB8403 /* CakeShopType.swift in Sources */,
+				B455C4332A07E99500FB8403 /* CakeCategory.swift in Sources */,
 				B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */,
 				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
+				8EAB811B2A45DCA800D9FA41 /* FilterButton.swift in Sources */,
+				8EAB81212A46148B00D9FA41 /* FilteredCategoryUserDefault.swift in Sources */,
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
 				B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */,
-				8E533A222A2C652200C56A55 /* DistrictUserDefaults.swift in Sources */,
+				8E533A222A2C652200C56A55 /* DistrictUserDefault.swift in Sources */,
 				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,
+				8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
 				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
 			);
