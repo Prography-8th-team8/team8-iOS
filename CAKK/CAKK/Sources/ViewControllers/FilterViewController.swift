@@ -97,7 +97,7 @@ class FilterViewController: UIViewController {
   
   private func setup() {
     setupLayout()
-    setupView()
+    setupDataSource()
   }
   
   private func bind() {
@@ -134,8 +134,8 @@ class FilterViewController: UIViewController {
 }
 
 
-
 // MARK: - UI & Layouts
+
 extension FilterViewController {
   
   private func collectionViewLayout() -> UICollectionViewCompositionalLayout {
@@ -212,23 +212,20 @@ extension FilterViewController {
       $0.bottom.equalTo(applyButton.snp.top)
     }
   }
-
-  
-  // MARK: - Setup View
-  
-  private func setupView() {
-    let section: [Section] = [.cakeCategories]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, CakeCategory>()
-    snapshot.appendSections(section)
-    snapshot.appendItems(CakeCategory.allCases)
-    dataSource.apply(snapshot)
-  }
 }
 
 
 // MARK: - DataSource & Snapshot
 
 extension FilterViewController {
+  
+  private func setupDataSource() {
+    let section: [Section] = [.cakeCategories]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, CakeCategory>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(CakeCategory.allCases)
+    dataSource.apply(snapshot)
+  }
   
   private func makeDataSource() -> DataSource {
     DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, shopType in
