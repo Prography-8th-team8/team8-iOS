@@ -68,12 +68,9 @@ class FilterViewModel: ViewModelType {
     output
       .categories
       .sink { [weak self] categories in
-        if categories.isEmpty {
-          output.categoriesChanged.send(false)
-          return
-        }
+        guard let self else { return }
         
-        if self?.originalFilteredCategories == categories {
+        if categories.isEmpty || Set(self.originalFilteredCategories) == Set(categories) {
           output.categoriesChanged.send(false)
         } else {
           output.categoriesChanged.send(true)
