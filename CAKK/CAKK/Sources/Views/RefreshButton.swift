@@ -147,12 +147,14 @@ class RefreshButton: UIButton {
   public func show() {
     UIView.animate(withDuration: 0.2) {
       self.alpha = 1
+      self.transform = .init(scaleX: 1, y: 1)
     }
   }
   
   public func hide() {
-    UIView.animate(withDuration: 0.2) {
+    UIView.animate(withDuration: 0.15) {
       self.alpha = 0
+      self.transform = .init(scaleX: 0.8, y: 0.8)
     } completion: { [weak self] _ in
       self?.stopLoading()
     }
