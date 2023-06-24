@@ -61,7 +61,8 @@ final class CakkMapView: NMFNaverMapView {
     }
     
     let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-    cameraUpdate.animation = .easeIn
+    cameraUpdate.animationDuration = 0.6
+    cameraUpdate.animation = .easeOut
     mapView.moveCamera(cameraUpdate)
   }
   
