@@ -50,7 +50,7 @@ class DistrictSelectionViewModel: ViewModelType {
         }
         
         if let section = DistrictSection.Section(rawValue: indexPath.row) {
-          DistrictUserDefaults.shared.updateSelected(districtSection: section)
+          DistrictUserDefault.shared.updateSelected(districtSection: section)
         }
       }
       .store(in: &cancellableBag)

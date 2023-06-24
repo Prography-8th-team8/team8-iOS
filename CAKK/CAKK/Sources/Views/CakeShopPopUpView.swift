@@ -32,7 +32,7 @@ class CakeShopPopUpView: UIControl {
     static let locationLabelTopPadding = 12.f
     static let locationLabelNumberOfLines = 3
     
-    static let cakeShopTypeStackViewSpacing = 4.f
+    static let cakeCategoryStackViewSpacing = 4.f
     
     static let shareButtonSize = 28.f
     static let shareButtonImagePadding = 5.f
@@ -75,9 +75,9 @@ class CakeShopPopUpView: UIControl {
     $0.numberOfLines = Metric.locationLabelNumberOfLines
   }
   
-  private let cakeShopTypeStackView = UIStackView().then {
+  private let cakeCategoryStackView = UIStackView().then {
     $0.axis = .horizontal
-    $0.spacing = Metric.cakeShopTypeStackViewSpacing
+    $0.spacing = Metric.cakeCategoryStackViewSpacing
     $0.alignment = .leading
   }
   
@@ -118,7 +118,7 @@ class CakeShopPopUpView: UIControl {
     setupStackViewDividerLayout()
     setupDistrictLabelLayout()
     setupLocationLabelLayout()
-    setupCakeShopTypeStackViewLayout()
+    setupCakeCategoryStackViewLayout()
   }
   
   private func setupShareButtonLayout() {
@@ -161,9 +161,9 @@ class CakeShopPopUpView: UIControl {
     }
   }
   
-  private func setupCakeShopTypeStackViewLayout() {
-    addSubview(cakeShopTypeStackView)
-    cakeShopTypeStackView.snp.makeConstraints {
+  private func setupCakeCategoryStackViewLayout() {
+    addSubview(cakeCategoryStackView)
+    cakeCategoryStackView.snp.makeConstraints {
       $0.leading.bottom.equalToSuperview().inset(Metric.padding)
     }
   }
@@ -173,7 +173,7 @@ class CakeShopPopUpView: UIControl {
     setupShopNameLabel()
     setupDistrictLabel()
     setupLocationLabel()
-    setupCakeShopTypeStackView()
+    setupCakeCategoryStackView()
   }
   
   private func setupBaseView() {
@@ -195,9 +195,9 @@ class CakeShopPopUpView: UIControl {
     locationLabel.text = cakeShop.location
   }
   
-  private func setupCakeShopTypeStackView() {
-    cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
-    let types = cakeShop.cakeShopTypes
+  private func setupCakeCategoryStackView() {
+    cakeCategoryStackView.subviews.forEach { $0.removeFromSuperview() }
+    let types = cakeShop.cakeCategories
     
     if types.isEmpty {
       let chip = LabelChip()
@@ -205,14 +205,14 @@ class CakeShopPopUpView: UIControl {
       chip.isBackgroundSynced = false
       chip.titleColor = R.color.brown_100()
       chip.backgroundColor = R.color.brown_10()
-      cakeShopTypeStackView.addArrangedSubview(chip)
+      cakeCategoryStackView.addArrangedSubview(chip)
       return
     }
     
     for (index, type) in types.enumerated() {
       if index < 3 {
-        let chip = CakeShopTypeChip(type)
-        cakeShopTypeStackView.addArrangedSubview(chip)
+        let chip = CakeCategoryChipView(type)
+        cakeCategoryStackView.addArrangedSubview(chip)
       } else {
         // at the end of the loop
         if index == types.count - 1 {
@@ -224,7 +224,7 @@ class CakeShopPopUpView: UIControl {
           supplementaryChip.titleColor = .white
           supplementaryChip.backgroundColor = .black
           
-          cakeShopTypeStackView.addArrangedSubview(supplementaryChip)
+          cakeCategoryStackView.addArrangedSubview(supplementaryChip)
         }
       }
     }
@@ -257,7 +257,7 @@ struct CakeShopPopUpView_Preview: PreviewProvider {
         location: "주소주소주소",
         latitude: 0,
         longitude: 0,
-        cakeShopTypes: [.character, .figure, .flower],
+        cakeCategories: [.character, .figure, .flower],
         url: ""))
     }
     .frame(height: 158)

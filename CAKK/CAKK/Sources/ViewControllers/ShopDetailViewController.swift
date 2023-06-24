@@ -300,7 +300,7 @@ final class ShopDetailViewController: UIViewController {
         
         self.nameLabel.text = cakeShopDetail.name
         self.addressLabel.text = cakeShopDetail.address
-        self.setupCakeShopTypeChips(with: cakeShopDetail)
+        self.setupCakeCategoryChips(with: cakeShopDetail)
         self.setActivityIndicator(toAnimate: false)
         
         if cakeShopDetail.phoneNumber.isEmpty {
@@ -448,9 +448,9 @@ extension ShopDetailViewController {
     title = "상세정보"
   }
   
-  private func setupCakeShopTypeChips(with cakeShopDetail: CakeShopDetailResponse) {
-    let chipViews = cakeShopDetail.cakeShopTypes.map {
-      CakeShopTypeChip($0)
+  private func setupCakeCategoryChips(with cakeShopDetail: CakeShopDetailResponse) {
+    let chipViews = cakeShopDetail.cakeCategories.map {
+      CakeCategoryChipView($0)
     }
     
     chipViews.forEach {

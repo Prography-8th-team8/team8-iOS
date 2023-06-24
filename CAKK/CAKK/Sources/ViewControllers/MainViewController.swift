@@ -45,7 +45,7 @@ final class MainViewController: UIViewController {
   
   private let viewModel: MainViewModel
   private var cancellableBag = Set<AnyCancellable>()
-  private let cakeShopListSurfaceAppearance = SurfaceAppearance().then { appearance in
+  private let floatingPanelSurfaceAppearance = SurfaceAppearance().then { appearance in
     // Shadows
     let shadow = SurfaceAppearance.Shadow()
     shadow.color = UIColor.black
@@ -79,8 +79,17 @@ final class MainViewController: UIViewController {
   
   private lazy var cakeShopListFloatingPanel = FloatingPanelController().then {
     $0.layout = CakeShopListFloatingPanelLayout()
-    $0.surfaceView.appearance = cakeShopListSurfaceAppearance
+    $0.surfaceView.appearance = floatingPanelSurfaceAppearance
     $0.surfaceView.grabberHandlePadding = 12
+  }
+  
+  private lazy var filterFloatingPanel = FloatingPanelController().then {
+    $0.layout = FilterFloatingPanelLayout()
+    $0.surfaceView.appearance = floatingPanelSurfaceAppearance
+    $0.surfaceView.grabberHandlePadding = 12
+    $0.contentMode = .fitToBounds
+    $0.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+    $0.isRemovalInteractionEnabled = true
   }
   
   private let refreshButton = RefreshButton()
@@ -359,6 +368,16 @@ final class MainViewController: UIViewController {
     }
   }
   
+  private func showFilterFloatingPanel() {
+    let viewModel = FilterViewModel()
+    let viewController = FilterViewController(viewModel: viewModel)
+    filterFloatingPanel.track(scrollView: viewController.collectionView)
+    filterFloatingPanel.addPanel(toParent: self)
+    filterFloatingPanel.set(contentViewController: viewController)
+    filterFloatingPanel.show()
+    filterFloatingPanel.move(to: .tip, animated: true)
+  }
+  
   private func askUserToPermissionSetting() {
     showAskAlert(title: "위치 권한이 필요해요",
                  message: "현재 내 위치로 이동하기 위해 권한이 필요해요.\n설정에서 위치 권한을 허용 해주세요",
@@ -472,6 +491,9 @@ extension MainViewController {
       self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
       self?.showCakeShopPopupView(cakeShop)
       self?.cakeShopListFloatingPanel.move(to: .half, animated: true)
+    }
+    viewController.filterButtonTapHandler = { [weak self] in
+      self?.showFilterFloatingPanel()
     }
     
     cakeShopListFloatingPanel.set(contentViewController: viewController)

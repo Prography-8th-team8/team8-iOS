@@ -1,5 +1,5 @@
 //
-//  CoordinatesUserDefaults.swift
+//  CoordinatesUserDefault.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/06/04.
@@ -7,11 +7,11 @@
 
 import Combine
 
-class CoordinatesUserDefaults {
+class CoordinatesUserDefault {
   
   // MARK: - Properties
   
-  static let shared = CoordinatesUserDefaults()
+  static let shared = CoordinatesUserDefault()
   
   public var lastCoordinatesPublisher = PassthroughSubject<Coordinates, Never>()
   

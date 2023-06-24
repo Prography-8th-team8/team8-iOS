@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 import SnapKit
 import Then
 
-import Combine
-
 import EasyTipView
+import FloatingPanel
 
 import CoreLocation
 
@@ -66,6 +66,8 @@ final class CakeShopListViewController: UIViewController {
   
   @UserDefault(key: "app.isfirstopen", defaultValue: true)
   private var isFirstOpen: Bool
+  
+  public var filterButtonTapHandler: (() -> Void)?
   
   
   // MARK: - UI
@@ -130,6 +132,8 @@ final class CakeShopListViewController: UIViewController {
     subTitle: "다른 곳으로 이동 후 새로고침을 눌러보세요!"
   )
   
+  private let filterButton = FilterButton(initialBadgeCount: 0)
+  
 
   // MARK: - Initialization
   
@@ -183,6 +187,13 @@ final class CakeShopListViewController: UIViewController {
         viewModel.input.selectCakeShop.send(indexPath)
       }
       .store(in: &cancellableBag)
+    
+    filterButton
+      .tapPublisher
+      .sink { [weak self] _ in
+        self?.filterButtonTapHandler?()
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput(_ viewModel: ViewModel?) {
@@ -225,6 +236,17 @@ final class CakeShopListViewController: UIViewController {
           self?.collectionView.isHidden = false
           self?.loadingView.isHidden = true
           self?.loadingView.stopAnimating()
+        }
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .filteredCategory
+      .sink { [weak self] categories in
+        if CakeCategory.allCases.count - categories.count == 0 {
+          self?.filterButton.setBadge(count: CakeCategory.allCases.count - categories.count)
+        } else {
+          self?.filterButton.setBadge(count: categories.count)
         }
       }
       .store(in: &cancellableBag)
@@ -285,6 +307,7 @@ extension CakeShopListViewController {
   private func setupLayout() {
     setupHeaderViewLayout()
     setupLabelStackLayout()
+    setupFilterButtonLayout()
     setupChangeDistrictButtonLayout()
     setupCollectionViewLayout()
     setupLoadingViewLayout()
@@ -306,11 +329,20 @@ extension CakeShopListViewController {
     }
   }
   
+  private func setupFilterButtonLayout() {
+    headerView.addSubview(filterButton)
+    filterButton.snp.makeConstraints {
+      $0.centerY.equalToSuperview()
+      $0.trailing.equalToSuperview().inset(Metric.padding)
+      $0.width.height.equalTo(36)
+    }
+  }
+  
   private func setupChangeDistrictButtonLayout() {
     headerView.addSubview(changeDistrictButton)
     changeDistrictButton.snp.makeConstraints {
       $0.centerY.equalToSuperview()
-      $0.trailing.equalToSuperview().inset(Metric.padding)
+      $0.trailing.equalTo(filterButton.snp.leading).inset(-8)
       $0.width.equalTo(Metric.changeDistrictWidth)
       $0.height.equalTo(Metric.changeDistrictHeight)
     }
@@ -338,6 +370,7 @@ extension CakeShopListViewController {
       $0.center.equalToSuperview()
     }
   }
+  
   
   // Setup Views
   private func setupView() {

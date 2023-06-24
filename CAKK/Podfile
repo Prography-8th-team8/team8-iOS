@@ -31,6 +31,7 @@ target 'CAKK' do
   # pod 'BottomSheetView', :git => 'git@github.com:qwerty3345/BottomSheetView.git', :branch => 'main'
   pod 'FloatingPanel', '~> 2.6.0'
   pod 'EasyTipView', '~> 2.1'
+  pod 'BadgeSwift', '~> 8.0'
   
   # Combine
   pod 'CombineCocoa', '~> 0.4.1'

@@ -16,7 +16,7 @@ class MainViewModel: ViewModelType {
   
   struct Input {
     let cameraMove = PassthroughSubject<Coordinates, Never>()
-    let searchByMapBounds = PassthroughSubject<NMGLatLngBounds, Never>()
+    let searchByMapBounds = CurrentValueSubject<NMGLatLngBounds, Never>(.init())
     let selectCakeShop = PassthroughSubject<IndexPath, Never>()
     let selectCakeShopMarker = PassthroughSubject<CakeShop, Never>()
   }
@@ -27,6 +27,7 @@ class MainViewModel: ViewModelType {
     let showDistrictSelectionView = PassthroughSubject<Void, Never>()
     let loadingCakeShops = CurrentValueSubject<Bool, Never>(false)
     let selectedCakeShop = PassthroughSubject<CakeShop?, Never>()
+    let filteredCategory = CurrentValueSubject<[CakeCategory], Never>(FilteredCategoryUserDefault.shared.categories)
   }
   
   private(set) var input: Input!
@@ -51,7 +52,7 @@ class MainViewModel: ViewModelType {
   // MARK: - Public
   
   public func setSelectedDistrict() {
-    guard DistrictUserDefaults.shared.selectedDistrictSection != nil else {
+    guard DistrictUserDefault.shared.selectedDistrictSection != nil else {
       output.showDistrictSelectionView.send(Void())
       return
     }
@@ -60,8 +61,8 @@ class MainViewModel: ViewModelType {
   }
   
   public func loadMyFinalPosition() {
-    let latitude = CoordinatesUserDefaults.shared.latitude
-    let longitude = CoordinatesUserDefaults.shared.longitude
+    let latitude = CoordinatesUserDefault.shared.latitude
+    let longitude = CoordinatesUserDefault.shared.longitude
 
     // 저장된 위,경도가 없을 시 사용자의 현재 위치로 카메라 이동
     guard latitude != 0, longitude != 0 else {
@@ -82,17 +83,26 @@ class MainViewModel: ViewModelType {
     let input = Input()
     let output = Output()
     
-    input.cameraMove
-      .debounce(for: 1, scheduler: DispatchQueue.main)
-      .sink { coordinates in
-        CoordinatesUserDefaults.shared.update(coordinates: coordinates)
-      }
-      .store(in: &cancellableBag)
-    
-    DistrictUserDefaults.shared
+    DistrictUserDefault.shared
       .selectedDistrictSectionPublisher
       .sink { [weak self] section in
         self?.loadCakeShops(section.value().districts)
+      }
+      .store(in: &cancellableBag)
+    
+    FilteredCategoryUserDefault.shared
+      .filteredCategoryPublisher
+      .sink { categories in
+        output.filteredCategory.send(categories)
+        /// 마지막 바운드로 필터된 상태로 요청
+        input.searchByMapBounds.send(input.searchByMapBounds.value)
+      }
+      .store(in: &cancellableBag)
+    
+    input.cameraMove
+      .debounce(for: 1, scheduler: DispatchQueue.main)
+      .sink { coordinates in
+        CoordinatesUserDefault.shared.update(coordinates: coordinates)
       }
       .store(in: &cancellableBag)
     
@@ -110,6 +120,7 @@ class MainViewModel: ViewModelType {
       .store(in: &cancellableBag)
     
     input.searchByMapBounds
+      .dropFirst()
       .sink { [weak self] bounds in
         self?.loadCakeShops(by: bounds)
       }
@@ -129,23 +140,26 @@ class MainViewModel: ViewModelType {
       .request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
       .subscribe(on: DispatchQueue.global())
       .receive(on: DispatchQueue.main)
-      .map { cakeShops in
+      .map { [weak self] cakeShops in
         cakeShops.filter { cakeShop in
-          latitudeRange.contains(cakeShop.latitude) &&
-          longitudeRange.contains(cakeShop.longitude)
+          let isContainingFilteredCategory = self?.output.filteredCategory.value.contains { category in
+            cakeShop.cakeCategories.contains(category)
+          } ?? false
+          
+          return latitudeRange.contains(cakeShop.latitude) &&
+          longitudeRange.contains(cakeShop.longitude) &&
+          isContainingFilteredCategory
         }
       }
       .sink { [weak self] completion in
         switch completion {
         case .finished:
-          break
+          self?.output.loadingCakeShops.send(false)
         case .failure(let error):
           print(error)
-          self?.output.loadingCakeShops.send(false)
         }
       } receiveValue: { [weak self] filteredCakeShops in
         self?.output.cakeShops.send(filteredCakeShops)
-        self?.output.loadingCakeShops.send(false)
       }
       .store(in: &cancellableBag)
 
@@ -161,15 +175,25 @@ class MainViewModel: ViewModelType {
       .subscribe(on: DispatchQueue.global())
       .receive(on: DispatchQueue.main)
       .flatMap { service.request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self) }
-      .sink { error in
-        print(error)
+      .sink { [weak self] completion in
+        switch completion {
+        case .finished:
+          self?.output.loadingCakeShops.send(false)
+        case .failure(let error):
+          print(error)
+        }
       } receiveValue: { [weak self] cakeShops in
-        // TODO: - MVP 에서는 그냥 모두 불러와서 필터링 하는 방식으로 사용중. 서버 들어오면 필터 로직은 서버가 가지기 때문에 삭제 필요함.
-        let filteredCakeShops = cakeShops.filter { districts.contains($0.district) }
+        let filteredCakeShops = cakeShops
+          .filter { cakeShop in
+            let isContainingFilteredCategory = self?.output.filteredCategory.value.contains { category in
+              cakeShop.cakeCategories.contains(category)
+            } ?? false
+            
+            return districts.contains(cakeShop.district) && isContainingFilteredCategory
+          }
         let lat = filteredCakeShops.map { $0.latitude }.reduce(0, +) / Double(filteredCakeShops.count)
         let lon = filteredCakeShops.map { $0.longitude }.reduce(0, +) / Double(filteredCakeShops.count)
         
-        self?.output.loadingCakeShops.send(false)
         self?.output.cakeShops.send(filteredCakeShops)
         self?.output.cameraCoordinates.send(Coordinates(latitude: lat, longitude: lon))
       }

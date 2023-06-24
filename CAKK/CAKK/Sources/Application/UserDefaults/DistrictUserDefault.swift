@@ -1,5 +1,5 @@
 //
-//  DistrictUserDefaults.swift
+//  DistrictUserDefault.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/06/04.
@@ -7,11 +7,11 @@
 
 import Combine
 
-class DistrictUserDefaults {
+class DistrictUserDefault {
   
   // MARK: - Properties
   
-  static let shared = DistrictUserDefaults()
+  static let shared = DistrictUserDefault()
   
   public var selectedDistrictSectionPublisher = PassthroughSubject<DistrictSection.Section, Never>()
   
