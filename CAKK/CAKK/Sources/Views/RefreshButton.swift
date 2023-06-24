@@ -6,7 +6,10 @@
 //
 
 import UIKit
+
 import Then
+import SnapKit
+
 import Lottie
 
 class RefreshButton: UIButton {
@@ -17,6 +20,8 @@ class RefreshButton: UIButton {
   enum Metric {
     static let imageSize = 20.f
     static let height = 40.f
+    static let width = 120.f
+    static let loadingWidth = 64.f
     static let spacing = 4.f
     static let horizontalPadding = 12.f
     static let loadingViewSize = 36.f
@@ -56,6 +61,7 @@ class RefreshButton: UIButton {
   private let label = UILabel().then {
     $0.textColor = R.color.white()
     $0.font = .pretendard(size: 12, weight: .bold)
+    $0.textAlignment = .center
   }
   
   private let loadingView = LottieAnimationView(name: "loading_dot").then {
@@ -64,6 +70,8 @@ class RefreshButton: UIButton {
     $0.alpha = 0
     $0.stop()
   }
+  
+  private var widthConstraint: Constraint?
   
   
   // MARK: - Initializers
@@ -89,9 +97,16 @@ class RefreshButton: UIButton {
   // MARK: - Setup Layout
   
   private func setupLayout() {
+    setupBaseLayout()
     setupImageViewLayout()
     setupLabelLayout()
     setupLoadingViewLayout()
+  }
+  
+  private func setupBaseLayout() {
+    self.snp.makeConstraints {
+      widthConstraint = $0.width.equalTo(Metric.width).constraint
+    }
   }
   
   private func setupImageViewLayout() {
@@ -141,7 +156,6 @@ class RefreshButton: UIButton {
   }
   
   
-  
   // MARK: - Public Method
   
   public func show() {
@@ -164,16 +178,30 @@ class RefreshButton: UIButton {
     loadingView.alpha = 1
     loadingView.play()
     
-    label.text = ""
+    label.isHidden = true
     iconImageView.alpha = 0
+    
+    UIView.animate(withDuration: 0.15,
+                   delay: 0,
+                   options: [.curveEaseOut]) {
+      self.widthConstraint?.update(offset: Metric.loadingWidth)
+      self.layoutIfNeeded()
+    }
   }
   
   public func stopLoading() {
     loadingView.alpha = 0
     loadingView.stop()
     
-    label.text = title
+    label.isHidden = false
     iconImageView.alpha = 1
+    
+    UIView.animate(withDuration: 0.15,
+                   delay: 0,
+                   options: [.curveEaseOut]) {
+      self.widthConstraint?.update(offset: Metric.width)
+      self.layoutIfNeeded()
+    }
   }
 }
 
