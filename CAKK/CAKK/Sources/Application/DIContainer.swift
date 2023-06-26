@@ -16,7 +16,7 @@ final class DIContainer {
   
   // MARK: - Properties
   
-  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .stub)
+  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server)
   
   // MARK: - DI Factory Methods
   
