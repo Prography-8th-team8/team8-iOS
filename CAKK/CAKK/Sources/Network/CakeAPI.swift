@@ -8,8 +8,11 @@
 import Moya
 import Alamofire
 
+import NMapsGeometry
+
 enum CakeAPI {
-  case fetchCakeShopList(districts: [District])
+  case fetchCakeShopsByDistricts(_ districts: [District], categories: [CakeCategory])
+  case fetchCakeShopsByBounds(_ bounds: NMGLatLngBounds, categories: [CakeCategory])
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
   /// numberOfPosts을 지정하지 않으면 포스팅 갯수의 기본값은 3임
@@ -24,14 +27,21 @@ extension CakeAPI: TargetType {
   
   var path: String {
     switch self {
-    case .fetchCakeShopList:
+    case .fetchCakeShopsByDistricts:
       return "/list"
+      
+    case .fetchCakeShopsByBounds:
+      return "/reload"
+      
     case .fetchDistrictCounts:
       return "/district/count"
+      
     case .fetchCakeShopDetail(id: let id):
       return "/\(id)"
+      
     case .fetchBlogReviews(id: let id, numberOfPosts: _):
       return "/\(id)/blog"
+      
     case .fetchCakeShopImage(id: let id):
       return "/image/\(id)"
     }
@@ -46,11 +56,32 @@ extension CakeAPI: TargetType {
   
   var task: Moya.Task {
     switch self {
-    case .fetchCakeShopList(let districts):
+    case .fetchCakeShopsByDistricts(let districts, let categories):
+      let districtsString = districts
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      let categoriesString = categories
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      
       let parameters: Parameters = [
-        "district": districts
-          .map { $0.rawValue.uppercased() }
-          .joined(separator: ",")
+        "district": districtsString,
+        "storeTypes": categoriesString
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchCakeShopsByBounds(let bounds, let categories):
+      let categoriesString = categories
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      
+      let parameters: Parameters = [
+        "southwestLatitude": bounds.southWestLat,
+        "southwestLongitude": bounds.southWestLng,
+        "northeastLatitude": bounds.northEastLat,
+        "northeastLongitude": bounds.northEastLng,
+        "storeTypes": categoriesString
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
@@ -78,12 +109,18 @@ extension CakeAPI: TargetType {
   /// Moya Provider의 Stub Closure 에서 호출되는 SampleData
   var sampleData: Data {
     switch self {
-    case .fetchCakeShopList:
+    case .fetchCakeShopsByDistricts:
       return SampleData.cakeShopListData
+      
+    case .fetchCakeShopsByBounds:
+      return SampleData.cakeShopListData
+      
     case .fetchDistrictCounts:
       return SampleData.districtCountData
+      
     case .fetchCakeShopDetail:
       return SampleData.cakeShopDetailData
+      
     case .fetchBlogReviews:
       return SampleData.blogPostsData
       

@@ -16,6 +16,8 @@ enum CakeCategory: String, Decodable, CaseIterable {
   case flower = "FLOWER"
   case photo = "PHOTO"
   case figure = "FIGURE"
+  case luxury = "LUXURY"
+  case etc = "ETC"
 }
 
 extension CakeCategory {
@@ -37,6 +39,10 @@ extension CakeCategory {
       return "포토"
     case .figure:
       return "피규어"
+    case .luxury:
+      return "럭셔리"
+    case .etc:
+      return "기타"
     }
   }
 }
@@ -59,6 +65,10 @@ extension CakeCategory {
     case .photo:
       return UIColor(hex: 0xE64136)
     case .figure:
+      return UIColor(hex: 0x141C3B)
+    case .luxury:
+      return UIColor(hex: 0x977944)
+    case .etc:
       return UIColor(hex: 0x141C3B)
     }
   }
