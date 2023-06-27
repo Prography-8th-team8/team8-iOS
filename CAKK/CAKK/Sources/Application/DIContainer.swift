@@ -43,4 +43,9 @@ final class DIContainer {
   func makeCakeShopListViewController(mainViewModel: MainViewModel) -> CakeShopListViewController {
     return CakeShopListViewController(viewModel: mainViewModel)
   }
+  
+  func makeFilterViewController(viewModel: FilterViewModel) -> FilterViewController {
+    let viewModel = FilterViewModel()
+    return FilterViewController(viewModel: viewModel)
+  }
 }

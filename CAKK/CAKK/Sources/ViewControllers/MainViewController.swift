@@ -370,7 +370,7 @@ final class MainViewController: UIViewController {
   
   private func showFilterFloatingPanel() {
     let viewModel = FilterViewModel()
-    let viewController = FilterViewController(viewModel: viewModel)
+    let viewController = DIContainer.shared.makeFilterViewController(viewModel: viewModel)
     filterFloatingPanel.track(scrollView: viewController.collectionView)
     filterFloatingPanel.addPanel(toParent: self)
     filterFloatingPanel.set(contentViewController: viewController)
