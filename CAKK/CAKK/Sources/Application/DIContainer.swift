@@ -16,7 +16,7 @@ final class DIContainer {
   
   // MARK: - Properties
   
-  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .stub)
+  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server)
   
   // MARK: - DI Factory Methods
   
@@ -42,5 +42,10 @@ final class DIContainer {
   
   func makeCakeShopListViewController(mainViewModel: MainViewModel) -> CakeShopListViewController {
     return CakeShopListViewController(viewModel: mainViewModel)
+  }
+  
+  func makeFilterViewController(viewModel: FilterViewModel) -> FilterViewController {
+    let viewModel = FilterViewModel()
+    return FilterViewController(viewModel: viewModel)
   }
 }

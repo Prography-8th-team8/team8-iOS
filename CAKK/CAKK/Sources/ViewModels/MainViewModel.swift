@@ -86,16 +86,15 @@ class MainViewModel: ViewModelType {
     DistrictUserDefault.shared
       .selectedDistrictSectionPublisher
       .sink { [weak self] section in
-        self?.loadCakeShops(section.value().districts)
+        self?.loadCakeShops(by: section.value().districts)
       }
       .store(in: &cancellableBag)
     
     FilteredCategoryUserDefault.shared
       .filteredCategoryPublisher
-      .sink { categories in
+      .sink { [weak self] categories in
         output.filteredCategory.send(categories)
-        /// 마지막 바운드로 필터된 상태로 요청
-        input.searchByMapBounds.send(input.searchByMapBounds.value)
+        self?.loadCakeShops(by: input.searchByMapBounds.value)
       }
       .store(in: &cancellableBag)
     
@@ -131,50 +130,11 @@ class MainViewModel: ViewModelType {
   }
   
   private func loadCakeShops(by bounds: NMGLatLngBounds) {
-    let latitudeRange = (bounds.southWestLat...bounds.northEastLat)
-    let longitudeRange = (bounds.southWestLng...bounds.northEastLng)
-    
     output.loadingCakeShops.send(true)
     
     service
-      .request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self)
-      .subscribe(on: DispatchQueue.global())
+      .request(.fetchCakeShopsByBounds(bounds, categories: FilteredCategoryUserDefault.shared.categories), type: CakeShopResponse.self)
       .receive(on: DispatchQueue.main)
-      .map { [weak self] cakeShops in
-        cakeShops.filter { cakeShop in
-          let isContainingFilteredCategory = self?.output.filteredCategory.value.contains { category in
-            cakeShop.cakeCategories.contains(category)
-          } ?? false
-          
-          return latitudeRange.contains(cakeShop.latitude) &&
-          longitudeRange.contains(cakeShop.longitude) &&
-          isContainingFilteredCategory
-        }
-      }
-      .sink { [weak self] completion in
-        switch completion {
-        case .finished:
-          self?.output.loadingCakeShops.send(false)
-        case .failure(let error):
-          print(error)
-        }
-      } receiveValue: { [weak self] filteredCakeShops in
-        self?.output.cakeShops.send(filteredCakeShops)
-      }
-      .store(in: &cancellableBag)
-
-  }
-  
-  private func loadCakeShops(_ districts: [District]) {
-    let service = service
-    let districts = districts
-    
-    output.loadingCakeShops.send(true)
-    
-    Just(Void())
-      .subscribe(on: DispatchQueue.global())
-      .receive(on: DispatchQueue.main)
-      .flatMap { service.request(.fetchCakeShopList(districts: districts), type: CakeShopResponse.self) }
       .sink { [weak self] completion in
         switch completion {
         case .finished:
@@ -183,19 +143,29 @@ class MainViewModel: ViewModelType {
           print(error)
         }
       } receiveValue: { [weak self] cakeShops in
-        let filteredCakeShops = cakeShops
-          .filter { cakeShop in
-            let isContainingFilteredCategory = self?.output.filteredCategory.value.contains { category in
-              cakeShop.cakeCategories.contains(category)
-            } ?? false
-            
-            return districts.contains(cakeShop.district) && isContainingFilteredCategory
-          }
-        let lat = filteredCakeShops.map { $0.latitude }.reduce(0, +) / Double(filteredCakeShops.count)
-        let lon = filteredCakeShops.map { $0.longitude }.reduce(0, +) / Double(filteredCakeShops.count)
+        self?.output.cakeShops.send(cakeShops)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func loadCakeShops(by districts: [District]) {
+    output.loadingCakeShops.send(true)
+  
+    service.request(.fetchCakeShopsByDistricts(districts, categories: FilteredCategoryUserDefault.shared.categories), type: CakeShopResponse.self)
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] completion in
+        switch completion {
+        case .finished:
+          self?.output.loadingCakeShops.send(false)
+        case .failure(let error):
+          print(error)
+        }
+      } receiveValue: { [weak self] cakeShops in
+        let avgLat = cakeShops.map { $0.latitude }.reduce(0, +) / Double(cakeShops.count)
+        let avgLng = cakeShops.map { $0.longitude }.reduce(0, +) / Double(cakeShops.count)
         
-        self?.output.cakeShops.send(filteredCakeShops)
-        self?.output.cameraCoordinates.send(Coordinates(latitude: lat, longitude: lon))
+        self?.output.cakeShops.send(cakeShops)
+        self?.output.cameraCoordinates.send(.init(latitude: avgLat, longitude: avgLng))
       }
       .store(in: &cancellableBag)
   }
