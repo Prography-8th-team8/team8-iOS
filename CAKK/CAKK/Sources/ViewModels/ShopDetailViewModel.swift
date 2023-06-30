@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 
-final class ShopDetailViewModel: ViewModelType {
+final class ShopDetailViewModel {
+  
   struct Input {
     let viewDidLoad = PassthroughSubject<Void, Never>()
     let loadMoreBlogPosts = PassthroughSubject<Void, Never>()
@@ -25,8 +26,8 @@ final class ShopDetailViewModel: ViewModelType {
   
   // MARK: - Properties
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   
   private let service: NetworkService<CakeAPI>
   private let realmStorage: RealmStorageProtocol
@@ -47,16 +48,22 @@ final class ShopDetailViewModel: ViewModelType {
     self.cakeShop = cakeShop
     self.realmStorage = realmStorage
     
-    bindInputs()
+    self.input = Input()
+    self.output = Output()
+    
+    bindInputs(input, output)
   }
   
   
   // MARK: - Private
   
-  private func bindInputs() {
-    let input = Input()
-    let output = Output()
-    
+  private func bindInputs(_ input: Input, _ output: Output) {
+    bindFetchCakeShopDetail(input, output)
+    bindLoadMoreBlogPosts(input, output)
+    bindBookmark(input, output)
+  }
+  
+  private func bindFetchCakeShopDetail(_ input: Input, _ output: Output) {
     input.viewDidLoad
       .flatMap { [weak service] in
         return service?.request(
@@ -71,7 +78,9 @@ final class ShopDetailViewModel: ViewModelType {
         output.cakeShopDetail.send(cakeShopDetail)
       })
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindLoadMoreBlogPosts(_ input: Input, _ output: Output) {
     input.loadMoreBlogPosts
       .prepend(()) // 초기에 한 번 값을 발행
       .filter { [weak self] in
@@ -97,7 +106,9 @@ final class ShopDetailViewModel: ViewModelType {
         self?.numberOfBlogPostsToShow += 3
       })
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindBookmark(_ input: Input, _ output: Output) {
     input.viewDidLoad
       .sink { [weak self] in
         guard let self = self else { return }
@@ -125,8 +136,5 @@ final class ShopDetailViewModel: ViewModelType {
         }
       }
       .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
   }
 }
