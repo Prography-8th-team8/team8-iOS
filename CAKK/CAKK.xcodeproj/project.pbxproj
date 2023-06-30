@@ -77,6 +77,7 @@
 		B455C4382A07F06900FB8403 /* cake_shop_list_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */; };
 		B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C43A2A07F12F00FB8403 /* SampleData.swift */; };
 		B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */; };
+		B466E5752A4EA2F40081E0BD /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B466E5742A4EA2F40081E0BD /* RealmStorage.swift */; };
 		B46CF5B22A35E97400A025FC /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CF5B12A35E97400A025FC /* UIViewController+Toast.swift */; };
 		B46F9DC829DACC8500113979 /* CakeShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */; };
 		B46F9DCA29DACF2400113979 /* CapsuleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DC929DACF2400113979 /* CapsuleImageButton.swift */; };
@@ -187,6 +188,7 @@
 		B455C4372A07F06900FB8403 /* cake_shop_list_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_list_sample.json; sourceTree = "<group>"; };
 		B455C43A2A07F12F00FB8403 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B45BB54529DD9D4A00A8B11B /* UIView+Animation.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; tabWidth = 2; };
+		B466E5742A4EA2F40081E0BD /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
 		B46CF5B12A35E97400A025FC /* UIViewController+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
 		B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeShopListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B46F9DC929DACF2400113979 /* CapsuleImageButton.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CapsuleImageButton.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -347,6 +349,7 @@
 			children = (
 				B4F1F41F2A17AF5F00DA6358 /* Application */,
 				8E32CE9C29CEE30A00905FD6 /* Network */,
+				B466E5732A4EA2DB0081E0BD /* Storage */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
 				B4FB8E7F2A0F700800DBF193 /* ViewModels */,
@@ -458,6 +461,14 @@
 				B455C43A2A07F12F00FB8403 /* SampleData.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		B466E5732A4EA2DB0081E0BD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				B466E5742A4EA2F40081E0BD /* RealmStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		B46F9DCB29DAE51100113979 /* Extensions */ = {
@@ -753,6 +764,7 @@
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */,
 				8EE842C62A0A33D8001F7E3D /* CakeCategoryChipView.swift in Sources */,
+				B466E5752A4EA2F40081E0BD /* RealmStorage.swift in Sources */,
 				8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */,
 				B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */,
 				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
