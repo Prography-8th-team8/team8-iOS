@@ -13,10 +13,10 @@ import RealmSwift
 // MARK: - Protocol, RealmStorageError
 
 protocol RealmStorageProtocol {
-  func load<T: Object>(id: String) -> T?
+  func load<T: Object>(id: Int, entityType: T.Type) -> T?
   func loadAll<T: Object>(entityType: T.Type) -> [T]
   @discardableResult func save<T: Object>(_ data: T) -> Bool
-  @discardableResult func remove<T: Object>(id: String, entityType: T.Type) -> Bool
+  @discardableResult func remove<T: Object>(id: Int, entityType: T.Type) -> Bool
   func removeAll<T: Object>(entityType: T.Type)
 }
 
@@ -50,14 +50,14 @@ final class RealmStorage: RealmStorageProtocol {
     }
   }
   
-  func load<T: Object>(id: String) -> T? {
+  func load<T: Object>(id: Int, entityType: T.Type) -> T? {
     guard let realm = realm,
           let object = realm.object(ofType: T.self, forPrimaryKey: id) else { return nil }
     return object
   }
   
   @discardableResult
-  func remove<T: Object>(id: String, entityType: T.Type) -> Bool {
+  func remove<T: Object>(id: Int, entityType: T.Type) -> Bool {
     guard let realm = realm else { return false }
     
     guard let object = realm.object(ofType: entityType.self, forPrimaryKey: id) else {
