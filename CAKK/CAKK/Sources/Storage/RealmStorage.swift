@@ -20,10 +20,6 @@ protocol RealmStorageProtocol {
   func removeAll<T: Object>(entityType: T.Type)
 }
 
-enum RealmStorageError: Error {
-  case realmNotInitialized
-}
-
 // MARK: - RealmStorage
 
 final class RealmStorage: RealmStorageProtocol {
@@ -40,7 +36,8 @@ final class RealmStorage: RealmStorageProtocol {
     return datas
   }
   
-  @discardableResult func save<T: Object>(_ data: T) -> Bool {
+  @discardableResult
+  func save<T: Object>(_ data: T) -> Bool {
     guard let realm = realm else { return false }
     
     do {
@@ -59,6 +56,7 @@ final class RealmStorage: RealmStorageProtocol {
     return object
   }
   
+  @discardableResult
   func remove<T: Object>(id: String, entityType: T.Type) -> Bool {
     guard let realm = realm else { return false }
     
