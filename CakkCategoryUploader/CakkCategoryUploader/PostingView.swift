@@ -14,6 +14,7 @@ struct PostingView: View {
   @Environment(\.presentationMode) var presentationMode
   @StateObject var store: PostingViewStore
   @State var isHidden = false
+  @State var isConfirmAlertShown = false
   
   
   // MARK: - Preview
@@ -83,7 +84,7 @@ struct PostingView: View {
         Spacer()
         
         Button {
-          store.post()
+          isConfirmAlertShown.toggle()
         } label: {
           Text("등록")
             .foregroundColor(.white)
@@ -94,6 +95,13 @@ struct PostingView: View {
       }
     }
     .environmentObject(store)
+    .alert("\(store.selectedCategoryNames)", isPresented: $isConfirmAlertShown) {
+      Button(role: .none) {
+        store.post()
+      } label: {
+        Text("확인 및 업로드")
+      }
+    }
     .alert("업로드에 성공하였습니다!", isPresented: $store.isSuccessToUpload) {
       Button(role: .none) {
         presentationMode.wrappedValue.dismiss()

@@ -10,6 +10,11 @@ import SwiftUI
 class PostingViewStore: ObservableObject {
   
   private var selectedCategory = [CakeCategory]()
+  public var selectedCategoryNames: String {
+    return selectedCategory
+      .map { $0.localizedString }
+      .joined(separator: ", ")
+  }
 
   @Published var cakeShop: CakeShop
   @Published var categories = CakeCategory.allCases
