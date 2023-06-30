@@ -16,7 +16,8 @@ final class DIContainer {
   
   // MARK: - Properties
   
-  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server)
+  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server, isLogEnabled: true)
+  private let realmStorage: RealmStorageProtocol = RealmStorage()
   
   // MARK: - DI Factory Methods
   
@@ -36,7 +37,9 @@ final class DIContainer {
   }
   
   func makeShopDetailViewController(with cakeShop: CakeShop) -> ShopDetailViewController {
-    let viewModel = ShopDetailViewModel(cakeShop: cakeShop, service: networkService)
+    let viewModel = ShopDetailViewModel(cakeShop: cakeShop,
+                                        service: networkService,
+                                        realmStorage: realmStorage)
     return ShopDetailViewController(viewModel: viewModel)
   }
   
