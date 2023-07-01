@@ -28,6 +28,10 @@ struct CakeShop: Decodable, Hashable {
     case id, createdAt, modifiedAt, name, city, district, location, latitude, longitude, url
     case cakeCategories = "storeTypes"
   }
+  
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
 }
 
 

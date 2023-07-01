@@ -130,41 +130,46 @@ final class MainViewModel: ViewModelType {
   }
   
   private func loadCakeShops(by bounds: NMGLatLngBounds) {
-    output.loadingCakeShops.send(true)
+    let service = service
     
-    service
-      .request(.fetchCakeShopsByBounds(bounds, categories: FilteredCategoryUserDefault.shared.categories), type: CakeShopResponse.self)
+    output.loadingCakeShops.send(true)
+    output.cakeShops.value.removeAll()
+    
+    let pages = 1...6
+    pages.publisher
+      .map { Int($0) }
+      .flatMap { page -> AnyPublisher<[CakeShop], Error> in
+        service.request(.fetchCakeShopsByBounds(bounds, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
+      }
       .receive(on: DispatchQueue.main)
-      .sink { [weak self] completion in
-        switch completion {
-        case .finished:
-          self?.output.loadingCakeShops.send(false)
-        case .failure(let error):
-          print(error)
-        }
+      .sink { [weak self] _ in
+        self?.output.loadingCakeShops.send(false)
       } receiveValue: { [weak self] cakeShops in
-        self?.output.cakeShops.send(cakeShops)
+        self?.output.cakeShops.value.appendUnique(contentsOf: cakeShops)
       }
       .store(in: &cancellableBag)
   }
   
   private func loadCakeShops(by districts: [District]) {
+    let service = service
+    
     output.loadingCakeShops.send(true)
-  
-    service.request(.fetchCakeShopsByDistricts(districts, categories: FilteredCategoryUserDefault.shared.categories), type: CakeShopResponse.self)
+    output.cakeShops.value.removeAll()
+    
+    let pages = 1...6
+    pages.publisher
+      .map { Int($0) }
+      .flatMap { page -> AnyPublisher<[CakeShop], Error> in
+        service.request(.fetchCakeShopsByDistricts(districts, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
+      }
       .receive(on: DispatchQueue.main)
-      .sink { [weak self] completion in
-        switch completion {
-        case .finished:
-          self?.output.loadingCakeShops.send(false)
-        case .failure(let error):
-          print(error)
-        }
+      .sink { [weak self] _ in
+        self?.output.loadingCakeShops.send(false)
       } receiveValue: { [weak self] cakeShops in
         let avgLat = cakeShops.map { $0.latitude }.reduce(0, +) / Double(cakeShops.count)
         let avgLng = cakeShops.map { $0.longitude }.reduce(0, +) / Double(cakeShops.count)
         
-        self?.output.cakeShops.send(cakeShops)
+        self?.output.cakeShops.value.appendUnique(contentsOf: cakeShops)
         self?.output.cameraCoordinates.send(.init(latitude: avgLat, longitude: avgLng))
       }
       .store(in: &cancellableBag)

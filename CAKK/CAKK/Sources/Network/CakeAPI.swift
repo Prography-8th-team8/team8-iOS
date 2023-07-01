@@ -11,8 +11,14 @@ import Alamofire
 import NMapsGeometry
 
 enum CakeAPI {
-  case fetchCakeShopsByDistricts(_ districts: [District], categories: [CakeCategory])
-  case fetchCakeShopsByBounds(_ bounds: NMGLatLngBounds, categories: [CakeCategory])
+  case fetchCakeShopsByDistricts(
+    _ districts: [District],
+    categories: [CakeCategory],
+    page: Int)
+  case fetchCakeShopsByBounds(
+    _ bounds: NMGLatLngBounds,
+    categories: [CakeCategory],
+    page: Int)
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
   /// numberOfPosts을 지정하지 않으면 포스팅 갯수의 기본값은 3임
@@ -56,7 +62,7 @@ extension CakeAPI: TargetType {
   
   var task: Moya.Task {
     switch self {
-    case .fetchCakeShopsByDistricts(let districts, let categories):
+    case .fetchCakeShopsByDistricts(let districts, let categories, let page):
       let districtsString = districts
         .map { $0.rawValue }
         .joined(separator: ",")
@@ -66,12 +72,13 @@ extension CakeAPI: TargetType {
       
       let parameters: Parameters = [
         "district": districtsString,
-        "storeTypes": categoriesString
+        "storeTypes": categoriesString,
+        "page": page
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
       
-    case .fetchCakeShopsByBounds(let bounds, let categories):
+    case .fetchCakeShopsByBounds(let bounds, let categories, let page):
       let categoriesString = categories
         .map { $0.rawValue }
         .joined(separator: ",")
@@ -81,7 +88,8 @@ extension CakeAPI: TargetType {
         "southwestLongitude": bounds.southWestLng,
         "northeastLatitude": bounds.northEastLat,
         "northeastLongitude": bounds.northEastLng,
-        "storeTypes": categoriesString
+        "storeTypes": categoriesString,
+        "page": page
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
