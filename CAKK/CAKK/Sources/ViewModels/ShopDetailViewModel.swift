@@ -8,25 +8,29 @@
 import Foundation
 import Combine
 
-final class ShopDetailViewModel: ViewModelType {
+final class ShopDetailViewModel {
+  
   struct Input {
     let viewDidLoad = PassthroughSubject<Void, Never>()
     let loadMoreBlogPosts = PassthroughSubject<Void, Never>()
+    let tapBookmarkButton = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
     let cakeShopDetail = CurrentValueSubject<CakeShopDetailResponse?, Never>(nil)
     let blogPostsToShow = PassthroughSubject<[BlogPost], Never>()
     let failToFetchDetail = PassthroughSubject<Void, Never>()
+    let isBookmarked = CurrentValueSubject<Bool, Never>(false)
   }
   
   
   // MARK: - Properties
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   
   private let service: NetworkService<CakeAPI>
+  private let realmStorage: RealmStorageProtocol
   
   private let cakeShop: CakeShop
   
@@ -37,20 +41,29 @@ final class ShopDetailViewModel: ViewModelType {
   
   // MARK: - Initialization
   
-  init(cakeShop: CakeShop, service: NetworkService<CakeAPI>) {
+  init(cakeShop: CakeShop,
+       service: NetworkService<CakeAPI>,
+       realmStorage: RealmStorageProtocol) {
     self.service = service
     self.cakeShop = cakeShop
+    self.realmStorage = realmStorage
     
-    bindInputs()
+    self.input = Input()
+    self.output = Output()
+    
+    bindInputs(input, output)
   }
   
   
   // MARK: - Private
   
-  private func bindInputs() {
-    let input = Input()
-    let output = Output()
-    
+  private func bindInputs(_ input: Input, _ output: Output) {
+    bindFetchCakeShopDetail(input, output)
+    bindLoadMoreBlogPosts(input, output)
+    bindBookmark(input, output)
+  }
+  
+  private func bindFetchCakeShopDetail(_ input: Input, _ output: Output) {
     input.viewDidLoad
       .flatMap { [weak service] in
         return service?.request(
@@ -65,7 +78,9 @@ final class ShopDetailViewModel: ViewModelType {
         output.cakeShopDetail.send(cakeShopDetail)
       })
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindLoadMoreBlogPosts(_ input: Input, _ output: Output) {
     input.loadMoreBlogPosts
       .prepend(()) // 초기에 한 번 값을 발행
       .filter { [weak self] in
@@ -91,8 +106,35 @@ final class ShopDetailViewModel: ViewModelType {
         self?.numberOfBlogPostsToShow += 3
       })
       .store(in: &cancellableBag)
+  }
+  
+  private func bindBookmark(_ input: Input, _ output: Output) {
+    input.viewDidLoad
+      .sink { [weak self] in
+        guard let self = self else { return }
+        let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: CakeShopEntity.self) != nil
+        output.isBookmarked.send(isBookmarked)
+      }
+      .store(in: &cancellableBag)
     
-    self.input = input
-    self.output = output
+    input.tapBookmarkButton
+      .map {
+        output.isBookmarked.value
+      }
+      .sink { [weak self] isBookmarked in
+        guard let self = self else { return }
+        
+        // 이미 북마크가 되어 있었으면 북마크에서 삭제
+        if isBookmarked {
+          self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
+          output.isBookmarked.send(false)
+        } else {
+          // 북마크가 되어 있지 않았으면 북마크 추가
+          let entity = self.cakeShop.toEntity(isBookmarked: true)
+          self.realmStorage.save(entity)
+          output.isBookmarked.send(true)
+        }
+      }
+      .store(in: &cancellableBag)
   }
 }

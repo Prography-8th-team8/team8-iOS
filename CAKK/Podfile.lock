@@ -14,6 +14,11 @@ PODS:
   - NMapsMap (3.16.2):
     - NMapsGeometry
   - R.swift (7.3.2)
+  - Realm (10.40.2):
+    - Realm/Headers (= 10.40.2)
+  - Realm/Headers (10.40.2)
+  - RealmSwift (10.40.2):
+    - Realm (= 10.40.2)
   - SnapKit (5.6.0)
   - SwiftLint (0.50.3)
   - Then (3.0.0)
@@ -28,6 +33,7 @@ DEPENDENCIES:
   - Moya/Combine (~> 15.0.0)
   - NMapsMap (~> 3.16.2)
   - R.swift (~> 7.3.0)
+  - RealmSwift (~> 10)
   - SnapKit (~> 5.6.0)
   - SwiftLint (~> 0.50.3)
   - Then (~> 3.0.0)
@@ -45,6 +51,8 @@ SPEC REPOS:
     - NMapsGeometry
     - NMapsMap
     - R.swift
+    - Realm
+    - RealmSwift
     - SnapKit
     - SwiftLint
     - Then
@@ -61,10 +69,12 @@ SPEC CHECKSUMS:
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: aaa64717249b06ae82c3a3addb3a01f0e33100ab
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
+  Realm: 731e86d9388287b18e36b0beb2493fc4845ce8a2
+  RealmSwift: c2a1059ba52e1e08467b1253b1d4ab354ef3177b
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: dd616b0b67ccac4b20dd7bacce5d0f2f743f869a
+PODFILE CHECKSUM: 0ffbdbf388989d0dea231439469432d3613614dd
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3

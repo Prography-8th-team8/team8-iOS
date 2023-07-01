@@ -112,6 +112,7 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
+                       bookmarkMenuButton,
                        //                       naviMenuButton,
                        shareMenuButton]
   ).then {
@@ -290,6 +291,13 @@ final class ShopDetailViewController: UIViewController {
         self?.makePhoneCall()
       }
       .store(in: &cancellableBag)
+    
+    bookmarkMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] in
+        self?.viewModel.input.tapBookmarkButton.send()
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -321,6 +329,13 @@ final class ShopDetailViewController: UIViewController {
     viewModel.output.blogPostsToShow
       .sink { [weak self] blogPosts in
         self?.applySnapshot(with: blogPosts)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output.isBookmarked
+      .sink { [weak self] isBookmarked in
+        let buttonImage = isBookmarked ? R.image.bookmark_filled() : R.image.bookmark()
+        self?.bookmarkMenuButton.update(image: buttonImage)
       }
       .store(in: &cancellableBag)
   }
@@ -500,7 +515,8 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
         ShopDetailViewController(
           viewModel: ShopDetailViewModel(
             cakeShop: SampleData.cakeShopList.first!,
-            service: NetworkService<CakeAPI>(type: .stub)))
+            service: NetworkService<CakeAPI>(type: .stub),
+            realmStorage: RealmStorage()))
     ).toPreview()
   }
 }
