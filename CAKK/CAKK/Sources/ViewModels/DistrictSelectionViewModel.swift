@@ -5,10 +5,11 @@
 //  Created by 이승기 on 2023/05/06.
 //
 
-import UIKit
+import Foundation
+
 import Combine
 
-class DistrictSelectionViewModel: ViewModelType {
+final class DistrictSelectionViewModel: ViewModelType {
   
   // MARK: - Properties
   

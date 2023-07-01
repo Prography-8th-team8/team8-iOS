@@ -1,5 +1,5 @@
 //
-//  UICollectionView+RegisterDeque.swift
+//  UICollectionView+RegisterDequeue.swift
 //  CAKK
 //
 //  Created by Mason Kim on 2023/06/11.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - 컬렉션뷰의 Cell, Header를 쉽게 register, deque 하기 위한 Syntax Sugar 메서드들
+// MARK: - 컬렉션뷰의 Cell, Header를 쉽게 register, dequeue 하기 위한 Syntax Sugar 메서드들
 
 extension UICollectionReusableView: ReusableView {}
 

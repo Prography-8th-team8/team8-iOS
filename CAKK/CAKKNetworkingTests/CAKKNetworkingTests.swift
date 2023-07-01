@@ -27,7 +27,7 @@ final class CAKKNetworkingTests: XCTestCase {
     let expectation = XCTestExpectation()
     
     // when
-    sut.request(.fetchCakeShopList(districts: [.dobong]), type: CakeShopResponse.self)
+    sut.request(.fetchCakeShopsByDistricts([.dobong], categories: CakeCategory.allCases), type: CakeShopResponse.self)
       .sink { completion in
         if case let .failure(error) = completion {
           XCTFail("CakeShopResponse 객체 디코딩 실패: \(error)")

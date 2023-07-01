@@ -12,9 +12,7 @@ import CombineCocoa
 
 import SnapKit
 import Then
-
 import NMapsMap
-
 import FloatingPanel
 
 final class MainViewController: UIViewController {

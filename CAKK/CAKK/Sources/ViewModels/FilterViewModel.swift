@@ -5,10 +5,11 @@
 //  Created by 이승기 on 2023/06/24.
 //
 
-import UIKit
+import Foundation
+
 import Combine
 
-class FilterViewModel: ViewModelType {
+final class FilterViewModel: ViewModelType {
 
   // MARK: - Properties
   
