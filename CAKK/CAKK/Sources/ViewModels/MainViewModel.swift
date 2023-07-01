@@ -6,11 +6,11 @@
 //
 
 import UIKit
-import Combine
 
+import Combine
 import NMapsGeometry
 
-class MainViewModel: ViewModelType {
+final class MainViewModel: ViewModelType {
   
   // MARK: - Properties
   

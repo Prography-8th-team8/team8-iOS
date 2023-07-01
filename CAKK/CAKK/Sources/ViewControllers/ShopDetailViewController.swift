@@ -6,12 +6,13 @@
 //
 
 import UIKit
+
 import SafariServices
+
+import Combine
 
 import SnapKit
 import Then
-
-import Combine
 
 final class ShopDetailViewController: UIViewController {
   

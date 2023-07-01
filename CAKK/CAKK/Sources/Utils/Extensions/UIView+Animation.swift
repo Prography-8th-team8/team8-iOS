@@ -29,14 +29,14 @@ extension UIView {
     })
   }
   
-  static func animateWithDamping(withDuration: TimeInterval = 0.5, 
-                          animations: @escaping () -> Void) {
+  static func animateWithDamping(withDuration: TimeInterval = 0.5,
+                                 animations: @escaping () -> Void) {
     UIView.animate(
       withDuration: 0.5,
       delay: 0,
       usingSpringWithDamping: 0.8,
       initialSpringVelocity: 0.8,
-      options: [.allowUserInteraction, .curveEaseInOut], 
+      options: [.allowUserInteraction, .curveEaseInOut],
       animations: animations)
   }
 

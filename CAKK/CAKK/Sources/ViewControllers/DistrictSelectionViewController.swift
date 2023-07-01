@@ -7,12 +7,12 @@
 
 import UIKit
 
+import Combine
+
 import SnapKit
 import Then
 
-import Combine
-
-class DistrictSelectionViewController: UIViewController {
+final class DistrictSelectionViewController: UIViewController {
   
   // MARK: - Constants
   

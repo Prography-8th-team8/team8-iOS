@@ -7,13 +7,13 @@
 
 import UIKit
 
+import CoreLocation
+
 import Then
 import SnapKit
 import Lottie
 
-import CoreLocation
-
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
   
   // MARK: - Constants
   

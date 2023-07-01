@@ -11,11 +11,12 @@ class DistrictUserDefault {
   
   // MARK: - Properties
   
+  static let key = "district.section.selected"
   static let shared = DistrictUserDefault()
   
   public var selectedDistrictSectionPublisher = PassthroughSubject<DistrictSection.Section, Never>()
   
-  @UserDefault(key: "district.section.selected", defaultValue: 0)
+  @UserDefault(key: DistrictUserDefault.key, defaultValue: 0)
   private(set) var selectedDistrictSection: Int?
   
   

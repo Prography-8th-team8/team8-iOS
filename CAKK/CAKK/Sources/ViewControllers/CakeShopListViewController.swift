@@ -6,15 +6,15 @@
 //
 
 import UIKit
+
+import CoreLocation
+
 import Combine
 
 import SnapKit
 import Then
-
 import EasyTipView
 import FloatingPanel
-
-import CoreLocation
 
 final class CakeShopListViewController: UIViewController {
   
