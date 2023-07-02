@@ -9,7 +9,7 @@ import Foundation
 
 import Combine
 
-final class FilterViewModel: ViewModelType {
+final class FilterViewModel {
 
   // MARK: - Properties
   
@@ -24,8 +24,8 @@ final class FilterViewModel: ViewModelType {
     let categoriesChanged = CurrentValueSubject<Bool, Never>(false)
   }
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   private var cancellableBag = Set<AnyCancellable>()
   private let originalFilteredCategories = FilteredCategoryUserDefault.shared.categories
   
@@ -33,23 +33,31 @@ final class FilterViewModel: ViewModelType {
   // MARK: - Initializers
   
   init() {
-    setupInputOutput()
+    self.input = Input()
+    self.output = Output()
+    
+    bind(input, output)
   }
 
   
   // MARK: - Private
   
-  private func setupInputOutput() {
-    let input = Input()
-    let output = Output()
-    
+  private func bind(_ input: Input, _ output: Output) {
+    bindAddCategory(input, output)
+    bindRemoveCategory(input, output)
+    bindApply(input, output)
+  }
+  
+  private func bindAddCategory(_ input: Input, _ output: Output) {
     input
       .addCategory
       .sink { category in
         output.categories.value.append(category)
       }
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindRemoveCategory(_ input: Input, _ output: Output) {
     input
       .removeCategory
       .sink { category in
@@ -58,28 +66,14 @@ final class FilterViewModel: ViewModelType {
         }
       }
       .store(in: &cancellableBag)
-    
+  }
+  
+  private func bindApply(_ input: Input, _ output: Output) {
     input
       .apply
       .sink { _ in
         FilteredCategoryUserDefault.shared.update(filteredCategories: output.categories.value)
       }
       .store(in: &cancellableBag)
-    
-    output
-      .categories
-      .sink { [weak self] categories in
-        guard let self else { return }
-        
-        if categories.isEmpty || Set(self.originalFilteredCategories) == Set(categories) {
-          output.categoriesChanged.send(false)
-        } else {
-          output.categoriesChanged.send(true)
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
   }
 }
