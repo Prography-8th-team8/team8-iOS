@@ -15,6 +15,7 @@ struct PostingView: View {
   @StateObject var store: PostingViewStore
   @State var isHidden = false
   @State var isConfirmAlertShown = false
+  @State var selectedCategoryEmptyAlertShown = false
   
   
   // MARK: - Preview
@@ -65,6 +66,7 @@ struct PostingView: View {
                   
                   Image(systemName: "chevron.up")
                 }
+                .frame(maxWidth: .infinity)
               }
               .padding()
               .foregroundColor(.black)
@@ -84,7 +86,11 @@ struct PostingView: View {
         Spacer()
         
         Button {
-          isConfirmAlertShown.toggle()
+          if store.selectedCategoryNames.isEmpty {
+            selectedCategoryEmptyAlertShown.toggle()
+          } else {
+            isConfirmAlertShown.toggle()
+          }
         } label: {
           Text("등록")
             .foregroundColor(.white)
@@ -95,7 +101,21 @@ struct PostingView: View {
       }
     }
     .environmentObject(store)
+    .alert("선택된 카테고리가 없습니다.", isPresented: $selectedCategoryEmptyAlertShown) {
+      Button(role: .none) {
+        // do something
+      } label: {
+        Text("확인")
+      }
+    }
     .alert("\(store.selectedCategoryNames)", isPresented: $isConfirmAlertShown) {
+      Button(role: .cancel) {
+        // do something
+      } label: {
+        Text("취소")
+          .foregroundColor(Color.accentColor)
+      }
+
       Button(role: .none) {
         store.post()
       } label: {
@@ -105,6 +125,13 @@ struct PostingView: View {
     .alert("업로드에 성공하였습니다!", isPresented: $store.isSuccessToUpload) {
       Button(role: .none) {
         presentationMode.wrappedValue.dismiss()
+      } label: {
+        Text("확인")
+      }
+    }
+    .alert("업로드에 실패하였습니다.", isPresented: $store.isFailedToUpload) {
+      Button(role: .none) {
+        // do something
       } label: {
         Text("확인")
       }

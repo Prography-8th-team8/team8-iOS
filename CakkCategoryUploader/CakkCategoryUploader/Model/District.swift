@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum District: String, Decodable, CaseIterable {
+enum District: String, Codable, CaseIterable {
   case jongno = "JONGNO"
   case jung = "JUNG"
   case yongsan = "YONGSAN"

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CakeShop: Decodable, Hashable {
+struct CakeShop: Codable, Hashable {
   let id: Int
   let createdAt: String
   let modifiedAt: String

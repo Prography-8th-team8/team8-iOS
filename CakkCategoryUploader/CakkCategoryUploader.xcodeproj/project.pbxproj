@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1C94692A515B50009F6803 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1C94682A515B50009F6803 /* CombineMoya */; };
+		8E1C946B2A515B50009F6803 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1C946A2A515B50009F6803 /* Moya */; };
+		8E1C946F2A515B9E009F6803 /* CakkCategoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C946E2A515B9E009F6803 /* CakkCategoryAPI.swift */; };
+		8E1C94722A51652F009F6803 /* CakeCategoryRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C94712A51652F009F6803 /* CakeCategoryRequestModel.swift */; };
 		8EAB81082A45C8B500D9FA41 /* CakkCategoryUploaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB81072A45C8B500D9FA41 /* CakkCategoryUploaderApp.swift */; };
 		8EAB810A2A45C8B500D9FA41 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB81092A45C8B500D9FA41 /* MainView.swift */; };
 		8EAB810C2A45C8B600D9FA41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EAB810B2A45C8B600D9FA41 /* Assets.xcassets */; };
@@ -26,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E1C946E2A515B9E009F6803 /* CakkCategoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkCategoryAPI.swift; sourceTree = "<group>"; };
+		8E1C94712A51652F009F6803 /* CakeCategoryRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryRequestModel.swift; sourceTree = "<group>"; };
 		8EAB81042A45C8B500D9FA41 /* CakkCategoryUploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CakkCategoryUploader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EAB81072A45C8B500D9FA41 /* CakkCategoryUploaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkCategoryUploaderApp.swift; sourceTree = "<group>"; };
 		8EAB81092A45C8B500D9FA41 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -51,12 +57,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1C946B2A515B50009F6803 /* Moya in Frameworks */,
+				8E1C94692A515B50009F6803 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E1C946C2A515B68009F6803 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				8EAB81092A45C8B500D9FA41 /* MainView.swift */,
+				8EAB812E2A488F6400D9FA41 /* CakeShopListView.swift */,
+				8EAB81322A48A81B00D9FA41 /* PostingViewStore.swift */,
+				8EAB81302A48977700D9FA41 /* PostingView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		8E1C946D2A515B88009F6803 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8E1C946E2A515B9E009F6803 /* CakkCategoryAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		8EAB80FB2A45C8B500D9FA41 = {
 			isa = PBXGroup;
 			children = (
@@ -78,11 +105,8 @@
 			children = (
 				8EAB81152A45CA8400D9FA41 /* Info.plist */,
 				8EAB81072A45C8B500D9FA41 /* CakkCategoryUploaderApp.swift */,
-				8EAB81092A45C8B500D9FA41 /* MainView.swift */,
-				8EAB812E2A488F6400D9FA41 /* CakeShopListView.swift */,
-				8EAB81302A48977700D9FA41 /* PostingView.swift */,
-				8EAB81322A48A81B00D9FA41 /* PostingViewStore.swift */,
-				8EAB813D2A48B3AC00D9FA41 /* PostedCakeShopUserDefault.swift */,
+				8E1C946D2A515B88009F6803 /* Network */,
+				8E1C946C2A515B68009F6803 /* Navigation */,
 				8EAB813A2A48B17800D9FA41 /* Utils */,
 				8EAB812B2A488CDA00D9FA41 /* Components */,
 				8EAB812A2A488CCD00D9FA41 /* Model */,
@@ -107,6 +131,7 @@
 				8EAB81262A488C4B00D9FA41 /* CakeShop.swift */,
 				8EAB81182A45CC9A00D9FA41 /* CakeCategory.swift */,
 				8EAB812C2A488D1500D9FA41 /* District.swift */,
+				8E1C94712A51652F009F6803 /* CakeCategoryRequestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +149,7 @@
 		8EAB813A2A48B17800D9FA41 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8EAB813D2A48B3AC00D9FA41 /* PostedCakeShopUserDefault.swift */,
 				8EAB813B2A48B18600D9FA41 /* UserDefault.swift */,
 			);
 			path = Utils;
@@ -145,6 +171,10 @@
 			dependencies = (
 			);
 			name = CakkCategoryUploader;
+			packageProductDependencies = (
+				8E1C94682A515B50009F6803 /* CombineMoya */,
+				8E1C946A2A515B50009F6803 /* Moya */,
+			);
 			productName = CakkCategoryUploader;
 			productReference = 8EAB81042A45C8B500D9FA41 /* CakkCategoryUploader.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +203,9 @@
 				Base,
 			);
 			mainGroup = 8EAB80FB2A45C8B500D9FA41;
+			packageReferences = (
+				8E1C94672A515B50009F6803 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 8EAB81052A45C8B500D9FA41 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,6 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E1C946F2A515B9E009F6803 /* CakkCategoryAPI.swift in Sources */,
+				8E1C94722A51652F009F6803 /* CakeCategoryRequestModel.swift in Sources */,
 				8EAB81172A45CAAD00D9FA41 /* WebView.swift in Sources */,
 				8EAB81372A48A9D900D9FA41 /* CategoryButton.swift in Sources */,
 				8EAB812D2A488D1500D9FA41 /* District.swift in Sources */,
@@ -417,6 +452,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E1C94672A515B50009F6803 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E1C94682A515B50009F6803 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E1C94672A515B50009F6803 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		8E1C946A2A515B50009F6803 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E1C94672A515B50009F6803 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8EAB80FC2A45C8B500D9FA41 /* Project object */;
 }

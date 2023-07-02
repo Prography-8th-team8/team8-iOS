@@ -11,6 +11,7 @@ import WebKit
 struct WebView: UIViewRepresentable {
   
   var url: String
+  weak var navigationDelegate: WKNavigationDelegate?
   
   //ui view 만들기
   func makeUIView(context: Context) -> WKWebView {
@@ -20,6 +21,7 @@ struct WebView: UIViewRepresentable {
     
     let webView = WKWebView()
     webView.load(URLRequest(url: url))
+    webView.navigationDelegate = navigationDelegate
     return webView
   }
   

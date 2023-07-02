@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CakeCategory: String, Decodable, CaseIterable {
+enum CakeCategory: String, Codable, CaseIterable {
   case lettering = "LETTERING"
   case character = "CHARACTER"
   case mealbox = "MEALBOX"
@@ -16,6 +16,8 @@ enum CakeCategory: String, Decodable, CaseIterable {
   case flower = "FLOWER"
   case photo = "PHOTO"
   case figure = "FIGURE"
+  case luxury = "LUXURY"
+  case etc = "ETC"
 }
 
 extension CakeCategory {
@@ -37,6 +39,10 @@ extension CakeCategory {
       return "포토"
     case .figure:
       return "피규어"
+    case .luxury:
+      return "럭셔리"
+    case .etc:
+      return "기타"
     }
   }
 }
