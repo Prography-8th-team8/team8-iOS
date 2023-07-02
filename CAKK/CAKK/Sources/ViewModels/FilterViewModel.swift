@@ -40,7 +40,7 @@ final class FilterViewModel {
   }
 
   
-  // MARK: - Binds
+  // MARK: - Private
   
   private func bind(_ input: Input, _ output: Output) {
     bindAddCategory(input, output)

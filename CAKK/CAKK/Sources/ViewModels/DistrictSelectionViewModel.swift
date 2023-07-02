@@ -9,7 +9,7 @@ import Foundation
 
 import Combine
 
-final class DistrictSelectionViewModel: ViewModelType {
+final class DistrictSelectionViewModel {
   
   // MARK: - Properties
   
@@ -22,8 +22,8 @@ final class DistrictSelectionViewModel: ViewModelType {
     let selectedDistrictSection = PassthroughSubject<DistrictSection, Never>()
   }
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   private var cancellableBag = Set<AnyCancellable>()
   
   private let service: NetworkService<CakeAPI>
@@ -33,17 +33,23 @@ final class DistrictSelectionViewModel: ViewModelType {
   
   init(service: NetworkService<CakeAPI>) {
     self.service = service
-    setupInputOutput()
+    
+    self.input = Input()
+    self.output = Output()
+    
+    bind(input, output)
+    
     setupData()
   }
   
   
   // MARK: - Private
   
-  private func setupInputOutput() {
-    let input = Input()
-    let output = Output()
-    
+  private func bind(_ input: Input, _ output: Output) {
+    bindSelectDistrict(input, output)
+  }
+  
+  private func bindSelectDistrict(_ input: Input, _ output: Output) {
     input.selectDistrict
       .sink { indexPath in
         if let selectedDistrictSection = output.districtSections.value[safe: indexPath.row] {
@@ -55,9 +61,6 @@ final class DistrictSelectionViewModel: ViewModelType {
         }
       }
       .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
   }
   
   private func setupData() {
