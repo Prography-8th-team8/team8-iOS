@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import NMapsGeometry
 
-final class MainViewModel: ViewModelType {
+final class MainViewModel {
   
   // MARK: - Properties
   
@@ -30,8 +30,8 @@ final class MainViewModel: ViewModelType {
     let filteredCategory = CurrentValueSubject<[CakeCategory], Never>(FilteredCategoryUserDefault.shared.categories)
   }
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   private var cancellableBag = Set<AnyCancellable>()
   
   
@@ -45,7 +45,75 @@ final class MainViewModel: ViewModelType {
     self.districts = districts
     self.service = service
     
-    setupInputOutput()
+    self.input = Input()
+    self.output = Output()
+    
+    bind(input, output)
+  }
+  
+  // MARK: - Binds
+  
+  private func bind(_ input: Input, _ output: Output) {
+    bindDistrictUserDefault(input, output)
+    bindFilterCategoryUserDefault(input, output)
+    bindCameraMove(input, output)
+    bindSelectCakeShop(input, output)
+    bindSelectCakeShopMarker(input, output)
+    bindSearchByBounds(input, output)
+  }
+  
+  private func bindDistrictUserDefault(_ input: Input, _ output: Output) {
+    DistrictUserDefault.shared
+      .selectedDistrictSectionPublisher
+      .sink { [weak self] section in
+        self?.loadCakeShops(by: section.value().districts)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindFilterCategoryUserDefault(_ input: Input, _ output: Output) {
+    FilteredCategoryUserDefault.shared
+      .filteredCategoryPublisher
+      .sink { [weak self] categories in
+        output.filteredCategory.send(categories)
+        self?.loadCakeShops(by: input.searchByMapBounds.value)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindCameraMove(_ input: Input, _ output: Output) {
+    input.cameraMove
+      .debounce(for: 1, scheduler: DispatchQueue.main)
+      .sink { coordinates in
+        CoordinatesUserDefault.shared.update(coordinates: coordinates)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindSelectCakeShop(_ input: Input, _ output: Output) {
+    input.selectCakeShop
+      .map { output.cakeShops.value[safe: $0.row] }
+      .sink { cakeShop in
+        output.selectedCakeShop.send(cakeShop)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindSelectCakeShopMarker(_ input: Input, _ output: Output) {
+    input.selectCakeShopMarker
+      .sink { cakeShop in
+        output.selectedCakeShop.send(cakeShop)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindSearchByBounds(_ input: Input, _ output: Output) {
+    input.searchByMapBounds
+      .dropFirst()
+      .sink { [weak self] bounds in
+        self?.loadCakeShops(by: bounds)
+      }
+      .store(in: &cancellableBag)
   }
   
   
@@ -78,56 +146,6 @@ final class MainViewModel: ViewModelType {
   
   
   // MARK: - Private
-  
-  private func setupInputOutput() {
-    let input = Input()
-    let output = Output()
-    
-    DistrictUserDefault.shared
-      .selectedDistrictSectionPublisher
-      .sink { [weak self] section in
-        self?.loadCakeShops(by: section.value().districts)
-      }
-      .store(in: &cancellableBag)
-    
-    FilteredCategoryUserDefault.shared
-      .filteredCategoryPublisher
-      .sink { [weak self] categories in
-        output.filteredCategory.send(categories)
-        self?.loadCakeShops(by: input.searchByMapBounds.value)
-      }
-      .store(in: &cancellableBag)
-    
-    input.cameraMove
-      .debounce(for: 1, scheduler: DispatchQueue.main)
-      .sink { coordinates in
-        CoordinatesUserDefault.shared.update(coordinates: coordinates)
-      }
-      .store(in: &cancellableBag)
-    
-    input.selectCakeShop
-      .map { output.cakeShops.value[safe: $0.row] }
-      .sink { cakeShop in
-        output.selectedCakeShop.send(cakeShop)
-      }
-      .store(in: &cancellableBag)
-    
-    input.selectCakeShopMarker
-      .sink { cakeShop in
-        output.selectedCakeShop.send(cakeShop)
-      }
-      .store(in: &cancellableBag)
-    
-    input.searchByMapBounds
-      .dropFirst()
-      .sink { [weak self] bounds in
-        self?.loadCakeShops(by: bounds)
-      }
-      .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
-  }
   
   private func loadCakeShops(by bounds: NMGLatLngBounds) {
     let service = service
