@@ -46,6 +46,7 @@ final class FilterViewModel {
     bindAddCategory(input, output)
     bindRemoveCategory(input, output)
     bindApply(input, output)
+    bindCategoryChanges(input, output)
   }
   
   private func bindAddCategory(_ input: Input, _ output: Output) {
@@ -73,6 +74,21 @@ final class FilterViewModel {
       .apply
       .sink { _ in
         FilteredCategoryUserDefault.shared.update(filteredCategories: output.categories.value)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindCategoryChanges(_ input: Input, _ output: Output) {
+    output
+      .categories
+      .sink { [weak self] categories in
+        guard let self else { return }
+        
+        if categories.isEmpty || Set(self.originalFilteredCategories) == Set(categories) {
+          output.categoriesChanged.send(false)
+        } else {
+          output.categoriesChanged.send(true)
+        }
       }
       .store(in: &cancellableBag)
   }
