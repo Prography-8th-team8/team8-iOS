@@ -31,9 +31,6 @@ final class MainViewController: UIViewController {
     
     static let bottomSheetTipModeHeight = 58.f
     
-    static let cakeShopPopupViewBottomInset = 12.f
-    static let cakeShopPopupViewHeight = 158.f
-    
     static let showMapButtonWidth = 80.f
     static let showMapButtonBottomInset = 20.f
   }
@@ -73,12 +70,18 @@ final class MainViewController: UIViewController {
   private lazy var cakkMapView = CakkMapView(viewModel: self.viewModel).then {
     $0.mapView.addCameraDelegate(delegate: self)
   }
-  private var cakeShopPopupView: CakeShopPopUpView?
   
   private lazy var cakeShopListFloatingPanel = FloatingPanelController().then {
     $0.layout = CakeShopListFloatingPanelLayout()
     $0.surfaceView.appearance = floatingPanelSurfaceAppearance
     $0.surfaceView.grabberHandlePadding = 12
+  }
+  
+  private lazy var cakeShopDetailFloatingPanel = FloatingPanelController().then {
+    $0.layout = CakeShopDetailFloatingPanelLayout()
+    $0.surfaceView.appearance = floatingPanelSurfaceAppearance
+    $0.surfaceView.grabberHandlePadding = 12
+    $0.isRemovalInteractionEnabled = true
   }
   
   private lazy var filterFloatingPanel = FloatingPanelController().then {
@@ -244,10 +247,8 @@ final class MainViewController: UIViewController {
         if isLoading {
           self.refreshButton.show()
           self.refreshButton.startLoading()
-          
-          self.hideCakeShopPopupView { [weak self] in
-            self?.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
-          }
+          self.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
+          self.cakeShopDetailFloatingPanel.hide(animated: true)
         } else {
           self.refreshButton.hide()
           self.updateFloatingPanelLayout()
@@ -261,15 +262,8 @@ final class MainViewController: UIViewController {
       .sink { [weak self] selectedCakeShop in
         guard let self else { return }
         if let selectedCakeShop {
-          self.showCakeShopPopupView(selectedCakeShop)
-          
-          /// Landscape 모드일때 그리고 cakeShopListFloatingPanel이 full 상태일때 .half로 이동
-          if self.isLandscapeMode && self.cakeShopListFloatingPanel.state == .full ||
-              self.isLandscapeMode == false && self.cakeShopListFloatingPanel.state == .full {
-            self.cakeShopListFloatingPanel.move(to: .half, animated: true)
-          }
-        } else {
-          self.hideCakeShopPopupView()
+          self.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+          self.showCakeShopDetailFloatingPanel(selectedCakeShop)
         }
       }
       .store(in: &cancellableBag)
@@ -277,48 +271,6 @@ final class MainViewController: UIViewController {
   
   
   // MARK: - Private methods
-  
-  private func showCakeShopPopupView(_ cakeShop: CakeShop) {
-    let newCakeShopPopupView = CakeShopPopUpView(cakeShop: cakeShop)
-    view.insertSubview(newCakeShopPopupView, belowSubview: cakeShopListFloatingPanel.view)
-    
-    newCakeShopPopupView.snp.makeConstraints {
-      $0.bottom.equalTo(cakeShopListFloatingPanel.surfaceView.snp.top).inset(-Metric.cakeShopPopupViewBottomInset)
-      $0.height.equalTo(Metric.cakeShopPopupViewHeight)
-      $0.width.equalTo(cakeShopListFloatingPanel.surfaceView).inset(Metric.horizontalPadding)
-      $0.centerX.equalTo(cakeShopListFloatingPanel.surfaceView)
-    }
-    view.layoutIfNeeded()
-
-    applyAnimation(to: newCakeShopPopupView)
-    configureMoveToDetailTapAction(to: newCakeShopPopupView, with: cakeShop)
-    configureShareButtonTapHandler(to: newCakeShopPopupView, with: cakeShop)
-
-    hideCakeShopPopupView { [weak self] in
-      self?.cakeShopPopupView = newCakeShopPopupView
-    }
-  }
-  
-  private func applyAnimation(to popupView: CakeShopPopUpView) {
-    var startTransform = CGAffineTransform.identity
-    startTransform = startTransform.scaledBy(x: 0.8, y: 0.8)
-    startTransform = startTransform.translatedBy(x: 0, y: Metric.cakeShopPopupViewHeight) /// height만큼 내림
-    popupView.transform = startTransform
-    popupView.alpha = 0
-    
-    var endTransform = CGAffineTransform.identity
-    endTransform = endTransform.scaledBy(x: 1, y: 1)
-    endTransform = endTransform.translatedBy(x: 0, y: 0)
-    
-    UIView.animate(
-      withDuration: 0.6,
-      delay: 0,
-      usingSpringWithDamping: 0.7,
-      initialSpringVelocity: 0.7) {
-        popupView.transform = endTransform
-        popupView.alpha = 1
-      }
-  }
   
   private func configureMoveToDetailTapAction(to popupView: CakeShopPopUpView,
                                               with cakeShop: CakeShop) {
@@ -341,20 +293,6 @@ final class MainViewController: UIViewController {
       activity.modalPresentationStyle = .popover
       activity.popoverPresentationController?.sourceView = popupView.shareButton
       self?.present(activity, animated: true)
-    }
-  }
-  
-  private func hideCakeShopPopupView(_ completion: (() -> Void)? = nil) {
-    UIView.animate(withDuration: 0.2) { [weak self] in
-      self?.cakeShopPopupView?.transform = .init(translationX: 0, y: -20)
-    } completion: { [weak self] _ in
-      UIView.animate(withDuration: 0.2) { [weak self] in
-        self?.cakeShopPopupView?.transform = .init(translationX: 0, y: Metric.cakeShopPopupViewHeight)
-        self?.cakeShopPopupView?.alpha = 0
-      } completion: { [weak self] _ in
-        self?.cakeShopPopupView?.removeFromSuperview()
-        completion?()
-      }
     }
   }
   
@@ -399,7 +337,10 @@ final class MainViewController: UIViewController {
   }
   
   private func updateMapViewInset() {
-    let floatingPanelHeight = view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY)
+    let floatingPanelHeight = max(
+      view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY),
+      view.frame.height - abs(cakeShopDetailFloatingPanel.surfaceView.frame.minY)
+    )
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
     if isLandscapeMode {
@@ -416,11 +357,23 @@ final class MainViewController: UIViewController {
   private func updateFloatingPanelLayout() {
     if isLandscapeMode {
       cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLandscapeLayout()
+      cakeShopDetailFloatingPanel.layout = CakeShopDetailFloatingPanelLandscapeLayout()
     } else {
       cakeShopListFloatingPanel.layout = CakeShopListFloatingPanelLayout()
+      cakeShopDetailFloatingPanel.layout = CakeShopDetailFloatingPanelLayout()
     }
     
     cakeShopListFloatingPanel.invalidateLayout()
+    cakeShopDetailFloatingPanel.invalidateLayout()
+  }
+  
+  private func showCakeShopDetailFloatingPanel(_ cakeShop: CakeShop) {
+    let viewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
+    cakeShopDetailFloatingPanel.delegate = self
+    cakeShopDetailFloatingPanel.addPanel(toParent: self)
+    cakeShopDetailFloatingPanel.set(contentViewController: viewController)
+    cakeShopDetailFloatingPanel.track(scrollView: viewController.mainScrollView)
+    cakeShopDetailFloatingPanel.move(to: .tip, animated: true)
   }
 }
 
@@ -487,7 +440,6 @@ extension MainViewController {
     viewController.cakeShopItemSelectHandler = { [weak self] cakeShop in
       let coordinate = NMGLatLng(lat: cakeShop.latitude, lng: cakeShop.longitude)
       self?.cakkMapView.moveCamera(coordinate, zoomLevel: nil)
-      self?.showCakeShopPopupView(cakeShop)
       self?.cakeShopListFloatingPanel.move(to: .half, animated: true)
     }
     viewController.filterButtonTapHandler = { [weak self] in
@@ -541,18 +493,24 @@ extension MainViewController: NMFMapViewCameraDelegate {
 
 extension MainViewController: FloatingPanelControllerDelegate {
   func floatingPanelDidMove(_ fpc: FloatingPanelController) {
-    // Show and hide cakeShopPopupView
-    UIView.animate(withDuration: 0.3) {
-      if fpc.state == .full {
-        self.cakeShopPopupView?.alpha = 0
-        self.showMapButton.alpha = 1
-      } else {
-        self.cakeShopPopupView?.alpha = 1
-        self.showMapButton.alpha = 0
+    if fpc == cakeShopListFloatingPanel {
+      // Show and hide cakeShopPopupView
+      UIView.animate(withDuration: 0.3) {
+        if fpc.state == .full {
+          self.showMapButton.alpha = 1
+        } else {
+          self.showMapButton.alpha = 0
+        }
       }
     }
     
     updateMapViewInset()
+  }
+  
+  func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
+    if fpc == cakeShopDetailFloatingPanel {
+      cakeShopListFloatingPanel.move(to: .half, animated: true)
+    }
   }
 }
 

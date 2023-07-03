@@ -16,6 +16,8 @@
 		8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */; };
 		8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E02B7832A057F3B003AE7AF /* DistrictSection.swift */; };
 		8E10735A2A0D849900FE07EF /* UIEdgeInsets+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */; };
+		8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C94922A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift */; };
+		8E1C94952A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C94942A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift */; };
 		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
@@ -127,6 +129,8 @@
 		8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionViewModel.swift; sourceTree = "<group>"; };
 		8E02B7832A057F3B003AE7AF /* DistrictSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSection.swift; sourceTree = "<group>"; };
 		8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Common.swift"; sourceTree = "<group>"; };
+		8E1C94922A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		8E1C94942A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailFloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
 		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 				8E0137AA2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift */,
 				8E0137AC2A2F503100EA3807 /* CakeShopListFloatingPanelLandscapeLayout.swift */,
 				8EAB811C2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift */,
+				8E1C94922A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift */,
+				8E1C94942A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift */,
 			);
 			path = FloatingPanelLayout;
 			sourceTree = "<group>";
@@ -785,6 +791,7 @@
 				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
+				8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */,
 				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
 				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,
 				8E933AF12A4FE99D00C34A83 /* Array+AppendUnique.swift in Sources */,
@@ -827,6 +834,7 @@
 				B46CF5B22A35E97400A025FC /* UIViewController+Toast.swift in Sources */,
 				8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */,
 				B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */,
+				8E1C94952A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift in Sources */,
 				B455C4332A07E99500FB8403 /* CakeCategory.swift in Sources */,
 				B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */,
 				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
@@ -1017,7 +1025,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1057,7 +1065,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
