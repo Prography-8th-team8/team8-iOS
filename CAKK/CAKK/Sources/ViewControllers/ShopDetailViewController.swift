@@ -48,7 +48,7 @@ final class ShopDetailViewController: UIViewController {
   
   // MARK: - UI
   
-  private let mainScrollView = UIScrollView().then {
+  public let mainScrollView = UIScrollView().then {
     $0.contentInsetAdjustmentBehavior = .always
   }
   private let contentStackView = UIStackView().then {

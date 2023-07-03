@@ -16,7 +16,7 @@ final class DIContainer {
   
   // MARK: - Properties
   
-  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server, isLogEnabled: true)
+  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server, isLogEnabled: false)
   private let realmStorage: RealmStorageProtocol = RealmStorage()
   
   // MARK: - DI Factory Methods
