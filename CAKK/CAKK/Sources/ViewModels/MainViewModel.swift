@@ -160,10 +160,13 @@ final class MainViewModel {
         service.request(.fetchCakeShopsByBounds(bounds, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
       }
       .receive(on: DispatchQueue.main)
+      .collect()
+      .map { $0.reduce([], +) }
       .sink { [weak self] _ in
         self?.output.loadingCakeShops.send(false)
       } receiveValue: { [weak self] cakeShops in
-        self?.output.cakeShops.value.appendUnique(contentsOf: cakeShops)
+        let uniqueCakeShops = Array(Set(cakeShops))
+        self?.output.cakeShops.send(uniqueCakeShops)
       }
       .store(in: &cancellableBag)
   }
@@ -181,13 +184,17 @@ final class MainViewModel {
         service.request(.fetchCakeShopsByDistricts(districts, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
       }
       .receive(on: DispatchQueue.main)
+      .collect()
+      .map { $0.reduce([], +) }
       .sink { [weak self] _ in
         self?.output.loadingCakeShops.send(false)
       } receiveValue: { [weak self] cakeShops in
+        let uniqueCakeShops = Array(Set(cakeShops))
+        self?.output.cakeShops.send(uniqueCakeShops)
+        
+        /// 모든 케이크샵들의 중간 지점으로 카메라 이동
         let avgLat = cakeShops.map { $0.latitude }.reduce(0, +) / Double(cakeShops.count)
         let avgLng = cakeShops.map { $0.longitude }.reduce(0, +) / Double(cakeShops.count)
-        
-        self?.output.cakeShops.value.appendUnique(contentsOf: cakeShops)
         self?.output.cameraCoordinates.send(.init(latitude: avgLat, longitude: avgLng))
       }
       .store(in: &cancellableBag)
