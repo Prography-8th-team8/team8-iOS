@@ -337,20 +337,31 @@ final class MainViewController: UIViewController {
   }
   
   private func updateMapViewInset() {
-    let floatingPanelHeight = max(
-      view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY),
-      view.frame.height - abs(cakeShopDetailFloatingPanel.surfaceView.frame.minY)
-    )
+    var floatingPanelHeight: CGFloat {
+      if cakeShopDetailFloatingPanel.state == .hidden {
+        return view.frame.height - abs(cakeShopListFloatingPanel.surfaceView.frame.minY)
+      } else {
+        return view.frame.height - abs(cakeShopDetailFloatingPanel.surfaceView.frame.minY)
+      }
+    }
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
     if isLandscapeMode {
       if cakeShopListFloatingPanel.state == .tip {
         cakkMapView.mapView.contentInset = .zero
       } else {
-        cakkMapView.mapView.contentInset = .init(top: 0, left: floatingPanelWidth - view.safeAreaInsets.left, bottom: 0, right: 0)
+        cakkMapView.mapView.contentInset = .init(
+          top: view.safeAreaInsets.top,
+          left: floatingPanelWidth - view.safeAreaInsets.left,
+          bottom: 0,
+          right: 0)
       }
     } else {
-      cakkMapView.mapView.contentInset = .init(top: 0, left: 0, bottom: floatingPanelHeight - view.safeAreaInsets.bottom, right: 0)
+      cakkMapView.mapView.contentInset = .init(
+        top: view.safeAreaInsets.top,
+        left: 0,
+        bottom: floatingPanelHeight - view.safeAreaInsets.bottom,
+        right: 0)
     }
   }
   
