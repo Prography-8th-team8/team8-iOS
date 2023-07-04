@@ -15,7 +15,7 @@ final class DetailSectionTitleView: UIView {
   // MARK: - UI
   
   private let keywordTitleLabel = UILabel().then {
-    $0.font = .pretendard(size: 20, weight: .bold)
+    $0.font = .pretendard(size: 18, weight: .bold)
     $0.text = "-"
   }
   
