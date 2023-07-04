@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
+import Kingfisher
+
 
 final class CakeImageCell: UICollectionViewCell {
   
@@ -34,8 +36,9 @@ final class CakeImageCell: UICollectionViewCell {
   
   // MARK: - Public
   
-  public func configure(image: UIImage) {
-    imageView.image = image
+  public func configure(imageURL: String) {
+    guard let url = URL(string: imageURL) else { return }
+    imageView.kf.setImage(with: url)
   }
   
   

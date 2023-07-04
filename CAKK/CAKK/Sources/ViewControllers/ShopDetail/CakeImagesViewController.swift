@@ -24,7 +24,7 @@ final class CakeImagesViewController: UICollectionViewController {
     case cakeImage
   }
   
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, UIImage>
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, String>
   
   
   // MARK: - Properties
@@ -38,7 +38,12 @@ final class CakeImagesViewController: UICollectionViewController {
   
   // MARK: - UI Components
   
-  // TODO: noData 뷰 구현 _ 이미지 없을 시 나타낼...
+  private let emptyStateView = EmptyStateView(
+    title: "표시할 데이터가 없어요!",
+    subTitle: "빠른 시일내에 준비하겠습니다."
+  ).then {
+    $0.isHidden = true
+  }
   
   // MARK: - Initialization
   
@@ -82,8 +87,9 @@ final class CakeImagesViewController: UICollectionViewController {
   
   private func bindOutput() {
     viewModel.output.cakeShopDetail
-      .sink { shopDetail in
-        print(shopDetail)
+      .sink { [weak self] shopDetail in
+        guard let imageUrls = shopDetail?.imageUrls else { return }
+        self?.applySnapshot(with: imageUrls)
       }
       .store(in: &cancellables)
   }
@@ -96,11 +102,18 @@ final class CakeImagesViewController: UICollectionViewController {
 extension CakeImagesViewController {
   
   private func setupLayout() {
-    
+    setupEmptyStateViewLayout()
+  }
+  
+  private func setupEmptyStateViewLayout() {
+    view.addSubview(emptyStateView)
+    emptyStateView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
   }
   
   private func setupCollectionView() {
-    collectionView.registerCell(cellClass: BlogPostCell.self)
+    collectionView.registerCell(cellClass: CakeImageCell.self)
     collectionView.addBorder(to: .bottom, color: R.color.gray_5())
   }
 }
@@ -116,16 +129,16 @@ extension CakeImagesViewController {
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(cellClass: CakeImageCell.self,
                                                       for: indexPath)
-        cell.configure(image: item)
+        cell.configure(imageURL: item)
         return cell
       })
   }
   
-  private func applySnapshot(with images: [UIImage]) {
+  private func applySnapshot(with imageURLs: [String]) {
     let section: [Section] = [.cakeImage]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, UIImage>()
+    var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
     snapshot.appendSections(section)
-    snapshot.appendItems(images)
+    snapshot.appendItems(imageURLs)
     
     blogPostDataSource.apply(snapshot)
   }
