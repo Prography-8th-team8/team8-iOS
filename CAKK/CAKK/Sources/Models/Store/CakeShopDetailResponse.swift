@@ -16,6 +16,8 @@ struct CakeShopDetailResponse: Decodable {
   let district: District
   let latitude: Double
   let longitude: Double
+  let thumbnail: String
+  let imageUrls: [String]
   let cakeCategories: [CakeCategory]
   let link: String
   let description: String
@@ -25,7 +27,7 @@ struct CakeShopDetailResponse: Decodable {
   
   enum CodingKeys: String, CodingKey {
     case id, createdAt, modifiedAt, name, city, district,
-         latitude, longitude, link, description, phoneNumber, address, blogPosts
+         latitude, longitude, link, description, phoneNumber, address, blogPosts, thumbnail, imageUrls
     case cakeCategories = "storeTypes"
   }
 }
