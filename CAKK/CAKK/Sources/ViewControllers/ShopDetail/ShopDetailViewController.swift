@@ -7,12 +7,13 @@
 
 import UIKit
 
-import SafariServices
-
 import Combine
 
 import SnapKit
 import Then
+
+import SafariServices
+
 
 final class ShopDetailViewController: UIViewController {
   
@@ -28,22 +29,11 @@ final class ShopDetailViewController: UIViewController {
   }
   
   
-  // MARK: - Types
-  
-  enum Section {
-    case blogPost
-  }
-  
-  typealias BlogPostDataSource = UICollectionViewDiffableDataSource<Section, BlogPost>
-  
-  
   // MARK: - Properties
   
   private let viewModel: ShopDetailViewModel
   
-  private var cancellableBag = Set<AnyCancellable>()
-  
-  private lazy var blogPostDataSource = makeBlogPostDataSource()
+  private var cancellables = Set<AnyCancellable>()
   
   
   // MARK: - UI
@@ -157,28 +147,13 @@ final class ShopDetailViewController: UIViewController {
   
   private let blogReviewTitleView = DetailSectionTitleView(title: "블로그 리뷰")
   
-  private lazy var blogPostCollectionView = UICollectionView(
-    frame: .zero,
-    collectionViewLayout: blogPostCollectionViewLayout).then {
-      $0.registerCell(cellClass: BlogPostCell.self)
-      $0.addBorder(to: .bottom, color: R.color.gray_5())
-  }
+  private lazy var blogPostsViewController = BlogPostsViewController(viewModel: viewModel, collectionViewLayout: blogPostCollectionViewLayout)
+
   private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
     $0.minimumLineSpacing = 0
     $0.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
   }
-  // 블로그 포스팅 컬렉션뷰의 사이즈가 내부 컨텐츠의 사이즈와 동일하게 하기 위한 constraints
-  private var blogPostCollectionViewHeightConstraint: Constraint?
-  
-  private let loadMoreBlogPostsButton = UIButton().then {
-    $0.titleLabel?.font = .pretendard(size: 14, weight: .bold)
-    $0.layer.borderColor = R.color.gray_5()?.cgColor
-    $0.layer.borderWidth = 2
-    $0.layer.cornerRadius = 8
-    $0.setTitle("블로그 리뷰 더 보기", for: .normal)
-    $0.setTitleColor(.black, for: .normal)
-  }
-  
+
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
   }
@@ -228,17 +203,8 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
-  // 컬렉션뷰의 내부의 컨텐츠 사이즈와 동일하게 해줌 (스크롤이 안되는, 전체를 감싸는 스택뷰처럼 처리함)
-  private func updateBlogPostCollectionViewHeight() {
-    blogPostCollectionViewHeightConstraint?.update(
-      offset: blogPostCollectionView.contentSize.height)
-    UIView.animate(withDuration: 0.3) {
-      self.view.layoutIfNeeded()
-    }
-  }
-  
   private func showBlogPostSafariController(of indexPath: IndexPath) {
-    guard let blogPost = blogPostDataSource.itemIdentifier(for: indexPath),
+    guard let blogPost = blogPostsViewController.blogPost(of: indexPath),
           let url = URL(string: blogPost.link) else { return }
     
     let safariViewController = SFSafariViewController(url: url)
@@ -263,19 +229,12 @@ final class ShopDetailViewController: UIViewController {
   private func bindInput() {
     viewModel.input.viewDidLoad.send()
     
-    loadMoreBlogPostsButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        self?.viewModel.input.loadMoreBlogPosts.send()
-      }
-      .store(in: &cancellableBag)
-    
     // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
-    blogPostCollectionView.didSelectItemPublisher
+    blogPostsViewController.collectionView.didSelectItemPublisher
       .sink { [weak self] indexPath in
         self?.showBlogPostSafariController(of: indexPath)
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
     
     // 클립보드에 복사
     copyAddressButton.tapPublisher
@@ -284,21 +243,21 @@ final class ShopDetailViewController: UIViewController {
         UIPasteboard.general.string = self?.addressLabel.text ?? ""
         self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
     
     callMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.makePhoneCall()
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
     
     bookmarkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.viewModel.input.tapBookmarkButton.send()
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
   }
   
   private func bindOutput() {
@@ -316,7 +275,7 @@ final class ShopDetailViewController: UIViewController {
           callMenuButton.isHidden = true
         }
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
     
     viewModel.output.failToFetchDetail
       .sink { [weak self] in
@@ -325,20 +284,14 @@ final class ShopDetailViewController: UIViewController {
           self.navigationController?.popViewController(animated: true)
         }
       }
-      .store(in: &cancellableBag)
-    
-    viewModel.output.blogPostsToShow
-      .sink { [weak self] blogPosts in
-        self?.applySnapshot(with: blogPosts)
-      }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
     
     viewModel.output.isBookmarked
       .sink { [weak self] isBookmarked in
         let buttonImage = isBookmarked ? R.image.bookmark_filled() : R.image.bookmark()
         self?.bookmarkMenuButton.update(image: buttonImage)
       }
-      .store(in: &cancellableBag)
+      .store(in: &cancellables)
   }
 }
 
@@ -425,17 +378,12 @@ extension ShopDetailViewController {
   private func setupBlogReviewViewLayout() {
     contentStackView.addArrangedSubview(separatorView)
     contentStackView.addArrangedSubview(blogReviewTitleView)
-    contentStackView.addArrangedSubview(blogPostCollectionView)
+//    contentStackView.addArrangedSubview(blogPostCollectionView)
     
-    blogPostCollectionView.snp.makeConstraints {
-      blogPostCollectionViewHeightConstraint = $0.height.equalTo(0).constraint
-    }
+//    blogPostCollectionView.snp.makeConstraints {
+//      blogPostCollectionViewHeightConstraint = $0.height.equalTo(0).constraint
+//    }
     
-    contentStackView.addArrangedSubview(loadMoreBlogPostsButton)
-    loadMoreBlogPostsButton.snp.makeConstraints {
-      $0.height.equalTo(48)
-      $0.horizontalEdges.equalTo(blogPostCollectionView).inset(Metric.horizontalPadding)
-    }
   }
   
   private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
@@ -475,34 +423,6 @@ extension ShopDetailViewController {
   }
 }
 
-
-// MARK: - DataSource & Snapshot
-
-extension ShopDetailViewController {
-  
-  private func makeBlogPostDataSource() -> BlogPostDataSource {
-    return BlogPostDataSource(
-      collectionView: blogPostCollectionView,
-      cellProvider: { collectionView, indexPath, item in
-        let cell = collectionView.dequeueReusableCell(cellClass: BlogPostCell.self,
-                                                      for: indexPath)
-        cell.configure(with: item)
-        return cell
-      })
-  }
-  
-  private func applySnapshot(with blogPosts: [BlogPost]) {
-    let section: [Section] = [.blogPost]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, BlogPost>()
-    snapshot.appendSections(section)
-    snapshot.appendItems(blogPosts)
-    
-    blogPostDataSource.apply(snapshot) { [weak self] in
-      self?.updateBlogPostCollectionViewHeight()
-    }
-  }
-  
-}
 
 // MARK: - Preview
 
