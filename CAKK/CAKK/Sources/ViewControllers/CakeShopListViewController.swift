@@ -257,9 +257,7 @@ final class CakeShopListViewController: UIViewController {
     viewController.modalPresentationStyle = .popover
     viewController.preferredContentSize = .init(width: 335, height: 520)
     viewController.popoverPresentationController?.sourceView = changeDistrictButton
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-      self.present(viewController, animated: true)
-    }
+    present(viewController, animated: true)
   }
   
   private func showToolTip() {
