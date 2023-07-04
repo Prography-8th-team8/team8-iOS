@@ -56,10 +56,16 @@ final class ShopDetailViewController: UIViewController {
   private let shopImageView = UIImageView().then {
     $0.image = R.image.noimage()
     $0.backgroundColor = R.color.stroke()
+    $0.contentMode = .scaleAspectFill
+    $0.snp.makeConstraints { make in
+      make.width.height.equalTo(72)
+    }
+    $0.layer.masksToBounds = true
+    $0.layer.cornerRadius = 36
   }
   
   private let nameLabel = UILabel().then {
-    $0.font = .pretendard(size: 20, weight: .bold)
+    $0.font = .pretendard(size: 18, weight: .bold)
     $0.text = Constants.skeletonText
     $0.textAlignment = .center
   }
@@ -76,12 +82,24 @@ final class ShopDetailViewController: UIViewController {
     $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal) // 줄어들게 하기 위해 우선순위 낮춤
   }
   
-  private var dotLabel: UILabel {
-    return UILabel().then {
-      $0.textColor = R.color.stroke()
-      $0.text = "·"
-    }
+  private lazy var nameAddressStackView = UIStackView(
+    arrangedSubviews: [nameLabel, addressLabel]
+  ).then {
+    $0.alignment = .leading
+    $0.axis = .vertical
+    $0.spacing = 12
   }
+  
+  private lazy var infoStackView = UIStackView(
+    arrangedSubviews: [shopImageView, nameAddressStackView]
+  ).then {
+    $0.axis = .horizontal
+    $0.distribution = .equalSpacing
+    $0.alignment = .center
+    $0.spacing = 16
+  }
+  
+  private let infoStackContainerView = UIView()
   
   private let copyAddressButton = UIButton().then {
     $0.setAttributedTitle(
@@ -90,18 +108,6 @@ final class ShopDetailViewController: UIViewController {
         attributes: [.font: UIFont.pretendard(weight: .bold)]), for: .normal
     )
   }
-  
-  private lazy var addressStackView = UIStackView(arrangedSubviews: [
-    addressLabel,
-    dotLabel,
-    copyAddressButton
-  ]).then {
-    $0.alignment = .center
-    $0.axis = .horizontal
-    $0.spacing = 4
-  }
-  
-  private let addressContainerView = UIView()
   
   // 메뉴 버튼
   private let callMenuButton = DetailMenuButton(image: R.image.phone(), title: "전화하기")
@@ -120,16 +126,6 @@ final class ShopDetailViewController: UIViewController {
     $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5))
   }
   
-  private lazy var headerStackView = UIStackView(
-    arrangedSubviews: [nameLabel,
-                       addressContainerView,
-                       menuButtonStackView]
-  ).then {
-    $0.axis = .vertical
-    $0.spacing = 12
-    $0.setCustomSpacing(32, after: addressContainerView)
-  }
-  
   // 키워드
   private let keywordTitleView = DetailSectionTitleView(title: "키워드")
   
@@ -142,23 +138,12 @@ final class ShopDetailViewController: UIViewController {
     $0.spacing = 4
   }
   
-  private var separatorView: UIView {
-    UIView().then {
-      $0.snp.makeConstraints { view in
-        view.height.equalTo(10)
-      }
-      $0.backgroundColor = R.color.stroke()?.withAlphaComponent(0.2)
-    }
-  }
-  
-  private let detailInfoView = DetailInfoView()
-
   
   // 케이크 이미지 뷰컨트롤러
   private lazy var cakeImagesViewController = CakeImagesViewController(viewModel: viewModel, collectionViewLayout: cakeImageCollectionViewLayout)
   private lazy var cakeImageCollectionViewLayout = UICollectionViewFlowLayout().then {
     $0.minimumInteritemSpacing = 3
-    let width = view.bounds.width / 3 - 10
+    let width = view.bounds.width / 3 - 5
     $0.itemSize = CGSize(width: width, height: width)
   }
   
@@ -172,7 +157,10 @@ final class ShopDetailViewController: UIViewController {
   lazy var contentViewControllers: [UIViewController] = [cakeImagesViewController, blogPostsViewController]
   
   // 케이크 이미지, 블로그 리뷰 전환 세그먼티드 컨트롤
-  private let segmentedControl = UnderlineSegmentedControl(items: ["케이크 이미지", "블로그 리뷰"])
+  private let segmentedControl = UnderlineSegmentedControl(items: ["케이크 이미지", "블로그 리뷰"]).then {
+    $0.addBorder(to: .top, color: R.color.gray_5())
+    $0.addBorder(to: .bottom, color: R.color.gray_20())
+  }
   
   // 케이크 이미지, 블로그 리뷰 페이징을 위한 컨트롤러
   private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
@@ -305,6 +293,10 @@ final class ShopDetailViewController: UIViewController {
         self.setupCakeCategoryChips(with: cakeShopDetail)
         self.setActivityIndicator(toAnimate: false)
         
+        if let thumbnailURL = URL(string: cakeShopDetail.thumbnail) {
+          self.shopImageView.kf.setImage(with: thumbnailURL)
+        }
+        
         if cakeShopDetail.phoneNumber.isEmpty {
           callMenuButton.isHidden = true
         }
@@ -341,8 +333,8 @@ extension ShopDetailViewController {
   
   private func setupLayout() {
     setupScrollViewLayout()
-    setupShopImageViewLayout()
-    setupHeaderStackViewLayout()
+    setupInfoStackViewLayout()
+    setupMenuStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupSegmentedControlLayout()
@@ -363,28 +355,18 @@ extension ShopDetailViewController {
     }
   }
   
-  private func setupShopImageViewLayout() {
-    contentStackView.addArrangedSubview(shopImageView)
-    shopImageView.snp.makeConstraints {
-      $0.height.equalTo(view.frame.width * 0.5)
+  private func setupInfoStackViewLayout() {
+    infoStackContainerView.addSubview(infoStackView)
+    infoStackView.snp.makeConstraints {
+      $0.edges.equalToSuperview().inset(16)
     }
-    contentStackView.setCustomSpacing(48, after: shopImageView)
+    
+    contentStackView.addArrangedSubview(infoStackContainerView)
   }
   
-  private func setupHeaderStackViewLayout() {
-    contentStackView.addArrangedSubview(headerStackView)
-    contentStackView.setCustomSpacing(38, after: headerStackView)
-    addSeperatorLineView()
+  private func setupMenuStackViewLayout() {
+    contentStackView.addArrangedSubview(menuButtonStackView)
     
-    // 스택뷰 내부의 주소 부분을 중간으로 잡기 위한 containerView 구성
-    addressContainerView.addSubview(addressStackView)
-    addressStackView.snp.makeConstraints {
-      $0.verticalEdges.equalToSuperview()
-      // 중간 지점에 오면서, 동시에 안쪽으로 패딩을 주기 위함
-      $0.centerX.equalToSuperview()
-      $0.leading.greaterThanOrEqualToSuperview().inset(Metric.horizontalPadding)
-      $0.trailing.lessThanOrEqualToSuperview().inset(Metric.horizontalPadding)
-    }
   }
   
   private func setupKeywordTitleLabelLayout() {
@@ -402,10 +384,8 @@ extension ShopDetailViewController {
   }
   
   private func setupSegmentedControlLayout() {
-    view.addSubview(segmentedControl)
+    contentStackView.addArrangedSubview(segmentedControl)
     segmentedControl.snp.makeConstraints {
-      $0.top.equalTo(contentStackView.snp.bottom)
-      $0.horizontalEdges.equalToSuperview()
       $0.height.equalTo(50)
     }
   }
