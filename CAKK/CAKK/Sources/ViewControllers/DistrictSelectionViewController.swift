@@ -22,6 +22,7 @@ final class DistrictSelectionViewController: UIViewController {
     
     static let descriptionLabelTopPadding = 12.f
     
+    static let collectionViewCornerRadius = 20.f
     static let collectionViewTopPadding = 40.f
     static let collectionViewBottomInset = 20.f
   }
@@ -50,6 +51,7 @@ final class DistrictSelectionViewController: UIViewController {
                 forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
     $0.backgroundColor = .clear
     $0.alwaysBounceVertical = false
+    $0.layer.cornerRadius = Metric.collectionViewCornerRadius
     $0.showsVerticalScrollIndicator = false
     $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
   }
