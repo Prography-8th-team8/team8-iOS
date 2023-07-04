@@ -118,6 +118,8 @@ final class CakkMapView: NMFNaverMapView {
     marker.mapView = mapView
     marker.iconImage = MarkerImage.pin
     marker.userInfo = [cakeShop.id: cakeShop]
+    marker.captionText = cakeShop.name
+    marker.isHideCollidedCaptions = true
     setupMarkerTouchHandler(marker, position: position, cakeShop: cakeShop)
     return marker
   }
