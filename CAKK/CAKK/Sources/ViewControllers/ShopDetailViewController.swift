@@ -114,7 +114,7 @@ final class ShopDetailViewController: UIViewController {
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [callMenuButton,
                        bookmarkMenuButton,
-                       //                       naviMenuButton,
+                       naviMenuButton,
                        shareMenuButton]
   ).then {
     $0.axis = .horizontal

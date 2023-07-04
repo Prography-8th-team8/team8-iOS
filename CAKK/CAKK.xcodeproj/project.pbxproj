@@ -98,6 +98,7 @@
 		B4A66FC72A1E5F7900D3581D /* BlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A66FC62A1E5F7800D3581D /* BlogPost.swift */; };
 		B4AEF5E22A2F12C30041C84B /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AEF5E12A2F12C30041C84B /* LocationDataManager.swift */; };
 		B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */; };
+		B4F3B8D32A5430BD00AB7585 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F3B8D22A5430BD00AB7585 /* UnderlineSegmentedControl.swift */; };
 		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
 		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
 		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
@@ -212,6 +213,7 @@
 		B4A66FC62A1E5F7800D3581D /* BlogPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPost.swift; sourceTree = "<group>"; };
 		B4AEF5E12A2F12C30041C84B /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		B4F1F4202A17AF6A00DA6358 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		B4F3B8D22A5430BD00AB7585 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -263,6 +265,7 @@
 				8E53F1BA2A332936002F871C /* EmptyStateView.swift */,
 				B41EF0502A34CA6A0068843B /* BlogPostCell.swift */,
 				8EAB811A2A45DCA800D9FA41 /* FilterButton.swift */,
+				B4F3B8D22A5430BD00AB7585 /* UnderlineSegmentedControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -392,11 +395,11 @@
 		8E9E193C29CEDDDE00CFF157 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 				8EC8F62629E03980003F032E /* SplashViewController.swift */,
 				8E02B77F2A0554CF003AE7AF /* DistrictSelectionViewController.swift */,
 				8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */,
 				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
-				B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */,
 				8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */,
 			);
 			path = ViewControllers;
@@ -771,6 +774,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
+				B4F3B8D32A5430BD00AB7585 /* UnderlineSegmentedControl.swift in Sources */,
 				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
