@@ -35,6 +35,14 @@ final class ShopDetailViewController: UIViewController {
   
   private var cancellables = Set<AnyCancellable>()
   
+  private var selectedPage: Int = 0 {
+    didSet {
+      let direction: UIPageViewController.NavigationDirection = oldValue <= selectedPage ? .forward : .reverse
+      guard let destination = contentViewControllers[safe: selectedPage] else { return }
+      pageViewController.setViewControllers([destination], direction: direction, animated: true)
+    }
+  }
+  
   
   // MARK: - UI
   
@@ -278,6 +286,12 @@ final class ShopDetailViewController: UIViewController {
         self?.viewModel.input.tapBookmarkButton.send()
       }
       .store(in: &cancellables)
+    
+    segmentedControl.selectedSegmentIndexPublisher
+      .sink { [weak self] index in
+        self?.selectedPage = index
+      }
+      .store(in: &cancellables)
   }
   
   private func bindOutput() {
@@ -465,6 +479,18 @@ extension ShopDetailViewController: UIPageViewControllerDelegate, UIPageViewCont
           let destination = contentViewControllers[safe: nextIndex] else { return nil }
     
     return destination
+  }
+  
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          didFinishAnimating finished: Bool,
+                          previousViewControllers: [UIViewController],
+                          transitionCompleted completed: Bool) {
+    guard completed,
+          let currentViewController = pageViewController.viewControllers?.first,
+          let index = contentViewControllers.firstIndex(of: currentViewController) else {
+      return
+    }
+    segmentedControl.selectedSegmentIndex = index
   }
 }
 

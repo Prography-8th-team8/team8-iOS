@@ -73,7 +73,6 @@ final class BlogPostsViewController: UICollectionViewController {
   // MARK: - Setups
   
   private func setup() {
-    setupLayout()
     setupCollectionView()
   }
   
@@ -107,7 +106,6 @@ final class BlogPostsViewController: UICollectionViewController {
   func blogPost(of indexPath: IndexPath) -> BlogPost? {
     return blogPostDataSource.itemIdentifier(for: indexPath)
   }
-  
 
 }
 
@@ -115,15 +113,6 @@ final class BlogPostsViewController: UICollectionViewController {
 // MARK: - UI & Layouts
 
 extension BlogPostsViewController {
-  
-  private func setupLayout() {
-    
-//    contentStackView.addArrangedSubview(loadMoreBlogPostsButton)
-//    loadMoreBlogPostsButton.snp.makeConstraints {
-//      $0.height.equalTo(48)
-//      $0.horizontalEdges.equalTo(blogPostCollectionView).inset(Metric.horizontalPadding)
-//    }
-  }
   
   private func setupCollectionView() {
     collectionView.registerCell(cellClass: BlogPostCell.self)

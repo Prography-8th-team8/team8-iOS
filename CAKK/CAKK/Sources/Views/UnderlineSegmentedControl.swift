@@ -20,6 +20,12 @@ final class UnderlineSegmentedControl: UISegmentedControl {
   
   private var cancellables = Set<AnyCancellable>()
   
+  override var selectedSegmentIndex: Int {
+    didSet {
+      updateUnderLineViewPosition(with: selectedSegmentIndex)
+    }
+  }
+  
   
   // MARK: - UI Components
   
@@ -57,6 +63,16 @@ final class UnderlineSegmentedControl: UISegmentedControl {
     setDividerImage(image, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
   }
   
+  private func updateUnderLineViewPosition(with index: Int) {
+    let widthPerSegment = bounds.size.width / CGFloat(numberOfSegments)
+    let xPosition = widthPerSegment * CGFloat(index)
+    
+    leadingConstraints?.update(inset: xPosition)
+    UIView.animate(withDuration: 0.3, animations: {
+      self.layoutIfNeeded()
+    })
+  }
+  
   // MARK: - Setup
   
   private func setup() {
@@ -87,13 +103,7 @@ final class UnderlineSegmentedControl: UISegmentedControl {
   private func bindSelectSegementedIndex() {
     selectedSegmentIndexPublisher.sink { [weak self] index in
       guard let self = self else { return }
-      let widthPerSegment = bounds.size.width / CGFloat(numberOfSegments)
-      let xPosition = widthPerSegment * CGFloat(index)
-      
-      leadingConstraints?.update(inset: xPosition)
-      UIView.animate(withDuration: 0.3, animations: {
-        self.layoutIfNeeded()
-      })
+      self.updateUnderLineViewPosition(with: index)
     }
     .store(in: &cancellables)
   }
