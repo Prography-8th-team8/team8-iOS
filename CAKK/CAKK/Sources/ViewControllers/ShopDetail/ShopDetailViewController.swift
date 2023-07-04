@@ -144,15 +144,35 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private let detailInfoView = DetailInfoView()
-  
-  private let blogReviewTitleView = DetailSectionTitleView(title: "블로그 리뷰")
-  
-  private lazy var blogPostsViewController = BlogPostsViewController(viewModel: viewModel, collectionViewLayout: blogPostCollectionViewLayout)
 
+  
+  // 케이크 이미지 뷰컨트롤러
+  private lazy var cakeImagesViewController = CakeImagesViewController(viewModel: viewModel, collectionViewLayout: cakeImageCollectionViewLayout)
+  private lazy var cakeImageCollectionViewLayout = UICollectionViewFlowLayout().then {
+    $0.minimumInteritemSpacing = 3
+    let width = view.bounds.width / 3 - 10
+    $0.itemSize = CGSize(width: width, height: width)
+  }
+  
+  // 블로그 포스트 뷰컨트롤러
+  private lazy var blogPostsViewController = BlogPostsViewController(viewModel: viewModel, collectionViewLayout: blogPostCollectionViewLayout)
   private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
     $0.minimumLineSpacing = 0
     $0.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
   }
+  
+  lazy var contentViewControllers: [UIViewController] = [cakeImagesViewController, blogPostsViewController]
+  
+  // 케이크 이미지, 블로그 리뷰 전환 세그먼티드 컨트롤
+  private let segmentedControl = UnderlineSegmentedControl(items: ["케이크 이미지", "블로그 리뷰"])
+  
+  // 케이크 이미지, 블로그 리뷰 페이징을 위한 컨트롤러
+  private lazy var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal).then {
+    $0.setViewControllers([cakeImagesViewController], direction: .forward, animated: true)
+    $0.delegate = self
+    $0.dataSource = self
+  }
+  
 
   private lazy var indicatorContainerView = UIView(frame: view.bounds).then {
     $0.backgroundColor = .systemBackground
@@ -311,11 +331,8 @@ extension ShopDetailViewController {
     setupHeaderStackViewLayout()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
-    
-    // TODO: - 일단 영업시간.. 같은 상세정보가 없으니 가림.
-    //    setupDetailInfoViewLayout()
-    
-    setupBlogReviewViewLayout()
+    setupSegmentedControlLayout()
+    setupPageViewControllerLayout()
     setupActivityIndicator()
   }
   
@@ -370,20 +387,23 @@ extension ShopDetailViewController {
     contentStackView.setCustomSpacing(20, after: keywordScrollView)
   }
   
-  private func setupDetailInfoViewLayout() {
-    contentStackView.addArrangedSubview(separatorView)
-    contentStackView.addArrangedSubview(detailInfoView)
+  private func setupSegmentedControlLayout() {
+    view.addSubview(segmentedControl)
+    segmentedControl.snp.makeConstraints {
+      $0.top.equalTo(contentStackView.snp.bottom)
+      $0.horizontalEdges.equalToSuperview()
+      $0.height.equalTo(50)
+    }
   }
   
-  private func setupBlogReviewViewLayout() {
-    contentStackView.addArrangedSubview(separatorView)
-    contentStackView.addArrangedSubview(blogReviewTitleView)
-//    contentStackView.addArrangedSubview(blogPostCollectionView)
+  private func setupPageViewControllerLayout() {
+    view.addSubview(pageViewController.view)
+    addChild(pageViewController)
     
-//    blogPostCollectionView.snp.makeConstraints {
-//      blogPostCollectionViewHeightConstraint = $0.height.equalTo(0).constraint
-//    }
-    
+    pageViewController.view.snp.makeConstraints {
+      $0.top.equalTo(segmentedControl.snp.bottom)
+      $0.horizontalEdges.bottom.equalToSuperview()
+    }
   }
   
   private func addSeperatorLineView(withBottomSpacing spacing: CGFloat = 0) {
@@ -420,6 +440,31 @@ extension ShopDetailViewController {
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)
     }
+  }
+}
+
+
+// MARK: - UIPageViewControllerDelegate, UIPageViewControllerDataSource
+
+extension ShopDetailViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    guard let index = contentViewControllers.firstIndex(of: viewController) else { return nil }
+    let previousIndex = index - 1
+    guard previousIndex >= 0,
+          let destination = contentViewControllers[safe: previousIndex] else { return nil }
+    
+    return destination
+  }
+  
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    guard let index = contentViewControllers.firstIndex(of: viewController) else { return nil }
+    let nextIndex = index + 1
+    guard nextIndex < contentViewControllers.count,
+          let destination = contentViewControllers[safe: nextIndex] else { return nil }
+    
+    return destination
   }
 }
 

@@ -21,7 +21,7 @@ final class CakeImagesViewController: UICollectionViewController {
   // MARK: - Types
   
   enum Section {
-    case shopImage
+    case cakeImage
   }
   
   typealias DataSource = UICollectionViewDiffableDataSource<Section, UIImage>
@@ -114,18 +114,18 @@ extension CakeImagesViewController {
     return DataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
-        let cell = collectionView.dequeueReusableCell(cellClass: BlogPostCell.self,
+        let cell = collectionView.dequeueReusableCell(cellClass: CakeImageCell.self,
                                                       for: indexPath)
-        cell.configure(with: item)
+        cell.configure(image: item)
         return cell
       })
   }
   
-  private func applySnapshot(with blogPosts: [BlogPost]) {
-    let section: [Section] = [.blogPost]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, BlogPost>()
+  private func applySnapshot(with images: [UIImage]) {
+    let section: [Section] = [.cakeImage]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, UIImage>()
     snapshot.appendSections(section)
-    snapshot.appendItems(blogPosts)
+    snapshot.appendItems(images)
     
     blogPostDataSource.apply(snapshot)
   }
