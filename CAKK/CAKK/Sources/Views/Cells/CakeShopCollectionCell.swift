@@ -12,6 +12,8 @@ import Combine
 import SnapKit
 import Then
 
+import Kingfisher
+
 final class CakeShopCollectionCell: HighlightableCell {
   
   // MARK: - Constants
@@ -19,7 +21,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   static let identifier = String(describing: CakeShopCollectionCell.self)
   
   enum Metric {
-    static let padding = 20.f
+    static let padding = 16.f
     static let cornerRadius = 24.f
     
     static let headerStackViewSpacing = 4.f
@@ -40,19 +42,25 @@ final class CakeShopCollectionCell: HighlightableCell {
     
     static let cakeCategoryStackViewSpacing = 4.f
     
-    static let shareButtonSize = 28.f
-    static let shareButtonImagePadding = 5.f
+    static let profileImageSize = 72.f
+    static let profileImageCornerRadius = 22.f
   }
   
   // MARK: - Properties
   
   private var cancellableBag = Set<AnyCancellable>()
-  public var shareButtonTapHandler: (() -> Void)?
   
   
   // MARK: - UI
   
   private let cakkView = CakkView()
+  
+  private let profileImageView = UIImageView().then {
+    $0.image = R.image.noimage()
+    $0.contentMode = .scaleAspectFill
+    $0.clipsToBounds = true
+    $0.layer.cornerRadius = Metric.profileImageCornerRadius
+  }
   
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -85,14 +93,6 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.axis = .horizontal
     $0.spacing = Metric.cakeCategoryStackViewSpacing
     $0.alignment = .leading
-  }
-  
-  public let shareButton = UIButton().then {
-    $0.tintColor = .init(hex: 0x525252)
-    $0.backgroundColor = .init(hex: 0xDFDCCD)
-    $0.setImage(R.image.arrow_right_square(), for: .normal)
-    $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
-    $0.layer.cornerRadius = Metric.shareButtonSize / 2
   }
   
   
@@ -130,7 +130,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   // Setup Layout
   private func setupLayout() {
     setupCakkViewLayout()
-    setupShareButtonLayout()
+    setupProfileImageViewLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -146,19 +146,20 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
-  private func setupShareButtonLayout() {
-    cakkView.addSubview(shareButton)
-    shareButton.snp.makeConstraints {
-      $0.top.trailing.equalToSuperview().inset(Metric.padding)
-      $0.width.height.equalTo(Metric.shareButtonSize)
+  private func setupProfileImageViewLayout() {
+    addSubview(profileImageView)
+    profileImageView.snp.makeConstraints {
+      $0.top.leading.equalToSuperview().inset(Metric.padding)
+      $0.size.equalTo(Metric.profileImageSize)
     }
   }
   
   private func setupHeaderStackViewLayout() {
     cakkView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().inset(Metric.padding)
-      $0.trailing.equalTo(shareButton.snp.leading).inset(Metric.headerStackViewRightPadding)
+      $0.top.equalToSuperview().inset(Metric.padding + 6)
+      $0.leading.equalTo(profileImageView.snp.trailing).offset(Metric.padding)
+      $0.trailing.equalToSuperview().inset(Metric.padding)
     }
   }
   
@@ -182,7 +183,8 @@ final class CakeShopCollectionCell: HighlightableCell {
     cakkView.addSubview(locationLabel)
     locationLabel.snp.makeConstraints {
       $0.top.equalTo(headerStackView.snp.bottom).offset(Metric.locationLabelTopPadding)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.leading.equalTo(headerStackView)
+      $0.trailing.equalToSuperview().inset(Metric.padding)
     }
   }
   
@@ -243,14 +245,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     bindOutput()
   }
   
-  private func bindInput() {
-    shareButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        self?.shareButtonTapHandler?()
-      }
-      .store(in: &cancellableBag)
-  }
+  private func bindInput() { }
   
   private func bindOutput() { }
 }

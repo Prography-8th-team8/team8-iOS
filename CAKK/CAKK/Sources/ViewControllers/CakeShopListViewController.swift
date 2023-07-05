@@ -30,7 +30,7 @@ final class CakeShopListViewController: UIViewController {
     static let collectionViewItemEstimatedHeight = 158.f
     static let collectionViewItemSpacing = 12.f
     static let collectionViewHorizontalPadding = 16.f
-    static let collectionViewBottomInset = 44.f
+    static let collectionViewBottomInset = 88.f
     
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
@@ -119,9 +119,9 @@ final class CakeShopListViewController: UIViewController {
   private let changeDistrictButton = UIButton().then {
     $0.setTitle("지역 이동", for: .normal)
     $0.titleLabel?.font = .pretendard(size: Metric.changeDistrictFontSize, weight: .bold)
-    $0.setTitleColor(R.color.pink_TBD(), for: .normal)
-    $0.setTitleColor(R.color.pink_30(), for: .highlighted)
-    $0.backgroundColor = R.color.pink_15()
+    $0.setTitleColor(R.color.black(), for: .normal)
+    $0.setTitleColor(R.color.gray_20(), for: .highlighted)
+    $0.backgroundColor = R.color.gray_5()
     $0.layer.cornerRadius = Metric.changeDistrictCornerRadius
   }
   
@@ -397,14 +397,6 @@ extension CakeShopListViewController {
           for: indexPath,
           item: item)
         cell.configure(item)
-        cell.shareButtonTapHandler = { [weak self] in
-          let items = [item.name, item.location, item.url]
-          
-          let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
-          activity.modalPresentationStyle = .popover
-          activity.popoverPresentationController?.sourceView = cell.shareButton
-          self?.present(activity, animated: true)
-        }
         return cell
       })
   }

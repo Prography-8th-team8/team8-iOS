@@ -12,7 +12,7 @@ class CakeShopDetailFloatingPanelLandscapeLayout: FloatingPanelLayout {
   let initialState: FloatingPanelState = .hidden
   let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
     .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .safeArea),
-    .tip: FloatingPanelLayoutAnchor(absoluteInset: 440, edge: .bottom, referenceGuide: .safeArea)
+    .tip: FloatingPanelLayoutAnchor(absoluteInset: 172, edge: .bottom, referenceGuide: .safeArea)
   ]
   
   func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
