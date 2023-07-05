@@ -80,7 +80,7 @@ final class MainViewController: UIViewController {
   private lazy var cakeShopDetailFloatingPanel = FloatingPanelController().then {
     $0.layout = CakeShopDetailFloatingPanelLayout()
     $0.surfaceView.appearance = floatingPanelSurfaceAppearance
-    $0.surfaceView.grabberHandlePadding = 12
+    $0.surfaceView.grabberHandle.isHidden = true
     $0.isRemovalInteractionEnabled = true
   }
   
