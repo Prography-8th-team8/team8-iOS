@@ -30,7 +30,7 @@ final class CakeShopListViewController: UIViewController {
     static let collectionViewItemEstimatedHeight = 158.f
     static let collectionViewItemSpacing = 12.f
     static let collectionViewHorizontalPadding = 16.f
-    static let collectionViewBottomInset = 44.f
+    static let collectionViewBottomInset = 88.f
     
     static let locationLabelFontSize = 18.f
     static let numberOfCakeShopFontSize = 14.f
