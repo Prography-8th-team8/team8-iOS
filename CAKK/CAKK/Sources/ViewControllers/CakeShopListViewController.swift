@@ -119,9 +119,9 @@ final class CakeShopListViewController: UIViewController {
   private let changeDistrictButton = UIButton().then {
     $0.setTitle("지역 이동", for: .normal)
     $0.titleLabel?.font = .pretendard(size: Metric.changeDistrictFontSize, weight: .bold)
-    $0.setTitleColor(R.color.pink_TBD(), for: .normal)
-    $0.setTitleColor(R.color.pink_30(), for: .highlighted)
-    $0.backgroundColor = R.color.pink_15()
+    $0.setTitleColor(R.color.black(), for: .normal)
+    $0.setTitleColor(R.color.gray_20(), for: .highlighted)
+    $0.backgroundColor = R.color.gray_5()
     $0.layer.cornerRadius = Metric.changeDistrictCornerRadius
   }
   
