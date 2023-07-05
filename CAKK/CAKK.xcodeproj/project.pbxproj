@@ -104,7 +104,7 @@
 		B4F3B8DB2A543B2700AB7585 /* CakeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */; };
 		B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */; };
 		B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */; };
-		B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */; };
+		B4F5CDC929DAFA9300AE4F66 /* CakeShopCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5CDC829DAFA9300AE4F66 /* CakeShopCollectionCell.swift */; };
 		B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */; };
 		B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -222,7 +222,7 @@
 		B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeImageCell.swift; sourceTree = "<group>"; };
 		B4F5CDC429DAF99B00AE4F66 /* UITableView+Register.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = "UITableView+Register.swift"; sourceTree = "<group>"; tabWidth = 2; };
 		B4F5CDC629DAF9BC00AE4F66 /* ReusableView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; tabWidth = 2; };
-		B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeListCell.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B4F5CDC829DAFA9300AE4F66 /* CakeShopCollectionCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CakeShopCollectionCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSectionTitleView.swift; sourceTree = "<group>"; };
 		B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,7 +311,7 @@
 			children = (
 				8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */,
 				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
-				B4F5CDC829DAFA9300AE4F66 /* CakeListCell.swift */,
+				B4F5CDC829DAFA9300AE4F66 /* CakeShopCollectionCell.swift */,
 				8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */,
 				B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */,
 			);
@@ -777,7 +777,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -838,7 +838,7 @@
 				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
 				B41EF0552A34E63C0068843B /* UICollectionView+RegisterDequeue.swift in Sources */,
 				8EAB811F2A46141F00D9FA41 /* FilterViewModel.swift in Sources */,
-				B4F5CDC929DAFA9300AE4F66 /* CakeListCell.swift in Sources */,
+				B4F5CDC929DAFA9300AE4F66 /* CakeShopCollectionCell.swift in Sources */,
 				B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,

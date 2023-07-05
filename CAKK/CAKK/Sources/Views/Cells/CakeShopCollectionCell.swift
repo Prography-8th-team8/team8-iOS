@@ -39,15 +39,11 @@ final class CakeShopCollectionCell: HighlightableCell {
     static let locationLabelNumberOfLines = 3
     
     static let cakeCategoryStackViewSpacing = 4.f
-    
-    static let shareButtonSize = 28.f
-    static let shareButtonImagePadding = 5.f
   }
   
   // MARK: - Properties
   
   private var cancellableBag = Set<AnyCancellable>()
-  public var shareButtonTapHandler: (() -> Void)?
   
   
   // MARK: - UI
@@ -87,14 +83,6 @@ final class CakeShopCollectionCell: HighlightableCell {
     $0.alignment = .leading
   }
   
-  public let shareButton = UIButton().then {
-    $0.tintColor = .init(hex: 0x525252)
-    $0.backgroundColor = .init(hex: 0xDFDCCD)
-    $0.setImage(R.image.arrow_right_square(), for: .normal)
-    $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
-    $0.layer.cornerRadius = Metric.shareButtonSize / 2
-  }
-  
   
   // MARK: - Initialization
   
@@ -130,7 +118,6 @@ final class CakeShopCollectionCell: HighlightableCell {
   // Setup Layout
   private func setupLayout() {
     setupCakkViewLayout()
-    setupShareButtonLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -146,19 +133,10 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
-  private func setupShareButtonLayout() {
-    cakkView.addSubview(shareButton)
-    shareButton.snp.makeConstraints {
-      $0.top.trailing.equalToSuperview().inset(Metric.padding)
-      $0.width.height.equalTo(Metric.shareButtonSize)
-    }
-  }
-  
   private func setupHeaderStackViewLayout() {
     cakkView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().inset(Metric.padding)
-      $0.trailing.equalTo(shareButton.snp.leading).inset(Metric.headerStackViewRightPadding)
+      $0.top.leading.trailing.equalToSuperview().inset(Metric.padding)
     }
   }
   
@@ -243,14 +221,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     bindOutput()
   }
   
-  private func bindInput() {
-    shareButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        self?.shareButtonTapHandler?()
-      }
-      .store(in: &cancellableBag)
-  }
+  private func bindInput() { }
   
   private func bindOutput() { }
 }
