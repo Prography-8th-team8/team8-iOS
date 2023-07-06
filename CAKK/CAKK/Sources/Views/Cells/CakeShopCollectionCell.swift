@@ -42,8 +42,8 @@ final class CakeShopCollectionCell: HighlightableCell {
     
     static let cakeCategoryStackViewSpacing = 4.f
     
-    static let profileImageSize = 72.f
-    static let profileImageCornerRadius = 22.f
+    static let thumbnailImageSize = 72.f
+    static let thumbnailImageCornerRadius = 22.f
   }
   
   // MARK: - Properties
@@ -55,11 +55,11 @@ final class CakeShopCollectionCell: HighlightableCell {
   
   private let cakkView = CakkView()
   
-  private let profileImageView = UIImageView().then {
-    $0.image = R.image.noimage()
+  private let thumbnailImageView = UIImageView().then {
+    $0.image = R.image.thumbnail_placeholder()
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
-    $0.layer.cornerRadius = Metric.profileImageCornerRadius
+    $0.layer.cornerRadius = Metric.thumbnailImageCornerRadius
   }
   
   private let headerStackView = UIStackView().then {
@@ -116,6 +116,11 @@ final class CakeShopCollectionCell: HighlightableCell {
     districtLocationLabel.text = item.district.koreanName
     locationLabel.text = item.location
     
+    if let thumbnail = item.thumbnail {
+      let url = URL(string: thumbnail)
+      thumbnailImageView.kf.setImage(with: url)
+    }
+    
     configureCakeCategoryStackView(item.cakeCategories)
   }
 
@@ -130,7 +135,7 @@ final class CakeShopCollectionCell: HighlightableCell {
   // Setup Layout
   private func setupLayout() {
     setupCakkViewLayout()
-    setupProfileImageViewLayout()
+    setupThumbnailImageViewLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -146,11 +151,11 @@ final class CakeShopCollectionCell: HighlightableCell {
     }
   }
   
-  private func setupProfileImageViewLayout() {
-    addSubview(profileImageView)
-    profileImageView.snp.makeConstraints {
+  private func setupThumbnailImageViewLayout() {
+    addSubview(thumbnailImageView)
+    thumbnailImageView.snp.makeConstraints {
       $0.top.leading.equalToSuperview().inset(Metric.padding)
-      $0.size.equalTo(Metric.profileImageSize)
+      $0.size.equalTo(Metric.thumbnailImageSize)
     }
   }
   
@@ -158,7 +163,7 @@ final class CakeShopCollectionCell: HighlightableCell {
     cakkView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.top.equalToSuperview().inset(Metric.padding + 6)
-      $0.leading.equalTo(profileImageView.snp.trailing).offset(Metric.padding)
+      $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(Metric.padding)
       $0.trailing.equalToSuperview().inset(Metric.padding)
     }
   }

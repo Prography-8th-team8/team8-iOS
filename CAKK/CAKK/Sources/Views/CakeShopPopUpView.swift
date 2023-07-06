@@ -253,13 +253,15 @@ struct CakeShopPopUpView_Preview: PreviewProvider {
         createdAt: "",
         modifiedAt: "",
         name: "이름이름이름",
+        shareLink: "",
         city: "도봉구",
         district: .dobong,
         location: "주소주소주소",
         latitude: 0,
         longitude: 0,
-        cakeCategories: [.character, .figure, .flower],
-        url: ""))
+        thumbnail: "",
+        imageUrls: [],
+        cakeCategories: [.character, .figure, .flower]))
     }
     .frame(height: 158)
     .previewLayout(.sizeThatFits)

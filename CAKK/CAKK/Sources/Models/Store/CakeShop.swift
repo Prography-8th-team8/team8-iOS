@@ -16,16 +16,18 @@ struct CakeShop: Decodable, Hashable {
   let createdAt: String
   let modifiedAt: String
   let name: String
+  let shareLink: String?
   let city: String
   let district: District
   let location: String
   let latitude: Double
   let longitude: Double
+  let thumbnail: String?
+  let imageUrls: [String]
   let cakeCategories: [CakeCategory]
-  let url: String?
   
   enum CodingKeys: String, CodingKey {
-    case id, createdAt, modifiedAt, name, city, district, location, latitude, longitude, url
+    case id, createdAt, modifiedAt, name, shareLink, city, district, location, latitude, longitude, thumbnail, imageUrls
     case cakeCategories = "storeTypes"
   }
   
@@ -42,7 +44,10 @@ extension CakeShop {
     let cakeCategories = cakeCategories.reduce(into: List<String>(), { result, category in
       result.append(category.rawValue)
     })
-    
+    let imageUrls = imageUrls.reduce(into: List<String>(), { result, imageUrl in
+      result.append(imageUrl)
+    })
+
     return CakeShopEntity(id: id,
                           isBookmarked: isBookmarked,
                           createdAt: createdAt,
@@ -53,7 +58,8 @@ extension CakeShop {
                           location: location,
                           latitude: latitude,
                           longitude: longitude,
-                          cakeCategories: cakeCategories,
-                          url: url)
+                          thumbnail: thumbnail,
+                          imageUrls: imageUrls,
+                          cakeCategories: cakeCategories)
   }
 }

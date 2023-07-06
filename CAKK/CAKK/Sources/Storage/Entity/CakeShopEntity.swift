@@ -13,39 +13,45 @@ final class CakeShopEntity: Object {
   @Persisted var createdAt: String
   @Persisted var modifiedAt: String
   @Persisted var name: String
+  @Persisted var shareLink: String?
   @Persisted var city: String
   @Persisted var district: String
   @Persisted var location: String
   @Persisted var latitude: Double
   @Persisted var longitude: Double
+  @Persisted var thumbnail: String?
+  @Persisted var imageUrls: List<String>
   @Persisted var cakeCategories: List<String>
-  @Persisted var url: String?
   
   convenience init(id: Int,
                    isBookmarked: Bool,
                    createdAt: String,
                    modifiedAt: String,
                    name: String,
+                   shareLink: String? = nil,
                    city: String,
                    district: String,
                    location: String,
                    latitude: Double,
                    longitude: Double,
-                   cakeCategories: List<String>,
-                   url: String? = nil) {
+                   thumbnail: String? = nil,
+                   imageUrls: List<String>,
+                   cakeCategories: List<String>) {
     self.init()
     self.id = id
     self.isBookmarked = isBookmarked
     self.createdAt = createdAt
     self.modifiedAt = modifiedAt
     self.name = name
+    self.shareLink = shareLink
     self.city = city
     self.district = district
     self.location = location
     self.latitude = latitude
     self.longitude = longitude
+    self.thumbnail = thumbnail
+    self.imageUrls = imageUrls
     self.cakeCategories = cakeCategories
-    self.url = url
   }
 }
 
@@ -58,12 +64,14 @@ extension CakeShopEntity {
                     createdAt: createdAt,
                     modifiedAt: modifiedAt,
                     name: name,
+                    shareLink: shareLink,
                     city: city,
                     district: District(rawValue: district) ?? .dobong,
                     location: location,
                     latitude: latitude,
                     longitude: longitude,
-                    cakeCategories: cakeCategories.compactMap { CakeCategory(rawValue: $0) },
-                    url: url)
+                    thumbnail: thumbnail,
+                    imageUrls: Array(imageUrls),
+                    cakeCategories: cakeCategories.compactMap { CakeCategory(rawValue: $0) })
       }
 }

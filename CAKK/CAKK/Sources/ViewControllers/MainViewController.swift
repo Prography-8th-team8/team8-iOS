@@ -284,18 +284,6 @@ final class MainViewController: UIViewController {
       .store(in: &cancellableBag)
   }
   
-  private func configureShareButtonTapHandler(to popupView: CakeShopPopUpView,
-                                              with cakeShop: CakeShop) {
-    popupView.shareButtonTapHandler = { [weak self] in
-      let items = [cakeShop.name, cakeShop.location, cakeShop.url]
-      
-      let activity = UIActivityViewController(activityItems: items, applicationActivities: nil)
-      activity.modalPresentationStyle = .popover
-      activity.popoverPresentationController?.sourceView = popupView.shareButton
-      self?.present(activity, animated: true)
-    }
-  }
-  
   private func showChangeDistrictView() {
     let viewController = DIContainer.shared.makeDistrictSelectionController()
     viewController.modalPresentationStyle = .fullScreen
