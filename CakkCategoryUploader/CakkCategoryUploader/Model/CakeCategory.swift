@@ -16,7 +16,7 @@ enum CakeCategory: String, Codable, CaseIterable {
   case flower = "FLOWER"
   case photo = "PHOTO"
   case figure = "FIGURE"
-  case luxury = "LUXURY"
+  case solid = "SOLID"
   case etc = "ETC"
 }
 
@@ -39,8 +39,8 @@ extension CakeCategory {
       return "포토"
     case .figure:
       return "피규어"
-    case .luxury:
-      return "럭셔리"
+    case .solid:
+      return "입체 케이크"
     case .etc:
       return "기타"
     }
