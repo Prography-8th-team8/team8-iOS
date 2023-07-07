@@ -94,7 +94,7 @@ final class ShopDetailViewController: UIViewController {
     arrangedSubviews: [shopImageView, nameAddressStackView]
   ).then {
     $0.axis = .horizontal
-    $0.distribution = .equalSpacing
+    $0.distribution = .fill
     $0.alignment = .center
     $0.spacing = 16
   }
@@ -110,13 +110,13 @@ final class ShopDetailViewController: UIViewController {
   }
   
   // 메뉴 버튼
-  private let callMenuButton = DetailMenuButton(image: R.image.phone(), title: "전화하기")
+  private let linkMenuButton = DetailMenuButton(image: R.image.instagram(), title: "전화하기")
   private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
   private let naviMenuButton = DetailMenuButton(image: R.image.pin_map(), title: "길 안내")
   private let shareMenuButton = DetailMenuButton(image: R.image.arrow_up_square(), title: "공유하기")
   
   private lazy var menuButtonStackView = UIStackView(
-    arrangedSubviews: [callMenuButton,
+    arrangedSubviews: [linkMenuButton,
                        bookmarkMenuButton,
                        naviMenuButton,
                        shareMenuButton]
@@ -222,6 +222,12 @@ final class ShopDetailViewController: UIViewController {
     present(safariViewController, animated: true)
   }
   
+  private func showLinkSafariController(link: String) {
+    guard let url = URL(string: link) else { return }
+    let safariViewController = SFSafariViewController(url: url)
+    present(safariViewController, animated: true)
+  }
+  
   private func makePhoneCall() {
     guard let phoneNumber = viewModel.output.cakeShopDetail.value?.phoneNumber,
           phoneNumber.isEmpty == false,
@@ -256,10 +262,12 @@ final class ShopDetailViewController: UIViewController {
       }
       .store(in: &cancellables)
     
-    callMenuButton.tapPublisher
+    linkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
-        self?.makePhoneCall()
+        guard let self = self,
+              let link = self.viewModel.output.cakeShopDetail.value?.link else { return }
+        self.showLinkSafariController(link: link)
       }
       .store(in: &cancellables)
     
@@ -287,13 +295,10 @@ final class ShopDetailViewController: UIViewController {
         self.addressLabel.text = cakeShopDetail.address
         self.setupCakeCategoryChips(with: cakeShopDetail)
         self.setActivityIndicator(toAnimate: false)
+        self.configureLinkMenuButton(with: cakeShopDetail)
         
         if let thumbnailURL = URL(string: cakeShopDetail.thumbnail) {
           self.shopImageView.kf.setImage(with: thumbnailURL)
-        }
-        
-        if cakeShopDetail.phoneNumber.isEmpty {
-          callMenuButton.isHidden = true
         }
       }
       .store(in: &cancellables)
@@ -433,6 +438,23 @@ extension ShopDetailViewController {
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)
     }
+  }
+  
+  private func configureLinkMenuButton(with cakeShopDetail: CakeShopDetailResponse) {
+    if cakeShopDetail.link.contains("instagram") {
+      linkMenuButton.menuImageView.image = R.image.instagram()
+      linkMenuButton.menuTitleLabel.text = "인스타그램"
+      return
+    }
+    
+    if cakeShopDetail.link.contains("pf.kakao") {
+      linkMenuButton.menuImageView.image = R.image.kakao()
+      linkMenuButton.menuTitleLabel.text = "카카오톡"
+      return
+    }
+    
+    linkMenuButton.menuImageView.image = R.image.website()
+    linkMenuButton.menuTitleLabel.text = "웹사이트"
   }
 }
 
