@@ -426,9 +426,9 @@ extension ShopDetailViewController {
       CakeCategoryChipView($0)
     }
     
-//    if cakeShopDetail.cakeCategories.isEmpty {
+    if cakeShopDetail.cakeCategories.isEmpty {
       chipViews = [CakeCategoryChipView(emptyKeyword: true)]
-//    }
+    }
     
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)
