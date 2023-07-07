@@ -94,7 +94,7 @@ final class ShopDetailViewController: UIViewController {
     arrangedSubviews: [shopImageView, nameAddressStackView]
   ).then {
     $0.axis = .horizontal
-    $0.distribution = .equalSpacing
+    $0.distribution = .fill
     $0.alignment = .center
     $0.spacing = 16
   }
