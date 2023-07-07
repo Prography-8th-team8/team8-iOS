@@ -7,6 +7,7 @@
 
 import UIKit
 
+import SnapKit
 import Then
 
 
@@ -23,7 +24,10 @@ final class LoadMoreBlogPostFooterView: UICollectionReusableView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     addSubview(button)
-    button.frame = bounds
+    button.snp.makeConstraints {
+      $0.horizontalEdges.equalToSuperview().inset(14)
+      $0.verticalEdges.equalToSuperview()
+    }
   }
   
   required init?(coder: NSCoder) {
