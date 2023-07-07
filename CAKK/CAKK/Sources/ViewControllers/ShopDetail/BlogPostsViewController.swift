@@ -17,6 +17,13 @@ import Then
 final class BlogPostsViewController: UICollectionViewController {
   
   
+  // MARK: - Constants
+  
+  enum Metric {
+    static let horizontalPadding = 14.f
+  }
+  
+  
   // MARK: - Types
   
   enum Section {
@@ -67,6 +74,17 @@ final class BlogPostsViewController: UICollectionViewController {
     super.viewDidLoad()
     setup()
     bind()
+  }
+  
+  // 아이패드 레이아웃 호환을 위해 bounds가 변경될 때 마다 새롭게 잡아주도록 함
+  // (플로팅 패널의 사이즈가 전체를 덮지 않을 수 있기에)
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    let itemWidth = collectionView.bounds.width - 28
+    guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+    layout.minimumLineSpacing = 0
+    layout.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
   }
   
   

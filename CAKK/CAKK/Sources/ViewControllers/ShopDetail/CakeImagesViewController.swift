@@ -64,6 +64,19 @@ final class CakeImagesViewController: UICollectionViewController {
     setup()
     bind()
   }
+
+  // 아이패드 레이아웃 호환을 위해 bounds가 변경될 때 마다 새롭게 잡아주도록 함
+  // (플로팅 패널의 사이즈가 전체를 덮지 않을 수 있기에)
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+    layout.minimumInteritemSpacing = 3
+    let width = view.bounds.width / 3 - 5
+    layout.itemSize = CGSize(width: width, height: width)
+  }
+  
+  
   
   
   // MARK: - Setups
