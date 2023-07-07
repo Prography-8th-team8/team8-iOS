@@ -268,6 +268,24 @@ final class ShopDetailViewController: UIViewController {
       }
       .store(in: &cancellables)
     
+    shareMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .compactMap { [weak self] in
+        self?.viewModel.output.cakeShopDetail.value
+      }
+      .sink { [weak self] cakeShopDetail in
+        guard let self = self else { return }
+        let items = [cakeShopDetail.name,
+                     cakeShopDetail.address,
+                     cakeShopDetail.link]
+        
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityController.modalPresentationStyle = .popover
+        activityController.popoverPresentationController?.sourceView = shareMenuButton // 아이패드를 위한 설정
+        self.present(activityController, animated: true)
+      }
+      .store(in: &cancellables)
+    
     segmentedControl.selectedSegmentIndexPublisher
       .sink { [weak self] index in
         self?.selectedPage = index
