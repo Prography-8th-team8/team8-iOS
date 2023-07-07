@@ -140,19 +140,14 @@ final class ShopDetailViewController: UIViewController {
   
   
   // 케이크 이미지 뷰컨트롤러
-  private lazy var cakeImagesViewController = CakeImagesViewController(viewModel: viewModel, collectionViewLayout: cakeImageCollectionViewLayout)
-  private lazy var cakeImageCollectionViewLayout = UICollectionViewFlowLayout().then {
-    $0.minimumInteritemSpacing = 3
-    let width = view.bounds.width / 3 - 5
-    $0.itemSize = CGSize(width: width, height: width)
-  }
+  private lazy var cakeImagesViewController = CakeImagesViewController(
+    viewModel: viewModel,
+    collectionViewLayout: UICollectionViewFlowLayout())
   
   // 블로그 포스트 뷰컨트롤러
-  private lazy var blogPostsViewController = BlogPostsViewController(viewModel: viewModel, collectionViewLayout: blogPostCollectionViewLayout)
-  private lazy var blogPostCollectionViewLayout = UICollectionViewFlowLayout().then {
-    $0.minimumLineSpacing = 0
-    $0.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
-  }
+  private lazy var blogPostsViewController = BlogPostsViewController(
+    viewModel: viewModel,
+    collectionViewLayout: UICollectionViewFlowLayout())
   
   lazy var contentViewControllers: [UIViewController] = [cakeImagesViewController, blogPostsViewController]
   

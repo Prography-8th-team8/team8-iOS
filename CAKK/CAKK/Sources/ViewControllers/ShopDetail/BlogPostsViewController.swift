@@ -17,6 +17,13 @@ import Then
 final class BlogPostsViewController: UICollectionViewController {
   
   
+  // MARK: - Constants
+  
+  enum Metric {
+    static let horizontalPadding = 14.f
+  }
+  
+  
   // MARK: - Types
   
   enum Section {
@@ -33,19 +40,6 @@ final class BlogPostsViewController: UICollectionViewController {
   private lazy var blogPostDataSource = makeBlogPostDataSource()
   
   private var cancellables = Set<AnyCancellable>()
-  
-  
-  // MARK: - UI Components
-  
-  // TODO: 컬렉션뷰의 푸터로 처리해야 할 듯
-  private let loadMoreBlogPostsButton = UIButton().then {
-    $0.titleLabel?.font = .pretendard(size: 14, weight: .bold)
-    $0.layer.borderColor = R.color.gray_5()?.cgColor
-    $0.layer.borderWidth = 2
-    $0.layer.cornerRadius = 8
-    $0.setTitle("블로그 리뷰 더 보기", for: .normal)
-    $0.setTitleColor(.black, for: .normal)
-  }
   
   
   // MARK: - Initialization
@@ -69,6 +63,17 @@ final class BlogPostsViewController: UICollectionViewController {
     bind()
   }
   
+  // 아이패드 레이아웃 호환을 위해 bounds가 변경될 때 마다 새롭게 잡아주도록 함
+  // (플로팅 패널의 사이즈가 전체를 덮지 않을 수 있기에)
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    
+    guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+    layout.minimumLineSpacing = 0
+    layout.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
+    layout.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 50)
+  }
+  
   
   // MARK: - Setups
   
@@ -80,12 +85,11 @@ final class BlogPostsViewController: UICollectionViewController {
   // MARK: - Bind
   
   private func bind() {
-    bindInput()
     bindOutput()
   }
   
-  private func bindInput() {
-    loadMoreBlogPostsButton.tapPublisher
+  private func bind(loadMoreBlogPostButton: UIButton) {
+    loadMoreBlogPostButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.viewModel.input.loadMoreBlogPosts.send()
@@ -116,6 +120,7 @@ extension BlogPostsViewController {
   
   private func setupCollectionView() {
     collectionView.registerCell(cellClass: BlogPostCell.self)
+    collectionView.registerFooterView(viewClass: LoadMoreBlogPostFooterView.self)
     collectionView.addBorder(to: .bottom, color: R.color.gray_5())
   }
 }
@@ -126,7 +131,7 @@ extension BlogPostsViewController {
 extension BlogPostsViewController {
   
   private func makeBlogPostDataSource() -> BlogPostDataSource {
-    return BlogPostDataSource(
+    let dataSource = BlogPostDataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(cellClass: BlogPostCell.self,
@@ -134,6 +139,16 @@ extension BlogPostsViewController {
         cell.configure(with: item)
         return cell
       })
+    
+    dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+      guard kind == UICollectionView.elementKindSectionFooter else { return nil }
+      let footerView = collectionView.dequeueReusableFooterView(ofType: LoadMoreBlogPostFooterView.self,
+                                                                for: indexPath)
+      self?.bind(loadMoreBlogPostButton: footerView.button)
+      return footerView
+    }
+    
+    return dataSource
   }
   
   private func applySnapshot(with blogPosts: [BlogPost]) {
@@ -144,5 +159,19 @@ extension BlogPostsViewController {
     
     blogPostDataSource.apply(snapshot)
   }
-  
 }
+
+//extension BlogPostsViewController {
+//  override func collectionView(_ collectionView: UICollectionView,
+//                               viewForSupplementaryElementOfKind kind: String,
+//                               at indexPath: IndexPath) -> UICollectionReusableView {
+//    guard kind == UICollectionView.elementKindSectionFooter else {
+//      return UICollectionReusableView()
+//    }
+//
+//    let footerView = collectionView.dequeueReusableFooterView(ofType: LoadMoreBlogPostFooterView.self,
+//                                                              for: indexPath)
+//    bind(loadMoreBlogPostButton: footerView.button)
+//    return footerView
+//  }
+//}

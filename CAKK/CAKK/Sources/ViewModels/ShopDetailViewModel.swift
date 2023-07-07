@@ -36,6 +36,7 @@ final class ShopDetailViewModel {
   private let cakeShop: CakeShop
   
   private var numberOfBlogPostsToShow = 3
+  private static let maximumNumberOfBlogPosts = 30 // 최대로 보여줄 블로그포스트 수
   
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -85,8 +86,8 @@ final class ShopDetailViewModel {
     input.loadMoreBlogPosts
       .prepend(()) // 초기에 한 번 값을 발행
       .filter { [weak self] in
-        // 15개 이상은 블로그 포스팅을 fetch 하지 않음
-        (self?.numberOfBlogPostsToShow ?? 0) < 15
+        // 30개 이상은 블로그 포스팅을 fetch 하지 않음
+        (self?.numberOfBlogPostsToShow ?? 0) < Self.maximumNumberOfBlogPosts
       }
       .flatMap { [weak self] in
         guard let self = self else { return Empty<BlogPostResponse, Error>().eraseToAnyPublisher() }
