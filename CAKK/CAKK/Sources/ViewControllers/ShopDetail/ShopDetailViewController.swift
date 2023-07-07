@@ -422,9 +422,13 @@ extension ShopDetailViewController {
   }
   
   private func setupCakeCategoryChips(with cakeShopDetail: CakeShopDetailResponse) {
-    let chipViews = cakeShopDetail.cakeCategories.map {
+    var chipViews = cakeShopDetail.cakeCategories.map {
       CakeCategoryChipView($0)
     }
+    
+//    if cakeShopDetail.cakeCategories.isEmpty {
+      chipViews = [CakeCategoryChipView(emptyKeyword: true)]
+//    }
     
     chipViews.forEach {
       keywordContentStackView.addArrangedSubview($0)

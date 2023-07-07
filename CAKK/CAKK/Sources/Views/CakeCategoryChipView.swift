@@ -12,13 +12,19 @@ class CakeCategoryChipView: LabelChip {
   
   // MARK: - Properties
   
-  private var cakeCategory: CakeCategory
+  private var cakeCategory: CakeCategory?
   
   
   // MARK: - Initialization
   
   init(_ cakeCategory: CakeCategory) {
     self.cakeCategory = cakeCategory
+    super.init(frame: .zero)
+    setup()
+  }
+  
+  init(emptyKeyword: Bool) {
+    self.cakeCategory = nil
     super.init(frame: .zero)
     setup()
   }
@@ -39,6 +45,13 @@ class CakeCategoryChipView: LabelChip {
   }
   
   private func setupChipView() {
+    guard let cakeCategory = cakeCategory else {
+      title = "등록된 키워드가 없어요"
+      titleColor = .white
+      backgroundColor = .black
+      return
+    }
+    
     title = cakeCategory.localizedString
     titleColor = cakeCategory.color
     isBackgroundSynced = true
