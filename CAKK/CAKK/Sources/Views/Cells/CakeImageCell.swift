@@ -19,7 +19,8 @@ final class CakeImageCell: UICollectionViewCell {
   // MARK: - UI
   
   let imageView = UIImageView().then {
-    $0.contentMode = .scaleAspectFit
+    $0.clipsToBounds = true
+    $0.contentMode = .scaleAspectFill
   }
   
   // MARK: - Initialization
