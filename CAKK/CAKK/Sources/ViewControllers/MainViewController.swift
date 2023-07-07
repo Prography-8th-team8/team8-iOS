@@ -87,7 +87,7 @@ final class MainViewController: UIViewController {
   private lazy var filterFloatingPanel = FloatingPanelController().then {
     $0.layout = FilterFloatingPanelLayout()
     $0.surfaceView.appearance = floatingPanelSurfaceAppearance
-    $0.surfaceView.grabberHandlePadding = 12
+    $0.surfaceView.grabberHandle.isHidden = true
     $0.contentMode = .fitToBounds
     $0.backdropView.dismissalTapGestureRecognizer.isEnabled = true
     $0.isRemovalInteractionEnabled = true

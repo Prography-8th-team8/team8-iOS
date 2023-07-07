@@ -17,6 +17,7 @@ final class FilterViewModel {
     let addCategory = PassthroughSubject<CakeCategory, Never>()
     let removeCategory = PassthroughSubject<CakeCategory, Never>()
     let apply = PassthroughSubject<Void, Never>()
+    let refresh = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
@@ -47,6 +48,7 @@ final class FilterViewModel {
     bindRemoveCategory(input, output)
     bindApply(input, output)
     bindCategoryChanges(input, output)
+    bindRefresh(input, output)
   }
   
   private func bindAddCategory(_ input: Input, _ output: Output) {
@@ -89,6 +91,15 @@ final class FilterViewModel {
         } else {
           output.categoriesChanged.send(true)
         }
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindRefresh(_ input: Input, _ output: Output) {
+    input
+      .refresh
+      .sink { _ in
+        output.categories.send(CakeCategory.allCases)
       }
       .store(in: &cancellableBag)
   }

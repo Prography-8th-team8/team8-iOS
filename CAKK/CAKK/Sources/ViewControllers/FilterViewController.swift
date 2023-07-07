@@ -17,7 +17,7 @@ class FilterViewController: UIViewController {
   // MARK: - Constants
   
   enum Metric {
-    static let topPadding = 28.f
+    static let topPadding = 22.f
     static let horizontalPadding = 20.f
     
     static let headerFontSize = 18.f
@@ -25,6 +25,12 @@ class FilterViewController: UIViewController {
     
     static let applyButtonHeight = 72.f
     static let applyButtonFontSize = 18.f
+    
+    static let closeButtonSize = 25.f
+    static let closeButtonImageInset = 4.f
+    
+    static let refreshButtonSize = 24.f
+    static let refreshButtonImageInset = 4.f
   }
   
   
@@ -56,7 +62,7 @@ class FilterViewController: UIViewController {
   }
   
   private let subtitleLabel = UILabel().then {
-    $0.text = "카테고리와 맞는 디자인의 케이크 샵을 추천해 드려요!"
+    $0.text = "원하는 디자인의 케이크샵을 추천해 드려요!"
     $0.textColor = R.color.black()!.withAlphaComponent(0.8)
     $0.font = .pretendard(size: Metric.subtitleFontSize)
   }
@@ -77,6 +83,19 @@ class FilterViewController: UIViewController {
       $0.delaysContentTouches = false
     }
   
+  private let closeButton = UIButton().then {
+    $0.setImage(.init(systemName: "xmark"), for: .normal)
+    $0.tintColor = R.color.black()
+    $0.imageEdgeInsets = .init(common: Metric.closeButtonImageInset)
+  }
+  
+  private let refreshButton = UIButton().then {
+    $0.setImage(R.image.arrow_circlepath(), for: .normal)
+    $0.tintColor = R.color.gray_40()
+    $0.backgroundColor = R.color.gray_10()
+    $0.layer.cornerRadius = Metric.refreshButtonSize / 2
+    $0.imageEdgeInsets = .init(common: Metric.refreshButtonImageInset)
+  }
   
   
   // MARK: - Initializers
@@ -114,6 +133,21 @@ class FilterViewController: UIViewController {
         self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
+    
+    closeButton
+      .tapPublisher
+      .sink { [weak self] in
+        self?.dismiss(animated: true)
+      }
+      .store(in: &cancellableBag)
+    
+    refreshButton
+      .tapPublisher
+      .sink { [weak self] in
+        self?.viewModel.input.refresh.send(Void())
+        self?.refreshAllCells()
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -131,6 +165,17 @@ class FilterViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
+  }
+  
+  
+  // MARK: - Private
+  
+  private func refreshAllCells() {
+    collectionView.visibleCells.forEach { cell in
+      if let cell = cell as? CakeCategoryCell {
+        cell.isChipSelected = true
+      }
+    }
   }
 }
 
@@ -176,16 +221,27 @@ extension FilterViewController {
   // MARK: - Setup Layout
   
   private func setupLayout() {
+    setupCloseButtonLayout()
     setupHeaderLabelLayout()
     setupSubtitleLabelLayout()
+    setupRefreshButtonLayout()
     setupApplyButtonLayout()
     setupCollectionViewLayout()
+  }
+  
+  private func setupCloseButtonLayout() {
+    view.addSubview(closeButton)
+    closeButton.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide).inset(Metric.topPadding)
+      $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.horizontalPadding)
+      $0.size.equalTo(Metric.closeButtonSize)
+    }
   }
   
   private func setupHeaderLabelLayout() {
     view.addSubview(headerLabel)
     headerLabel.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.topPadding)
+      $0.top.equalTo(closeButton.snp.bottom).offset(8)
       $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
     }
   }
@@ -194,7 +250,16 @@ extension FilterViewController {
     view.addSubview(subtitleLabel)
     subtitleLabel.snp.makeConstraints {
       $0.top.equalTo(headerLabel.snp.bottom).offset(12)
-      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.leading.equalToSuperview().inset(Metric.horizontalPadding)
+    }
+  }
+  
+  private func setupRefreshButtonLayout() {
+    view.addSubview(refreshButton)
+    refreshButton.snp.makeConstraints {
+      $0.centerY.equalTo(subtitleLabel)
+      $0.leading.equalTo(subtitleLabel.snp.trailing).offset(8)
+      $0.size.equalTo(Metric.refreshButtonSize)
     }
   }
   
