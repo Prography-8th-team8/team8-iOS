@@ -22,6 +22,7 @@ final class ShopDetailViewModel {
     let blogPostsToShow = PassthroughSubject<[BlogPost], Never>()
     let failToFetchDetail = PassthroughSubject<Void, Never>()
     let isBookmarked = CurrentValueSubject<Bool, Never>(false)
+    let naverMapRouteURL = CurrentValueSubject<URL?, Never>(nil)
   }
   
   
@@ -63,6 +64,7 @@ final class ShopDetailViewModel {
     bindFetchCakeShopDetail(input, output)
     bindLoadMoreBlogPosts(input, output)
     bindBookmark(input, output)
+    bindRoute(input, output)
   }
   
   private func bindFetchCakeShopDetail(_ input: Input, _ output: Output) {
@@ -139,4 +141,23 @@ final class ShopDetailViewModel {
       }
       .store(in: &cancellableBag)
   }
+  
+  private func bindRoute(_ input: Input, _ output: Output) {
+    output.cakeShopDetail.sink { shopDetail in
+      guard let shopDetail = shopDetail else { return }
+      
+      guard var urlComponents = URLComponents(string: "nmap://route/public") else { return }
+      urlComponents.queryItems = [
+        URLQueryItem(name: "dlat", value: String(shopDetail.latitude)),
+        URLQueryItem(name: "dlng", value: String(shopDetail.longitude)),
+        URLQueryItem(name: "dname", value: shopDetail.name),
+        URLQueryItem(name: "appname", value: Bundle.main.bundleIdentifier)
+      ]
+      guard let url = urlComponents.url else { return }
+      
+      output.naverMapRouteURL.send(url)
+    }
+    .store(in: &cancellableBag)
+  }
+  
 }

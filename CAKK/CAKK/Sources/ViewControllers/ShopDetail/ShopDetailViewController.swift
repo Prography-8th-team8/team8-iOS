@@ -112,13 +112,13 @@ final class ShopDetailViewController: UIViewController {
   // 메뉴 버튼
   private let linkMenuButton = DetailMenuButton(image: R.image.instagram(), title: "전화하기")
   private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
-  private let naviMenuButton = DetailMenuButton(image: R.image.pin_map(), title: "길 안내")
+  private let routeMenuButton = DetailMenuButton(image: R.image.pin_map(), title: "길 안내")
   private let shareMenuButton = DetailMenuButton(image: R.image.arrow_up_square(), title: "공유하기")
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [linkMenuButton,
                        bookmarkMenuButton,
-                       naviMenuButton,
+                       routeMenuButton,
                        shareMenuButton]
   ).then {
     $0.axis = .horizontal
@@ -268,6 +268,25 @@ final class ShopDetailViewController: UIViewController {
         guard let self = self,
               let link = self.viewModel.output.cakeShopDetail.value?.link else { return }
         self.showLinkSafariController(link: link)
+      }
+      .store(in: &cancellables)
+    
+    routeMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .compactMap { [weak self] in
+        self?.viewModel.output.naverMapRouteURL.value
+      }
+      .sink { [weak self] naverMapRouteURL in
+        guard let self = self else { return }
+        
+        guard UIApplication.shared.canOpenURL(naverMapRouteURL) else {
+          if let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8") {
+            UIApplication.shared.open(appStoreURL)
+          }
+          return
+        }
+        
+        UIApplication.shared.open(naverMapRouteURL)
       }
       .store(in: &cancellables)
     
