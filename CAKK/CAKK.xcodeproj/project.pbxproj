@@ -88,6 +88,7 @@
 		B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */; };
 		B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */; };
 		B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */; };
+		B48EF3AE2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EF3AD2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift */; };
 		B490C3392A0FDBA5008A2736 /* CakeShopDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */; };
 		B490C33B2A0FE942008A2736 /* cake_shop_detail_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */; };
 		B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B490C33D2A0FF066008A2736 /* ViewModelType.swift */; };
@@ -206,6 +207,7 @@
 		B46F9DCC29DAE51D00113979 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		B48EA8512A0B7EC500AC336D /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
 		B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuButton.swift; sourceTree = "<group>"; };
+		B48EF3AD2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreBlogPostFooterView.swift; sourceTree = "<group>"; };
 		B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailResponse.swift; sourceTree = "<group>"; };
 		B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_shop_detail_sample.json; sourceTree = "<group>"; };
 		B490C33D2A0FF066008A2736 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */,
 				B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */,
 				B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */,
+				B48EF3AD2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
+				B48EF3AE2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift in Sources */,
 				8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */,
 				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
 				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,

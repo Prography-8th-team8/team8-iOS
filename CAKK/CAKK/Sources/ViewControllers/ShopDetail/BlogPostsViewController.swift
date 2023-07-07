@@ -42,19 +42,6 @@ final class BlogPostsViewController: UICollectionViewController {
   private var cancellables = Set<AnyCancellable>()
   
   
-  // MARK: - UI Components
-  
-  // TODO: 컬렉션뷰의 푸터로 처리해야 할 듯
-  private let loadMoreBlogPostsButton = UIButton().then {
-    $0.titleLabel?.font = .pretendard(size: 14, weight: .bold)
-    $0.layer.borderColor = R.color.gray_5()?.cgColor
-    $0.layer.borderWidth = 2
-    $0.layer.cornerRadius = 8
-    $0.setTitle("블로그 리뷰 더 보기", for: .normal)
-    $0.setTitleColor(.black, for: .normal)
-  }
-  
-  
   // MARK: - Initialization
   
   init(viewModel: ShopDetailViewModel, collectionViewLayout: UICollectionViewLayout) {
@@ -81,10 +68,10 @@ final class BlogPostsViewController: UICollectionViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    let itemWidth = collectionView.bounds.width - 28
     guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
     layout.minimumLineSpacing = 0
     layout.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
+    layout.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 50)
   }
   
   
@@ -98,12 +85,11 @@ final class BlogPostsViewController: UICollectionViewController {
   // MARK: - Bind
   
   private func bind() {
-    bindInput()
     bindOutput()
   }
   
-  private func bindInput() {
-    loadMoreBlogPostsButton.tapPublisher
+  private func bind(loadMoreBlogPostButton: UIButton) {
+    loadMoreBlogPostButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.viewModel.input.loadMoreBlogPosts.send()
@@ -134,6 +120,7 @@ extension BlogPostsViewController {
   
   private func setupCollectionView() {
     collectionView.registerCell(cellClass: BlogPostCell.self)
+    collectionView.registerFooterView(viewClass: LoadMoreBlogPostFooterView.self)
     collectionView.addBorder(to: .bottom, color: R.color.gray_5())
   }
 }
@@ -144,7 +131,7 @@ extension BlogPostsViewController {
 extension BlogPostsViewController {
   
   private func makeBlogPostDataSource() -> BlogPostDataSource {
-    return BlogPostDataSource(
+    let dataSource = BlogPostDataSource(
       collectionView: collectionView,
       cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(cellClass: BlogPostCell.self,
@@ -152,6 +139,16 @@ extension BlogPostsViewController {
         cell.configure(with: item)
         return cell
       })
+    
+    dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+      guard kind == UICollectionView.elementKindSectionFooter else { return nil }
+      let footerView = collectionView.dequeueReusableFooterView(ofType: LoadMoreBlogPostFooterView.self,
+                                                                for: indexPath)
+      self?.bind(loadMoreBlogPostButton: footerView.button)
+      return footerView
+    }
+    
+    return dataSource
   }
   
   private func applySnapshot(with blogPosts: [BlogPost]) {
@@ -162,5 +159,19 @@ extension BlogPostsViewController {
     
     blogPostDataSource.apply(snapshot)
   }
-  
 }
+
+//extension BlogPostsViewController {
+//  override func collectionView(_ collectionView: UICollectionView,
+//                               viewForSupplementaryElementOfKind kind: String,
+//                               at indexPath: IndexPath) -> UICollectionReusableView {
+//    guard kind == UICollectionView.elementKindSectionFooter else {
+//      return UICollectionReusableView()
+//    }
+//
+//    let footerView = collectionView.dequeueReusableFooterView(ofType: LoadMoreBlogPostFooterView.self,
+//                                                              for: indexPath)
+//    bind(loadMoreBlogPostButton: footerView.button)
+//    return footerView
+//  }
+//}
