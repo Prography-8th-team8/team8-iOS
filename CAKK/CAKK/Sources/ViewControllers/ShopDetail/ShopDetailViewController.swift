@@ -101,14 +101,6 @@ final class ShopDetailViewController: UIViewController {
   
   private let infoStackContainerView = UIView()
   
-  private let copyAddressButton = UIButton().then {
-    $0.setAttributedTitle(
-      NSAttributedString(
-        string: "주소 복사",
-        attributes: [.font: UIFont.pretendard(weight: .bold)]), for: .normal
-    )
-  }
-  
   // 메뉴 버튼
   private let linkMenuButton = DetailMenuButton(image: R.image.instagram(), title: "전화하기")
   private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
@@ -253,15 +245,6 @@ final class ShopDetailViewController: UIViewController {
       }
       .store(in: &cancellables)
     
-    // 클립보드에 복사
-    copyAddressButton.tapPublisher
-      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .sink { [weak self] in
-        UIPasteboard.general.string = self?.addressLabel.text ?? ""
-        self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
-      }
-      .store(in: &cancellables)
-    
     linkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
@@ -273,20 +256,8 @@ final class ShopDetailViewController: UIViewController {
     
     routeMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-      .compactMap { [weak self] in
-        self?.viewModel.output.naverMapRouteURL.value
-      }
-      .sink { [weak self] naverMapRouteURL in
-        guard let self = self else { return }
-        
-        guard UIApplication.shared.canOpenURL(naverMapRouteURL) else {
-          if let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8") {
-            UIApplication.shared.open(appStoreURL)
-          }
-          return
-        }
-        
-        UIApplication.shared.open(naverMapRouteURL)
+      .sink { [weak self] in
+        self?.showRouteActionSheet()
       }
       .store(in: &cancellables)
     
@@ -474,6 +445,45 @@ extension ShopDetailViewController {
     
     linkMenuButton.menuImageView.image = R.image.website()
     linkMenuButton.menuTitleLabel.text = "웹사이트"
+  }
+  
+  private func showRouteActionSheet() {
+    let alertController = UIAlertController(title: "길안내", message: nil, preferredStyle: .actionSheet)
+    let copyAddressAction = UIAlertAction(title: "주소 복사", style: .default) { [weak self] _ in
+      UIPasteboard.general.string = self?.addressLabel.text ?? ""
+      self?.showToast(with: "주소가 클립보드에 복사되었습니다.")
+    }
+    alertController.addAction(copyAddressAction)
+    
+    let naverMapRouteAction = UIAlertAction(title: "네이버 지도 앱에서 보기", style: .default) { [weak self] _ in
+      self?.openNaverMapRoute()
+    }
+    alertController.addAction(naverMapRouteAction)
+    
+    let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+    alertController.addAction(cancelAction)
+    
+    // 아이패드에선 화면 중앙에 나타나도록 설정
+    if let popoverController = alertController.popoverPresentationController {
+      popoverController.sourceView = view // 액션시트가 표시될 기준 뷰
+      popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+      popoverController.permittedArrowDirections = [] // 화살표 표시 없음
+    }
+    
+    present(alertController, animated: true, completion: nil)
+  }
+  
+  private func openNaverMapRoute() {
+    guard let naverMapRouteURL = viewModel.output.naverMapRouteURL.value else { return }
+    
+    guard UIApplication.shared.canOpenURL(naverMapRouteURL) else {
+      if let appStoreURL = URL(string: "http://itunes.apple.com/app/id311867728?mt=8") {
+        UIApplication.shared.open(appStoreURL)
+      }
+      return
+    }
+    
+    UIApplication.shared.open(naverMapRouteURL)
   }
 }
 
