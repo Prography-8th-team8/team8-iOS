@@ -238,13 +238,30 @@ final class ShopDetailViewController: UIViewController {
   private func bindInput() {
     viewModel.input.viewDidLoad.send()
     
+    bindBlogPostCollectionView()
+    bindLinkMenuButton()
+    bindRouteMenuButton()
+    bindBookmarkMenuButton()
+    bindShareMenuButton()
+    bindSegmentedControl()
+  }
+  
+  private func bindOutput() {
+    bindCakeShopDetail()
+    bindFailToFetchDetail()
+    bindIsBookmarked()
+  }
+  
+  private func bindBlogPostCollectionView() {
     // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
     blogPostsViewController.collectionView.didSelectItemPublisher
       .sink { [weak self] indexPath in
         self?.showBlogPostSafariController(of: indexPath)
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindLinkMenuButton() {
     linkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
@@ -253,21 +270,47 @@ final class ShopDetailViewController: UIViewController {
         self.showLinkSafariController(link: link)
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindRouteMenuButton() {
     routeMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.showRouteActionSheet()
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindBookmarkMenuButton() {
     bookmarkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
         self?.viewModel.input.tapBookmarkButton.send()
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindShareMenuButton() {
+    shareMenuButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .compactMap { [weak self] in
+        self?.viewModel.output.cakeShopDetail.value
+      }
+      .sink { [weak self] cakeShopDetail in
+        guard let self = self else { return }
+        let items = [cakeShopDetail.name,
+                     cakeShopDetail.address,
+                     cakeShopDetail.link]
+        
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityController.modalPresentationStyle = .popover
+        activityController.popoverPresentationController?.sourceView = shareMenuButton // 아이패드를 위한 설정
+        self.present(activityController, animated: true)
+      }
+      .store(in: &cancellables)
+  }
+  
+  private func bindSegmentedControl() {
     segmentedControl.selectedSegmentIndexPublisher
       .sink { [weak self] index in
         self?.selectedPage = index
@@ -275,7 +318,7 @@ final class ShopDetailViewController: UIViewController {
       .store(in: &cancellables)
   }
   
-  private func bindOutput() {
+  private func bindCakeShopDetail() {
     viewModel.output.cakeShopDetail
       .sink { [weak self] cakeShopDetail in
         guard let self,
@@ -292,7 +335,9 @@ final class ShopDetailViewController: UIViewController {
         }
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindFailToFetchDetail() {
     viewModel.output.failToFetchDetail
       .sink { [weak self] in
         guard let self else { return }
@@ -301,7 +346,9 @@ final class ShopDetailViewController: UIViewController {
         }
       }
       .store(in: &cancellables)
-    
+  }
+  
+  private func bindIsBookmarked() {
     viewModel.output.isBookmarked
       .sink { [weak self] isBookmarked in
         let buttonImage = isBookmarked ? R.image.bookmark_filled() : R.image.bookmark()
