@@ -12,6 +12,7 @@ class CakeShopDetailFloatingPanelLandscapeLayout: FloatingPanelLayout {
   let initialState: FloatingPanelState = .hidden
   let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
     .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .safeArea),
+    .half: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .safeArea),
     .tip: FloatingPanelLayoutAnchor(absoluteInset: 172, edge: .bottom, referenceGuide: .safeArea)
   ]
   
