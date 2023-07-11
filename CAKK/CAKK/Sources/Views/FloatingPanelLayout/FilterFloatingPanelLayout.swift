@@ -14,6 +14,6 @@ class FilterFloatingPanelLayout: FloatingPanelLayout {
     return 0.6
   }
   let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
-    .tip: FloatingPanelLayoutAnchor(absoluteInset: 320, edge: .bottom, referenceGuide: .safeArea)
+    .tip: FloatingPanelLayoutAnchor(absoluteInset: 360, edge: .bottom, referenceGuide: .safeArea)
   ]
 }
