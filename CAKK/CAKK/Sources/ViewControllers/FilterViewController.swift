@@ -18,13 +18,15 @@ class FilterViewController: UIViewController {
   
   enum Metric {
     static let topPadding = 22.f
+    static let bottomPadding = 12.f
     static let horizontalPadding = 20.f
     
     static let headerFontSize = 18.f
     static let subtitleFontSize = 14.f
     
-    static let applyButtonHeight = 72.f
     static let applyButtonFontSize = 18.f
+    static let applyButtonCornerRadius = 15.f
+    static let applyButtonHeight = 57.f
     
     static let closeButtonSize = 25.f
     static let closeButtonImageInset = 4.f
@@ -68,12 +70,13 @@ class FilterViewController: UIViewController {
   }
   
   private let applyButton = UIButton().then {
+    $0.layer.cornerRadius = Metric.applyButtonCornerRadius
     $0.setTitle("필터 적용", for: .normal)
     $0.setTitle("필터를 선택해 주세요", for: .disabled)
     $0.setTitleColor(R.color.white(), for: .normal)
     $0.setTitleColor(R.color.white()?.withAlphaComponent(0.3), for: .highlighted)
     $0.titleLabel?.font = .pretendard(size: Metric.applyButtonFontSize, weight: .bold)
-    $0.backgroundColor = R.color.black()
+    $0.backgroundColor = R.color.pink_100()
   }
   
   public lazy var collectionView = UICollectionView(
@@ -158,7 +161,7 @@ class FilterViewController: UIViewController {
         
         if isChanged {
           self.applyButton.isEnabled = true
-          self.applyButton.backgroundColor = R.color.black()
+          self.applyButton.backgroundColor = R.color.pink_100()
         } else {
           self.applyButton.isEnabled = false
           self.applyButton.backgroundColor = R.color.gray_20()
@@ -202,19 +205,6 @@ extension FilterViewController {
     section.interGroupSpacing = 12
     
     return .init(section: section)
-  }
-  
-  // MARK: - Configure Layout
-  
-  override func viewSafeAreaInsetsDidChange() {
-    configureApplyButtonLayout()
-  }
-  
-  private func configureApplyButtonLayout() {
-    applyButton.snp.makeConstraints {
-      $0.height.equalTo(Metric.applyButtonHeight + view.safeAreaInsets.bottom)
-    }
-    applyButton.titleEdgeInsets.bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
   }
   
   
@@ -266,7 +256,9 @@ extension FilterViewController {
   private func setupApplyButtonLayout() {
     view.addSubview(applyButton)
     applyButton.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
+      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.bottomPadding)
+      $0.height.equalTo(Metric.applyButtonHeight)
     }
   }
   
@@ -307,7 +299,6 @@ extension FilterViewController {
     }
   }
 }
-
 
 
 // MARK: - Preview
