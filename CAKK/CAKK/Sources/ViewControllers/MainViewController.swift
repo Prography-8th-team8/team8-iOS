@@ -372,7 +372,7 @@ final class MainViewController: UIViewController {
     cakeShopDetailFloatingPanel.addPanel(toParent: self)
     cakeShopDetailFloatingPanel.set(contentViewController: viewController)
     cakeShopDetailFloatingPanel.track(scrollView: viewController.mainScrollView)
-    cakeShopDetailFloatingPanel.move(to: .tip, animated: true)
+    cakeShopDetailFloatingPanel.move(to: .half, animated: true)
   }
 }
 
@@ -464,6 +464,7 @@ extension MainViewController: NMFMapViewCameraDelegate {
         isLandscapeMode == false {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
         self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+        self?.cakeShopDetailFloatingPanel.move(to: .tip, animated: true)
       }
     }
   }
