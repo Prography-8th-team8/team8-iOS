@@ -223,6 +223,7 @@ final class CakeShopListViewController: UIViewController {
 
     viewModel.output
       .cakeShops
+      .receive(on: DispatchQueue.main)
       .map { $0.count.description }
       .sink { [weak self] count in
         self?.numberOfCakeShopLabel.text = "\(count)개의 케이크샵"
