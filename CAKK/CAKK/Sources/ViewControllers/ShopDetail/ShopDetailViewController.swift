@@ -27,7 +27,7 @@ final class ShopDetailViewController: UIViewController {
   enum Metric {
     static let horizontalPadding = 14.f
     
-    static let navigationBarHeight = 52.f
+    static let navigationBarHeight = 56.f
   }
   
   

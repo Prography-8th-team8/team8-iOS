@@ -13,8 +13,10 @@ import Combine
 
 import SnapKit
 import Then
+
 import EasyTipView
 import FloatingPanel
+import SkeletonView
 
 final class CakeShopListViewController: UIViewController {
   
@@ -97,11 +99,20 @@ final class CakeShopListViewController: UIViewController {
     $0.text = "이 근처 케이크샵"
     $0.font = .pretendard(size: Metric.locationLabelFontSize, weight: .bold)
     $0.textColor = .black
+    
+    // Skeleton
+    $0.isSkeletonable = true
+    $0.linesCornerRadius = 6
+    $0.skeletonTextLineHeight = .fixed(22)
   }
   
   private let numberOfCakeShopLabel = UILabel().then {
     $0.font = .systemFont(ofSize: Metric.numberOfCakeShopFontSize)
     $0.textColor = .black.withAlphaComponent(0.8)
+    
+    // Skeleton
+    $0.isSkeletonable = true
+    $0.linesCornerRadius = 4
   }
   
   private lazy var labelsStack = UIStackView(
@@ -119,6 +130,10 @@ final class CakeShopListViewController: UIViewController {
     $0.setTitleColor(R.color.gray_20(), for: .highlighted)
     $0.backgroundColor = R.color.gray_5()
     $0.layer.cornerRadius = Metric.changeDistrictCornerRadius
+    
+    // Skeleton
+    $0.isSkeletonable = true
+    $0.skeletonCornerRadius = Float(Metric.changeDistrictCornerRadius)
   }
   
   private let loadingView = UIActivityIndicatorView()
@@ -128,7 +143,11 @@ final class CakeShopListViewController: UIViewController {
     subTitle: "다른 곳으로 이동 후 새로고침을 눌러보세요!"
   )
   
-  private let filterButton = FilterButton(initialBadgeCount: 0)
+  private let filterButton = FilterButton(initialBadgeCount: 0).then {
+    // Skeleton
+    $0.isSkeletonable = true
+    $0.skeletonCornerRadius = 14
+  }
   
 
   // MARK: - Initialization
@@ -228,10 +247,12 @@ final class CakeShopListViewController: UIViewController {
           self?.collectionView.isHidden = true
           self?.loadingView.isHidden = false
           self?.loadingView.startAnimating()
+          self?.showSkeletons()
         } else {
           self?.collectionView.isHidden = false
           self?.loadingView.isHidden = true
           self?.loadingView.stopAnimating()
+          self?.hideSkeletons()
         }
       }
       .store(in: &cancellableBag)
@@ -284,6 +305,22 @@ final class CakeShopListViewController: UIViewController {
     }
     
     isFirstOpen = false
+  }
+  
+  private func showSkeletons() {
+    headerLabel.showCustomSkeleton()
+    numberOfCakeShopLabel.showCustomSkeleton()
+    changeDistrictButton.showCustomSkeleton()
+    filterButton.showCustomSkeleton()
+    filterButton.clipsToBounds = true
+  }
+  
+  private func hideSkeletons() {
+    headerLabel.hideSkeleton()
+    numberOfCakeShopLabel.hideSkeleton()
+    changeDistrictButton.hideSkeleton()
+    filterButton.hideSkeleton()
+    filterButton.clipsToBounds = false
   }
 }
 

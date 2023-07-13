@@ -19,6 +19,7 @@ PODS:
   - Realm/Headers (10.40.2)
   - RealmSwift (10.40.2):
     - Realm (= 10.40.2)
+  - SkeletonView (1.30.4)
   - SnapKit (5.6.0)
   - SwiftLint (0.50.3)
   - Then (3.0.0)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - NMapsMap (~> 3.16.2)
   - R.swift (~> 7.3.0)
   - RealmSwift (~> 10)
+  - SkeletonView (~> 1.30.4)
   - SnapKit (~> 5.6.0)
   - SwiftLint (~> 0.50.3)
   - Then (~> 3.0.0)
@@ -53,6 +55,7 @@ SPEC REPOS:
     - R.swift
     - Realm
     - RealmSwift
+    - SkeletonView
     - SnapKit
     - SwiftLint
     - Then
@@ -71,10 +74,11 @@ SPEC CHECKSUMS:
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
   Realm: 731e86d9388287b18e36b0beb2493fc4845ce8a2
   RealmSwift: c2a1059ba52e1e08467b1253b1d4ab354ef3177b
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 6130e5716a934b124fe15d7e7abadcd469009351
+PODFILE CHECKSUM: cb56ed72bd39440657b61e8c0ab1940e62279af0
 
 COCOAPODS: 1.12.1
