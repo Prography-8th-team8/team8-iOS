@@ -41,6 +41,7 @@
 		8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E53F1BA2A332936002F871C /* EmptyStateView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */; };
+		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */; };
 		8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */; };
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
@@ -148,6 +149,7 @@
 		8E53F1BA2A332936002F871C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
+		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E9E192329CEDD4F00CFF157 /* CAKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9E192629CEDD4F00CFF157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9E192829CEDD4F00CFF157 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				B41EF0502A34CA6A0068843B /* BlogPostCell.swift */,
 				8EAB811A2A45DCA800D9FA41 /* FilterButton.swift */,
 				B4F3B8D22A5430BD00AB7585 /* UnderlineSegmentedControl.swift */,
+				8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
 				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
 				B466E5792A4EA52F0081E0BD /* CakeShopEntity.swift in Sources */,
+				8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
