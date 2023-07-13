@@ -22,8 +22,7 @@ class CakeShopListFloatingPanelLandscapeLayout: FloatingPanelLayout {
   
   func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
     return [
-      surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0),
-      surfaceView.widthAnchor.constraint(equalToConstant: 340)
+      surfaceView.widthAnchor.constraint(equalToConstant: 375)
     ]
   }
 }

@@ -26,6 +26,8 @@ final class ShopDetailViewController: UIViewController {
   
   enum Metric {
     static let horizontalPadding = 14.f
+    
+    static let navigationBarHeight = 52.f
   }
   
   
@@ -45,6 +47,8 @@ final class ShopDetailViewController: UIViewController {
   
   
   // MARK: - UI
+  
+  private let navigationBar = FloatingPanelNavigationBar(title: "상세정보")
   
   public let mainScrollView = UIScrollView().then {
     $0.contentInsetAdjustmentBehavior = .always
@@ -369,6 +373,7 @@ extension ShopDetailViewController {
   }
   
   private func setupLayout() {
+    setupNavigationBarLayout()
     setupScrollViewLayout()
     setupInfoStackViewLayout()
     setupMenuStackViewLayout()
@@ -379,10 +384,19 @@ extension ShopDetailViewController {
     setupActivityIndicator()
   }
   
+  private func setupNavigationBarLayout() {
+    view.addSubview(navigationBar)
+    navigationBar.snp.makeConstraints {
+      $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+      $0.height.equalTo(Metric.navigationBarHeight)
+    }
+  }
+  
   private func setupScrollViewLayout() {
     view.addSubview(mainScrollView)
     mainScrollView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
+      $0.top.equalTo(navigationBar.snp.bottom)
+      $0.leading.trailing.bottom.equalToSuperview()
     }
     
     mainScrollView.addSubview(contentStackView)
@@ -459,8 +473,18 @@ extension ShopDetailViewController {
   }
   
   private func setupView() {
-    view.backgroundColor = .white
-    title = "상세정보"
+    setupBaseView()
+    setupNavigationBar()
+  }
+  
+  private func setupBaseView() {
+    view.backgroundColor = R.color.white()
+  }
+  
+  private func setupNavigationBar() {
+    navigationBar.leadingButtonHandler = { [weak self] in
+      self?.dismiss(animated: true)
+    }
   }
   
   private func setupCakeCategoryChips(with cakeShopDetail: CakeShopDetailResponse) {

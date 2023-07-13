@@ -320,7 +320,7 @@ extension CakeShopListViewController {
   private func setupLabelStackLayout() {
     headerView.addSubview(labelsStack)
     labelsStack.snp.makeConstraints {
-      $0.top.leading.equalToSuperview().inset(Metric.padding)
+      $0.centerY.leading.equalToSuperview().inset(Metric.padding)
     }
   }
   
