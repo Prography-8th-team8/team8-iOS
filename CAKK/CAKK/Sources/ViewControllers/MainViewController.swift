@@ -247,12 +247,13 @@ final class MainViewController: UIViewController {
         if isLoading {
           self.refreshButton.show()
           self.refreshButton.startLoading()
-          self.cakeShopListFloatingPanel.move(to: .hidden, animated: true)
+          self.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+          self.cakeShopListFloatingPanel.panGestureRecognizer.isEnabled = false
           self.cakeShopDetailFloatingPanel.hide(animated: true)
         } else {
           self.refreshButton.hide()
           self.updateFloatingPanelLayout()
-          self.cakeShopListFloatingPanel.move(to: .tip, animated: true)
+          self.cakeShopListFloatingPanel.panGestureRecognizer.isEnabled = true
         }
       }
       .store(in: &cancellableBag)
