@@ -336,7 +336,8 @@ final class MainViewController: UIViewController {
     let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
     
     if isLandscapeMode {
-      if cakeShopListFloatingPanel.state == .tip {
+      if cakeShopListFloatingPanel.state == .tip &&
+          (cakeShopDetailFloatingPanel.state == .tip || cakeShopDetailFloatingPanel.state == .hidden) {
         cakkMapView.mapView.contentInset = .zero
       } else {
         cakkMapView.mapView.contentInset = .init(
@@ -465,7 +466,10 @@ extension MainViewController: NMFMapViewCameraDelegate {
         isLandscapeMode == false {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
         self?.cakeShopListFloatingPanel.move(to: .tip, animated: true)
-        self?.cakeShopDetailFloatingPanel.move(to: .tip, animated: true)
+        
+        if self?.cakeShopDetailFloatingPanel.state != .hidden {
+          self?.cakeShopDetailFloatingPanel.move(to: .tip, animated: true)
+        }
       }
     }
   }
