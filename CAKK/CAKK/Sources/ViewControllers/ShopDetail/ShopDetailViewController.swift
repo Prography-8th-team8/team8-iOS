@@ -346,7 +346,7 @@ final class ShopDetailViewController: UIViewController {
       .sink { [weak self] in
         guard let self else { return }
         self.showFailAlert(with: "상세 정보를 불러오지 못했어요.") {
-          self.navigationController?.popViewController(animated: true)
+          self.dismiss(animated: true)
         }
       }
       .store(in: &cancellables)
