@@ -4,6 +4,7 @@ PODS:
   - CombineCocoa (0.4.1)
   - EasyTipView (2.1.0)
   - FloatingPanel (2.6.1)
+  - Hero (1.6.2)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
   - Moya/Combine (15.0.0):
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - CombineCocoa (~> 0.4.1)
   - EasyTipView (~> 2.1)
   - FloatingPanel (~> 2.6.0)
+  - Hero (~> 1.6.2)
   - Kingfisher (~> 7.6.2)
   - lottie-ios (~> 4.1.3)
   - Moya/Combine (~> 15.0.0)
@@ -47,6 +49,7 @@ SPEC REPOS:
     - CombineCocoa
     - EasyTipView
     - FloatingPanel
+    - Hero
     - Kingfisher
     - lottie-ios
     - Moya
@@ -66,6 +69,7 @@ SPEC CHECKSUMS:
   CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
   FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
+  Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -79,6 +83,6 @@ SPEC CHECKSUMS:
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: cb56ed72bd39440657b61e8c0ab1940e62279af0
+PODFILE CHECKSUM: de9cd79cb89f65afc46f36de366512fa107fb32e
 
 COCOAPODS: 1.12.1
