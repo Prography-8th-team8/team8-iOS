@@ -8,6 +8,7 @@
 import UIKit
 
 import Combine
+import CombineCocoa
 
 import SnapKit
 import Then
@@ -190,23 +191,48 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     }
     
     imageUrls.map { imageUrl in
-      let imageView = UIImageView()
-      imageView.contentMode = .scaleAspectFill
-      imageView.layer.cornerRadius = Metric.cakeImageCornerRadius
-      imageView.clipsToBounds = true
-
-      let url = URL(string: imageUrl)
-      imageView.kf.setImage(with: url, placeholder: R.image.thumbnail_placeholder())
+      let imageView = UIControlImageView()
+      imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
+      imageView.setImage(urlString: imageUrl, placeholder: R.image.thumbnail_placeholder())
       
+      // Image size
       imageView.snp.makeConstraints {
         $0.size.equalTo(Metric.cakeImageSize)
       }
+      
+      // tap gesture
+      imageView
+        .controlEventPublisher(for: .touchUpInside)
+        .sink { [weak self] in
+          self?.showImageViewer(imageUrl)
+        }
+        .store(in: &cancellableBag)
       
       return imageView
     }
     .forEach { imageView in
       cakeImageStackView.addArrangedSubview(imageView)
     }
+  }
+  
+  private func showImageViewer(_ imageUrl: String) {
+    if let viewController = findParentViewController() {
+      let imageViewer = ImageViewerViewController(imageUrl: imageUrl)
+      imageViewer.modalPresentationStyle = .overFullScreen
+      viewController.present(imageViewer, animated: true)
+    }
+  }
+  
+  // UITableViewCell의 상위 UIViewController를 찾는 함수데스
+  private func findParentViewController() -> UIViewController? {
+    var responder: UIResponder? = self
+    while responder != nil {
+      responder = responder?.next
+      if let viewController = responder as? UIViewController {
+        return viewController
+      }
+    }
+    return nil
   }
 }
 
@@ -234,7 +260,7 @@ extension CakeShopCollectionCell {
   }
   
   private func setupHeaderStackViewLayout() {
-    addSubview(headerStackView)
+    contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.top.equalToSuperview().inset(Metric.padding + 6)
       $0.leading.trailing.equalToSuperview().inset(Metric.padding)
@@ -258,7 +284,7 @@ extension CakeShopCollectionCell {
   }
   
   private func setupLocationLabelLayout() {
-    addSubview(locationLabel)
+    contentView.addSubview(locationLabel)
     locationLabel.snp.makeConstraints {
       $0.top.equalTo(headerStackView.snp.bottom).offset(Metric.locationLabelTopPadding)
       $0.leading.equalTo(headerStackView)
@@ -267,7 +293,7 @@ extension CakeShopCollectionCell {
   }
   
   private func setupCakeCategoriesStackViewLayout() {
-    addSubview(cakeCategoryStackView)
+    contentView.addSubview(cakeCategoryStackView)
     cakeCategoryStackView.snp.makeConstraints {
       $0.top.equalTo(locationLabel.snp.bottom).offset(Metric.cakeShopCategoryStackViewTopMargin)
       $0.leading.equalToSuperview().inset(Metric.padding)
@@ -275,7 +301,7 @@ extension CakeShopCollectionCell {
   }
   
   private func setupCakeImageScrollView() {
-    addSubview(cakeImageScrollView)
+    contentView.addSubview(cakeImageScrollView)
     cakeImageScrollView.snp.makeConstraints {
       $0.top.equalTo(cakeCategoryStackView.snp.bottom).offset(32)
       $0.leading.trailing.bottom.equalToSuperview().inset(Metric.padding)
@@ -291,7 +317,7 @@ extension CakeShopCollectionCell {
   }
   
   private func setupDividerLayout() {
-    addSubview(divider)
+    contentView.addSubview(divider)
     divider.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.dividerHeight)
@@ -300,7 +326,12 @@ extension CakeShopCollectionCell {
   
   // Setup View
   private func setupView() {
+    setupBaseView()
     setupContentView()
+  }
+  
+  private func setupBaseView() {
+    hero.isEnabled = true
   }
   
   private func setupContentView() {
