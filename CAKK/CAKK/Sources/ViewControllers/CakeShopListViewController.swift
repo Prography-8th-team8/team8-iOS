@@ -425,11 +425,14 @@ extension CakeShopListViewController {
       cellProvider: { [weak self] collectionView, indexPath, item in
         guard let self else { return UICollectionViewCell() }
         
+        let isBookmarked = self.viewModel?.isBookmarked(id: item.id) ?? false
+        
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: self.cakeShopCellRegistration,
           for: indexPath,
           item: item)
         cell.configure(item)
+        cell.configure(isBookmarked: isBookmarked)
         return cell
       })
   }
@@ -452,7 +455,7 @@ import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    let viewModel = MainViewModel(districts: [], service: .init())
+    let viewModel = MainViewModel(districts: [], service: .init(), storage: RealmStorage())
     
     CakeShopListViewController(viewModel: viewModel)
       .toPreview()

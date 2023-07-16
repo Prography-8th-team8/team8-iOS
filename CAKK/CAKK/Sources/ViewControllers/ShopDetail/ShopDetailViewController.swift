@@ -107,7 +107,7 @@ final class ShopDetailViewController: UIViewController {
   
   // 메뉴 버튼
   private let linkMenuButton = DetailMenuButton(image: R.image.instagram(), title: "전화하기")
-  private let bookmarkMenuButton = DetailMenuButton(image: R.image.bookmark(), title: "북마크")
+  private let bookmarkMenuButton = DetailMenuButton(image: R.image.heart(), title: "북마크")
   private let routeMenuButton = DetailMenuButton(image: R.image.pin_map(), title: "길 안내")
   private let shareMenuButton = DetailMenuButton(image: R.image.arrow_up_square(), title: "공유하기")
   
@@ -373,7 +373,7 @@ final class ShopDetailViewController: UIViewController {
   private func bindIsBookmarked() {
     viewModel.output.isBookmarked
       .sink { [weak self] isBookmarked in
-        let buttonImage = isBookmarked ? R.image.bookmark_filled() : R.image.bookmark()
+        let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
         self?.bookmarkMenuButton.update(image: buttonImage)
       }
       .store(in: &cancellables)

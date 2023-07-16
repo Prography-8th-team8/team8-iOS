@@ -113,6 +113,11 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     $0.backgroundColor = R.color.gray_10()
   }
   
+  private let bookmaredImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
+    $0.image = R.image.heart()
+  }
+  
   
   // MARK: - Initialization
   
@@ -136,7 +141,10 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     
     configureCakeCategoryStackView(item.cakeCategories)
     configureCakeImages(imageUrls: item.imageUrls)
-    
+  }
+  
+  func configure(isBookmarked: Bool) {
+    bookmaredImageView.image = isBookmarked ? R.image.heart_filled() : R.image.heart()
   }
   
   
@@ -257,6 +265,7 @@ extension CakeShopCollectionCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
+    setBookmarkedImageView()
   }
   
   private func setupHeaderStackViewLayout() {
@@ -321,6 +330,15 @@ extension CakeShopCollectionCell {
     divider.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.dividerHeight)
+    }
+  }
+  
+  private func setBookmarkedImageView() {
+    contentView.addSubview(bookmaredImageView)
+    bookmaredImageView.snp.makeConstraints {
+      $0.top.equalToSuperview().inset(Metric.padding)
+      $0.trailing.equalToSuperview().inset(Metric.padding - 6)
+      $0.width.height.equalTo(32)
     }
   }
   
