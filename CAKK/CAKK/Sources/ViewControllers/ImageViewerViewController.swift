@@ -13,6 +13,14 @@ import Hero
 
 class ImageViewerViewController: UIViewController {
   
+  // MARK: - Constants
+  
+  enum Metric {
+    static let maximumZoomScale = 10.f
+    static let minimumZoomScale = 1.f
+  }
+  
+  
   // MARK: - Properties
   
   private let imageUrl: String
@@ -20,6 +28,13 @@ class ImageViewerViewController: UIViewController {
   
   // MARK: - UI
   
+  private lazy var scrollView = UIScrollView().then {
+    $0.delegate = self
+    $0.showsVerticalScrollIndicator = false
+    $0.showsHorizontalScrollIndicator = false
+    $0.maximumZoomScale = Metric.maximumZoomScale
+    $0.minimumZoomScale = Metric.minimumZoomScale
+  }
   private let imageView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
   }
@@ -49,8 +64,8 @@ class ImageViewerViewController: UIViewController {
     let dismissThreshold = 160.f
     
     if distanceY > dismissThreshold {
-      imageView.frame.origin.x += translate.x * 0.5
-      imageView.frame.origin.y += translate.y * 0.5
+      imageView.frame.origin.x += translate.x * 0.65
+      imageView.frame.origin.y += translate.y * 0.65
     } else {
       imageView.frame.origin.x += translate.x
       imageView.frame.origin.y += translate.y
@@ -91,14 +106,29 @@ extension ImageViewerViewController {
   }
   
   private func setupLayout() {
-    view.addSubview(imageView)
+    setupScrollViewLayout()
+    setupImageViewLayout()
+  }
+  
+  private func setupScrollViewLayout() {
+    view.addSubview(scrollView)
+    scrollView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+  }
+  
+  private func setupImageViewLayout() {
+    scrollView.addSubview(imageView)
     imageView.snp.makeConstraints {
       $0.edges.equalToSuperview()
+      $0.width.equalToSuperview()
+      $0.height.equalToSuperview()
     }
   }
   
   private func setupView() {
     setupBaseView()
+    setupScrollView()
     setupImageView()
   }
   
@@ -116,22 +146,46 @@ extension ImageViewerViewController {
     view.hero.modifiers = [.fade, .duration(0.25)]
   }
   
+  private func setupScrollView() {
+    
+  }
+  
   private func setupImageView() {
     let url = URL(string: imageUrl)
     imageView.kf.setImage(with: url)
+    
+    // hero
+    imageView.hero.modifiers = [.scale(0.5), .duration(0.25)]
     
     // pan gesture
     imageView.isUserInteractionEnabled = true
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
     imageView.addGestureRecognizer(panGestureRecognizer)
-    
-    // hero
-    imageView.hero.modifiers = [.scale(0.5), .duration(0.25)]
+  }
+}
+
+
+// MARK: - UIScrollView Delegate
+
+extension ImageViewerViewController: UIScrollViewDelegate {
+  
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return imageView
+  }
+  
+  func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    UIView.animate(withDuration: 0.4,
+                   delay: 0,
+                   usingSpringWithDamping: 0.9,
+                   initialSpringVelocity: 0.9) {
+      self.scrollView.zoomScale = 1.0
+    }
   }
 }
 
 
 // MARK: - Preview
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 struct ImageViewerViewController_Preview: PreviewProvider {
@@ -152,3 +206,4 @@ struct ImageViewerViewController_Preview: PreviewProvider {
     }
   }
 }
+#endif
