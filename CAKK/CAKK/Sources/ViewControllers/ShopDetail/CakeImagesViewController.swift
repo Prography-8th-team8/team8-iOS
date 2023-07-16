@@ -31,7 +31,7 @@ final class CakeImagesViewController: UICollectionViewController {
   
   private let viewModel: ShopDetailViewModel
   
-  private lazy var blogPostDataSource = makeShopImageDataSource()
+  private lazy var dataSource = makeShopImageDataSource()
   
   private var cancellables = Set<AnyCancellable>()
   
@@ -77,8 +77,6 @@ final class CakeImagesViewController: UICollectionViewController {
   }
   
   
-  
-  
   // MARK: - Setups
   
   private func setup() {
@@ -105,6 +103,13 @@ final class CakeImagesViewController: UICollectionViewController {
         self?.applySnapshot(with: imageUrls)
       }
       .store(in: &cancellables)
+  }
+  
+  
+  // MARK: - Public Methods
+  
+  func cakeImageURL(of indexPath: IndexPath) -> String? {
+    return dataSource.itemIdentifier(for: indexPath)
   }
   
 }
@@ -153,7 +158,7 @@ extension CakeImagesViewController {
     snapshot.appendSections(section)
     snapshot.appendItems(imageURLs)
     
-    blogPostDataSource.apply(snapshot)
+    dataSource.apply(snapshot)
   }
   
 }

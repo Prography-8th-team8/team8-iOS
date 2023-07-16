@@ -210,6 +210,14 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  private func showCakeImage(of indexPath: IndexPath) {
+    guard let cakeImageURL = cakeImagesViewController.cakeImageURL(of: indexPath) else { return }
+    
+    let imageViewer = ImageViewerViewController(imageUrl: cakeImageURL)
+    imageViewer.modalPresentationStyle = .overFullScreen
+    present(imageViewer, animated: true)
+  }
+  
   private func showBlogPostSafariController(of indexPath: IndexPath) {
     guard let blogPost = blogPostsViewController.blogPost(of: indexPath),
           let url = URL(string: blogPost.link) else { return }
@@ -242,6 +250,7 @@ final class ShopDetailViewController: UIViewController {
   private func bindInput() {
     viewModel.input.viewDidLoad.send()
     
+    bindCakeImagesCollectionView()
     bindBlogPostCollectionView()
     bindLinkMenuButton()
     bindRouteMenuButton()
@@ -254,6 +263,15 @@ final class ShopDetailViewController: UIViewController {
     bindCakeShopDetail()
     bindFailToFetchDetail()
     bindIsBookmarked()
+  }
+  
+  private func bindCakeImagesCollectionView() {
+    // 각 블로그 포스트 셀을 눌렀을 때, 사파리 컨트롤러로 포스팅 링크를 띄워줌
+    cakeImagesViewController.collectionView.didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        self?.showCakeImage(of: indexPath)
+      }
+      .store(in: &cancellables)
   }
   
   private func bindBlogPostCollectionView() {
