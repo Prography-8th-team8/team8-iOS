@@ -26,7 +26,7 @@ final class DIContainer {
   }
   
   func makeMainViewController(districts: [District]) -> UINavigationController {
-    let viewModel = MainViewModel(districts: districts, service: networkService)
+    let viewModel = MainViewModel(districts: districts, service: networkService, storage: realmStorage)
     let controller = MainViewController(viewModel: viewModel)
     return UINavigationController(rootViewController: controller)
   }

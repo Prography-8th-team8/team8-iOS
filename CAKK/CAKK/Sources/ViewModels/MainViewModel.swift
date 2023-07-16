@@ -37,13 +37,15 @@ final class MainViewModel {
   
   private var districts: [District]
   private let service: NetworkService<CakeAPI>
+  private let storage: RealmStorageProtocol
   
   
   // MARK: - Initialization
   
-  init(districts: [District], service: NetworkService<CakeAPI>) {
+  init(districts: [District], service: NetworkService<CakeAPI>, storage: RealmStorageProtocol) {
     self.districts = districts
     self.service = service
+    self.storage = storage
     
     self.input = Input()
     self.output = Output()
@@ -142,6 +144,10 @@ final class MainViewModel {
     
     let lastCoordinates = Coordinates.init(latitude: latitude, longitude: longitude)
     output.cameraCoordinates.send(lastCoordinates)
+  }
+  
+  func isBookmarked(id: Int) -> Bool {
+    return storage.load(id: id, entityType: CakeShopEntity.self) != nil
   }
   
   

@@ -527,7 +527,7 @@ import SwiftUI
 
 struct ViewControllerPreView: PreviewProvider {
   static var previews: some View {
-    let viewModel = MainViewModel(districts: [.dobong, .dongdaemun], service: .init(type: .stub))
+    let viewModel = MainViewModel(districts: [.dobong, .dongdaemun], service: .init(type: .stub), storage: RealmStorage())
     MainViewController(viewModel: viewModel)
       .toPreview()
       .ignoresSafeArea()
