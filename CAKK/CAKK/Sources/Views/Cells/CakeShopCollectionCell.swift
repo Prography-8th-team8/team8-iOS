@@ -265,7 +265,7 @@ extension CakeShopCollectionCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
-    setBookmarkedImageView()
+    setBookmarkedImageViewLayout()
   }
   
   private func setupHeaderStackViewLayout() {
@@ -333,7 +333,7 @@ extension CakeShopCollectionCell {
     }
   }
   
-  private func setBookmarkedImageView() {
+  private func setBookmarkedImageViewLayout() {
     contentView.addSubview(bookmaredImageView)
     bookmaredImageView.snp.makeConstraints {
       $0.top.equalToSuperview().inset(Metric.padding)

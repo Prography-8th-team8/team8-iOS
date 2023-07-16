@@ -49,7 +49,6 @@ final class MainViewController: UIViewController {
     shadow.spread = 8
     shadow.opacity = 0.1
     appearance.shadows = [shadow]
-    
     appearance.cornerRadius = 20
   }
   
@@ -459,6 +458,7 @@ extension MainViewController {
 // MARK: - MapView Extensions
 
 extension MainViewController: NMFMapViewCameraDelegate {
+
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
     if reason == NMFMapChangedByGesture &&
         viewModel.output.loadingCakeShops.value == false &&
@@ -508,7 +508,6 @@ extension MainViewController: FloatingPanelControllerDelegate {
         }
       }
     }
-    
     updateMapViewInset()
   }
   

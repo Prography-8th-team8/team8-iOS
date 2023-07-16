@@ -38,6 +38,9 @@ class ImageViewerViewController: UIViewController {
   private let imageView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
   }
+  private let loadingView = UIActivityIndicatorView().then {
+    $0.stopAnimating()
+  }
   
   
   // MARK: - Initializers
@@ -45,12 +48,16 @@ class ImageViewerViewController: UIViewController {
   init(imageUrl: String) {
     self.imageUrl = imageUrl
     super.init(nibName: nil, bundle: nil)
-    
     setup()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    startLoading()
   }
   
   
@@ -90,8 +97,17 @@ class ImageViewerViewController: UIViewController {
   }
   
   @objc
-  func didTap(_ sender: UITapGestureRecognizer) {
+  private func didTap(_ sender: UITapGestureRecognizer) {
     dismiss(animated: true)
+  }
+  
+  private func startLoading() {
+    loadingView.startAnimating()
+  }
+  
+  private func stopLoading() {
+    loadingView.stopAnimating()
+    loadingView.removeFromSuperview()
   }
 }
 
@@ -106,8 +122,16 @@ extension ImageViewerViewController {
   }
   
   private func setupLayout() {
+    setupLoadingViewLayout()
     setupScrollViewLayout()
     setupImageViewLayout()
+  }
+  
+  private func setupLoadingViewLayout() {
+    view.addSubview(loadingView)
+    loadingView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
   }
   
   private func setupScrollViewLayout() {
@@ -128,7 +152,6 @@ extension ImageViewerViewController {
   
   private func setupView() {
     setupBaseView()
-    setupScrollView()
     setupImageView()
   }
   
@@ -146,13 +169,11 @@ extension ImageViewerViewController {
     view.hero.modifiers = [.fade, .duration(0.25)]
   }
   
-  private func setupScrollView() {
-    
-  }
-  
   private func setupImageView() {
     let url = URL(string: imageUrl)
-    imageView.kf.setImage(with: url)
+    imageView.kf.setImage(with: url) { [weak self] _ in
+      self?.stopLoading()
+    }
     
     // hero
     imageView.hero.modifiers = [.scale(0.5), .duration(0.25)]
