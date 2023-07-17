@@ -93,6 +93,8 @@ final class MainViewController: UIViewController {
   }
   
   private let refreshButton = RefreshButton()
+  private var refreshButtonCenterYConstraint: Constraint?
+  private var isRefreshButtonCentered = true
   
   private let currentLocationButton = UIButton().then {
     $0.setImage(R.image.scope(), for: .normal)
@@ -113,6 +115,7 @@ final class MainViewController: UIViewController {
       $0.tintColor = R.color.white()
       $0.backgroundColor = .init(hex: 0x141C3B)
       $0.addShadow(to: .bottom)
+      $0.alpha = 0
     }
   
   
@@ -332,25 +335,38 @@ final class MainViewController: UIViewController {
         return view.frame.height - abs(cakeShopDetailFloatingPanel.surfaceView.frame.minY)
       }
     }
-    let floatingPanelWidth = cakeShopListFloatingPanel.surfaceView.frame.width
+    let leftInset = cakeShopListFloatingPanel.surfaceView.frame.width - view.safeAreaInsets.left
+    let cakeShopListFPCState = cakeShopListFloatingPanel.state
+    let cakeShopDetailFPCState = cakeShopDetailFloatingPanel.state
     
     if isLandscapeMode {
-      if cakeShopListFloatingPanel.state == .tip &&
-          (cakeShopDetailFloatingPanel.state == .tip || cakeShopDetailFloatingPanel.state == .hidden) {
-        cakkMapView.mapView.contentInset = .zero
-      } else {
+      if cakeShopListFPCState == .full || cakeShopDetailFPCState == .full || cakeShopDetailFPCState == .half {
+        // update camera inset
         cakkMapView.mapView.contentInset = .init(
           top: view.safeAreaInsets.top,
-          left: floatingPanelWidth - view.safeAreaInsets.left,
+          left: leftInset,
           bottom: 0,
           right: 0)
+
+        // Update refresh button position
+        moveRefreshButtonPosition(leftInset: leftInset / 2)
+      } else {
+        // Update camera inset
+        cakkMapView.mapView.contentInset = .zero
+        
+        // Update refresh button position
+        moveRefreshButtonPosition(leftInset: 0)
       }
     } else {
+      // update camera inset
       cakkMapView.mapView.contentInset = .init(
         top: view.safeAreaInsets.top,
         left: 0,
         bottom: floatingPanelHeight - view.safeAreaInsets.bottom,
         right: 0)
+      
+      // Update refresh button position
+      moveRefreshButtonPosition(leftInset: 0)
     }
   }
   
@@ -374,6 +390,30 @@ final class MainViewController: UIViewController {
     cakeShopDetailFloatingPanel.set(contentViewController: viewController)
     cakeShopDetailFloatingPanel.track(scrollView: viewController.mainScrollView)
     cakeShopDetailFloatingPanel.move(to: .half, animated: true)
+  }
+  
+  private func moveRefreshButtonPosition(leftInset: CGFloat) {
+    if leftInset == .zero {
+      if isRefreshButtonCentered == false {
+        refreshButtonCenterYConstraint?.update(offset: 0)
+        UIView.animate(withDuration: 0.3, delay: 0,
+                       usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8,
+                       options: [.allowUserInteraction]) {
+          self.view.layoutIfNeeded()
+        }
+        isRefreshButtonCentered = true
+      }
+    } else {
+      if isRefreshButtonCentered == true {
+        refreshButtonCenterYConstraint?.update(offset: leftInset)
+        UIView.animate(withDuration: 0.3, delay: 0,
+                       usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8,
+                       options: [.allowUserInteraction]) {
+          self.view.layoutIfNeeded()
+        }
+        isRefreshButtonCentered = false
+      }
+    }
   }
 }
 
@@ -399,7 +439,7 @@ extension MainViewController {
   private func setupRefreshButtonLayout() {
     view.addSubview(refreshButton)
     refreshButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
+      refreshButtonCenterYConstraint = $0.centerX.equalToSuperview().constraint
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Metric.verticalPadding)
     }
   }
