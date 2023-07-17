@@ -178,10 +178,10 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     
     if types.isEmpty {
       let chip = LabelChip()
-      chip.title = "등록된 카테고리가 없어요 😓"
+      chip.title = "🤦‍♂️ 등록된 카테고리가 없어요"
       chip.isBackgroundSynced = false
-      chip.titleColor = R.color.brown_100()
-      chip.backgroundColor = R.color.brown_10()
+      chip.titleColor = R.color.white()
+      chip.backgroundColor = R.color.black()
       cakeCategoryStackView.addArrangedSubview(chip)
       return
     }
