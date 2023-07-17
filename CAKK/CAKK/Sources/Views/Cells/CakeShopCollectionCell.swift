@@ -63,6 +63,16 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   private var cancellableBag = Set<AnyCancellable>()
   
+  override var isHighlighted: Bool {
+    didSet {
+      if isHighlighted {
+        highlight()
+      } else {
+        unhighlight()
+      }
+    }
+  }
+  
   
   // MARK: - UI
 
@@ -241,6 +251,16 @@ final class CakeShopCollectionCell: UICollectionViewCell {
       }
     }
     return nil
+  }
+  
+  private func highlight() {
+    contentView.backgroundColor = R.color.gray_10()
+  }
+  
+  private func unhighlight() {
+    UIView.animate(withDuration: 0.3) {
+      self.contentView.backgroundColor = .clear
+    }
   }
 }
 
