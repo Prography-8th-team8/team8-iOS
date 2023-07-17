@@ -47,6 +47,8 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     static let cakeImageCornerRadius = 20.f
     static let cakeImageSpacing = 8.f
     
+    static let bookmarkButtonSize = 24.f
+    
     static let dividerHeight = 1.f
   }
   
@@ -75,6 +77,12 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   
   // MARK: - UI
+  
+  private let bookmarkImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
+    $0.image = R.image.heart()
+    $0.tintColor = R.color.black()
+  }
 
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -123,11 +131,6 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     $0.backgroundColor = R.color.gray_10()
   }
   
-  private let bookmaredImageView = UIImageView().then {
-    $0.contentMode = .scaleAspectFit
-    $0.image = R.image.heart()
-  }
-  
   
   // MARK: - Initialization
   
@@ -154,7 +157,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   }
   
   func configure(isBookmarked: Bool) {
-    bookmaredImageView.image = isBookmarked ? R.image.heart_filled() : R.image.heart()
+    bookmarkImageView.image = isBookmarked ? R.image.heart_filled() : R.image.heart()
   }
   
   
@@ -276,6 +279,7 @@ extension CakeShopCollectionCell {
   
   // Setup Layout
   private func setupLayout() {
+    setBookmarkImageViewLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -285,14 +289,22 @@ extension CakeShopCollectionCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
-    setBookmarkedImageViewLayout()
+  }
+  
+  private func setBookmarkImageViewLayout() {
+    contentView.addSubview(bookmarkImageView)
+    bookmarkImageView.snp.makeConstraints {
+      $0.top.trailing.equalToSuperview().inset(Metric.padding)
+      $0.width.height.equalTo(Metric.bookmarkButtonSize)
+      $0.size.equalTo(Metric.bookmarkButtonSize)
+    }
   }
   
   private func setupHeaderStackViewLayout() {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(Metric.padding + 6)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.top.leading.equalToSuperview().inset(Metric.padding)
+      $0.trailing.equalTo(bookmarkImageView.snp.leading)
     }
   }
   
@@ -350,15 +362,6 @@ extension CakeShopCollectionCell {
     divider.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.dividerHeight)
-    }
-  }
-  
-  private func setBookmarkedImageViewLayout() {
-    contentView.addSubview(bookmaredImageView)
-    bookmaredImageView.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(Metric.padding)
-      $0.trailing.equalToSuperview().inset(Metric.padding - 6)
-      $0.width.height.equalTo(32)
     }
   }
   
