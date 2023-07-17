@@ -120,6 +120,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   private let cakeImageScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
     $0.layer.cornerRadius = Metric.cakeImageCornerRadius
+    $0.alwaysBounceHorizontal = true
   }
   
   private let cakeImageStackView = UIStackView().then {
