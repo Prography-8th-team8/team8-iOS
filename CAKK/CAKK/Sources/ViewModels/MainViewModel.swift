@@ -146,10 +146,6 @@ final class MainViewModel {
     output.cameraCoordinates.send(lastCoordinates)
   }
   
-  func isBookmarked(id: Int) -> Bool {
-    return storage.load(id: id, entityType: CakeShopEntity.self) != nil
-  }
-  
   
   // MARK: - Private
   

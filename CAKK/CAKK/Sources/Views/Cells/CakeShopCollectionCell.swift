@@ -63,6 +63,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - Properties
   
+  private var viewModel: CakeShopCollectionCellModel?
   private var cancellableBag = Set<AnyCancellable>()
   
   override var isHighlighted: Bool {
@@ -138,7 +139,6 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
-    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -148,21 +148,14 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - Public
   
-  public func configure(_ item: CakeShop) {
-    shopNameLabel.text = item.name
-    districtLocationLabel.text = item.district.koreanName
-    locationLabel.text = item.location
-    
-    configureCakeCategoryStackView(item.cakeCategories)
-    configureCakeImages(imageUrls: item.imageUrls)
-  }
-  
-  func configure(isBookmarked: Bool) {
-    bookmarkImageView.image = isBookmarked ? R.image.heart_filled() : R.image.heart()
+  public func configure(viewModel: CakeShopCollectionCellModel) {
+    self.viewModel = viewModel
+    bind()
+    viewModel.input.configure.send(Void())
   }
   
   
-  // MARK: - Private
+  // MARK: - Binds
   
   private func bind() {
     bindInput()
@@ -171,7 +164,47 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   private func bindInput() { }
   
-  private func bindOutput() { }
+  private func bindOutput() {
+    guard let viewModel else { return }
+    
+    viewModel.output
+      .shopName
+      .sink { [weak self] shopName in
+        self?.shopNameLabel.text = shopName
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .district
+      .sink { [weak self] district in
+        self?.districtLocationLabel.text = district.koreanName
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .location
+      .sink { [weak self] location in
+        self?.locationLabel.text = location
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .categories
+      .sink { [weak self] categories in
+        self?.configureCakeCategoryStackView(categories)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .imageUrls
+      .sink { [weak self] imageUrls in
+        self?.configureCakeImages(imageUrls: imageUrls)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  
+  // MARK: - Private
 
   private func configureCakeCategoryStackView(_ types: [CakeCategory]) {
     cakeCategoryStackView.subviews.forEach { $0.removeFromSuperview() }
@@ -208,9 +241,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   }
   
   private func configureCakeImages(imageUrls: [String]) {
-    cakeImageStackView.subviews.forEach { subView in
-      subView.removeFromSuperview()
-    }
+    cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
     
     imageUrls.map { imageUrl in
       let imageView = UIControlImageView()
@@ -391,7 +422,9 @@ struct CakeListCellPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
       let cell = CakeShopCollectionCell()
-      cell.configure(SampleData.cakeShopList.first!)
+      cell.configure(viewModel: .init(
+        cakeShop: SampleData.cakeShopList.first!,
+        service: .init()))
       return cell
     }
     .frame(width: 328, height: 158)
