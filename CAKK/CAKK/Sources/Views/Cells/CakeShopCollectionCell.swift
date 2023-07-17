@@ -47,6 +47,8 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     static let cakeImageCornerRadius = 20.f
     static let cakeImageSpacing = 8.f
     
+    static let bookmarkButtonSize = 24.f
+    
     static let dividerHeight = 1.f
   }
   
@@ -61,10 +63,27 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - Properties
   
+  private var viewModel: CakeShopCollectionCellModel?
   private var cancellableBag = Set<AnyCancellable>()
+  
+  override var isHighlighted: Bool {
+    didSet {
+      if isHighlighted {
+        highlight()
+      } else {
+        unhighlight()
+      }
+    }
+  }
   
   
   // MARK: - UI
+  
+  private let bookmarkImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
+    $0.image = R.image.heart()
+    $0.tintColor = R.color.black()
+  }
 
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -102,6 +121,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   private let cakeImageScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
     $0.layer.cornerRadius = Metric.cakeImageCornerRadius
+    $0.alwaysBounceHorizontal = true
   }
   
   private let cakeImageStackView = UIStackView().then {
@@ -113,18 +133,12 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     $0.backgroundColor = R.color.gray_10()
   }
   
-  private let bookmaredImageView = UIImageView().then {
-    $0.contentMode = .scaleAspectFit
-    $0.image = R.image.heart()
-  }
-  
   
   // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
-    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -134,21 +148,14 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - Public
   
-  public func configure(_ item: CakeShop) {
-    shopNameLabel.text = item.name
-    districtLocationLabel.text = item.district.koreanName
-    locationLabel.text = item.location
-    
-    configureCakeCategoryStackView(item.cakeCategories)
-    configureCakeImages(imageUrls: item.imageUrls)
-  }
-  
-  func configure(isBookmarked: Bool) {
-    bookmaredImageView.image = isBookmarked ? R.image.heart_filled() : R.image.heart()
+  public func configure(viewModel: CakeShopCollectionCellModel) {
+    self.viewModel = viewModel
+    bind()
+    viewModel.input.configure.send(Void())
   }
   
   
-  // MARK: - Private
+  // MARK: - Binds
   
   private func bind() {
     bindInput()
@@ -157,17 +164,57 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   private func bindInput() { }
   
-  private func bindOutput() { }
+  private func bindOutput() {
+    guard let viewModel else { return }
+    
+    viewModel.output
+      .shopName
+      .sink { [weak self] shopName in
+        self?.shopNameLabel.text = shopName
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .district
+      .sink { [weak self] district in
+        self?.districtLocationLabel.text = district.koreanName
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .location
+      .sink { [weak self] location in
+        self?.locationLabel.text = location
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .categories
+      .sink { [weak self] categories in
+        self?.configureCakeCategoryStackView(categories)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .imageUrls
+      .sink { [weak self] imageUrls in
+        self?.configureCakeImages(imageUrls: imageUrls)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  
+  // MARK: - Private
 
   private func configureCakeCategoryStackView(_ types: [CakeCategory]) {
     cakeCategoryStackView.subviews.forEach { $0.removeFromSuperview() }
     
     if types.isEmpty {
       let chip = LabelChip()
-      chip.title = "등록된 카테고리가 없어요 😓"
+      chip.title = "🤦‍♂️ 등록된 카테고리가 없어요"
       chip.isBackgroundSynced = false
-      chip.titleColor = R.color.brown_100()
-      chip.backgroundColor = R.color.brown_10()
+      chip.titleColor = R.color.white()
+      chip.backgroundColor = R.color.black()
       cakeCategoryStackView.addArrangedSubview(chip)
       return
     }
@@ -194,9 +241,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   }
   
   private func configureCakeImages(imageUrls: [String]) {
-    cakeImageStackView.subviews.forEach { subView in
-      subView.removeFromSuperview()
-    }
+    cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
     
     imageUrls.map { imageUrl in
       let imageView = UIControlImageView()
@@ -242,6 +287,16 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     }
     return nil
   }
+  
+  private func highlight() {
+    contentView.backgroundColor = R.color.gray_10()
+  }
+  
+  private func unhighlight() {
+    UIView.animate(withDuration: 0.3) {
+      self.contentView.backgroundColor = .clear
+    }
+  }
 }
 
 
@@ -256,6 +311,7 @@ extension CakeShopCollectionCell {
   
   // Setup Layout
   private func setupLayout() {
+    setBookmarkImageViewLayout()
     setupHeaderStackViewLayout()
     setupShopNameLabelLayout()
     setupStackViewDividerLayout()
@@ -265,14 +321,22 @@ extension CakeShopCollectionCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
-    setBookmarkedImageViewLayout()
+  }
+  
+  private func setBookmarkImageViewLayout() {
+    contentView.addSubview(bookmarkImageView)
+    bookmarkImageView.snp.makeConstraints {
+      $0.top.trailing.equalToSuperview().inset(Metric.padding)
+      $0.width.height.equalTo(Metric.bookmarkButtonSize)
+      $0.size.equalTo(Metric.bookmarkButtonSize)
+    }
   }
   
   private func setupHeaderStackViewLayout() {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(Metric.padding + 6)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.top.leading.equalToSuperview().inset(Metric.padding)
+      $0.trailing.equalTo(bookmarkImageView.snp.leading)
     }
   }
   
@@ -333,15 +397,6 @@ extension CakeShopCollectionCell {
     }
   }
   
-  private func setBookmarkedImageViewLayout() {
-    contentView.addSubview(bookmaredImageView)
-    bookmaredImageView.snp.makeConstraints {
-      $0.top.equalToSuperview().inset(Metric.padding)
-      $0.trailing.equalToSuperview().inset(Metric.padding - 6)
-      $0.width.height.equalTo(32)
-    }
-  }
-  
   // Setup View
   private func setupView() {
     setupBaseView()
@@ -367,7 +422,9 @@ struct CakeListCellPreview: PreviewProvider {
   static var previews: some View {
     UIViewPreview {
       let cell = CakeShopCollectionCell()
-      cell.configure(SampleData.cakeShopList.first!)
+      cell.configure(viewModel: .init(
+        cakeShop: SampleData.cakeShopList.first!,
+        service: .init()))
       return cell
     }
     .frame(width: 328, height: 158)

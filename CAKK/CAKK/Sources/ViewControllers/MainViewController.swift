@@ -416,7 +416,7 @@ extension MainViewController {
   private func setupShowMapButtonLayout() {
     view.addSubview(showMapButton)
     showMapButton.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
+      $0.centerX.equalTo(cakeShopListFloatingPanel.surfaceView)
       $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(Metric.showMapButtonBottomInset)
     }
   }

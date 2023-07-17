@@ -51,4 +51,9 @@ final class DIContainer {
     let viewModel = FilterViewModel()
     return FilterViewController(viewModel: viewModel)
   }
+  
+  func makeCakeShopCollectionCellModel(cakeShop: CakeShop) -> CakeShopCollectionCellModel {
+    let viewModel = CakeShopCollectionCellModel(cakeShop: cakeShop, service: networkService)
+    return viewModel
+  }
 }

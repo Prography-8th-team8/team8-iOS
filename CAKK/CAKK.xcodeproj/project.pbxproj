@@ -50,6 +50,9 @@
 		8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9E192A29CEDD4F00CFF157 /* MainViewController.swift */; };
 		8E9E193029CEDD5000CFF157 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E192F29CEDD5000CFF157 /* Assets.xcassets */; };
 		8E9E193329CEDD5000CFF157 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9E193129CEDD5000CFF157 /* LaunchScreen.storyboard */; };
+		8EA04D862A6501C0008C90C8 /* CakeShopCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */; };
+		8EA04D882A6506D1008C90C8 /* CakeCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA04D872A6506D1008C90C8 /* CakeCategoryResponse.swift */; };
+		8EA04D8A2A650832008C90C8 /* cake_category_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EA04D892A650832008C90C8 /* cake_category_sample.json */; };
 		8EA64A8A2A44ABC2001CE498 /* loading_dot.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EA64A892A44ABC2001CE498 /* loading_dot.json */; };
 		8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */; };
 		8EAB80FA2A4557CF00D9FA41 /* CakeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */; };
@@ -163,6 +166,9 @@
 		8E9E192F29CEDD5000CFF157 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E9E193229CEDD5000CFF157 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E9E193429CEDD5000CFF157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopCollectionCellModel.swift; sourceTree = "<group>"; };
+		8EA04D872A6506D1008C90C8 /* CakeCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryResponse.swift; sourceTree = "<group>"; };
+		8EA04D892A650832008C90C8 /* cake_category_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_category_sample.json; sourceTree = "<group>"; };
 		8EA64A892A44ABC2001CE498 /* loading_dot.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_dot.json; sourceTree = "<group>"; };
 		8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryCell.swift; sourceTree = "<group>"; };
@@ -324,6 +330,7 @@
 				8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */,
 				8E02B7792A054BC2003AE7AF /* RegionPickerCollectionCell.swift */,
 				B4F5CDC829DAFA9300AE4F66 /* CakeShopCollectionCell.swift */,
+				8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */,
 				8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */,
 				B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */,
 			);
@@ -428,7 +435,7 @@
 		8E9E193D29CEDDE700CFF157 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B455C4312A07E98A00FB8403 /* Store */,
+				B455C4312A07E98A00FB8403 /* Shop */,
 				B455C4342A07EB2000FB8403 /* District */,
 			);
 			path = Models;
@@ -467,15 +474,16 @@
 			path = CAKKNetworkingTests;
 			sourceTree = "<group>";
 		};
-		B455C4312A07E98A00FB8403 /* Store */ = {
+		B455C4312A07E98A00FB8403 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
 				B455C42B2A07E62500FB8403 /* CakeShop.swift */,
 				B455C4322A07E99500FB8403 /* CakeCategory.swift */,
+				8EA04D872A6506D1008C90C8 /* CakeCategoryResponse.swift */,
 				B490C3382A0FDBA5008A2736 /* CakeShopDetailResponse.swift */,
 				B4A66FC62A1E5F7800D3581D /* BlogPost.swift */,
 			);
-			path = Store;
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		B455C4342A07EB2000FB8403 /* District */ = {
@@ -496,6 +504,7 @@
 				B490C33A2A0FE942008A2736 /* cake_shop_detail_sample.json */,
 				B43889C52A15E02300476BFC /* district_count_sample.json */,
 				B49966432A2AECC600967ED3 /* blog_post_sample.json */,
+				8EA04D892A650832008C90C8 /* cake_category_sample.json */,
 				B455C43A2A07F12F00FB8403 /* SampleData.swift */,
 			);
 			path = Tests;
@@ -692,6 +701,7 @@
 				B43889C62A15E02300476BFC /* district_count_sample.json in Resources */,
 				8E37754A29F7CA2F00166198 /* Pretendard-ExtraLight.otf in Resources */,
 				8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */,
+				8EA04D8A2A650832008C90C8 /* cake_category_sample.json in Resources */,
 				8E37754B29F7CA2F00166198 /* Pretendard-Light.otf in Resources */,
 				8E37754829F7CA2F00166198 /* Pretendard-Bold.otf in Resources */,
 				8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */,
@@ -854,6 +864,7 @@
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
 				B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */,
+				8EA04D862A6501C0008C90C8 /* CakeShopCollectionCellModel.swift in Sources */,
 				8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */,
 				B41EF0552A34E63C0068843B /* UICollectionView+RegisterDequeue.swift in Sources */,
 				8EAB811F2A46141F00D9FA41 /* FilterViewModel.swift in Sources */,
@@ -882,6 +893,7 @@
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
 				B4F3B8DB2A543B2700AB7585 /* CakeImageCell.swift in Sources */,
+				8EA04D882A6506D1008C90C8 /* CakeCategoryResponse.swift in Sources */,
 				B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */,
 				8E533A222A2C652200C56A55 /* DistrictUserDefault.swift in Sources */,
 				B45BB54629DD9D4A00A8B11B /* UIView+Animation.swift in Sources */,

@@ -425,14 +425,12 @@ extension CakeShopListViewController {
       cellProvider: { [weak self] collectionView, indexPath, item in
         guard let self else { return UICollectionViewCell() }
         
-        let isBookmarked = self.viewModel?.isBookmarked(id: item.id) ?? false
-        
         let cell = collectionView.dequeueConfiguredReusableCell(
           using: self.cakeShopCellRegistration,
           for: indexPath,
           item: item)
-        cell.configure(item)
-        cell.configure(isBookmarked: isBookmarked)
+        let viewModel = DIContainer.shared.makeCakeShopCollectionCellModel(cakeShop: item)
+        cell.configure(viewModel: viewModel)
         return cell
       })
   }
