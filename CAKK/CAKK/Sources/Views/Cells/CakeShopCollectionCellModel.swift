@@ -15,6 +15,7 @@ class CakeShopCollectionCellModel {
   
   struct Input {
     let configure = PassthroughSubject<Void, Never>()
+    let tapBookmarkButton = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
@@ -23,6 +24,7 @@ class CakeShopCollectionCellModel {
     let location = PassthroughSubject<String, Never>()
     let categories = PassthroughSubject<[CakeCategory], Never>()
     let imageUrls = PassthroughSubject<[String], Never>()
+    let isBookmarked = CurrentValueSubject<Bool, Never>(false)
   }
   
   let input: Input
@@ -31,13 +33,17 @@ class CakeShopCollectionCellModel {
   
   private let cakeShop: CakeShop
   private let service: NetworkService<CakeAPI>
+  private let realmStorage: RealmStorageProtocol
   
   
   // MARK: - Initializers
   
-  init(cakeShop: CakeShop, service: NetworkService<CakeAPI>) {
+  init(cakeShop: CakeShop,
+       service: NetworkService<CakeAPI>,
+       realmStorage: RealmStorageProtocol) {
     self.cakeShop = cakeShop
     self.service = service
+    self.realmStorage = realmStorage
     
     self.input = Input()
     self.output = Output()
@@ -53,6 +59,7 @@ class CakeShopCollectionCellModel {
     bindLocation(input, output: output)
     bindCakeShopCategory(input, output)
     bindImageUrls(input, output)
+    bindBookmark(input, output)
   }
   
   private func bindShopName(_ input: Input, output: Output) {
@@ -122,7 +129,35 @@ class CakeShopCollectionCellModel {
       .store(in: &cancellableBag)
   }
   
-//  func isBookmarked(id: Int) -> Bool {
-//    return storage.load(id: id, entityType: CakeShopEntity.self) != nil
-//  }
+  private func bindBookmark(_ input: Input, _ output: Output) {
+    let cakeShop = cakeShop
+    let realmStorage = realmStorage
+    
+    input.configure
+      .sink { isBookmarked in
+        let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: CakeShopEntity.self) != nil
+        output.isBookmarked.send(isBookmarked)
+      }
+      .store(in: &cancellableBag)
+    
+    input.tapBookmarkButton
+      .map { output.isBookmarked.value }
+      .sink { isBookmarked in
+        if isBookmarked {
+          let successToRemove = realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
+          
+          if successToRemove {
+            output.isBookmarked.send(false)
+          }
+        } else {
+          let entity = cakeShop.toEntity(isBookmarked: true)
+          let successToSave = realmStorage.save(entity)
+          
+          if successToSave {
+            output.isBookmarked.send(true)
+          }
+        }
+      }
+      .store(in: &cancellableBag)
+  }
 }

@@ -79,10 +79,11 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - UI
   
-  private let bookmarkImageView = UIImageView().then {
+  private let bookmarkButton = UIButton().then {
+    $0.setImage(R.image.heart(), for: .normal)
     $0.contentMode = .scaleAspectFit
-    $0.image = R.image.heart()
-    $0.tintColor = R.color.black()
+//    $0.image = R.image.heart()
+    $0.tintColor = R.color.gray_80()
   }
 
   private let headerStackView = UIStackView().then {
@@ -162,7 +163,16 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     bindOutput()
   }
   
-  private func bindInput() { }
+  private func bindInput() {
+    guard let viewModel else { return }
+    
+    bookmarkButton
+      .tapPublisher
+      .sink { _ in
+        viewModel.input.tapBookmarkButton.send(Void())
+      }
+      .store(in: &cancellableBag)
+  }
   
   private func bindOutput() {
     guard let viewModel else { return }
@@ -199,6 +209,17 @@ final class CakeShopCollectionCell: UICollectionViewCell {
       .imageUrls
       .sink { [weak self] imageUrls in
         self?.configureCakeImages(imageUrls: imageUrls)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .isBookmarked
+      .sink { [weak self] isBookmarked in
+        if isBookmarked {
+          self?.bookmarkButton.setImage(R.image.heart_filled(), for: .normal)
+        } else {
+          self?.bookmarkButton.setImage(R.image.heart(), for: .normal)
+        }
       }
       .store(in: &cancellableBag)
   }
@@ -324,8 +345,8 @@ extension CakeShopCollectionCell {
   }
   
   private func setBookmarkImageViewLayout() {
-    contentView.addSubview(bookmarkImageView)
-    bookmarkImageView.snp.makeConstraints {
+    contentView.addSubview(bookmarkButton)
+    bookmarkButton.snp.makeConstraints {
       $0.top.trailing.equalToSuperview().inset(Metric.padding)
       $0.width.height.equalTo(Metric.bookmarkButtonSize)
       $0.size.equalTo(Metric.bookmarkButtonSize)
@@ -336,7 +357,7 @@ extension CakeShopCollectionCell {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.top.leading.equalToSuperview().inset(Metric.padding)
-      $0.trailing.equalTo(bookmarkImageView.snp.leading)
+      $0.trailing.equalTo(bookmarkButton.snp.leading)
     }
   }
   
@@ -424,7 +445,8 @@ struct CakeListCellPreview: PreviewProvider {
       let cell = CakeShopCollectionCell()
       cell.configure(viewModel: .init(
         cakeShop: SampleData.cakeShopList.first!,
-        service: .init()))
+        service: .init(),
+        realmStorage: RealmStorage()))
       return cell
     }
     .frame(width: 328, height: 158)
