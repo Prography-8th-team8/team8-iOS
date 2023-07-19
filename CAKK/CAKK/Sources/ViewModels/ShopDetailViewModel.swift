@@ -130,17 +130,17 @@ final class ShopDetailViewModel {
         
         // 이미 북마크가 되어 있었으면 북마크에서 삭제
         if isBookmarked {
-          let isSuccess = self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
+          let successToRemove = self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
           
-          if isBookmarked {
+          if successToRemove {
             output.isBookmarked.send(false)
           }
         } else {
           // 북마크가 되어 있지 않았으면 북마크 추가
           let entity = self.cakeShop.toEntity(isBookmarked: true)
-          let isSuccess = self.realmStorage.save(entity)
+          let successToSave = self.realmStorage.save(entity)
           
-          if isSuccess {
+          if successToSave {
             output.isBookmarked.send(true)
           }
         }
