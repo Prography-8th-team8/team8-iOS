@@ -53,7 +53,9 @@ final class DIContainer {
   }
   
   func makeCakeShopCollectionCellModel(cakeShop: CakeShop) -> CakeShopCollectionCellModel {
-    let viewModel = CakeShopCollectionCellModel(cakeShop: cakeShop, service: networkService)
+    let viewModel = CakeShopCollectionCellModel(cakeShop: cakeShop,
+                                                service: networkService,
+                                                realmStorage: realmStorage)
     return viewModel
   }
 }

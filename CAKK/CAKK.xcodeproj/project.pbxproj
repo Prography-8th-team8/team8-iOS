@@ -53,6 +53,7 @@
 		8EA04D862A6501C0008C90C8 /* CakeShopCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */; };
 		8EA04D882A6506D1008C90C8 /* CakeCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA04D872A6506D1008C90C8 /* CakeCategoryResponse.swift */; };
 		8EA04D8A2A650832008C90C8 /* cake_category_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EA04D892A650832008C90C8 /* cake_category_sample.json */; };
+		8EA11D062A67A74A00F79E60 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA11D052A67A74A00F79E60 /* HeartButton.swift */; };
 		8EA64A8A2A44ABC2001CE498 /* loading_dot.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EA64A892A44ABC2001CE498 /* loading_dot.json */; };
 		8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */; };
 		8EAB80FA2A4557CF00D9FA41 /* CakeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */; };
@@ -169,6 +170,7 @@
 		8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopCollectionCellModel.swift; sourceTree = "<group>"; };
 		8EA04D872A6506D1008C90C8 /* CakeCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryResponse.swift; sourceTree = "<group>"; };
 		8EA04D892A650832008C90C8 /* cake_category_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cake_category_sample.json; sourceTree = "<group>"; };
+		8EA11D052A67A74A00F79E60 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		8EA64A892A44ABC2001CE498 /* loading_dot.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_dot.json; sourceTree = "<group>"; };
 		8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryCell.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				B4F3B8D22A5430BD00AB7585 /* UnderlineSegmentedControl.swift */,
 				8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */,
 				8E907A742A62C3B500914A4E /* UIControlImageView.swift */,
+				8EA11D052A67A74A00F79E60 /* HeartButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 				B455C4332A07E99500FB8403 /* CakeCategory.swift in Sources */,
 				B401B7852A2C9275003B0393 /* RefreshButton.swift in Sources */,
 				8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */,
+				8EA11D062A67A74A00F79E60 /* HeartButton.swift in Sources */,
 				B4F3B8D92A5432D700AB7585 /* CakeImagesViewController.swift in Sources */,
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				8EAB811B2A45DCA800D9FA41 /* FilterButton.swift in Sources */,
