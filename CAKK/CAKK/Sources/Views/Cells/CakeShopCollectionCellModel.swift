@@ -44,7 +44,7 @@ class CakeShopCollectionCellModel {
     self.cakeShop = cakeShop
     self.service = service
     self.realmStorage = realmStorage
-    
+
     self.input = Input()
     self.output = Output()
     bind(input, output)
@@ -131,10 +131,11 @@ class CakeShopCollectionCellModel {
   
   private func bindBookmark(_ input: Input, _ output: Output) {
     let cakeShop = cakeShop
-    let realmStorage = realmStorage
     
     input.configure
-      .sink { isBookmarked in
+      .sink { [weak self] isBookmarked in
+        guard let self else { return }
+        
         let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: CakeShopEntity.self) != nil
         output.isBookmarked.send(isBookmarked)
       }
@@ -144,14 +145,16 @@ class CakeShopCollectionCellModel {
       .map { output.isBookmarked.value }
       .sink { isBookmarked in
         if isBookmarked {
-          let successToRemove = realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
+          // 북마크 삭제
+          let successToRemove = self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
           
           if successToRemove {
             output.isBookmarked.send(false)
           }
         } else {
+          // 북마크 추가
           let entity = cakeShop.toEntity(isBookmarked: true)
-          let successToSave = realmStorage.save(entity)
+          let successToSave = self.realmStorage.save(entity)
           
           if successToSave {
             output.isBookmarked.send(true)

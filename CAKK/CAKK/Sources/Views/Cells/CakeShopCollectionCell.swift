@@ -79,12 +79,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - UI
   
-  private let bookmarkButton = UIButton().then {
-    $0.setImage(R.image.heart(), for: .normal)
-    $0.contentMode = .scaleAspectFit
-//    $0.image = R.image.heart()
-    $0.tintColor = R.color.gray_80()
-  }
+  private let bookmarkButton = HeartButton(isBookmarked: false)
 
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -144,6 +139,11 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    cancellableBag = .init()
   }
   
   
@@ -215,11 +215,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     viewModel.output
       .isBookmarked
       .sink { [weak self] isBookmarked in
-        if isBookmarked {
-          self?.bookmarkButton.setImage(R.image.heart_filled(), for: .normal)
-        } else {
-          self?.bookmarkButton.setImage(R.image.heart(), for: .normal)
-        }
+        self?.bookmarkButton.setBookmark(isBookmarked)
       }
       .store(in: &cancellableBag)
   }
