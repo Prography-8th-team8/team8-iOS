@@ -120,9 +120,10 @@ class CakeShopCollectionCellModel {
   
   private func bindImageUrls(_ input: Input, _ output: Output) {
     let cakeShop = cakeShop
+    let maxImageCounts = 4
     
     input.configure
-      .map { cakeShop.imageUrls }
+      .map { Array(cakeShop.imageUrls.prefix(maxImageCounts)) }
       .sink { imageUrls in
         output.imageUrls.send(imageUrls)
       }
