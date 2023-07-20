@@ -31,7 +31,6 @@ final class MainViewController: UIViewController {
     
     static let bottomSheetTipModeHeight = 58.f
     
-    static let showMapButtonWidth = 80.f
     static let showMapButtonBottomInset = 20.f
   }
   
@@ -107,17 +106,20 @@ final class MainViewController: UIViewController {
   }
   
   private let showMapButton = CapsuleImageButton(
-    iconImage: R.image.map()!,
-    text: "지도",
-    spacing: 8,
-    horizontalPadding: 20,
-    verticalPadding: 10).then {
-      $0.tintColor = R.color.white()
+    imageSize: .init(width: 20, height: 20),
+    imagePosition: .left,
+    insets: .init(vertical: 10, horizontal: 20)).then {
+      $0.title = "지도"
+      $0.font = .pretendard(size: 14, weight: .semiBold)
+      $0.image = R.image.map()
+      $0.spacing = 8
+      $0.imageColor = .white
+      $0.textColor = .white
       $0.backgroundColor = .init(hex: 0x141C3B)
       $0.addShadow(to: .bottom)
       $0.alpha = 0
-    }
-  
+  }
+
   
   // MARK: - Initialization
   
