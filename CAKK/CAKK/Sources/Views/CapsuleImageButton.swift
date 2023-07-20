@@ -14,38 +14,43 @@ class CapsuleImageButton: UIButton {
   
   // MARK: - Properties
   
-  public var font: UIFont = .pretendard(size: 14, weight: .bold) {
+  enum ImagePosition {
+    case left, right
+  }
+  
+  let insets: UIEdgeInsets
+  var spacing: CGFloat = 0 {
     didSet {
-      buttonLabel.font = font
+      stackView.spacing = spacing
     }
   }
   
-  public override var tintColor: UIColor! {
+  var image: UIImage? {
     didSet {
-      imageView?.tintColor = tintColor
-      titleLabel?.textColor = tintColor
+      iconImageView.image = image
+    }
+  }
+  let imagePosition: ImagePosition
+  let imageSize: CGSize
+  var imageColor: UIColor = .white {
+    didSet {
+      iconImageView.tintColor = imageColor
     }
   }
   
-  public var borderColor: UIColor = .clear {
+  var title: String = "" {
     didSet {
-      layer.borderColor = borderColor.cgColor
+      textLabel.text = title
     }
   }
-  
-  public var borderWidth: CGFloat = 0 {
+  var textColor: UIColor = .white {
     didSet {
-      layer.borderWidth = borderWidth
+      textLabel.textColor = textColor
     }
   }
-  
-  override var isEnabled: Bool {
+  var font: UIFont = .pretendard(size: 14) {
     didSet {
-      if isEnabled {
-        enableButton()
-      } else {
-        disableButton()
-      }
+      textLabel.font = font
     }
   }
   
@@ -61,46 +66,40 @@ class CapsuleImageButton: UIButton {
     }
   }
   
-  private let spacing: CGFloat
-  private let horizontalPadding: CGFloat
-  private let verticalPadding: CGFloat
-  private let imageSize: CGSize
-  
   
   // MARK: - UI
   
-  lazy var stackView = UIStackView().then {
+  private lazy var stackView = UIStackView().then {
+    $0.axis = .horizontal
     $0.spacing = self.spacing
     $0.isUserInteractionEnabled = false
   }
   
-  let iconImageView = UIImageView().then {
+  lazy var iconImageView = UIImageView().then {
     $0.contentMode = .scaleAspectFit
-    $0.tintColor = .white
+    $0.tintColor = tintColor
   }
   
-  lazy var buttonLabel = UILabel().then {
+  lazy var textLabel = UILabel().then {
     $0.textColor = .white
     $0.font = self.font
     $0.textAlignment = .center
   }
   
+  private var oldFrame: CGRect = .zero
+  
   
   // MARK: - Initialization
-
-  init(iconImage: UIImage,
-       text: String,
-       spacing: CGFloat = 4,
-       horizontalPadding: CGFloat = 0,
-       verticalPadding: CGFloat = 0,
-       imageSize: CGSize = .init(width: 20, height: 20)) {
-    self.spacing = spacing
-    self.horizontalPadding = horizontalPadding
-    self.verticalPadding = verticalPadding
+  
+  init(imageSize: CGSize,
+       imagePosition: ImagePosition = .left,
+       insets: UIEdgeInsets = .zero) {
     self.imageSize = imageSize
-
+    self.imagePosition = imagePosition
+    self.insets = insets
+    
     super.init(frame: .zero)
-    setup(iconImage, text)
+    setup()
   }
 
   required init?(coder: NSCoder) {
@@ -112,51 +111,64 @@ class CapsuleImageButton: UIButton {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    configureCornerRadius()
+    
+    if oldFrame != frame {
+      configureCornerRadius()
+      oldFrame = frame
+    }
   }
 
   // MARK: - Public
   
   // MARK: - Private
   
-  private func setup(_ iconImage: UIImage?, _ text: String) {
-    setupLayout()
-    setupComponent(iconImage, text)
+  private func configureCornerRadius() {
+    layer.cornerRadius = frame.height / 2
   }
+  
+  @objc
+  private func highlight() {
+    alpha = 0.2
+  }
+  
+  @objc
+  private func unhighlight() {
+    UIView.animate(withDuration: 0.2) {
+      self.alpha = 1.0
+    }
+  }
+}
 
-  private func setupComponent(_ iconImage: UIImage?, _ text: String) {
-    buttonLabel.text = text
-    iconImageView.image = iconImage
+
+// MARK: - UI & Layout
+
+extension CapsuleImageButton {
+  
+  private func setup() {
+    setupLayout()
   }
   
   private func setupLayout() {
     addSubview(stackView)
     stackView.snp.makeConstraints {
-      $0.horizontalEdges.equalToSuperview().inset(self.horizontalPadding)
-      $0.verticalEdges.equalToSuperview().inset(self.verticalPadding)
+      $0.top.equalToSuperview().inset(insets.top)
+      $0.left.equalToSuperview().inset(insets.left)
+      $0.right.equalToSuperview().inset(insets.right)
+      $0.bottom.equalToSuperview().inset(insets.bottom)
     }
     
-    stackView.addArrangedSubview(iconImageView)
-    stackView.addArrangedSubview(buttonLabel)
+    switch imagePosition {
+    case .left:
+      stackView.addArrangedSubview(iconImageView)
+      stackView.addArrangedSubview(textLabel)
+    case .right:
+      stackView.addArrangedSubview(textLabel)
+      stackView.addArrangedSubview(iconImageView)
+    }
     
     iconImageView.snp.makeConstraints {
-      $0.width.height.equalTo(self.imageSize)
-    }
-  }
-  
-  private func configureCornerRadius() {
-    layer.cornerRadius = frame.height / 2
-  }
-  
-  private func disableButton() {
-    UIView.animate(withDuration: 0.3) {
-      self.alpha = 0
-    }
-  }
-  
-  private func enableButton() {
-    UIView.animate(withDuration: 0.3) {
-      self.alpha = 1
+      $0.width.equalTo(imageSize.width)
+      $0.height.equalTo(imageSize.height)
     }
   }
 }

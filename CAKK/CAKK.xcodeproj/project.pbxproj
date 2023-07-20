@@ -41,6 +41,7 @@
 		8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E53F1BA2A332936002F871C /* EmptyStateView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */; };
+		8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -156,6 +157,7 @@
 		8E53F1BA2A332936002F871C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
+		8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Symmetric.swift"; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				8E02B77D2A054CAF003AE7AF /* UIColor+Hex.swift */,
 				8E02B77B2A054C9B003AE7AF /* UIColor+RGB.swift */,
 				8E1073592A0D849900FE07EF /* UIEdgeInsets+Common.swift */,
+				8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */,
 				8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */,
 				B49F0C9129E69C5D001BB296 /* UIScrollView+Scroll.swift */,
 				B49BC92A2A0BD0E2009BD434 /* UIStackView+Seperator.swift */,
@@ -904,6 +907,7 @@
 				8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */,
 				8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
+				8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */,
 				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
