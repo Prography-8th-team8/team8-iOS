@@ -151,6 +151,16 @@ class FilterViewController: UIViewController {
         self?.refreshAllCells()
       }
       .store(in: &cancellableBag)
+    
+    collectionView
+      .didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        guard let self else { return }
+        guard let cell = self.collectionView.cellForItem(at: indexPath) as? CakeCategoryCell else { return }
+        cell.isChipSelected.toggle()
+        self.viewModel.input.selectItem.send(indexPath)
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -190,12 +200,12 @@ extension FilterViewController {
   private func collectionViewLayout() -> UICollectionViewCompositionalLayout {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .estimated(46),
-      heightDimension: .estimated(30))
+      heightDimension: .estimated(34))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(30))
+      heightDimension: .estimated(34))
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: groupSize,
       subitems: [item])
@@ -286,14 +296,15 @@ extension FilterViewController {
   }
   
   private func makeDataSource() -> DataSource {
-    DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, shopType in
+    DataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, category in
       guard let self else { return UICollectionViewCell() }
       
       let cell = collectionView.dequeueConfiguredReusableCell(
         using: self.cellRegistration,
         for: indexPath,
-        item: shopType)
-      cell.configure(viewModel: self.viewModel, cakeCategory: shopType)
+        item: category)
+      let isSelected = viewModel.isSelected(category)
+      cell.configure(cakeCategory: category, isSelected: isSelected)
       
       return cell
     }
