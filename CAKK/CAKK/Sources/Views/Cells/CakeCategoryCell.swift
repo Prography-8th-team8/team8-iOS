@@ -17,20 +17,19 @@ class CakeCategoryCell: UICollectionViewCell {
   // MARK: - Constants
   
   enum Metric {
-    static let chipHeight = 40.f
-    static let chipHorizontalTitlePadding = 12.f
-    static let chipVerticalTitlePadding = 8.f
+    static let height = 34.f
+    static let spacing = 4.f
+    
+    static let horizontalPadding = 12.f
+    static let verticalPadding = 8.f
+    
+    static let iconSize = 16.f
     static let titleFontSize = 14.f
   }
-  
-  // MARK: - Types
-  
-  typealias ViewModel = FilterViewModel
   
   
   // MARK: - Properties
   
-  private weak var viewModel: ViewModel?
   private var cancellableBag = Set<AnyCancellable>()
   
   public var cakeCategory: CakeCategory?
@@ -44,21 +43,33 @@ class CakeCategoryCell: UICollectionViewCell {
     }
   }
   
+  override var isHighlighted: Bool {
+    didSet {
+      if isHighlighted {
+        alpha = 0.2
+      } else {
+        UIView.animate(withDuration: 0.2) {
+          self.alpha = 1
+        }
+      }
+    }
+  }
+  
   
   // MARK: - UI
   
-  private let chipButton = UIButton().then {
-    $0.titleLabel?.font = .pretendard(size: Metric.titleFontSize, weight: .bold)
-    $0.setTitleColor(R.color.black(), for: .normal)
-    $0.contentEdgeInsets = .init(
-      top: Metric.chipVerticalTitlePadding,
-      left: Metric.chipHorizontalTitlePadding,
-      bottom: Metric.chipVerticalTitlePadding,
-      right: Metric.chipHorizontalTitlePadding)
-    $0.layer.cornerRadius = Metric.chipHeight / 2
-    $0.layer.borderWidth = 1
-    $0.layer.borderColor = R.color.gray_20()!.cgColor
-    $0.isHidden = true
+  private lazy var stackView = UIStackView(arrangedSubviews: [iconImageView, titleLabel]).then {
+    $0.axis = .horizontal
+    $0.spacing = Metric.spacing
+  }
+  
+  private let iconImageView = UIImageView().then {
+    $0.contentMode = .scaleAspectFit
+  }
+  
+  private let titleLabel = UILabel().then {
+    $0.font = .pretendard(size: 14, weight: .bold)
+    $0.textColor = R.color.black()
   }
   
   
@@ -67,7 +78,6 @@ class CakeCategoryCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
-    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -75,80 +85,76 @@ class CakeCategoryCell: UICollectionViewCell {
   }
   
   
-  // MARK: - Setup
-  
-  private func setup() {
-    setupView()
-  }
-  
-  private func setupView() {
-    setupChipButton()
-  }
-  
-  private func setupChipButton() {
-    contentView.addSubview(chipButton)
-    chipButton.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-      $0.height.equalTo(Metric.chipHeight)
-    }
-  }
-  
-  
   // MARK: - Public
   
-  public func configure(viewModel: ViewModel?, cakeCategory: CakeCategory) {
-    self.viewModel = viewModel
+  public func configure(cakeCategory: CakeCategory, isSelected: Bool) {
     self.cakeCategory = cakeCategory
     
-    chipButton.isHidden = false
-    chipButton.setTitle(cakeCategory.localizedString, for: .normal)
+    titleLabel.text = cakeCategory.localizedString
+    isChipSelected = isSelected
     
-    if viewModel!.output.categories.value.contains(cakeCategory) {
-      isChipSelected = true
+    // configure image
+    if let iconImage = cakeCategory.icon {
+      iconImageView.image = cakeCategory.icon
     } else {
-      isChipSelected = false
+      iconImageView.removeFromSuperview()
     }
   }
   
   
   // MARK: - Private
   
-  private func bind() {
-    chipButton
-      .tapPublisher
-      .sink { [weak self] _ in
-        guard let self,
-              let cakeCategory = self.cakeCategory else { return }
-        
-        if self.isChipSelected {
-          viewModel?.input
-            .removeCategory
-            .send(cakeCategory)
-        } else {
-          viewModel?.input
-            .addCategory
-            .send(cakeCategory)
-        }
-        
-        isChipSelected.toggle()
-      }
-      .store(in: &cancellableBag)
-  }
-  
   private func setSelected() {
     if let cakeCategory {
-      chipButton.setTitleColor(cakeCategory.color, for: .normal)
-      chipButton.setTitleColor(cakeCategory.color.withAlphaComponent(0.3), for: .highlighted)
-      chipButton.backgroundColor = cakeCategory.color.withAlphaComponent(0.2)
-      chipButton.layer.borderWidth = 0
+      titleLabel.textColor = cakeCategory.color
+      contentView.backgroundColor = cakeCategory.color.withAlphaComponent(0.2)
+      contentView.layer.borderWidth = 0
     }
   }
   
   private func setUnselected() {
-    chipButton.setTitleColor(R.color.black(), for: .normal)
-    chipButton.setTitleColor(R.color.gray_20(), for: .highlighted)
-    chipButton.backgroundColor = .white
-    chipButton.layer.borderWidth = 1
-    chipButton.layer.borderColor = R.color.gray_20()!.cgColor
+    titleLabel.textColor = R.color.black()
+    contentView.backgroundColor = .white
+    contentView.layer.borderWidth = 1
+  }
+}
+
+
+// MARK: - UI & Layout
+
+extension CakeCategoryCell {
+
+  private func setup() {
+    setupLayout()
+    setupView()
+  }
+  
+  private func setupLayout() {
+    setupStackViewLayout()
+    setupIconImageLayout()
+  }
+  
+  private func setupStackViewLayout() {
+    contentView.addSubview(stackView)
+    stackView.snp.makeConstraints {
+      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.verticalEdges.equalToSuperview().inset(Metric.verticalPadding)
+    }
+  }
+  
+  private func setupIconImageLayout() {
+    iconImageView.snp.makeConstraints {
+      $0.size.equalTo(Metric.iconSize)
+    }
+  }
+  
+  private func setupView() {
+    setupContentView()
+  }
+  
+  private func setupContentView() {
+    contentView.layer.cornerRadius = Metric.height / 2
+    contentView.layer.borderWidth = 1
+    contentView.layer.borderColor = R.color.gray_20()!.cgColor
   }
 }

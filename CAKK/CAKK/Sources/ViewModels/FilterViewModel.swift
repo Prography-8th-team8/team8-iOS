@@ -14,10 +14,9 @@ final class FilterViewModel {
   // MARK: - Properties
   
   struct Input {
-    let addCategory = PassthroughSubject<CakeCategory, Never>()
-    let removeCategory = PassthroughSubject<CakeCategory, Never>()
     let apply = PassthroughSubject<Void, Never>()
     let refresh = PassthroughSubject<Void, Never>()
+    let selectItem = PassthroughSubject<IndexPath, Never>()
   }
   
   struct Output {
@@ -39,36 +38,22 @@ final class FilterViewModel {
     
     bind(input, output)
   }
+  
+  
+  // MARK: - Public
+  
+  public func isSelected(_ category: CakeCategory) -> Bool {
+    return output.categories.value.contains(category)
+  }
 
   
   // MARK: - Private
   
   private func bind(_ input: Input, _ output: Output) {
-    bindAddCategory(input, output)
-    bindRemoveCategory(input, output)
     bindApply(input, output)
     bindCategoryChanges(input, output)
     bindRefresh(input, output)
-  }
-  
-  private func bindAddCategory(_ input: Input, _ output: Output) {
-    input
-      .addCategory
-      .sink { category in
-        output.categories.value.append(category)
-      }
-      .store(in: &cancellableBag)
-  }
-  
-  private func bindRemoveCategory(_ input: Input, _ output: Output) {
-    input
-      .removeCategory
-      .sink { category in
-        if let index = output.categories.value.firstIndex(of: category) {
-          output.categories.value.remove(at: index)
-        }
-      }
-      .store(in: &cancellableBag)
+    bindItemSelect(input, output)
   }
   
   private func bindApply(_ input: Input, _ output: Output) {
@@ -100,6 +85,22 @@ final class FilterViewModel {
       .refresh
       .sink { _ in
         output.categories.send(CakeCategory.allCases)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindItemSelect(_ input: Input, _ output: Output) {
+    input
+      .selectItem
+      .map { CakeCategory.allCases[$0.row] }
+      .sink { selectedItem in
+        if output.categories.value.contains(selectedItem) {
+          if let index = output.categories.value.firstIndex(of: selectedItem) {
+            output.categories.value.remove(at: index)
+          }
+        } else {
+          output.categories.value.append(selectedItem)
+        }
       }
       .store(in: &cancellableBag)
   }
