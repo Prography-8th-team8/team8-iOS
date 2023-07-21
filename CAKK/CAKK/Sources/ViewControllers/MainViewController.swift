@@ -539,7 +539,12 @@ extension MainViewController: NMFMapViewCameraDelegate {
 // MARK: - FloatingPanelControllerDelegate
 
 extension MainViewController: FloatingPanelControllerDelegate {
+  
   func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+    updateMapViewInset()
+  }
+
+  func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
     if fpc == cakeShopListFloatingPanel {
       // Show and hide cakeShopPopupView
       UIView.animate(withDuration: 0.3) {
@@ -550,7 +555,6 @@ extension MainViewController: FloatingPanelControllerDelegate {
         }
       }
     }
-    updateMapViewInset()
   }
   
   func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
