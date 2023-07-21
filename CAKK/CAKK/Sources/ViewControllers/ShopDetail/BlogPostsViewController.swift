@@ -160,18 +160,3 @@ extension BlogPostsViewController {
     blogPostDataSource.apply(snapshot)
   }
 }
-
-//extension BlogPostsViewController {
-//  override func collectionView(_ collectionView: UICollectionView,
-//                               viewForSupplementaryElementOfKind kind: String,
-//                               at indexPath: IndexPath) -> UICollectionReusableView {
-//    guard kind == UICollectionView.elementKindSectionFooter else {
-//      return UICollectionReusableView()
-//    }
-//
-//    let footerView = collectionView.dequeueReusableFooterView(ofType: LoadMoreBlogPostFooterView.self,
-//                                                              for: indexPath)
-//    bind(loadMoreBlogPostButton: footerView.button)
-//    return footerView
-//  }
-//}
