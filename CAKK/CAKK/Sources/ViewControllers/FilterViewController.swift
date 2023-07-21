@@ -266,8 +266,8 @@ extension FilterViewController {
   private func setupApplyButtonLayout() {
     view.addSubview(applyButton)
     applyButton.snp.makeConstraints {
-      $0.leading.trailing.equalToSuperview().inset(Metric.horizontalPadding)
-      $0.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.bottomPadding)
+      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.bottomPadding)
       $0.height.equalTo(Metric.applyButtonHeight)
     }
   }
