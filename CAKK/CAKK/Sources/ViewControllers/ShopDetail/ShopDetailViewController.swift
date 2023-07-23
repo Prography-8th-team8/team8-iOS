@@ -601,7 +601,7 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
           viewModel: ShopDetailViewModel(
             cakeShop: SampleData.cakeShopList.first!,
             service: NetworkService<CakeAPI>(type: .stub),
-            realmStorage: RealmStorage()))
+            realmStorage: MockRealmStorage()))
     ).toPreview()
   }
 }

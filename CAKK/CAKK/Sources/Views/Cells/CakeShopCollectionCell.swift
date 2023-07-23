@@ -445,7 +445,7 @@ struct CakeListCellPreview: PreviewProvider {
       cell.configure(viewModel: .init(
         cakeShop: SampleData.cakeShopList.first!,
         service: .init(),
-        realmStorage: RealmStorage()))
+        realmStorage: MockRealmStorage()))
       return cell
     }
     .frame(width: 328, height: 158)
