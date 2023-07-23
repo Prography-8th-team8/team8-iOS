@@ -113,7 +113,7 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [linkMenuButton,
-                       bookmarkMenuButton,
+//                       bookmarkMenuButton,
                        routeMenuButton,
                        shareMenuButton]
   ).then {
@@ -601,7 +601,7 @@ struct ShopDetailViewControllerPreView: PreviewProvider {
           viewModel: ShopDetailViewModel(
             cakeShop: SampleData.cakeShopList.first!,
             service: NetworkService<CakeAPI>(type: .stub),
-            realmStorage: RealmStorage()))
+            realmStorage: MockRealmStorage()))
     ).toPreview()
   }
 }

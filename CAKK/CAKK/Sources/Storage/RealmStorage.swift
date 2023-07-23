@@ -20,8 +20,16 @@ protocol RealmStorageProtocol {
   func removeAll<T: Object>(entityType: T.Type)
 }
 
-// MARK: - RealmStorage
+final class MockRealmStorage: RealmStorageProtocol {
+  func load<T: Object>(id: Int, entityType: T.Type) -> T? { return nil }
+  func loadAll<T: Object>(entityType: T.Type) -> [T] { return [] }
+  func save<T: Object>(_ data: T) -> Bool { return false }
+  func remove<T: Object>(id: Int, entityType: T.Type) -> Bool { return false }
+  func removeAll<T: Object>(entityType: T.Type) { }
+}
 
+// MARK: - RealmStorage
+/**
 final class RealmStorage: RealmStorageProtocol {
   
   // MARK: - Properties
@@ -83,3 +91,4 @@ final class RealmStorage: RealmStorageProtocol {
     }
   }
 }
+ */
