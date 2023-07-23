@@ -347,6 +347,9 @@ extension CakeShopCollectionCell {
       $0.width.height.equalTo(Metric.bookmarkButtonSize)
       $0.size.equalTo(Metric.bookmarkButtonSize)
     }
+    
+    // FIXME: 차후 북마크 버튼 숨김 처리 해제
+    bookmarkButton.isHidden = true
   }
   
   private func setupHeaderStackViewLayout() {
