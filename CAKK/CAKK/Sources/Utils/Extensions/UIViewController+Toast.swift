@@ -20,10 +20,18 @@ extension UIViewController {
   
   func showToast(with message: String, delay: TimeInterval = 1) {
     let toastView = UIView().then {
-      $0.backgroundColor = R.color.gray_80()
+      $0.clipsToBounds = true
       $0.layer.cornerRadius = 12
       $0.isUserInteractionEnabled = false
       $0.alpha = 0
+      $0.transform = .init(scaleX: 0.7, y: 0.7)
+    }
+    
+    let blurEffect = UIBlurEffect(style: .dark)
+    let blurView = UIVisualEffectView(effect: blurEffect)
+    toastView.addSubview(blurView)
+    blurView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
     }
     
     let toastLabel = UILabel().then {
@@ -46,11 +54,12 @@ extension UIViewController {
       $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(ToastMetric.bottomInset)
     }
     
-    UIView.animate(withDuration: 0.5) {
+    UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8) {
       toastView.alpha = 1.0
+      toastView.transform = .init(scaleX: 1, y: 1)
     } completion: { _ in
       
-      UIView.animate(withDuration: 0.5, delay: delay) {
+      UIView.animate(withDuration: 0.25, delay: delay) {
         toastView.alpha = 0.0
       } completion: { _ in
         toastView.removeFromSuperview()
