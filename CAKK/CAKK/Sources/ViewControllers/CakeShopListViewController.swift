@@ -449,7 +449,7 @@ import SwiftUI
 
 struct CakeListViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    let viewModel = MainViewModel(districts: [], service: .init(), storage: MockRealmStorage())
+    let viewModel = MainViewModel(service: .init(), storage: MockRealmStorage())
     
     CakeShopListViewController(viewModel: viewModel)
       .toPreview()

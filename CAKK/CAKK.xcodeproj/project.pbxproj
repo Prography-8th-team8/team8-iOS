@@ -40,6 +40,7 @@
 		8E533A2B2A2C7F8A00C56A55 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */; };
 		8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E53F1BA2A332936002F871C /* EmptyStateView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
+		8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E18022A7028F700ADA360 /* TabBarController.swift */; };
 		8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */; };
 		8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
@@ -156,6 +157,7 @@
 		8E533A2A2A2C7F8A00C56A55 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		8E53F1BA2A332936002F871C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8E6E18022A7028F700ADA360 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Symmetric.swift"; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				B46F9DC729DACC8500113979 /* CakeShopListViewController.swift */,
 				8EAB80F52A454A1E00D9FA41 /* FilterViewController.swift */,
 				8E907A722A6107B300914A4E /* ImageViewerViewController.swift */,
+				8E6E18022A7028F700ADA360 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */,
 				8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
+				8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */,
 				8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */,
 				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
 			);

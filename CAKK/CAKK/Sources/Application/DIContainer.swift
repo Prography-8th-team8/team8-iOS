@@ -25,8 +25,8 @@ final class DIContainer {
     return SplashViewController()
   }
   
-  func makeMainViewController(districts: [District]) -> UINavigationController {
-    let viewModel = MainViewModel(districts: districts, service: networkService, storage: realmStorage)
+  func makeMainViewController() -> UINavigationController {
+    let viewModel = MainViewModel(service: networkService, storage: realmStorage)
     let controller = MainViewController(viewModel: viewModel)
     return UINavigationController(rootViewController: controller)
   }

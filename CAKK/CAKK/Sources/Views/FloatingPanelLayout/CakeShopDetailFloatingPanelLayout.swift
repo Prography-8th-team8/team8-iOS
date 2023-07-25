@@ -13,6 +13,6 @@ class CakeShopDetailFloatingPanelLayout: FloatingPanelLayout {
   let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
     .full: FloatingPanelLayoutAnchor(absoluteInset: 0, edge: .top, referenceGuide: .superview),
     .half: FloatingPanelLayoutAnchor(fractionalInset: 0.65, edge: .bottom, referenceGuide: .safeArea),
-    .tip: FloatingPanelLayoutAnchor(absoluteInset: 224, edge: .bottom, referenceGuide: .safeArea)
+    .tip: FloatingPanelLayoutAnchor(absoluteInset: 240, edge: .bottom, referenceGuide: .safeArea)
   ]
 }
