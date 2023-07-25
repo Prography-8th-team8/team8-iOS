@@ -34,16 +34,13 @@ final class MainViewModel {
   let output: Output
   private var cancellableBag = Set<AnyCancellable>()
   
-  
-  private var districts: [District]
   private let service: NetworkService<CakeAPI>
   private let storage: RealmStorageProtocol
   
   
   // MARK: - Initialization
   
-  init(districts: [District], service: NetworkService<CakeAPI>, storage: RealmStorageProtocol) {
-    self.districts = districts
+  init(service: NetworkService<CakeAPI>, storage: RealmStorageProtocol) {
     self.service = service
     self.storage = storage
     
