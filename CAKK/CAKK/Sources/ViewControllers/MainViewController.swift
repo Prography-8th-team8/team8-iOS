@@ -300,6 +300,10 @@ final class MainViewController: UIViewController {
   private func showFilterFloatingPanel() {
     let viewModel = FilterViewModel()
     let viewController = DIContainer.shared.makeFilterViewController(viewModel: viewModel)
+    viewController.applyCompletionHandler = { [weak self] in
+      self?.showToast(with: "필터가 적용 되었어요!")
+    }
+    
     filterFloatingPanel.track(scrollView: viewController.collectionView)
     filterFloatingPanel.addPanel(toParent: self)
     filterFloatingPanel.set(contentViewController: viewController)

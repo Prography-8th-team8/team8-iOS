@@ -54,6 +54,8 @@ class FilterViewController: UIViewController {
   private lazy var dataSource: DataSource = makeDataSource()
   private var cellRegistration = UICollectionView.CellRegistration<CakeCategoryCell, CakeCategory> { _, _, _ in }
   
+  public var applyCompletionHandler: (() -> Void)?
+  
   
   // MARK: - UI
   
@@ -133,6 +135,7 @@ class FilterViewController: UIViewController {
       .tapPublisher
       .sink { [weak self] _ in
         self?.viewModel.input.apply.send(Void())
+        self?.applyCompletionHandler?()
         self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
