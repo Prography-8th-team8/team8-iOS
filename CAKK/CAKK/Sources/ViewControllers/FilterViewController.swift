@@ -186,7 +186,7 @@ class FilterViewController: UIViewController {
   private func refreshAllCells() {
     collectionView.visibleCells.forEach { cell in
       if let cell = cell as? CakeCategoryCell {
-        cell.isChipSelected = true
+        cell.isChipSelected = false
       }
     }
   }

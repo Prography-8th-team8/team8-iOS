@@ -261,11 +261,7 @@ final class CakeShopListViewController: UIViewController {
     viewModel.output
       .filteredCategory
       .sink { [weak self] categories in
-        if CakeCategory.allCases.count - categories.count == 0 {
-          self?.filterButton.setBadge(count: CakeCategory.allCases.count - categories.count)
-        } else {
-          self?.filterButton.setBadge(count: categories.count)
-        }
+        self?.filterButton.setBadge(count: categories.count)
       }
       .store(in: &cancellableBag)
   }

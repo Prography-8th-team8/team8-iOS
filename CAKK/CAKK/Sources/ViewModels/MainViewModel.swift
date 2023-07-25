@@ -151,6 +151,8 @@ final class MainViewModel {
   
   private func loadCakeShops(by bounds: NMGLatLngBounds) {
     let service = service
+    // 선택된 카테고리가 없으면 모든 카테고리를 기준으로 검색
+    let categories = FilteredCategoryUserDefault.shared.categories.isEmpty ? CakeCategory.allCases : FilteredCategoryUserDefault.shared.categories
     
     output.loadingCakeShops.send(true)
     output.cakeShops.value.removeAll()
@@ -159,7 +161,7 @@ final class MainViewModel {
     pages.publisher
       .map { Int($0) }
       .flatMap { page -> AnyPublisher<[CakeShop], Error> in
-        service.request(.fetchCakeShopsByBounds(bounds, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
+        service.request(.fetchCakeShopsByBounds(bounds, categories: categories, page: page), type: CakeShopResponse.self)
       }
       .receive(on: DispatchQueue.main)
       .collect()
@@ -175,6 +177,8 @@ final class MainViewModel {
   
   private func loadCakeShops(by districts: [District]) {
     let service = service
+    // 선택된 카테고리가 없으면 모든 카테고리를 기준으로 검색
+    let categories = FilteredCategoryUserDefault.shared.categories.isEmpty ? CakeCategory.allCases : FilteredCategoryUserDefault.shared.categories
     
     output.loadingCakeShops.send(true)
     output.cakeShops.value.removeAll()
@@ -183,7 +187,7 @@ final class MainViewModel {
     pages.publisher
       .map { Int($0) }
       .flatMap { page -> AnyPublisher<[CakeShop], Error> in
-        service.request(.fetchCakeShopsByDistricts(districts, categories: FilteredCategoryUserDefault.shared.categories, page: page), type: CakeShopResponse.self)
+        service.request(.fetchCakeShopsByDistricts(districts, categories: categories, page: page), type: CakeShopResponse.self)
       }
       .receive(on: DispatchQueue.main)
       .collect()
