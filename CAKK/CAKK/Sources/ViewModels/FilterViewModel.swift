@@ -71,7 +71,7 @@ final class FilterViewModel {
       .sink { [weak self] categories in
         guard let self else { return }
         
-        if categories.isEmpty || Set(self.originalFilteredCategories) == Set(categories) {
+        if Set(self.originalFilteredCategories) == Set(categories) {
           output.categoriesChanged.send(false)
         } else {
           output.categoriesChanged.send(true)
@@ -84,7 +84,7 @@ final class FilterViewModel {
     input
       .refresh
       .sink { _ in
-        output.categories.send(CakeCategory.allCases)
+        output.categories.send([])
       }
       .store(in: &cancellableBag)
   }

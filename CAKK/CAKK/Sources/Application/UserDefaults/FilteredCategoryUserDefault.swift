@@ -31,7 +31,7 @@ class FilteredCategoryUserDefault {
       categories = value.compactMap { CakeCategory(rawValue: $0) }
     } else {
       // default value
-      categories = CakeCategory.allCases
+      categories = []
     }
   }
   
