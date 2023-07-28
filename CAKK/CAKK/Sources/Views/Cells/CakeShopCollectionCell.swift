@@ -257,6 +257,14 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   }
   
   private func configureCakeImages(imageUrls: [String]) {
+    // ❌ 이미지 없는 경우 -> 가짜 이미지 하나 뿌려줌
+    var imageUrls = imageUrls
+    
+    if imageUrls.isEmpty {
+      imageUrls.append("")
+    }
+    
+    // 이미지 추가
     cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
     
     imageUrls.map { imageUrl in
