@@ -243,14 +243,13 @@ final class CakeShopCollectionCell: UICollectionViewCell {
       } else {
         // at the end of the loop
         if index == types.count - 1 {
-          let count = "+\((index + 2) - 3)"
+          let count = "+\(types.count - 3)"
           
           let supplementaryChip = LabelChip()
           supplementaryChip.title = count
           supplementaryChip.isBackgroundSynced = false
           supplementaryChip.titleColor = .white
           supplementaryChip.backgroundColor = .black
-          
           cakeCategoryStackView.addArrangedSubview(supplementaryChip)
         }
       }
