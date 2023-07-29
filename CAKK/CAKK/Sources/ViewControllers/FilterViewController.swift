@@ -26,7 +26,7 @@ class FilterViewController: UIViewController {
     
     static let applyButtonFontSize = 18.f
     static let applyButtonCornerRadius = 15.f
-    static let applyButtonHeight = 57.f
+    static let applyButtonHeight = 56.f
     
     static let closeButtonSize = 25.f
     static let closeButtonImageInset = 4.f
