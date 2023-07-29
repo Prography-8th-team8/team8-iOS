@@ -564,6 +564,7 @@ extension MainViewController: FloatingPanelControllerDelegate {
   func floatingPanelWillRemove(_ fpc: FloatingPanelController) {
     if fpc == cakeShopDetailFloatingPanel {
       cakeShopListFloatingPanel.move(to: .half, animated: true)
+      cakkMapView.unselectMarker()
     }
   }
 }
