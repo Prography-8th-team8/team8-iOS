@@ -52,9 +52,9 @@ extension CakeCategory {
     case .character:
       return UIColor(hex: 0xFF5CBE)
     case .mealbox:
-      return UIColor(hex: 0xE4B801)
+      return UIColor(hex: 0xCEAA15)
     case .tiara:
-      return UIColor(hex: 0x2448FF)
+      return UIColor(hex: 0x222222)
     case .rice:
       return UIColor(hex: 0x8161EB)
     case .flower:
