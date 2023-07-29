@@ -116,8 +116,8 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   private let cakeImageScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
-    $0.layer.cornerRadius = Metric.cakeImageCornerRadius
     $0.alwaysBounceHorizontal = true
+    $0.contentInset = .init(vertical: 0, horizontal: Metric.padding)
   }
   
   private let cakeImageStackView = UIStackView().then {
@@ -404,7 +404,7 @@ extension CakeShopCollectionCell {
     contentView.addSubview(cakeImageScrollView)
     cakeImageScrollView.snp.makeConstraints {
       $0.top.equalTo(cakeCategoryStackView.snp.bottom).offset(32)
-      $0.leading.trailing.bottom.equalToSuperview().inset(Metric.padding)
+      $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(Metric.cakeImageSize)
     }
   }
