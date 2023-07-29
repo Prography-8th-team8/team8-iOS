@@ -404,7 +404,8 @@ extension CakeShopCollectionCell {
     contentView.addSubview(cakeImageScrollView)
     cakeImageScrollView.snp.makeConstraints {
       $0.top.equalTo(cakeCategoryStackView.snp.bottom).offset(32)
-      $0.leading.trailing.bottom.equalToSuperview()
+      $0.leading.trailing.equalToSuperview()
+      $0.bottom.equalToSuperview().inset(Metric.padding)
       $0.height.equalTo(Metric.cakeImageSize)
     }
   }
