@@ -110,7 +110,7 @@ final class ShopDetailViewController: UIViewController {
   
   private lazy var menuButtonStackView = UIStackView(
     arrangedSubviews: [linkMenuButton,
-//                       bookmarkMenuButton,
+                       bookmarkMenuButton,
                        routeMenuButton,
                        shareMenuButton]
   ).then {
