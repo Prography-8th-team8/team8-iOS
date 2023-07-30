@@ -168,18 +168,28 @@ extension PopUpViewController {
   // MARK: - Setup Layout
   
   private func setupLayout() {
+    setupContainerViewLayout()
+    setupTitleDescriptionStackViewLayout()
+    setupButtonStackViewLayout()
+  }
+  
+  private func setupContainerViewLayout() {
     view.addSubview(contentView)
     contentView.snp.makeConstraints {
       $0.centerY.equalToSuperview()
       $0.horizontalEdges.equalToSuperview().inset(24)
     }
-    
+  }
+  
+  private func setupTitleDescriptionStackViewLayout() {
     contentView.addSubview(titleDescriptionStackView)
     titleDescriptionStackView.snp.makeConstraints {
       $0.horizontalEdges.equalToSuperview().inset(16)
       $0.top.equalToSuperview().inset(48)
     }
-    
+  }
+  
+  private func setupButtonStackViewLayout() {
     contentView.addSubview(buttonStackView)
     buttonStackView.snp.makeConstraints {
       $0.top.equalTo(titleDescriptionStackView.snp.bottom).offset(36)
