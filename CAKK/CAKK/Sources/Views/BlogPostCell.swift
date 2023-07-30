@@ -87,20 +87,26 @@ final class BlogPostCell: HighlightableCell {
   }
   
   private func setupBloggerNamePostDateLabelText(of blogPost: BlogPost) {
+    let bloggerNameAttrString = NSAttributedString(
+      string: blogPost.bloggerName,
+      attributes: [.font: UIFont.pretendard(size: 12, weight: .bold)])
+    
+    let separatorAttrString = NSAttributedString(
+      string: " ∙ ",
+      attributes: [.font: UIFont.pretendard(size: 12, weight: .bold),
+                   .foregroundColor: R.color.gray_20() ?? .gray])
+    
     let formattedPostDate = changingPostDateFormat(blogPost.postDate)
-    bloggerNamePostDateLabel.attributedText = NSMutableAttributedString().then({ string in
-      string.append(NSAttributedString(
-        string: blogPost.bloggerName,
-        attributes: [.font: UIFont.pretendard(size: 12, weight: .bold)]))
-      string.append(NSAttributedString(
-        string: " ∙ ",
-        attributes: [.font: UIFont.pretendard(size: 12, weight: .bold),
-                     .foregroundColor: R.color.gray_20() ?? .gray]))
-      string.append(NSAttributedString(
-        string: formattedPostDate,
-        attributes: [.font: UIFont.pretendard(size: 12),
-                     .foregroundColor: R.color.gray_60() ?? .gray]))
-    })
+    let postDateAttrString = NSAttributedString(
+      string: formattedPostDate,
+      attributes: [.font: UIFont.pretendard(size: 12),
+                   .foregroundColor: R.color.gray_60() ?? .gray])
+    
+    bloggerNamePostDateLabel.attributedText = NSMutableAttributedString().then { string in
+      string.append(bloggerNameAttrString)
+      string.append(separatorAttrString)
+      string.append(postDateAttrString)
+    }
   }
   
   private func changingPostDateFormat(_ postDate: String) -> String {
