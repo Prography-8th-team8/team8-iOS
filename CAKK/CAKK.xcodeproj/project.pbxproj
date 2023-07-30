@@ -80,6 +80,9 @@
 		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
 		B4484B362A765A2100B37EFC /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B352A765A2100B37EFC /* PopUpViewController.swift */; };
 		B4484B382A76631900B37EFC /* UIViewController+ShowPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */; };
+		B4484B3A2A7669A200B37EFC /* MyBookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B392A7669A200B37EFC /* MyBookmarkViewController.swift */; };
+		B4484B3C2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */; };
+		B4484B402A766D9100B37EFC /* MyBookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B3F2A766D9100B37EFC /* MyBookmarkViewModel.swift */; };
 		B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B452B84C2A075E9700784A17 /* UIView+Shadow.swift */; };
 		B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41C2A079B6E00FB8403 /* NetworkService.swift */; };
 		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
@@ -209,6 +212,9 @@
 		B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		B4484B352A765A2100B37EFC /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowPopUp.swift"; sourceTree = "<group>"; };
+		B4484B392A7669A200B37EFC /* MyBookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookmarkViewController.swift; sourceTree = "<group>"; };
+		B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookmarkCakeShopCell.swift; sourceTree = "<group>"; };
+		B4484B3F2A766D9100B37EFC /* MyBookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookmarkViewModel.swift; sourceTree = "<group>"; };
 		B452B84C2A075E9700784A17 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		B455C41C2A079B6E00FB8403 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
@@ -339,6 +345,7 @@
 				8EA04D852A6501C0008C90C8 /* CakeShopCollectionCellModel.swift */,
 				8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */,
 				B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */,
+				B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -436,6 +443,7 @@
 				8E907A722A6107B300914A4E /* ImageViewerViewController.swift */,
 				8E6E18022A7028F700ADA360 /* TabBarController.swift */,
 				B4484B352A765A2100B37EFC /* PopUpViewController.swift */,
+				B4484B392A7669A200B37EFC /* MyBookmarkViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -599,6 +607,7 @@
 				8E02B7812A057DD3003AE7AF /* DistrictSelectionViewModel.swift */,
 				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 				8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */,
+				B4484B3F2A766D9100B37EFC /* MyBookmarkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -860,9 +869,11 @@
 				B48EA8562A0BBE3900AC336D /* DetailMenuButton.swift in Sources */,
 				8EAB811D2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift in Sources */,
 				B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */,
+				B4484B402A766D9100B37EFC /* MyBookmarkViewModel.swift in Sources */,
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
+				B4484B3C2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleImageButton.swift in Sources */,
 				8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */,
 				B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */,
@@ -910,6 +921,7 @@
 				8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
 				B4484B382A76631900B37EFC /* UIViewController+ShowPopUp.swift in Sources */,
+				B4484B3A2A7669A200B37EFC /* MyBookmarkViewController.swift in Sources */,
 				8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */,
 				8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */,
 				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,
