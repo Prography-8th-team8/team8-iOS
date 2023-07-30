@@ -7,7 +7,7 @@
 		<string>nmap</string>
 	</array>
 	<key>NMFClientId</key>
-	<string>$(NAVERMAP_API_KEY)</string>
+	<string>x1jf5cvfzz</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
