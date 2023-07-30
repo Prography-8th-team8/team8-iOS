@@ -59,6 +59,7 @@ class PopUpViewController: UIViewController {
   private let cancelButton = UIButton().then {
     $0.setTitle("취소", for: .normal)
     $0.setTitleColor(R.color.gray_60(), for: .normal)
+    $0.setTitleColor(R.color.gray_10(), for: .highlighted)
     $0.titleLabel?.font = .pretendard(size: 16)
     $0.backgroundColor = R.color.gray_10()
     $0.layer.cornerRadius = 12
@@ -67,6 +68,7 @@ class PopUpViewController: UIViewController {
   private let confirmButton = UIButton().then {
     $0.setTitle("확인", for: .normal)
     $0.setTitleColor(.white, for: .normal)
+    $0.setTitleColor(.white.withAlphaComponent(0.2), for: .highlighted)
     $0.titleLabel?.font = .pretendard(size: 16, weight: .semiBold)
     $0.backgroundColor = R.color.pink_100()
     $0.layer.cornerRadius = 12
