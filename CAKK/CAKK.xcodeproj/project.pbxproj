@@ -75,7 +75,6 @@
 		B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0502A34CA6A0068843B /* BlogPostCell.swift */; };
 		B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */; };
 		B41EF0552A34E63C0068843B /* UICollectionView+RegisterDequeue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0542A34E63B0068843B /* UICollectionView+RegisterDequeue.swift */; };
-		B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */; };
 		B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889B42A15B21700476BFC /* CakkMapView.swift */; };
 		B43889BD2A15DB4600476BFC /* CAKKNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */; };
 		B43889C62A15E02300476BFC /* district_count_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B43889C52A15E02300476BFC /* district_count_sample.json */; };
@@ -203,7 +202,6 @@
 		B41EF0502A34CA6A0068843B /* BlogPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCell.swift; sourceTree = "<group>"; };
 		B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingHTMLTags.swift"; sourceTree = "<group>"; };
 		B41EF0542A34E63B0068843B /* UICollectionView+RegisterDequeue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+RegisterDequeue.swift"; sourceTree = "<group>"; };
-		B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		B43889B42A15B21700476BFC /* CakkMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkMapView.swift; sourceTree = "<group>"; };
 		B43889BA2A15DB4600476BFC /* CAKKNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CAKKNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B43889BC2A15DB4600476BFC /* CAKKNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAKKNetworkingTests.swift; sourceTree = "<group>"; };
@@ -606,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				B48EA8552A0BBE3900AC336D /* DetailMenuButton.swift */,
-				B41FE93A2A0C752A0072BC98 /* DetailInfoView.swift */,
 				B4FB8E812A0F729900DBF193 /* DetailSectionTitleView.swift */,
 				B48EF3AD2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift */,
 			);
@@ -845,7 +842,6 @@
 				B4FB8E822A0F729900DBF193 /* DetailSectionTitleView.swift in Sources */,
 				8E02B7802A0554CF003AE7AF /* DistrictSelectionViewController.swift in Sources */,
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
-				B41FE93B2A0C752A0072BC98 /* DetailInfoView.swift in Sources */,
 				8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */,
 				B48EF3AE2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift in Sources */,
 				8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */,

@@ -21,6 +21,7 @@ final class BlogPostsViewController: UICollectionViewController {
   
   enum Metric {
     static let horizontalPadding = 14.f
+    static let loadMoreBlogPostButtonBottomPadding = 16.f
   }
   
   
@@ -71,7 +72,7 @@ final class BlogPostsViewController: UICollectionViewController {
     guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
     layout.minimumLineSpacing = 0
     layout.itemSize = CGSize(width: view.bounds.width - (Metric.horizontalPadding * 2), height: 150)
-    layout.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 50)
+    layout.footerReferenceSize = CGSize(width: collectionView.bounds.width, height: 50 + Metric.loadMoreBlogPostButtonBottomPadding)
   }
   
   
