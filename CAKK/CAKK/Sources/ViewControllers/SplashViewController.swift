@@ -26,10 +26,11 @@ final class SplashViewController: UIViewController {
   enum Metric {
     static let descriptionLabelBottomMargin = 24.f
     static let gridAnimationSpacing = -18.f
-    static let logoStackViewSpacing = 20.f
+    static let logoStackViewSpacing = 28.f
     
     static let subtitleLabelFontSize = 16.f
-    static let subtitleLabelInset = 12.f
+    static let subtitleLabelVerticalInset = 12.f
+    static let subtitleLabelHorizontalInset = 21.f
   }
   
   
@@ -41,24 +42,28 @@ final class SplashViewController: UIViewController {
     $0.axis = .vertical
     $0.distribution = .fillEqually
   }
-  private var logoStackView = UIStackView().then {
+  private let logoStackView = UIStackView().then {
     $0.axis = .vertical
     $0.spacing = Metric.logoStackViewSpacing
   }
-  private var subtitleContainerView = UIView().then {
-    $0.backgroundColor = .white.withAlphaComponent(0.2)
+  private let subtitleContainerView = UIView().then {
     $0.layer.cornerRadius = 20
     $0.alpha = 0
+    $0.clipsToBounds = true
   }
-  private var subtitleLabel = UILabel().then {
+  private let subtitleLabel = UILabel().then {
     $0.font = .pretendard(size: Metric.subtitleLabelFontSize, weight: .bold)
     $0.text = Constants.description
     $0.textColor = .white
   }
-  private var logoImageView = UIImageView().then {
+  private let logoImageView = UIImageView().then {
     $0.image = R.image.logo()
     $0.contentMode = .scaleAspectFill
     $0.transform = .init(scaleX: 0, y: 0)
+  }
+  private let blurView = UIVisualEffectView().then { view in
+    let blurEffect = UIBlurEffect(style: .light)
+    view.effect = blurEffect
   }
   
   
@@ -75,7 +80,7 @@ final class SplashViewController: UIViewController {
   }
   
   
-  // MARK: - Public Methods
+  // MARK: - Public
   
   public func startSplash(completion: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + Constants.splashDuration) {
@@ -91,17 +96,49 @@ final class SplashViewController: UIViewController {
   
   public func stopAnimations() {
     stopGridAnimation()
-  } 
+  }
+  
+
+  // MARK: - Private
+  
+  private func playGridAnimation() {
+    gridAnimations.forEach { animationView in
+      animationView.play()
+    }
+  }
+  
+  private func stopGridAnimation() {
+    gridAnimations.forEach { animationView in
+      animationView.stop()
+    }
+  }
+  
+  private func playLogoAnimation() {
+    UIView.animate(withDuration: 0.7,
+                   delay: 0,
+                   usingSpringWithDamping: 0.7,
+                   initialSpringVelocity: 0.7) {
+      self.logoImageView.transform = .init(scaleX: 1, y: 1)
+    }
+  }
+  
+  private func playSubTitleAnimation() {
+    UIView.animate(withDuration: 0.5) {
+      self.subtitleContainerView.alpha = 1
+    }
+  }
 }
 
 // MARK: - UI & Layout
 
 extension SplashViewController {
+  
   private func setup() {
     setupLayout()
     setupView()
   }
   
+  // Layout
   private func setupLayout() {
     setupAnimationStackViewLayout()
     setupAnimationViewLayout()
@@ -110,6 +147,7 @@ extension SplashViewController {
     setupLogoImageViewLayout()
     
     setupDescriptionContainerViewLayout()
+    setupSubTitleContainerBlurLayout()
     setupSubtitleLabelLayout()
   }
   
@@ -149,46 +187,28 @@ extension SplashViewController {
     logoStackView.addArrangedSubview(subtitleContainerView)
   }
   
-  private func setupSubtitleLabelLayout() {
-    subtitleContainerView.addSubview(subtitleLabel)
-    subtitleLabel.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(Metric.subtitleLabelInset)
+  private func setupSubTitleContainerBlurLayout() {
+    subtitleContainerView.addSubview(blurView)
+    blurView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
     }
   }
   
+  private func setupSubtitleLabelLayout() {
+    subtitleContainerView.addSubview(subtitleLabel)
+    subtitleLabel.snp.makeConstraints {
+      $0.verticalEdges.equalToSuperview().inset(Metric.subtitleLabelVerticalInset)
+      $0.horizontalEdges.equalToSuperview().inset(Metric.subtitleLabelHorizontalInset)
+    }
+  }
+  
+  // View
   private func setupView() {
     setupBaseView()
   }
   
   private func setupBaseView() {
     view.backgroundColor = UIColor(named: "AccentColor")
-  }
-  
-  private func playGridAnimation() {
-    gridAnimations.forEach { animationView in
-      animationView.play()
-    }
-  }
-  
-  private func stopGridAnimation() {
-    gridAnimations.forEach { animationView in
-      animationView.stop()
-    }
-  }
-  
-  private func playLogoAnimation() {
-    UIView.animate(withDuration: 0.7,
-                   delay: 0,
-                   usingSpringWithDamping: 0.7,
-                   initialSpringVelocity: 0.7) {
-      self.logoImageView.transform = .init(scaleX: 1, y: 1)
-    }
-  }
-  
-  private func playSubTitleAnimation() {
-    UIView.animate(withDuration: 0.5) {
-      self.subtitleContainerView.alpha = 1
-    }
   }
 }
 
