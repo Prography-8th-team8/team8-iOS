@@ -25,6 +25,7 @@ target 'CAKK' do
   pod 'lottie-ios',   '~> 4.1.3'
   pod 'SkeletonView', '~> 1.30.4'
   pod 'Hero',         '~> 1.6.2'
+  pod 'ToastPiston',  :git => 'https://github.com/WallabyStuff/ToastPiston'
 
   # Image Caching
   pod 'Kingfisher', '~> 7.6.2'

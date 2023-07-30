@@ -24,6 +24,7 @@ PODS:
   - SnapKit (5.6.0)
   - SwiftLint (0.50.3)
   - Then (3.0.0)
+  - ToastPiston (0.1.0)
 
 DEPENDENCIES:
   - BadgeSwift (~> 8.0)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.6.0)
   - SwiftLint (~> 0.50.3)
   - Then (~> 3.0.0)
+  - ToastPiston (from `https://github.com/WallabyStuff/ToastPiston`)
 
 SPEC REPOS:
   trunk:
@@ -63,6 +65,15 @@ SPEC REPOS:
     - SwiftLint
     - Then
 
+EXTERNAL SOURCES:
+  ToastPiston:
+    :git: https://github.com/WallabyStuff/ToastPiston
+
+CHECKOUT OPTIONS:
+  ToastPiston:
+    :commit: 11035081255c16c97f16fde63c3c1f37b3bc227b
+    :git: https://github.com/WallabyStuff/ToastPiston
+
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   BadgeSwift: a81547ffde1f462bb5fc02e3fa3fdcbc1b888354
@@ -82,7 +93,8 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  ToastPiston: 35fbcf44c5e74ae7a1ca1fbacf68708d8002b713
 
-PODFILE CHECKSUM: de9cd79cb89f65afc46f36de366512fa107fb32e
+PODFILE CHECKSUM: f38f25db43bb249893a0d823a05ba2b7fa26565f
 
 COCOAPODS: 1.12.1
