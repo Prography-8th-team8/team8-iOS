@@ -195,7 +195,7 @@ extension DistrictSelectionViewController {
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints {
       $0.top.equalTo(descriptionLabel.snp.bottom).offset(Metric.collectionViewTopPadding)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+      $0.leading.trailing.equalToSuperview().inset(10)
       $0.bottom.equalToSuperview()
     }
   }
