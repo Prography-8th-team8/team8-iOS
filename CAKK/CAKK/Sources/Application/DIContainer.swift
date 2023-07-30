@@ -58,4 +58,9 @@ final class DIContainer {
                                                 realmStorage: realmStorage)
     return viewModel
   }
+  
+  func makeMyBookmarkViewController() -> MyBookmarkViewController {
+    let viewModel = MyBookmarkViewModel(realmStorage: realmStorage)
+    return MyBookmarkViewController(viewModel: viewModel)
+  }
 }

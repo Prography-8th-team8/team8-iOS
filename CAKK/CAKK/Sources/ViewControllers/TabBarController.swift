@@ -42,7 +42,7 @@ final class TabBarController: UITabBarController {
     let mainVC = DIContainer.shared.makeMainViewController()
     mainVC.tabBarItem = .init(title: "홈", image: R.image.home()!, tag: 0)
     
-    let bookmarkVC = UIViewController()
+    let bookmarkVC = DIContainer.shared.makeMyBookmarkViewController()
     bookmarkVC.view.backgroundColor = .white
     bookmarkVC.tabBarItem = .init(title: "북마크", image: R.image.heart()!, tag: 1)
     
