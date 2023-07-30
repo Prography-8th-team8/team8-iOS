@@ -76,14 +76,11 @@ final class ShopDetailViewController: UIViewController {
   
   // 주소
   private let addressLabel = UILabel().then {
-    $0.font = .pretendard(size: 16)
+    $0.textColor = R.color.gray_60()
+    $0.font = .pretendard(size: 14)
     $0.text = Constants.skeletonText
-    $0.textAlignment = .center
-    // 텍스트가 길면 사이즈가 줄어들 수 있게함
-    $0.adjustsFontSizeToFitWidth = true
-    $0.minimumScaleFactor = 0.7
-    $0.lineBreakMode = .byTruncatingTail
-    $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal) // 줄어들게 하기 위해 우선순위 낮춤
+    $0.textAlignment = .left
+    $0.numberOfLines = 2
   }
   
   private lazy var nameAddressStackView = UIStackView(
