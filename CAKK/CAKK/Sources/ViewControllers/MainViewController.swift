@@ -14,6 +14,7 @@ import SnapKit
 import Then
 import NMapsMap
 import FloatingPanel
+import ToastPiston
 
 final class MainViewController: UIViewController {
   
@@ -301,7 +302,7 @@ final class MainViewController: UIViewController {
     let viewModel = FilterViewModel()
     let viewController = DIContainer.shared.makeFilterViewController(viewModel: viewModel)
     viewController.applyCompletionHandler = { [weak self] in
-      self?.showToast(with: "필터가 적용 되었어요!")
+      self?.showPistonToast(title: "필터가 적용 되었어요!")
     }
     
     filterFloatingPanel.track(scrollView: viewController.collectionView)
