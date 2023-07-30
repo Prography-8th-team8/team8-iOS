@@ -79,6 +79,7 @@
 		B43889C62A15E02300476BFC /* district_count_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B43889C52A15E02300476BFC /* district_count_sample.json */; };
 		B43DA3D429F8B04900F1A4B1 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */; };
 		B4484B362A765A2100B37EFC /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B352A765A2100B37EFC /* PopUpViewController.swift */; };
+		B4484B382A76631900B37EFC /* UIViewController+ShowPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */; };
 		B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B452B84C2A075E9700784A17 /* UIView+Shadow.swift */; };
 		B455C41D2A079B6E00FB8403 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41C2A079B6E00FB8403 /* NetworkService.swift */; };
 		B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B455C41E2A079C4B00FB8403 /* CakeAPI.swift */; };
@@ -207,6 +208,7 @@
 		B43889C52A15E02300476BFC /* district_count_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = district_count_sample.json; sourceTree = "<group>"; };
 		B43DA3D329F8B04900F1A4B1 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		B4484B352A765A2100B37EFC /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowPopUp.swift"; sourceTree = "<group>"; };
 		B452B84C2A075E9700784A17 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		B455C41C2A079B6E00FB8403 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B455C41E2A079C4B00FB8403 /* CakeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeAPI.swift; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 				B41EF0542A34E63B0068843B /* UICollectionView+RegisterDequeue.swift */,
 				B46CF5B12A35E97400A025FC /* UIViewController+Toast.swift */,
 				8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */,
+				B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				8EAB80F62A454A1E00D9FA41 /* FilterViewController.swift in Sources */,
 				8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */,
 				B455C42C2A07E62500FB8403 /* CakeShop.swift in Sources */,
+				B4484B382A76631900B37EFC /* UIViewController+ShowPopUp.swift in Sources */,
 				8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */,
 				8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */,
 				B46F9DCD29DAE51D00113979 /* Number+FloatType.swift in Sources */,

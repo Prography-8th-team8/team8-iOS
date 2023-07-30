@@ -302,7 +302,11 @@ final class ShopDetailViewController: UIViewController {
     routeMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
-        self?.openNaverMapRoute()
+        guard let self = self else { return }
+        
+        showPopUp(titleText: "네이버 지도에서 여시겠어요?") { [weak self] in
+          self?.openNaverMapRoute()
+        }
       }
       .store(in: &cancellables)
   }

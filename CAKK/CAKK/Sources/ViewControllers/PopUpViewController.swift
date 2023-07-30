@@ -31,6 +31,7 @@ class PopUpViewController: UIViewController {
   private let contentView = UIView().then {
     $0.backgroundColor = .white
     $0.layer.cornerRadius = 14
+    $0.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
   }
   
   private lazy var titleLabel = UILabel().then {
@@ -90,7 +91,10 @@ class PopUpViewController: UIViewController {
     self.descriptionText = descriptionText
     self.confirmAction = confirmAction
     self.cancelAction = cancelAction
+    
     super.init(nibName: nil, bundle: nil)
+    
+    modalPresentationStyle = .overFullScreen
   }
   
   required init?(coder: NSCoder) {
@@ -106,6 +110,24 @@ class PopUpViewController: UIViewController {
     bind()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut) { [weak self] in
+      self?.contentView.transform = .identity
+      self?.contentView.isHidden = false
+    }
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn) { [weak self] in
+      self?.contentView.transform = .identity
+      self?.contentView.isHidden = true
+    }
+  }
+  
   
   // MARK: - Setups
   
@@ -117,12 +139,16 @@ class PopUpViewController: UIViewController {
   private func bind() {
     confirmButton.tapPublisher.sink { [weak self] in
       self?.confirmAction()
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        self?.dismiss(animated: false)
+      }
     }
     .store(in: &cancellables)
     
     cancelButton.tapPublisher.sink { [weak self] in
-      self?.dismiss(animated: true)
       self?.cancelAction?()
+      self?.dismiss(animated: false)
     }
     .store(in: &cancellables)
   }
