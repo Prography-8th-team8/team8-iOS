@@ -58,8 +58,8 @@ final class ShopDetailViewController: UIViewController {
   }
   
   private let shopImageView = UIImageView().then {
-    $0.image = R.image.noimage()
-    $0.backgroundColor = R.color.stroke()
+    $0.image = R.image.img_profile_nodata()
+    $0.backgroundColor = R.color.white()
     $0.contentMode = .scaleAspectFill
     $0.snp.makeConstraints { make in
       make.width.height.equalTo(72)
@@ -77,8 +77,9 @@ final class ShopDetailViewController: UIViewController {
   // 주소
   private let addressLabel = UILabel().then {
     $0.textColor = R.color.gray_60()
-    $0.font = .pretendard(size: 14)
+    $0.font = .pretendard(size: 16)
     $0.text = Constants.skeletonText
+    // TODO: 차후 주소 2줄 이상일 때를 반영한 디자인 나오면 변경 필요
     $0.textAlignment = .left
     $0.numberOfLines = 2
   }
@@ -116,7 +117,13 @@ final class ShopDetailViewController: UIViewController {
   ).then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
-    $0.addSeparators(color: R.color.stroke()?.withAlphaComponent(0.5))
+    $0.addSeparators(color: R.color.gray_5())
+  }
+  
+  // 헤더 부분의 파란색 배경을 주기 위한 뷰
+  private let headerBackgroundView = UIView().then {
+    $0.isUserInteractionEnabled = false
+    $0.backgroundColor = R.color.blue_10()
   }
   
   // 키워드
@@ -392,6 +399,7 @@ extension ShopDetailViewController {
     setupScrollViewLayout()
     setupInfoStackViewLayout()
     setupMenuStackViewLayout()
+    setupHeaderBackgroundView()
     setupKeywordTitleLabelLayout()
     setupKeywordScrollViewLayout()
     setupSegmentedControlLayout()
@@ -424,7 +432,8 @@ extension ShopDetailViewController {
   private func setupInfoStackViewLayout() {
     infoStackContainerView.addSubview(infoStackView)
     infoStackView.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(16)
+      $0.horizontalEdges.bottom.equalToSuperview().inset(16)
+      $0.top.equalToSuperview().inset(30)
     }
     
     contentStackView.addArrangedSubview(infoStackContainerView)
@@ -432,7 +441,16 @@ extension ShopDetailViewController {
   
   private func setupMenuStackViewLayout() {
     contentStackView.addArrangedSubview(menuButtonStackView)
-    
+    contentStackView.setCustomSpacing(24, after: menuButtonStackView)
+  }
+  
+  private func setupHeaderBackgroundView() {
+    view.addSubview(headerBackgroundView)
+    headerBackgroundView.snp.makeConstraints {
+      $0.top.equalTo(infoStackContainerView)
+      $0.horizontalEdges.equalToSuperview()
+      $0.bottom.equalTo(menuButtonStackView).offset(24)
+    }
   }
   
   private func setupKeywordTitleLabelLayout() {
