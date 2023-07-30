@@ -21,7 +21,7 @@ final class DetailSectionTitleView: UIView {
   
   // MARK: - Initialization
   
-  init(title: String, topMargin: CGFloat = 40, bottomMargin: CGFloat = 16) {
+  init(title: String, topMargin: CGFloat = 24, bottomMargin: CGFloat = 16) {
     super.init(frame: .zero)
     setup(title: title, topMargin: topMargin, bottomMargin: bottomMargin)
   }

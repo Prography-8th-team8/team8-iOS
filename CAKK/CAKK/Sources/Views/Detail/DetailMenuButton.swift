@@ -15,7 +15,8 @@ final class DetailMenuButton: UIButton {
   // MARK: - UI
   
   let menuTitleLabel = UILabel().then {
-    $0.font = .pretendard()
+    $0.font = .pretendard(size: 12)
+    $0.textColor = R.color.gray_80()
     $0.isUserInteractionEnabled = false
   }
   let menuImageView = UIImageView().then {

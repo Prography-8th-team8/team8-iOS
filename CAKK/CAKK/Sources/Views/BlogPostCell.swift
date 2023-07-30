@@ -55,7 +55,7 @@ final class BlogPostCell: HighlightableCell {
     
     titleLabel.text = blogPost.title
     contentLabel.text = blogPost.description
-    setupbloggerNamePostDateLabelText(of: blogPost)
+    setupBloggerNamePostDateLabelText(of: blogPost)
   }
   
   
@@ -86,20 +86,36 @@ final class BlogPostCell: HighlightableCell {
     }
   }
   
-  private func setupbloggerNamePostDateLabelText(of blogPost: BlogPost) {
-    bloggerNamePostDateLabel.attributedText = NSMutableAttributedString().then({ string in
-      string.append(NSAttributedString(
-        string: blogPost.bloggerName,
-        attributes: [.font: UIFont.pretendard(size: 12, weight: .bold)]))
-      string.append(NSAttributedString(
-        string: " ∙ ",
-        attributes: [.font: UIFont.pretendard(size: 12, weight: .bold),
-                     .foregroundColor: R.color.gray_20() ?? .gray]))
-      string.append(NSAttributedString(
-        string: blogPost.postDate,
-        attributes: [.font: UIFont.pretendard(size: 12),
-                     .foregroundColor: R.color.gray_60() ?? .gray]))
-    })
+  private func setupBloggerNamePostDateLabelText(of blogPost: BlogPost) {
+    let bloggerNameAttrString = NSAttributedString(
+      string: blogPost.bloggerName,
+      attributes: [.font: UIFont.pretendard(size: 12, weight: .bold)])
+    
+    let separatorAttrString = NSAttributedString(
+      string: " ∙ ",
+      attributes: [.font: UIFont.pretendard(size: 12, weight: .bold),
+                   .foregroundColor: R.color.gray_20() ?? .gray])
+    
+    let formattedPostDate = changingPostDateFormat(blogPost.postDate)
+    let postDateAttrString = NSAttributedString(
+      string: formattedPostDate,
+      attributes: [.font: UIFont.pretendard(size: 12),
+                   .foregroundColor: R.color.gray_60() ?? .gray])
+    
+    bloggerNamePostDateLabel.attributedText = NSMutableAttributedString().then { string in
+      string.append(bloggerNameAttrString)
+      string.append(separatorAttrString)
+      string.append(postDateAttrString)
+    }
+  }
+  
+  private func changingPostDateFormat(_ postDate: String) -> String {
+    guard postDate.count == 8 else { return postDate }
+    
+    let year = postDate.prefix(4)
+    let month = postDate.dropFirst(4).prefix(2)
+    let day = postDate.suffix(2)
+    return "\(year).\(month).\(day)"
   }
   
   private func setupView() {

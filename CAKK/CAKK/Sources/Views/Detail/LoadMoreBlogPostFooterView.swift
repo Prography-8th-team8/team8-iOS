@@ -26,7 +26,8 @@ final class LoadMoreBlogPostFooterView: UICollectionReusableView {
     addSubview(button)
     button.snp.makeConstraints {
       $0.horizontalEdges.equalToSuperview().inset(14)
-      $0.verticalEdges.equalToSuperview()
+      $0.top.equalToSuperview()
+      $0.bottom.equalToSuperview().inset(BlogPostsViewController.Metric.loadMoreBlogPostButtonBottomPadding)
     }
   }
   
