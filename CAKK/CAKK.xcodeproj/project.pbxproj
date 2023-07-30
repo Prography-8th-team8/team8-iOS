@@ -41,7 +41,6 @@
 		8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E53F1BA2A332936002F871C /* EmptyStateView.swift */; };
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E18022A7028F700ADA360 /* TabBarController.swift */; };
-		8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */; };
 		8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
@@ -157,7 +156,6 @@
 		8E53F1BA2A332936002F871C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E6E18022A7028F700ADA360 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Symmetric.swift"; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
@@ -324,7 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */,
-				8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -710,7 +707,6 @@
 				8EA04D8A2A650832008C90C8 /* cake_category_sample.json in Resources */,
 				8E37754B29F7CA2F00166198 /* Pretendard-Light.otf in Resources */,
 				8E37754829F7CA2F00166198 /* Pretendard-Bold.otf in Resources */,
-				8E83174F2A30F95200FE0486 /* APIKeys.xcconfig in Resources */,
 				8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */,
 				8E37754729F7CA2F00166198 /* Pretendard-SemiBold.otf in Resources */,
 				B490C33B2A0FE942008A2736 /* cake_shop_detail_sample.json in Resources */,
@@ -944,7 +940,6 @@
 /* Begin XCBuildConfiguration section */
 		8E9E193529CEDD5000CFF157 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1009,7 +1004,6 @@
 		};
 		8E9E193629CEDD5000CFF157 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E83174E2A30F95200FE0486 /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
