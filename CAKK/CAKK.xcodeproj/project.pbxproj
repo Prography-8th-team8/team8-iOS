@@ -65,6 +65,10 @@
 		8EB7B78E29F6CAFE00D3F5BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B78D29F6CAFE00D3F5BF /* R.generated.swift */; };
 		8EB7B79029F6CCF600D3F5BF /* grid_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B78F29F6CCF600D3F5BF /* grid_animation.json */; };
 		8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */; };
+		8EB7E9912A7696B2008EEFE4 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9902A7696B2008EEFE4 /* Feed.swift */; };
+		8EB7E9932A769FED008EEFE4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9922A769FED008EEFE4 /* FeedViewController.swift */; };
+		8EB7E9952A769FF9008EEFE4 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */; };
+		8EB7E9972A76A776008EEFE4 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9962A76A776008EEFE4 /* FeedCell.swift */; };
 		8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */; };
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
 		8EE842C62A0A33D8001F7E3D /* CakeCategoryChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */; };
@@ -195,6 +199,10 @@
 		8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		8EB7B7A829F7C05200D3F5BF /* UIFont+Pretendard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Pretendard.swift"; sourceTree = "<group>"; };
+		8EB7E9902A7696B2008EEFE4 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		8EB7E9922A769FED008EEFE4 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		8EB7E9962A76A776008EEFE4 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopPopUpView.swift; sourceTree = "<group>"; };
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryChipView.swift; sourceTree = "<group>"; };
@@ -346,6 +354,7 @@
 				8EAB80F92A4557CF00D9FA41 /* CakeCategoryCell.swift */,
 				B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */,
 				B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */,
+				8EB7E9962A76A776008EEFE4 /* FeedCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -444,6 +453,7 @@
 				8E6E18022A7028F700ADA360 /* TabBarController.swift */,
 				B4484B352A765A2100B37EFC /* PopUpViewController.swift */,
 				B4484B392A7669A200B37EFC /* MyBookmarkViewController.swift */,
+				8EB7E9922A769FED008EEFE4 /* FeedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -451,6 +461,7 @@
 		8E9E193D29CEDDE700CFF157 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8EB7E98F2A7696B2008EEFE4 /* Feed */,
 				B455C4312A07E98A00FB8403 /* Shop */,
 				B455C4342A07EB2000FB8403 /* District */,
 			);
@@ -480,6 +491,14 @@
 				8EB7B79E29F7BDF100D3F5BF /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8EB7E98F2A7696B2008EEFE4 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				8EB7E9902A7696B2008EEFE4 /* Feed.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		B43889BB2A15DB4600476BFC /* CAKKNetworkingTests */ = {
@@ -608,6 +627,7 @@
 				B4FB8E832A0F7DA600DBF193 /* ShopDetailViewModel.swift */,
 				8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */,
 				B4484B3F2A766D9100B37EFC /* MyBookmarkViewModel.swift */,
+				8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -780,7 +800,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -835,16 +855,19 @@
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
 				B4F3B8D32A5430BD00AB7585 /* UnderlineSegmentedControl.swift in Sources */,
 				B4F3B8D72A5432BD00AB7585 /* BlogPostsViewController.swift in Sources */,
+				8EB7E9972A76A776008EEFE4 /* FeedCell.swift in Sources */,
 				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,
 				8E907A752A62C3B500914A4E /* UIControlImageView.swift in Sources */,
 				8E02B77C2A054C9B003AE7AF /* UIColor+RGB.swift in Sources */,
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
+				8EB7E9912A7696B2008EEFE4 /* Feed.swift in Sources */,
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
 				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
 				B4484B362A765A2100B37EFC /* PopUpViewController.swift in Sources */,
 				B466E5792A4EA52F0081E0BD /* CakeShopEntity.swift in Sources */,
 				8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */,
 				B455C43B2A07F12F00FB8403 /* SampleData.swift in Sources */,
+				8EB7E9952A769FF9008EEFE4 /* FeedViewModel.swift in Sources */,
 				B452B84D2A075E9700784A17 /* UIView+Shadow.swift in Sources */,
 				8E9E192B29CEDD4F00CFF157 /* MainViewController.swift in Sources */,
 				B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */,
@@ -873,6 +896,7 @@
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,
+				8EB7E9932A769FED008EEFE4 /* FeedViewController.swift in Sources */,
 				B4484B3C2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift in Sources */,
 				B46F9DCA29DACF2400113979 /* CapsuleImageButton.swift in Sources */,
 				8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */,

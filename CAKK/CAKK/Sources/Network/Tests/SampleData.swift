@@ -67,4 +67,16 @@ enum SampleData {
   static let cakeCategory: CakeCategoryResponse! = {
     return try? JSONDecoder().decode(CakeCategoryResponse.self, from: SampleData.cakeCategoryData)
   }()
+  
+  
+  // MARK: - Feed
+  
+  static let feedData: Data! = {
+    let resource = Bundle.main.url(forResource: "feed_image_sample", withExtension: "json")!
+    return try? Data(contentsOf: resource)
+  }()
+  
+  static let feed: FeedResponse! = {
+    return try? JSONDecoder().decode(FeedResponse.self, from: SampleData.feedData)
+  }()
 }
