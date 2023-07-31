@@ -25,6 +25,7 @@ enum CakeAPI {
   case fetchBlogReviews(id: Int, numberOfPosts: Int = 3)
   case fetchCakeShopImage(id: Int)
   case fetchCakeCategory(id: Int)
+  case fetchFeed(page: Int)
 }
 
 extension CakeAPI: TargetType {
@@ -54,6 +55,9 @@ extension CakeAPI: TargetType {
     
     case .fetchCakeCategory(id: let id):
       return "/\(id)/type"
+      
+    case .fetchFeed:
+      return "/feed"
     }
   }
   
@@ -114,6 +118,13 @@ extension CakeAPI: TargetType {
     
     case .fetchCakeCategory:
       return .requestPlain
+    
+    case .fetchFeed(let page):
+      let parameters: Parameters = [
+        "page": page
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
     }
   }
   
@@ -145,6 +156,9 @@ extension CakeAPI: TargetType {
       
     case .fetchCakeCategory:
       return SampleData.cakeCategoryData
+      
+    case .fetchFeed:
+      return SampleData.feedData
     }
   }
 }
