@@ -157,14 +157,13 @@ extension MyBookmarkViewController {
     view.addSubview(headerView)
     headerView.snp.makeConstraints {
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-      $0.horizontalEdges.equalToSuperview().inset(16)
+      $0.horizontalEdges.equalToSuperview()
     }
     headerView.addBorder(to: .bottom, color: R.color.gray_5(), width: 2)
     
     headerView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.horizontalEdges.equalToSuperview()
-      $0.verticalEdges.equalToSuperview().inset(16)
+      $0.edges.equalToSuperview().inset(16)
     }
   }
   
