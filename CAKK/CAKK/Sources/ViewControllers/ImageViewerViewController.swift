@@ -41,6 +41,10 @@ class ImageViewerViewController: UIViewController {
   private let loadingView = UIActivityIndicatorView().then {
     $0.stopAnimating()
   }
+  private let dimmingView = UIVisualEffectView().then { view in
+    let effect = UIBlurEffect(style: .light)
+    view.effect = effect
+  }
   
   
   // MARK: - Initializers
@@ -122,9 +126,17 @@ extension ImageViewerViewController {
   }
   
   private func setupLayout() {
+    setupDimmingViewLayout()
     setupLoadingViewLayout()
     setupScrollViewLayout()
     setupImageViewLayout()
+  }
+  
+  private func setupDimmingViewLayout() {
+    view.addSubview(dimmingView)
+    dimmingView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
   }
   
   private func setupLoadingViewLayout() {
@@ -153,20 +165,12 @@ extension ImageViewerViewController {
   private func setupView() {
     setupBaseView()
     setupImageView()
+    setupDimmingView()
   }
   
   private func setupBaseView() {
     hero.isEnabled = true
-    
-    // background as dimming
-    view.backgroundColor = .black.withAlphaComponent(0.8)
-    
-    // tap gesture
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
-    view.addGestureRecognizer(tapGestureRecognizer)
-    
-    // hero
-    view.hero.modifiers = [.fade, .duration(0.25)]
+    view.backgroundColor = .clear
   }
   
   private func setupImageView() {
@@ -182,6 +186,16 @@ extension ImageViewerViewController {
     imageView.isUserInteractionEnabled = true
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
     imageView.addGestureRecognizer(panGestureRecognizer)
+  }
+  
+  private func setupDimmingView() {
+    // tap gesture
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+    dimmingView.addGestureRecognizer(tapGestureRecognizer)
+    
+    // hero animation
+    dimmingView.isHeroEnabled = true
+    dimmingView.hero.modifiers = [.fade, .duration(0.25)]
   }
 }
 
