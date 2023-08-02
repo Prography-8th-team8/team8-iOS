@@ -34,6 +34,8 @@
 		8E37754F29F7CA2F00166198 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7B79D29F7BDF100D3F5BF /* Pretendard-Medium.otf */; };
 		8E37755129F7CFAD00166198 /* LabelChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E37755029F7CFAD00166198 /* LabelChip.swift */; };
 		8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3FF2E72A0E408800865E36 /* CakkView.swift */; };
+		8E46DFA52A7A56EB0090C1C5 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46DFA42A7A56EB0090C1C5 /* FeedDetailViewController.swift */; };
+		8E46DFA72A7A58110090C1C5 /* FeedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46DFA62A7A58110090C1C5 /* FeedDetailViewModel.swift */; };
 		8E533A222A2C652200C56A55 /* DistrictUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A212A2C652200C56A55 /* DistrictUserDefault.swift */; };
 		8E533A262A2C66D300C56A55 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A252A2C66D300C56A55 /* UserDefault.swift */; };
 		8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E533A272A2C7E9300C56A55 /* CoordinatesUserDefault.swift */; };
@@ -157,6 +159,8 @@
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		8E37755029F7CFAD00166198 /* LabelChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelChip.swift; sourceTree = "<group>"; };
 		8E3FF2E72A0E408800865E36 /* CakkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakkView.swift; sourceTree = "<group>"; };
+		8E46DFA42A7A56EB0090C1C5 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		8E46DFA62A7A58110090C1C5 /* FeedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewModel.swift; sourceTree = "<group>"; };
 		8E533A212A2C652200C56A55 /* DistrictUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictUserDefault.swift; sourceTree = "<group>"; };
 		8E533A252A2C66D300C56A55 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		8E533A272A2C7E9300C56A55 /* CoordinatesUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesUserDefault.swift; sourceTree = "<group>"; };
@@ -454,6 +458,7 @@
 				B4484B352A765A2100B37EFC /* PopUpViewController.swift */,
 				B4484B392A7669A200B37EFC /* MyBookmarkViewController.swift */,
 				8EB7E9922A769FED008EEFE4 /* FeedViewController.swift */,
+				8E46DFA42A7A56EB0090C1C5 /* FeedDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -628,6 +633,7 @@
 				8EAB811E2A46141F00D9FA41 /* FilterViewModel.swift */,
 				B4484B3F2A766D9100B37EFC /* MyBookmarkViewModel.swift */,
 				8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */,
+				8E46DFA62A7A58110090C1C5 /* FeedDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -863,6 +869,7 @@
 				8EB7E9912A7696B2008EEFE4 /* Feed.swift in Sources */,
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
 				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
+				8E46DFA52A7A56EB0090C1C5 /* FeedDetailViewController.swift in Sources */,
 				B4484B362A765A2100B37EFC /* PopUpViewController.swift in Sources */,
 				B466E5792A4EA52F0081E0BD /* CakeShopEntity.swift in Sources */,
 				8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */,
@@ -879,6 +886,7 @@
 				B455C41F2A079C4C00FB8403 /* CakeAPI.swift in Sources */,
 				8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */,
 				B48EF3AE2A57D07100D910C3 /* LoadMoreBlogPostFooterView.swift in Sources */,
+				8E46DFA72A7A58110090C1C5 /* FeedDetailViewModel.swift in Sources */,
 				8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */,
 				B490C33E2A0FF066008A2736 /* ViewModelType.swift in Sources */,
 				B49BC92B2A0BD0E2009BD434 /* UIStackView+Seperator.swift in Sources */,
