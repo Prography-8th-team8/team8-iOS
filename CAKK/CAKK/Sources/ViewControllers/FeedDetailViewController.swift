@@ -61,15 +61,13 @@ final class FeedDetailViewController: UIViewController {
   private let blurView = UIVisualEffectView().then { view in
     let blurEffect = UIBlurEffect(style: .light)
     view.effect = blurEffect
-    view.backgroundColor = .systemTeal
   }
   
   private let navigationView = UIView().then {
     $0.backgroundColor = .white
     $0.addBorder(to: .bottom, color: R.color.gray_5())
   }
-  private let shopNameLabel = UILabel().then {
-    $0.text = "title"
+  private let storeNameLabel = UILabel().then {
     $0.font = .pretendard(size: 18, weight: .semiBold)
     $0.textColor = R.color.black()
   }
@@ -78,7 +76,7 @@ final class FeedDetailViewController: UIViewController {
     $0.tintColor = R.color.black()
   }
   private var navigationViewHeightConstraint: Constraint?
-  private var shopNameLabelCenterYConstraint: Constraint?
+  private var storeNameLabelCenterYConstraint: Constraint?
   private var closeButtonCenterYConstraint: Constraint?
   
   private let toolBar = UIView()
@@ -191,7 +189,19 @@ final class FeedDetailViewController: UIViewController {
   }
   
   private func bindOutput() {
-    applySnapshot(with: ["3", "1", "2"])
+    viewModel.output
+      .storeName
+      .sink { [weak self] storeName in
+        self?.storeNameLabel.text = storeName
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .imageUrls
+      .sink { [weak self] imageUrls in
+        self?.applySnapshot(with: imageUrls)
+      }
+      .store(in: &cancellableBag)
   }
 }
 
@@ -228,9 +238,9 @@ extension FeedDetailViewController {
       navigationViewHeightConstraint = $0.height.equalTo(Metric.navigationViewHeight).constraint
     }
     
-    navigationView.addSubview(shopNameLabel)
-    shopNameLabel.snp.makeConstraints {
-      shopNameLabelCenterYConstraint = $0.centerY.equalToSuperview().constraint
+    navigationView.addSubview(storeNameLabel)
+    storeNameLabel.snp.makeConstraints {
+      storeNameLabelCenterYConstraint = $0.centerY.equalToSuperview().constraint
       $0.centerX.equalToSuperview()
     }
     
@@ -301,7 +311,7 @@ extension FeedDetailViewController {
       $0.height.equalTo(Metric.navigationViewHeight + view.safeAreaInsets.top)
     }
     closeButtonCenterYConstraint?.update(offset: view.safeAreaInsets.top / 2)
-    shopNameLabelCenterYConstraint?.update(offset: view.safeAreaInsets.top / 2)
+    storeNameLabelCenterYConstraint?.update(offset: view.safeAreaInsets.top / 2)
   }
   
   private func configureToolBarLayout() {
@@ -352,6 +362,7 @@ extension FeedDetailViewController {
           using: self.imageViewerCellRegistration,
           for: indexPath,
           item: item)
+        cell.configure(imageUrl: item)
         return cell
       }
   }
@@ -373,7 +384,11 @@ import SwiftUI
 
 struct FeedDetailViewController_Preview: PreviewProvider {
   static var previews: some View {
-    FeedDetailViewController(viewModel: .init())
+    let feed = Feed(storeId: 308,
+                    storeName: "플레플레",
+                    district: .mapo,
+                    imageUrl: "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e267878d-f913-4dbe-b178-c83ddda225cd.jpeg")
+    DIContainer.shared.makeFeedDetailViewController(feed: feed)
       .toPreview()
       .ignoresSafeArea()
   }

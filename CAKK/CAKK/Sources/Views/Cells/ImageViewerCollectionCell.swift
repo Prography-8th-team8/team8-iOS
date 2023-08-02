@@ -29,7 +29,6 @@ class ImageViewerCollectionCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
-    imageView.image = R.image.noimage() //tmp
   }
   
   required init?(coder: NSCoder) {
