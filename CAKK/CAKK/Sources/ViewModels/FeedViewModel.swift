@@ -13,11 +13,14 @@ final class FeedViewModel {
   
   // MARK: - Properties
   
-  struct Input { }
+  struct Input {
+    let didSelectItem = PassthroughSubject<IndexPath, Never>()
+  }
   
   struct Output {
     let feedData = CurrentValueSubject<[Feed], Never>([])
     let isLoading = PassthroughSubject<Bool, Never>()
+    let showFeedDetail = PassthroughSubject<Feed, Never>()
   }
   
   let input: Input
@@ -43,7 +46,17 @@ final class FeedViewModel {
   // MARK: - Binds
   
   private func bind(_ input: Input, _ output: Output) {
-    
+    bindItemSelection(input, output)
+  }
+  
+  private func bindItemSelection(_ input: Input, _ output: Output) {
+    input
+      .didSelectItem
+      .sink { indexPath in
+        let selectedFeed = output.feedData.value[indexPath.row]
+        output.showFeedDetail.send(selectedFeed)
+      }
+      .store(in: &cancellableBag)
   }
   
   
