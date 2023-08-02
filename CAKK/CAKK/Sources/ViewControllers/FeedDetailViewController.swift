@@ -347,13 +347,13 @@ extension FeedDetailViewController {
     blurView.heroModifiers = [.fade, .duration(Constant.heroDuration)]
     
     navigationView.isHeroEnabled = true
-    navigationView.heroModifiers = [.translate(x: 0, y: -120, z: 0), .duration(Constant.heroDuration)]
+    navigationView.heroModifiers = [.translate(x: 0, y: -120, z: 0), .duration(Constant.heroDuration), .fade]
     
     toolBar.isHeroEnabled = true
-    toolBar.heroModifiers = [.translate(x: 0, y: 160, z: 0), .duration(Constant.heroDuration)]
+    toolBar.heroModifiers = [.translate(x: 0, y: 160, z: 0), .duration(Constant.heroDuration), .fade]
     
     collectionView.isHeroEnabled = true
-    collectionView.heroModifiers = [.scale(0.7), .duration(Constant.heroDuration)]
+    collectionView.heroModifiers = [.scale(0.7), .duration(Constant.heroDuration), .fade]
   }
   
   // Configure view
