@@ -51,14 +51,45 @@ class ImageViewerCollectionCell: UICollectionViewCell {
   private let loadingView = UIActivityIndicatorView().then {
     $0.stopAnimating()
   }
+  private let failureLabel = UILabel().then {
+    $0.text = "이미지 불러오기에 실패하였습니다"
+    $0.font = .pretendard(size: 15, weight: .semiBold)
+    $0.textColor = R.color.gray_60()
+  }
   
   
   // MARK: - Configure
   
   public func configure(imageUrl: String) {
-    if imageView.image == nil {
-      let url = URL(string: imageUrl)
-      imageView.kf.setImage(with: url)
+    startLoading()
+    
+    let url = URL(string: imageUrl)
+    imageView.kf.setImage(with: url) { [weak self] result in
+      self?.stopLoading()
+      
+      do {
+        try result.get()
+      } catch {
+        self?.showFilaureLabel()
+      }
+    }
+  }
+  
+  private func startLoading() {
+    loadingView.isHidden = false
+    loadingView.startAnimating()
+  }
+  
+  private func stopLoading() {
+    loadingView.isHidden = true
+    loadingView.stopAnimating()
+  }
+  
+  private func showFilaureLabel() {
+    failureLabel.removeFromSuperview()
+    contentView.addSubview(failureLabel)
+    failureLabel.snp.makeConstraints {
+      $0.center.equalToSuperview()
     }
   }
 }
@@ -73,16 +104,9 @@ extension ImageViewerCollectionCell {
   }
   
   private func setupLayout() {
-    setupLoadingViewLayout()
     setupScrollViewLayout()
     setupImageViewLayout()
-  }
-  
-  private func setupLoadingViewLayout() {
-    contentView.addSubview(loadingView)
-    loadingView.snp.makeConstraints {
-      $0.center.equalToSuperview()
-    }
+    setupLoadingViewLayout()
   }
   
   private func setupScrollViewLayout() {
@@ -98,6 +122,13 @@ extension ImageViewerCollectionCell {
       $0.edges.equalToSuperview()
       $0.width.equalToSuperview()
       $0.height.equalToSuperview()
+    }
+  }
+  
+  private func setupLoadingViewLayout() {
+    contentView.addSubview(loadingView)
+    loadingView.snp.makeConstraints {
+      $0.center.equalToSuperview()
     }
   }
 }
