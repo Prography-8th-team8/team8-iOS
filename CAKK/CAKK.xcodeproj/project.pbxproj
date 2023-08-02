@@ -72,6 +72,7 @@
 		8EB7E9952A769FF9008EEFE4 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */; };
 		8EB7E9972A76A776008EEFE4 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7E9962A76A776008EEFE4 /* FeedCell.swift */; };
 		8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */; };
+		8EBCBFFD2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBCBFFC2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift */; };
 		8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F62629E03980003F032E /* SplashViewController.swift */; };
 		8EE842C62A0A33D8001F7E3D /* CakeCategoryChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */; };
 		B401B7832A2C7CE4003B0393 /* UIViewController+ShowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */; };
@@ -208,6 +209,7 @@
 		8EB7E9942A769FF9008EEFE4 /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		8EB7E9962A76A776008EEFE4 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		8EB978DE2A28CAA700932757 /* CakeShopPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopPopUpView.swift; sourceTree = "<group>"; };
+		8EBCBFFC2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerCollectionCell.swift; sourceTree = "<group>"; };
 		8EC8F62629E03980003F032E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		8EE842C52A0A33D8001F7E3D /* CakeCategoryChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeCategoryChipView.swift; sourceTree = "<group>"; };
 		B401B7822A2C7CE4003B0393 /* UIViewController+ShowAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ShowAlert.swift"; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				B4F3B8DA2A543B2700AB7585 /* CakeImageCell.swift */,
 				B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */,
 				8EB7E9962A76A776008EEFE4 /* FeedCell.swift */,
+				8EBCBFFC2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				8EAB811D2A45F57F00D9FA41 /* FilterFloatingPanelLayout.swift in Sources */,
 				B4F1F4212A17AF6A00DA6358 /* DIContainer.swift in Sources */,
 				B4484B402A766D9100B37EFC /* MyBookmarkViewModel.swift in Sources */,
+				8EBCBFFD2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift in Sources */,
 				8E02B7842A057F3B003AE7AF /* DistrictSection.swift in Sources */,
 				8E53F1BB2A332936002F871C /* EmptyStateView.swift in Sources */,
 				8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */,

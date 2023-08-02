@@ -36,10 +36,22 @@ final class FeedDetailViewController: UIViewController {
   }
   
   
+  // MARK: - Types
+  
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, String>
+  
+  enum Section {
+    case cakeImage
+  }
+  
+  
   // MARK: - Properties
   
   private let viewModel: FeedDetailViewModel
   private var cancellableBag = Set<AnyCancellable>()
+  
+  private lazy var dataSource: DataSource = makeDataSource()
+  private var imageViewerCellRegistration = UICollectionView.CellRegistration<ImageViewerCollectionCell, String> { _, _, _ in }
   
   
   // MARK: - UI
@@ -110,6 +122,25 @@ final class FeedDetailViewController: UIViewController {
     $0.layer.cornerRadius = Metric.pagingButtonSize / 2
   }
   
+  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout).then {
+    $0.backgroundColor = .clear
+    $0.alwaysBounceVertical = false
+  }
+  private var collectionViewLayout: UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1.0),
+      heightDimension: .fractionalHeight(1.0)
+    )
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.orthogonalScrollingBehavior = .paging
+    
+    return UICollectionViewCompositionalLayout(section: section)
+  }
+  
   
   // MARK: - Initializers
   
@@ -147,6 +178,7 @@ final class FeedDetailViewController: UIViewController {
   
   private func bind() {
     bindInput()
+    bindOutput()
   }
   
   private func bindInput() {
@@ -156,6 +188,10 @@ final class FeedDetailViewController: UIViewController {
         self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
+  }
+  
+  private func bindOutput() {
+    applySnapshot(with: ["3", "1", "2"])
   }
 }
 
@@ -174,6 +210,7 @@ extension FeedDetailViewController {
     setupBlurViewLayout()
     setupNavigationViewLayout()
     setupToolBarLayout()
+    setupCollectionViewLayout()
     setupPagingButtonLayout()
   }
   
@@ -224,6 +261,15 @@ extension FeedDetailViewController {
       heartButtonBottomConstraint = $0.bottom.equalToSuperview().inset(Metric.toolBarBottomPadding).constraint
       $0.trailing.equalTo(heartButton.snp.leading).inset(-8)
       $0.height.equalTo(Metric.visitCakeShopButtonHeight)
+    }
+  }
+  
+  private func setupCollectionViewLayout() {
+    view.insertSubview(collectionView, belowSubview: navigationView)
+    collectionView.snp.makeConstraints {
+      $0.top.equalTo(navigationView.snp.bottom)
+      $0.leading.trailing.equalToSuperview()
+      $0.bottom.equalTo(toolBar.snp.top).inset(32)
     }
   }
   
@@ -289,6 +335,33 @@ extension FeedDetailViewController {
     gradientLayer.locations = [0.0, 0.25, 1.0]
     gradientLayer.frame = toolBar.bounds
     toolBar.layer.insertSublayer(gradientLayer, at: 0)
+  }
+}
+
+
+// MARK: - DataSource & Snapshot
+
+extension FeedDetailViewController {
+  
+  private func makeDataSource() -> DataSource {
+    DataSource(
+      collectionView: collectionView) { [weak self] collectionView, indexPath, item in
+        guard let self else { return UICollectionViewCell() }
+        
+        let cell = collectionView.dequeueConfiguredReusableCell(
+          using: self.imageViewerCellRegistration,
+          for: indexPath,
+          item: item)
+        return cell
+      }
+  }
+  
+  private func applySnapshot(with imageUrls: [String]) {
+    let section: [Section] = [.cakeImage]
+    var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+    snapshot.appendSections(section)
+    snapshot.appendItems(imageUrls)
+    dataSource.apply(snapshot)
   }
 }
 
