@@ -13,9 +13,15 @@ import SnapKit
 import Combine
 import CombineCocoa
 
+import Hero
+
 final class FeedDetailViewController: UIViewController {
   
   // MARK: - Constants
+  
+  enum Constant {
+    static let heroDuration = 0.25.f
+  }
   
   enum Metric {
     static let padding = 16.f
@@ -102,6 +108,7 @@ final class FeedDetailViewController: UIViewController {
   private var heartButtonBottomConstraint: Constraint?
   
   private let nextImageButton = UIButton().then {
+    $0.isHidden = true
     $0.setImage(R.image.chevron_right(), for: .normal)
     $0.tintColor = R.color.gray_60()
     $0.backgroundColor = .white.withAlphaComponent(0.8)
@@ -111,6 +118,7 @@ final class FeedDetailViewController: UIViewController {
     $0.layer.cornerRadius = Metric.pagingButtonSize / 2
   }
   private let previousImageButton = UIButton().then {
+    $0.isHidden = true
     $0.setImage(R.image.chevron_left(), for: .normal)
     $0.tintColor = R.color.gray_60()
     $0.backgroundColor = .white.withAlphaComponent(0.8)
@@ -327,10 +335,25 @@ extension FeedDetailViewController {
   // Setup view
   private func setupView() {
     setupBaseView()
+    setupHero()
   }
   
   private func setupBaseView() {
     view.backgroundColor = .clear
+    isHeroEnabled = true
+  }
+  
+  private func setupHero() {
+    blurView.heroModifiers = [.fade, .duration(Constant.heroDuration)]
+    
+    navigationView.isHeroEnabled = true
+    navigationView.heroModifiers = [.translate(x: 0, y: -120, z: 0), .duration(Constant.heroDuration)]
+    
+    toolBar.isHeroEnabled = true
+    toolBar.heroModifiers = [.translate(x: 0, y: 160, z: 0), .duration(Constant.heroDuration)]
+    
+    collectionView.isHeroEnabled = true
+    collectionView.heroModifiers = [.scale(0.7), .duration(Constant.heroDuration)]
   }
   
   // Configure view
