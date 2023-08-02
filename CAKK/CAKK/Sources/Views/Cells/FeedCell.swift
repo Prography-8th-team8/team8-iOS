@@ -19,7 +19,7 @@ final class FeedCell: UICollectionViewCell {
   
   // MARK: - UI
   
-  private let imageView = UIControlImageView().then {
+  private let imageView = UIImageView().then {
     $0.contentMode = .scaleAspectFill
     $0.backgroundColor = R.color.gray_10()
     $0.clipsToBounds = true
@@ -41,7 +41,14 @@ final class FeedCell: UICollectionViewCell {
   // MARK: - Public
   
   public func configure(feed: Feed) {
-    imageView.setImage(urlString: feed.imageUrl)
+    configureImage(feed.imageUrl)
+  }
+  
+  private func configureImage(_ imageUrl: String) {
+    if imageView.image == nil {
+      let url = URL(string: imageUrl)
+      imageView.kf.setImage(with: url)
+    }
   }
 }
 

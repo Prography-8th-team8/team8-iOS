@@ -68,4 +68,11 @@ final class DIContainer {
     let viewModel = FeedViewModel(service: networkService)
     return FeedViewController(viewModel: viewModel)
   }
+  
+  func makeFeedDetailViewController(feed: Feed) -> FeedDetailViewController {
+    let viewModel = FeedDetailViewModel(feed: feed,
+                                        service: networkService,
+                                        storage: realmStorage)
+    return FeedDetailViewController(viewModel: viewModel)
+  }
 }

@@ -125,6 +125,13 @@ final class FeedViewController: UIViewController {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
       }
       .store(in: &cancellableBag)
+    
+    collectionView
+      .didSelectItemPublisher
+      .sink { [weak self] indexPath in
+        self?.viewModel.input.didSelectItem.send(indexPath)
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -132,6 +139,13 @@ final class FeedViewController: UIViewController {
       .feedData
       .sink { [weak self] feeds in
         self?.applySnapshot(with: feeds)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .showFeedDetail
+      .sink { [weak self] feed in
+        self?.presentFeedDetail(feed)
       }
       .store(in: &cancellableBag)
   }
@@ -142,6 +156,12 @@ final class FeedViewController: UIViewController {
   private func updateCollectionViewLayout() {
     collectionView.collectionViewLayout.invalidateLayout()
     collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
+  }
+  
+  private func presentFeedDetail(_ feed: Feed) {
+    let vc = DIContainer.shared.makeFeedDetailViewController(feed: feed)
+    vc.modalPresentationStyle = .overFullScreen
+    present(vc, animated: true)
   }
 }
 
