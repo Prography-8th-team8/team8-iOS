@@ -26,7 +26,7 @@ final class MainViewModel {
     let cameraCoordinates = PassthroughSubject<Coordinates, Never>()
     let showDistrictSelectionView = PassthroughSubject<Void, Never>()
     let loadingCakeShops = CurrentValueSubject<Bool, Never>(false)
-    let selectedCakeShop = PassthroughSubject<CakeShop?, Never>()
+    let selectedCakeShop = PassthroughSubject<Int?, Never>()
     let filteredCategory = CurrentValueSubject<[CakeCategory], Never>(FilteredCategoryUserDefault.shared.categories)
   }
   
@@ -93,7 +93,7 @@ final class MainViewModel {
     input.selectCakeShop
       .map { output.cakeShops.value[safe: $0.row] }
       .sink { cakeShop in
-        output.selectedCakeShop.send(cakeShop)
+        output.selectedCakeShop.send(cakeShop.id)
       }
       .store(in: &cancellableBag)
   }
@@ -101,7 +101,7 @@ final class MainViewModel {
   private func bindSelectCakeShopMarker(_ input: Input, _ output: Output) {
     input.selectCakeShopMarker
       .sink { cakeShop in
-        output.selectedCakeShop.send(cakeShop)
+        output.selectedCakeShop.send(cakeShop.id)
       }
       .store(in: &cancellableBag)
   }

@@ -265,11 +265,11 @@ final class MainViewController: UIViewController {
     
     viewModel.output
       .selectedCakeShop
-      .sink { [weak self] selectedCakeShop in
+      .sink { [weak self] cakeShopId in
         guard let self else { return }
-        if let selectedCakeShop {
+        if let cakeShopId {
           self.cakeShopListFloatingPanel.move(to: .tip, animated: true)
-          self.showCakeShopDetailFloatingPanel(selectedCakeShop)
+          self.showCakeShopDetailFloatingPanel(cakeShopId)
         }
       }
       .store(in: &cancellableBag)
@@ -283,7 +283,7 @@ final class MainViewController: UIViewController {
     popupView
       .controlEventPublisher(for: .touchUpInside)
       .sink { [weak self] _ in
-        let detailController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
+        let detailController = DIContainer.shared.makeShopDetailViewController(with: cakeShop.id)
         self?.navigationController?.pushViewController(detailController, animated: true)
         
       }
@@ -390,8 +390,8 @@ final class MainViewController: UIViewController {
     cakeShopDetailFloatingPanel.invalidateLayout()
   }
   
-  private func showCakeShopDetailFloatingPanel(_ cakeShop: CakeShop) {
-    let viewController = DIContainer.shared.makeShopDetailViewController(with: cakeShop)
+  private func showCakeShopDetailFloatingPanel(_ cakeShopId: Int) {
+    let viewController = DIContainer.shared.makeShopDetailViewController(with: cakeShopId)
     cakeShopDetailFloatingPanel.delegate = self
     cakeShopDetailFloatingPanel.addPanel(toParent: self)
     cakeShopDetailFloatingPanel.set(contentViewController: viewController)
