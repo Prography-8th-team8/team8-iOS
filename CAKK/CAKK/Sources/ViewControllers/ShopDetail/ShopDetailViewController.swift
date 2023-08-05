@@ -360,7 +360,8 @@ final class ShopDetailViewController: UIViewController {
         self.setActivityIndicator(toAnimate: false)
         self.configureLinkMenuButton(with: cakeShopDetail)
         
-        if let thumbnailURL = URL(string: cakeShopDetail.thumbnail) {
+        if let urlString = cakeShopDetail.thumbnail,
+           let thumbnailURL = URL(string: urlString) {
           self.shopImageView.kf.setImage(with: thumbnailURL)
         }
       }

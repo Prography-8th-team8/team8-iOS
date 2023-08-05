@@ -16,7 +16,7 @@ struct CakeShopDetailResponse: Decodable {
   let district: District
   let latitude: Double
   let longitude: Double
-  let thumbnail: String
+  let thumbnail: String?
   let imageUrls: [String]
   let cakeCategories: [CakeCategory]
   let link: String
