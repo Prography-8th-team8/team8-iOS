@@ -13,6 +13,7 @@ struct Bookmark: Decodable, Hashable {
   let district: District
   let location: String
   let imageUrls: [String]
+  var isBookmarked: Bool = true
 }
 
 // MARK: - Model Mapping

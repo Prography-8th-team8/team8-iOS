@@ -122,37 +122,29 @@ final class ShopDetailViewModel {
       }
       .store(in: &cancellableBag)
     
-    let bookmarkPublisher = input.tapBookmarkButton.map { output.isBookmarked.value }
     
-    // 이미 북마크가 되어 있었으면 북마크에서 삭제
-    bookmarkPublisher
-      .filter { $0 }
-      .sink { [weak self] _ in
-        guard let self = self else { return }
-        let successToRemove = realmStorage.remove(id: cakeShopID, entityType: BookmarkEntity.self)
-        if successToRemove {
-          output.isBookmarked.send(false)
-        }
-      }
-      .store(in: &cancellableBag)
-    
-    // 북마크가 되어 있지 않았으면 북마크 추가
-    bookmarkPublisher
-      .filter { $0 == false }
-      .flatMap { [weak self] _ -> AnyPublisher<Bookmark, any Error> in
-        guard let self = self else { return Empty<Bookmark, Error>().eraseToAnyPublisher() }
-        return service.request(.fetchBookmark(id: cakeShopID), type: Bookmark.self)
-      }
-      .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] bookmark in
+    input.tapBookmarkButton
+      .map { output.isBookmarked.value }
+      .sink { [weak self] isBookmarked in
         guard let self = self else { return }
         
-        let entity = bookmark.toEntity()
-        let successToSave = self.realmStorage.save(entity)
-        
-        if successToSave {
-          output.isBookmarked.send(true)
+        if isBookmarked {
+          // 이미 북마크가 되어 있었으면 북마크에서 삭제
+          let successToRemove = realmStorage.remove(id: cakeShopID, entityType: BookmarkEntity.self)
+          if successToRemove {
+            output.isBookmarked.send(false)
+          }
+        } else {
+          // 북마크가 되어 있지 않았으면 북마크 추가
+          guard let cakeShopDetail = output.cakeShopDetail.value else { return }
+          let entity = cakeShopDetail.toBookmarkEntity()
+          let successToSave = self.realmStorage.save(entity)
+          
+          if successToSave {
+            output.isBookmarked.send(true)
+          }
         }
-      })
+      }
       .store(in: &cancellableBag)
   }
   

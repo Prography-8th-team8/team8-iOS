@@ -35,7 +35,7 @@ class HeartButton: UIButton {
   
   private func setupView() {
     contentMode = .scaleAspectFit
-    tintColor = R.color.gray_80()
+    tintColor = R.color.gray_40()
     setBookmark(isBookmarked)
     
     addTarget(self, action: #selector(didFocus), for: .touchDown)

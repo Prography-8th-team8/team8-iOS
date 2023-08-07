@@ -64,6 +64,12 @@ final class DIContainer {
     return MyBookmarkViewController(viewModel: viewModel)
   }
   
+  func makeMyBookmarkCellViewModel(bookmark: Bookmark) -> MyBookmarkCellViewModel {
+    let viewModel = MyBookmarkCellViewModel(bookmark: bookmark,
+                                            realmStorage: realmStorage)
+    return viewModel
+  }
+  
   func makeFeedViewController() -> FeedViewController {
     let viewModel = FeedViewModel(service: networkService)
     return FeedViewController(viewModel: viewModel)

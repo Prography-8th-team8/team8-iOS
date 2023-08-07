@@ -42,12 +42,13 @@ final class MyBookmarkViewController: UIViewController {
   
   // MARK: - UI
   
-  private lazy var collectionView = UICollectionView(frame: .zero,
-                                                     collectionViewLayout: collectionViewLayout).then {
-    $0.registerCell(cellClass: MyBookmarkCakeShopCell.self)
-    $0.backgroundColor = .clear
-    $0.delaysContentTouches = false
-  }
+  private lazy var collectionView = UICollectionView(
+    frame: .zero,
+    collectionViewLayout: collectionViewLayout).then {
+      $0.registerCell(cellClass: MyBookmarkCakeShopCell.self)
+      $0.backgroundColor = .clear
+      $0.delaysContentTouches = false
+    }
   
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
     let itemSize = NSCollectionLayoutSize(
@@ -63,24 +64,25 @@ final class MyBookmarkViewController: UIViewController {
     return UICollectionViewCompositionalLayout(section: section)
   }()
   
-  private let headerLabel = UILabel().then {
-    $0.text = "북마크한 케이크샵"
-    $0.font = .pretendard(size: 16, weight: .bold)
+  private let titleLabel = PaddingLabel(top: 10, left: 20, bottom: 10).then {
+    $0.text = "마이페이지"
+    $0.font = .pretendard(size: 20, weight: .bold)
     $0.textColor = .black
+    $0.addBorder(to: .bottom, color: R.color.gray_5(), width: 1)
   }
   
-  private let editButton = UIButton().then {
-    $0.setTitle("편집", for: .normal)
-    $0.titleLabel?.font = .pretendard(size: 12)
+  private let headerLabel = PaddingLabel(top: 24, left: 20, bottom: 16).then {
+    $0.text = "북마크한 케이크샵"
+    $0.font = .pretendard(size: 18)
+    $0.textColor = R.color.gray_80()
+    $0.addBorder(to: .bottom, color: R.color.gray_10(), width: 1)
   }
   
   private lazy var headerStackView = UIStackView(arrangedSubviews: [
-    headerLabel, editButton
+    titleLabel, headerLabel
   ]).then {
-    $0.axis = .horizontal
+    $0.axis = .vertical
   }
-  
-  private let headerView = UIView()
   
   private let loadingView = UIActivityIndicatorView()
   
@@ -129,6 +131,7 @@ final class MyBookmarkViewController: UIViewController {
   private func bindOutput(_ viewModel: ViewModel) {
     viewModel.output.bookmarks.sink { [weak self] bookmarks in
       self?.applySnapshot(with: bookmarks)
+      self?.emptyStateView.isHidden = !bookmarks.isEmpty
     }
     .store(in: &cancellables)
   }
@@ -154,23 +157,17 @@ extension MyBookmarkViewController {
   }
   
   private func setupHeaderViewLayout() {
-    view.addSubview(headerView)
-    headerView.snp.makeConstraints {
+    view.addSubview(headerStackView)
+    headerStackView.snp.makeConstraints {
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
       $0.horizontalEdges.equalToSuperview()
-    }
-    headerView.addBorder(to: .bottom, color: R.color.gray_5(), width: 2)
-    
-    headerView.addSubview(headerStackView)
-    headerStackView.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(16)
     }
   }
   
   private func setupCollectionViewLayout() {
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints {
-      $0.top.equalTo(headerView.snp.bottom)
+      $0.top.equalTo(headerStackView.snp.bottom)
       $0.horizontalEdges.bottom.equalToSuperview()
     }
   }
@@ -203,12 +200,12 @@ extension MyBookmarkViewController {
   private func makeDataSource() -> DataSource {
     DataSource(
       collectionView: collectionView,
-      cellProvider: { collectionView, indexPath, item in
+      cellProvider: { [weak self] collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(
           cellClass: MyBookmarkCakeShopCell.self,
           for: indexPath)
-        
-        cell.configure(item)
+        let viewModel = DIContainer.shared.makeMyBookmarkCellViewModel(bookmark: item)
+        cell.configure(viewModel: viewModel)
         
         return cell
       })
@@ -221,6 +218,6 @@ extension MyBookmarkViewController {
     var snapshot = NSDiffableDataSourceSnapshot<Section, Bookmark>()
     snapshot.appendSections(section)
     snapshot.appendItems(bookmarks)
-    dataSource.apply(snapshot)
+    dataSource.apply(snapshot, animatingDifferences: false)
   }
 }
