@@ -19,7 +19,7 @@ final class MyBookmarkViewModel: ViewModelType {
   }
   
   struct Output {
-    let myBookmarkCakeShops = CurrentValueSubject<[CakeShopEntity], Never>([])
+    let bookmarks = CurrentValueSubject<[Bookmark], Never>([])
   }
   
   let input: Input
@@ -45,8 +45,11 @@ final class MyBookmarkViewModel: ViewModelType {
   private func bind(_ input: Input, _ output: Output) {
     input.viewWillAppear.sink { [weak self] in
       guard let self = self else { return }
-      let cakeShpopEntities = realmStorage.loadAll(entityType: CakeShopEntity.self)
-      output.myBookmarkCakeShops.send(cakeShpopEntities)
+      let bookmarks = realmStorage
+        .loadAll(entityType: BookmarkEntity.self)
+        .map { $0.toModel() }
+      
+      output.bookmarks.send(bookmarks)
     }
     .store(in: &cancellables)
   }

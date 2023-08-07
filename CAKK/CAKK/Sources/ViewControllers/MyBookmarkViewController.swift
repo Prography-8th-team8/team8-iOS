@@ -25,7 +25,7 @@ final class MyBookmarkViewController: UIViewController {
   // MARK: - Types
   
   typealias ViewModel = MyBookmarkViewModel
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, CakeShopEntity>
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, Bookmark>
   
   enum Section {
     case bookmarkedCakeshop
@@ -127,8 +127,8 @@ final class MyBookmarkViewController: UIViewController {
   }
   
   private func bindOutput(_ viewModel: ViewModel) {
-    viewModel.output.myBookmarkCakeShops.sink { [weak self] myBookmarkCakeShop in
-      self?.applySnapshot(with: myBookmarkCakeShop)
+    viewModel.output.bookmarks.sink { [weak self] bookmarks in
+      self?.applySnapshot(with: bookmarks)
     }
     .store(in: &cancellables)
   }
@@ -203,9 +203,7 @@ extension MyBookmarkViewController {
   private func makeDataSource() -> DataSource {
     DataSource(
       collectionView: collectionView,
-      cellProvider: { [weak self] collectionView, indexPath, item in
-        guard let self else { return UICollectionViewCell() }
-        
+      cellProvider: { collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(
           cellClass: MyBookmarkCakeShopCell.self,
           for: indexPath)
@@ -216,13 +214,13 @@ extension MyBookmarkViewController {
       })
   }
   
-  private func applySnapshot(with bookmarkedCakeShops: [CakeShopEntity]) {
+  private func applySnapshot(with bookmarks: [Bookmark]) {
     collectionView.scrollToTop(animated: false)
     
     let section: [Section] = [.bookmarkedCakeshop]
-    var snapshot = NSDiffableDataSourceSnapshot<Section, CakeShopEntity>()
+    var snapshot = NSDiffableDataSourceSnapshot<Section, Bookmark>()
     snapshot.appendSections(section)
-    snapshot.appendItems(bookmarkedCakeShops)
+    snapshot.appendItems(bookmarks)
     dataSource.apply(snapshot)
   }
 }
