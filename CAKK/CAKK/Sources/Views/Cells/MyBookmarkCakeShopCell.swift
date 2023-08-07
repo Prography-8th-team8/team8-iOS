@@ -15,6 +15,13 @@ import Then
 
 import Kingfisher
 
+protocol MyBookmarkCakeShopCellDelegate: AnyObject {
+  /// 북마크 버튼이 눌렸는지와, 누른 후의 상태를 전달하는 delegate
+  func myBookmarkCakeShopCell(_ cell: MyBookmarkCakeShopCell,
+                              didTapBookmarkButton bookmark: Bookmark,
+                              isBookmarked: Bool)
+}
+
 final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Constants
@@ -43,8 +50,21 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  private var viewModel: CakeShopCollectionCellModel?
+  weak var delegate: MyBookmarkCakeShopCellDelegate?
+  
+  private var bookmark: Bookmark?
+  
   private var cancellableBag = Set<AnyCancellable>()
+  
+  override var isHighlighted: Bool {
+    didSet {
+      if isHighlighted {
+        highlight()
+      } else {
+        unhighlight()
+      }
+    }
+  }
   
   
   // MARK: - UI
@@ -107,6 +127,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
+    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -116,6 +137,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     cancellableBag = .init()
+//    bookmarkButtonTapHandler = nil
   }
   
   
@@ -126,10 +148,23 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
     locationLabel.text = bookmark.location
     districtLocationLabel.text = bookmark.district.koreanName
     configureCakeShopImage(bookmark)
+    self.bookmark = bookmark
   }
   
   
   // MARK: - Private
+  
+  private func bind() {
+    bookmarkButton.tapPublisher.sink { [weak self] _ in
+      guard let self,
+            let bookmark else { return }
+      bookmarkButton.setBookmark(!bookmarkButton.isBookmarked)
+      delegate?.myBookmarkCakeShopCell(self,
+                                       didTapBookmarkButton: bookmark,
+                                       isBookmarked: bookmarkButton.isBookmarked)
+    }
+    .store(in: &cancellableBag)
+  }
   
   private func configureCakeShopImage(_ bookmark: Bookmark) {
     cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
@@ -180,6 +215,15 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
     return nil
   }
   
+  private func highlight() {
+    contentView.backgroundColor = R.color.gray_10()
+  }
+  
+  private func unhighlight() {
+    UIView.animate(withDuration: 0.3) {
+      self.contentView.backgroundColor = .clear
+    }
+  }
 }
 
 

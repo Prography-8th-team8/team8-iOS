@@ -16,6 +16,8 @@ final class MyBookmarkViewModel: ViewModelType {
   
   struct Input {
     let viewWillAppear = PassthroughSubject<Void, Never>()
+    let saveBookmark = PassthroughSubject<Bookmark, Never>()
+    let removeBookmark = PassthroughSubject<Bookmark, Never>()
   }
   
   struct Output {
@@ -50,6 +52,20 @@ final class MyBookmarkViewModel: ViewModelType {
         .map { $0.toModel() }
       
       output.bookmarks.send(bookmarks)
+    }
+    .store(in: &cancellables)
+    
+    bindBookmark(input, output)
+  }
+  
+  private func bindBookmark(_ input: Input, _ output: Output) {
+    input.saveBookmark.sink { [weak self] bookmark in
+      self?.realmStorage.save(bookmark.toEntity())
+    }
+    .store(in: &cancellables)
+    
+    input.removeBookmark.sink { [weak self] bookmark in
+      self?.realmStorage.remove(id: bookmark.id, entityType: BookmarkEntity.self)
     }
     .store(in: &cancellables)
   }

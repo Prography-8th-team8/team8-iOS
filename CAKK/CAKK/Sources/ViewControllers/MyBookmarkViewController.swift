@@ -199,12 +199,13 @@ extension MyBookmarkViewController {
   private func makeDataSource() -> DataSource {
     DataSource(
       collectionView: collectionView,
-      cellProvider: { collectionView, indexPath, item in
+      cellProvider: { [weak self] collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(
           cellClass: MyBookmarkCakeShopCell.self,
           for: indexPath)
         
         cell.configure(item)
+        cell.delegate = self
         
         return cell
       })
@@ -218,5 +219,19 @@ extension MyBookmarkViewController {
     snapshot.appendSections(section)
     snapshot.appendItems(bookmarks)
     dataSource.apply(snapshot)
+  }
+}
+
+// MARK: - MyBookmarkCakeShopCellDelegate
+
+extension MyBookmarkViewController: MyBookmarkCakeShopCellDelegate {
+  func myBookmarkCakeShopCell(_ cell: MyBookmarkCakeShopCell,
+                              didTapBookmarkButton bookmark: Bookmark,
+                              isBookmarked: Bool) {
+    // 최종 북마크 상태에 따라 북마크를 저장 / 삭제 하도록 viewModel에 요청
+    let bookmarkPublisher = isBookmarked
+    ? viewModel.input.saveBookmark
+    : viewModel.input.removeBookmark
+    bookmarkPublisher.send(bookmark)
   }
 }
