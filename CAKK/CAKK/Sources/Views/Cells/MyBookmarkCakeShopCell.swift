@@ -20,8 +20,16 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   // MARK: - Constants
   
   enum Metric {
-    static let horizontalPadding = 16.f
-    static let cakeImageSize = 110.f
+    static let padding = 20.f
+    
+    static let cakeImageSize = 96.f
+    static let cakeImageCornerRadius = 20.f
+    static let cakeImageSpacing = 8.f
+    
+    static let stackViewDividerWidth = 1.f
+    static let stackViewDividerHeight = 12.f
+    
+    static let bookmarkButtonSize = 24.f
   }
   
   // MARK: - Types
@@ -41,21 +49,39 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - UI
   
-  private let bookmarkButton = HeartButton(isBookmarked: false)
+  private let bookmarkButton = HeartButton(isBookmarked: true)
   
   private let shopNameLabel = UILabel().then {
     $0.font = .pretendard(size: 16, weight: .bold)
     $0.textColor = .black
   }
   
-  private let locationLabel = UILabel().then {
-    $0.font = .pretendard()
-    $0.textColor = .black.withAlphaComponent(0.6)
+  private let districtLocationLabel = UILabel().then {
+    $0.font = .pretendard(size: 12)
   }
   
-  private lazy var headerStackView = UIStackView(arrangedSubviews: [
-    shopNameLabel, locationLabel
+  private let stackViewDivider = UIView().then {
+    $0.backgroundColor = R.color.gray_40()
+  }
+  
+  private lazy var shopNameDistrictLocationStackView = UIStackView(arrangedSubviews: [
+    shopNameLabel, stackViewDivider, districtLocationLabel
   ]).then {
+    $0.alignment = .center
+    $0.axis = .horizontal
+    $0.spacing = 4
+  }
+  
+  private let locationLabel = UILabel().then {
+    $0.font = .pretendard()
+    $0.textColor = R.color.gray_60()
+  }
+  
+  
+  private lazy var headerStackView = UIStackView(arrangedSubviews: [
+    shopNameDistrictLocationStackView, locationLabel
+  ]).then {
+    $0.alignment = .leading
     $0.axis = .vertical
     $0.spacing = 8
   }
@@ -63,12 +89,16 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   private let cakeImageScrollView = UIScrollView().then {
     $0.showsHorizontalScrollIndicator = false
     $0.alwaysBounceHorizontal = true
-    $0.contentInset = .init(vertical: 0, horizontal: Metric.horizontalPadding)
+    $0.contentInset = .init(vertical: 0, horizontal: Metric.padding)
   }
   
   private let cakeImageStackView = UIStackView().then {
     $0.axis = .horizontal
-    $0.spacing = 6
+    $0.spacing = Metric.cakeImageSpacing
+  }
+  
+  private let divider = UIView().then {
+    $0.backgroundColor = R.color.gray_10()
   }
   
   
@@ -94,6 +124,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   public func configure(_ bookmark: Bookmark) {
     shopNameLabel.text = bookmark.name
     locationLabel.text = bookmark.location
+    districtLocationLabel.text = bookmark.district.koreanName
     configureCakeShopImage(bookmark)
   }
   
@@ -107,7 +138,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
       guard let self = self else { return nil }
       
       let imageView = UIControlImageView()
-      imageView.setupCornerRadius(10)
+      imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
       imageView.setImage(urlString: imageUrl,
                          placeholder: R.image.thumbnail_placeholder())
       
@@ -163,16 +194,32 @@ extension MyBookmarkCakeShopCell {
   
   // Setup Layout
   private func setupLayout() {
+    setBookmarkButtonLayout()
     setupHeader()
     setupCakeImageScrollView()
     setupCakeImageStackView()
+    setupDividerLayout()
   }
   
   private func setupHeader() {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
-      $0.horizontalEdges.equalToSuperview().inset(Metric.horizontalPadding)
+      $0.leading.equalToSuperview().inset(Metric.padding)
       $0.top.equalToSuperview().inset(16)
+      $0.trailing.equalTo(bookmarkButton.snp.leading)
+    }
+    
+    stackViewDivider.snp.makeConstraints {
+      $0.width.equalTo(Metric.stackViewDividerWidth)
+      $0.height.equalTo(Metric.stackViewDividerHeight)
+    }
+  }
+  
+  private func setBookmarkButtonLayout() {
+    contentView.addSubview(bookmarkButton)
+    bookmarkButton.snp.makeConstraints {
+      $0.top.trailing.equalToSuperview().inset(Metric.padding)
+      $0.size.equalTo(Metric.bookmarkButtonSize)
     }
   }
   
@@ -181,7 +228,7 @@ extension MyBookmarkCakeShopCell {
     cakeImageScrollView.snp.makeConstraints {
       $0.top.equalTo(headerStackView.snp.bottom).offset(10)
       $0.leading.trailing.equalToSuperview()
-      $0.bottom.equalToSuperview().inset(10)
+      $0.bottom.equalToSuperview().inset(Metric.padding)
       $0.height.equalTo(Metric.cakeImageSize)
     }
   }
@@ -193,7 +240,20 @@ extension MyBookmarkCakeShopCell {
     }
   }
   
+  private func setupDividerLayout() {
+    contentView.addSubview(divider)
+    divider.snp.makeConstraints {
+      $0.bottom.leading.trailing.equalToSuperview()
+      $0.height.equalTo(1)
+    }
+  }
+  
   private func setupView() {
+    setupContentView()
+  }
+  
+  private func setupContentView() {
+    backgroundColor = UIColor(hex: 0xF8F5E9)
   }
 }
 
