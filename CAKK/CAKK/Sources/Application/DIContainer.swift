@@ -36,8 +36,8 @@ final class DIContainer {
     return DistrictSelectionViewController(viewModel: viewModel)
   }
   
-  func makeShopDetailViewController(with cakeShopId: Int) -> ShopDetailViewController {
-    let viewModel = ShopDetailViewModel(cakeShop: cakeShopId,
+  func makeShopDetailViewController(with cakeShopID: Int) -> ShopDetailViewController {
+    let viewModel = ShopDetailViewModel(cakeShopID: cakeShopID,
                                         service: networkService,
                                         realmStorage: realmStorage)
     return ShopDetailViewController(viewModel: viewModel)

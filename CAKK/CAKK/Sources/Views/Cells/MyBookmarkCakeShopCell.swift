@@ -26,7 +26,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Types
   
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, CakeShopEntity>
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, Bookmark>
   
   enum Section {
     case cakeImages
@@ -91,19 +91,19 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Public
   
-  public func configure(_ cakeShop: CakeShopEntity) {
-    shopNameLabel.text = cakeShop.name
-    locationLabel.text = cakeShop.location
-    configureCakeShopImage(cakeShop)
+  public func configure(_ bookmark: Bookmark) {
+    shopNameLabel.text = bookmark.name
+    locationLabel.text = bookmark.location
+    configureCakeShopImage(bookmark)
   }
   
   
   // MARK: - Private
   
-  private func configureCakeShopImage(_ cakeShop: CakeShopEntity) {
+  private func configureCakeShopImage(_ bookmark: Bookmark) {
     cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
     
-    cakeShop.imageUrls.compactMap { [weak self] imageUrl in
+    bookmark.imageUrls.compactMap { [weak self] imageUrl in
       guard let self = self else { return nil }
       
       let imageView = UIControlImageView()
