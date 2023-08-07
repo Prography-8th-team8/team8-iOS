@@ -35,7 +35,7 @@ final class ShopDetailViewModel {
   private let service: NetworkService<CakeAPI>
   private let realmStorage: RealmStorageProtocol
   
-  private let cakeShop: CakeShop
+  private let cakeShopID: Int
   
   private var numberOfBlogPostsToShow = 3
   private static let maximumNumberOfBlogPosts = 30 // 최대로 보여줄 블로그포스트 수
@@ -45,11 +45,11 @@ final class ShopDetailViewModel {
   
   // MARK: - Initialization
   
-  init(cakeShop: CakeShop,
+  init(cakeShopID: Int,
        service: NetworkService<CakeAPI>,
        realmStorage: RealmStorageProtocol) {
     self.service = service
-    self.cakeShop = cakeShop
+    self.cakeShopID = cakeShopID
     self.realmStorage = realmStorage
     
     self.input = Input()
@@ -70,9 +70,9 @@ final class ShopDetailViewModel {
   
   private func bindFetchCakeShopDetail(_ input: Input, _ output: Output) {
     input.viewDidLoad
-      .flatMap { [weak service] in
-        return service?.request(
-          .fetchCakeShopDetail(id: self.cakeShop.id),
+      .flatMap { [weak self] in
+        return self?.service.request(
+          .fetchCakeShopDetail(id: self?.cakeShopID ?? 0),
           type: CakeShopDetailResponse.self) ?? Empty().eraseToAnyPublisher()
       }
       .sink(receiveCompletion: { completion in
@@ -94,8 +94,8 @@ final class ShopDetailViewModel {
       }
       .flatMap { [weak self] in
         guard let self = self else { return Empty<BlogPostResponse, Error>().eraseToAnyPublisher() }
-        return self.service.request(
-          .fetchBlogReviews(id: self.cakeShop.id, numberOfPosts: self.numberOfBlogPostsToShow),
+        return service.request(
+          .fetchBlogReviews(id: cakeShopID, numberOfPosts: self.numberOfBlogPostsToShow),
           type: BlogPostResponse.self)
       }
       .sink(receiveCompletion: { completion in
@@ -117,35 +117,42 @@ final class ShopDetailViewModel {
     input.viewDidLoad
       .sink { [weak self] in
         guard let self = self else { return }
-        let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: CakeShopEntity.self) != nil
+        let isBookmarked = self.realmStorage.load(id: cakeShopID, entityType: BookmarkEntity.self) != nil
         output.isBookmarked.send(isBookmarked)
       }
       .store(in: &cancellableBag)
     
-    input.tapBookmarkButton
-      .map {
-        output.isBookmarked.value
-      }
-      .sink { [weak self] isBookmarked in
+    let bookmarkPublisher = input.tapBookmarkButton.map { output.isBookmarked.value }
+    
+    // 이미 북마크가 되어 있었으면 북마크에서 삭제
+    bookmarkPublisher
+      .filter { $0 }
+      .sink { [weak self] _ in
         guard let self = self else { return }
-        
-        // 이미 북마크가 되어 있었으면 북마크에서 삭제
-        if isBookmarked {
-          let successToRemove = self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
-          
-          if successToRemove {
-            output.isBookmarked.send(false)
-          }
-        } else {
-          // 북마크가 되어 있지 않았으면 북마크 추가
-          let entity = self.cakeShop.toEntity(isBookmarked: true)
-          let successToSave = self.realmStorage.save(entity)
-          
-          if successToSave {
-            output.isBookmarked.send(true)
-          }
+        let successToRemove = realmStorage.remove(id: cakeShopID, entityType: BookmarkEntity.self)
+        if successToRemove {
+          output.isBookmarked.send(false)
         }
       }
+      .store(in: &cancellableBag)
+    
+    // 북마크가 되어 있지 않았으면 북마크 추가
+    bookmarkPublisher
+      .filter { $0 == false }
+      .flatMap { [weak self] _ -> AnyPublisher<Bookmark, any Error> in
+        guard let self = self else { return Empty<Bookmark, Error>().eraseToAnyPublisher() }
+        return service.request(.fetchBookmark(id: cakeShopID), type: Bookmark.self)
+      }
+      .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] bookmark in
+        guard let self = self else { return }
+        
+        let entity = bookmark.toEntity()
+        let successToSave = self.realmStorage.save(entity)
+        
+        if successToSave {
+          output.isBookmarked.send(true)
+        }
+      })
       .store(in: &cancellableBag)
   }
   
