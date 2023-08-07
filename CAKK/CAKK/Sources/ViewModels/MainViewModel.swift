@@ -91,7 +91,7 @@ final class MainViewModel {
   
   private func bindSelectCakeShop(_ input: Input, _ output: Output) {
     input.selectCakeShop
-      .map { output.cakeShops.value[safe: $0.row] }
+      .compactMap { output.cakeShops.value[safe: $0.row] }
       .sink { cakeShop in
         output.selectedCakeShop.send(cakeShop.id)
       }

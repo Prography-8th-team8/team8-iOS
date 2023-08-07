@@ -33,3 +33,15 @@ struct CakeShop: Decodable, Hashable {
     hasher.combine(location)
   }
 }
+
+// MARK: - Model Mapping
+
+extension CakeShop {
+  func toBookmarkEntity() -> BookmarkEntity {
+    return Bookmark(id: id,
+                    name: name,
+                    district: district,
+                    location: location,
+                    imageUrls: imageUrls).toEntity()
+  }
+}
