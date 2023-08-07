@@ -49,11 +49,13 @@ class MyBookmarkCellViewModel {
   }
 
   private func bindBookmark(_ input: Input, _ output: Output) {
+    let isBookmarked = realmStorage.load(id: bookmark.id, entityType: BookmarkEntity.self) != nil
+    output.isBookmarked.send(isBookmarked)
+    
     let bookmark = bookmark
     input.tapBookmarkButton
-      .map { output.isBookmarked.value }
-      .sink { isBookmarked in
-        if isBookmarked {
+      .sink { _ in
+        if output.isBookmarked.value {
           // 북마크 삭제
           let successToRemove = self.realmStorage.remove(id: bookmark.id,
                                                          entityType: BookmarkEntity.self)
