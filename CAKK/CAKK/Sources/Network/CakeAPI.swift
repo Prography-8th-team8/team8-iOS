@@ -26,6 +26,7 @@ enum CakeAPI {
   case fetchCakeShopImage(id: Int)
   case fetchCakeCategory(id: Int)
   case fetchFeed(page: Int)
+  case fetchBookmark(id: Int)
 }
 
 extension CakeAPI: TargetType {
@@ -58,6 +59,9 @@ extension CakeAPI: TargetType {
       
     case .fetchFeed:
       return "/feed"
+      
+    case .fetchBookmark(id: let id):
+      return "/\(id)/bookmark"
     }
   }
   
@@ -125,6 +129,9 @@ extension CakeAPI: TargetType {
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchBookmark:
+      return .requestPlain
     }
   }
   
@@ -159,6 +166,9 @@ extension CakeAPI: TargetType {
       
     case .fetchFeed:
       return SampleData.feedData
+      
+    case .fetchBookmark:
+      return SampleData.bookmarkData
     }
   }
 }
