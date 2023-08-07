@@ -79,4 +79,15 @@ enum SampleData {
   static let feed: FeedResponse! = {
     return try? JSONDecoder().decode(FeedResponse.self, from: SampleData.feedData)
   }()
+  
+  // MARK: - Bookmark
+  
+  static let bookmarkData: Data! = {
+    let resource = Bundle.main.url(forResource: "bookmark_sample", withExtension: "json")!
+    return try? Data(contentsOf: resource)
+  }()
+  
+  static let bookmark: Bookmark! = {
+    return try? JSONDecoder().decode(Bookmark.self, from: SampleData.bookmarkData)
+  }()
 }
