@@ -31,3 +31,16 @@ struct CakeShopDetailResponse: Decodable {
     case cakeCategories = "storeTypes"
   }
 }
+
+
+// MARK: - Entity 매핑
+
+extension CakeShopDetailResponse {
+  func toBookmarkEntity() -> BookmarkEntity {
+    return Bookmark(id: id,
+                    name: name,
+                    district: district,
+                    location: address,
+                    imageUrls: imageUrls).toEntity()
+  }
+}

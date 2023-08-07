@@ -80,6 +80,7 @@
 		B403C9152A8088DA008BF24B /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B403C9142A8088DA008BF24B /* Bookmark.swift */; };
 		B403C9172A808B6A008BF24B /* bookmark_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = B403C9162A808B6A008BF24B /* bookmark_sample.json */; };
 		B403C9192A80AF50008BF24B /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B403C9182A80AF50008BF24B /* PaddingLabel.swift */; };
+		B403C91B2A80F031008BF24B /* MyBookmarkCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B403C91A2A80F031008BF24B /* MyBookmarkCellViewModel.swift */; };
 		B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */; };
 		B41EF0512A34CA6A0068843B /* BlogPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0502A34CA6A0068843B /* BlogPostCell.swift */; };
 		B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */; };
@@ -220,6 +221,7 @@
 		B403C9142A8088DA008BF24B /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		B403C9162A808B6A008BF24B /* bookmark_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bookmark_sample.json; sourceTree = "<group>"; };
 		B403C9182A80AF50008BF24B /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		B403C91A2A80F031008BF24B /* MyBookmarkCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookmarkCellViewModel.swift; sourceTree = "<group>"; };
 		B41D30912A2CD2B60092A0BD /* Array+SafeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeIndex.swift"; sourceTree = "<group>"; };
 		B41EF0502A34CA6A0068843B /* BlogPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogPostCell.swift; sourceTree = "<group>"; };
 		B41EF0522A34D2050068843B /* String+RemovingHTMLTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingHTMLTags.swift"; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				B4484B3B2A766A5D00B37EFC /* MyBookmarkCakeShopCell.swift */,
 				8EB7E9962A76A776008EEFE4 /* FeedCell.swift */,
 				8EBCBFFC2A7A7EDF00040D40 /* ImageViewerCollectionCell.swift */,
+				B403C91A2A80F031008BF24B /* MyBookmarkCellViewModel.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				8EC8F62729E03980003F032E /* SplashViewController.swift in Sources */,
 				B48EA8522A0B7EC500AC336D /* ShopDetailViewController.swift in Sources */,
 				8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */,
+				B403C91B2A80F031008BF24B /* MyBookmarkCellViewModel.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
 				B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */,

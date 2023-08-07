@@ -131,6 +131,7 @@ final class MyBookmarkViewController: UIViewController {
   private func bindOutput(_ viewModel: ViewModel) {
     viewModel.output.bookmarks.sink { [weak self] bookmarks in
       self?.applySnapshot(with: bookmarks)
+      self?.emptyStateView.isHidden = !bookmarks.isEmpty
     }
     .store(in: &cancellables)
   }
@@ -203,9 +204,8 @@ extension MyBookmarkViewController {
         let cell = collectionView.dequeueReusableCell(
           cellClass: MyBookmarkCakeShopCell.self,
           for: indexPath)
-        
-        cell.configure(item)
-        cell.delegate = self
+        let viewModel = DIContainer.shared.makeMyBookmarkCellViewModel(bookmark: item)
+        cell.configure(viewModel: viewModel)
         
         return cell
       })
@@ -218,20 +218,6 @@ extension MyBookmarkViewController {
     var snapshot = NSDiffableDataSourceSnapshot<Section, Bookmark>()
     snapshot.appendSections(section)
     snapshot.appendItems(bookmarks)
-    dataSource.apply(snapshot)
-  }
-}
-
-// MARK: - MyBookmarkCakeShopCellDelegate
-
-extension MyBookmarkViewController: MyBookmarkCakeShopCellDelegate {
-  func myBookmarkCakeShopCell(_ cell: MyBookmarkCakeShopCell,
-                              didTapBookmarkButton bookmark: Bookmark,
-                              isBookmarked: Bool) {
-    // 최종 북마크 상태에 따라 북마크를 저장 / 삭제 하도록 viewModel에 요청
-    let bookmarkPublisher = isBookmarked
-    ? viewModel.input.saveBookmark
-    : viewModel.input.removeBookmark
-    bookmarkPublisher.send(bookmark)
+    dataSource.apply(snapshot, animatingDifferences: false)
   }
 }

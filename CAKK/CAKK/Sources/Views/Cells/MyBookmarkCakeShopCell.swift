@@ -15,13 +15,6 @@ import Then
 
 import Kingfisher
 
-protocol MyBookmarkCakeShopCellDelegate: AnyObject {
-  /// 북마크 버튼이 눌렸는지와, 누른 후의 상태를 전달하는 delegate
-  func myBookmarkCakeShopCell(_ cell: MyBookmarkCakeShopCell,
-                              didTapBookmarkButton bookmark: Bookmark,
-                              isBookmarked: Bool)
-}
-
 final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Constants
@@ -50,9 +43,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  weak var delegate: MyBookmarkCakeShopCellDelegate?
-  
-  private var bookmark: Bookmark?
+  private var viewModel: MyBookmarkCellViewModel?
   
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -137,18 +128,15 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     cancellableBag = .init()
-//    bookmarkButtonTapHandler = nil
   }
   
   
   // MARK: - Public
   
-  public func configure(_ bookmark: Bookmark) {
-    shopNameLabel.text = bookmark.name
-    locationLabel.text = bookmark.location
-    districtLocationLabel.text = bookmark.district.koreanName
-    configureCakeShopImage(bookmark)
-    self.bookmark = bookmark
+  public func configure(viewModel: MyBookmarkCellViewModel) {
+    self.viewModel = viewModel
+    bind()
+    configure(viewModel.bookmark)
   }
   
   
@@ -156,14 +144,21 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   private func bind() {
     bookmarkButton.tapPublisher.sink { [weak self] _ in
-      guard let self,
-            let bookmark else { return }
-      bookmarkButton.setBookmark(!bookmarkButton.isBookmarked)
-      delegate?.myBookmarkCakeShopCell(self,
-                                       didTapBookmarkButton: bookmark,
-                                       isBookmarked: bookmarkButton.isBookmarked)
+      self?.viewModel?.input.tapBookmarkButton.send()
     }
     .store(in: &cancellableBag)
+    
+    viewModel?.output.isBookmarked.sink { [weak self] isBookmarked in
+      self?.bookmarkButton.setBookmark(isBookmarked)
+    }
+    .store(in: &cancellableBag)
+  }
+  
+  private func configure(_ bookmark: Bookmark) {
+    shopNameLabel.text = bookmark.name
+    locationLabel.text = bookmark.location
+    districtLocationLabel.text = bookmark.district.koreanName
+    configureCakeShopImage(bookmark)
   }
   
   private func configureCakeShopImage(_ bookmark: Bookmark) {
