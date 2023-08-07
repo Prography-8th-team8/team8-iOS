@@ -137,7 +137,7 @@ class CakeShopCollectionCellModel {
       .sink { [weak self] isBookmarked in
         guard let self else { return }
         
-        let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: CakeShopEntity.self) != nil
+        let isBookmarked = self.realmStorage.load(id: cakeShop.id, entityType: BookmarkEntity.self) != nil
         output.isBookmarked.send(isBookmarked)
       }
       .store(in: &cancellableBag)
@@ -147,16 +147,16 @@ class CakeShopCollectionCellModel {
       .sink { isBookmarked in
         if isBookmarked {
           // 북마크 삭제
-          let successToRemove = self.realmStorage.remove(id: cakeShop.id, entityType: CakeShopEntity.self)
+          let successToRemove = self.realmStorage.remove(id: cakeShop.id, entityType: BookmarkEntity.self)
           
           if successToRemove {
             output.isBookmarked.send(false)
           }
         } else {
           // 북마크 추가
-          let entity = cakeShop.toEntity(isBookmarked: true)
+          let entity = cakeShop.toBookmarkEntity()
           let successToSave = self.realmStorage.save(entity)
-          
+
           if successToSave {
             output.isBookmarked.send(true)
           }
