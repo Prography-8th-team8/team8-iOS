@@ -79,7 +79,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   
   // MARK: - UI
   
-  private let bookmarkButton = HeartButton(isBookmarked: false)
+  let bookmarkButton = HeartButton(isBookmarked: false)
 
   private let headerStackView = UIStackView().then {
     $0.axis = .horizontal

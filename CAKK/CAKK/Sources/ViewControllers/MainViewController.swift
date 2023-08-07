@@ -284,6 +284,7 @@ final class MainViewController: UIViewController {
       .controlEventPublisher(for: .touchUpInside)
       .sink { [weak self] _ in
         let detailController = DIContainer.shared.makeShopDetailViewController(with: cakeShop.id)
+        detailController.delegate = self
         self?.navigationController?.pushViewController(detailController, animated: true)
         
       }
@@ -392,6 +393,7 @@ final class MainViewController: UIViewController {
   
   private func showCakeShopDetailFloatingPanel(_ cakeShopId: Int) {
     let viewController = DIContainer.shared.makeShopDetailViewController(with: cakeShopId)
+    viewController.delegate = self
     cakeShopDetailFloatingPanel.delegate = self
     cakeShopDetailFloatingPanel.addPanel(toParent: self)
     cakeShopDetailFloatingPanel.set(contentViewController: viewController)
@@ -567,6 +569,21 @@ extension MainViewController: FloatingPanelControllerDelegate {
       cakeShopListFloatingPanel.move(to: .half, animated: true)
       cakkMapView.unselectMarker()
     }
+  }
+}
+
+
+// MARK: - ShopDetailViewControllerDelegate
+
+// 상세화면에서 처리한 북마크 상태를 리스트 뷰컨으로 전달해서 셀에 반영되게 함
+extension MainViewController: ShopDetailViewControllerDelegate {
+  func shopDetailViewController(_ viewController: ShopDetailViewController,
+                                didBookmarkStateChanged isBookmarked: Bool,
+                                of cakeShopID: Int) {
+    guard let viewController = cakeShopListFloatingPanel
+      .contentViewController as? CakeShopListViewController else { return }
+    
+    viewController.applyBookmarkStateToCell(of: cakeShopID, isBookmarked: isBookmarked)
   }
 }
 
