@@ -49,6 +49,8 @@ final class MyBookmarkViewModel: ViewModelType {
       let bookmarks = realmStorage
         .loadAll(entityType: BookmarkEntity.self)
         .map { $0.toModel() }
+        // 일단 이름 기준 가나다순으로 정렬
+        .sorted(by: { $0.name < $1.name })
       
       output.bookmarks.send(bookmarks)
     }

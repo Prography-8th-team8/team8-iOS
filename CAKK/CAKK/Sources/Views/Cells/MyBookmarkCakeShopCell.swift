@@ -118,7 +118,6 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setup()
-    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -143,10 +142,13 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   // MARK: - Private
   
   private func bind() {
-    bookmarkButton.tapPublisher.sink { [weak self] _ in
-      self?.viewModel?.input.tapBookmarkButton.send()
-    }
-    .store(in: &cancellableBag)
+    bookmarkButton.tapPublisher
+      .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+      .sink { [weak self] _ in
+        print("tap!")
+        self?.viewModel?.input.tapBookmarkButton.send()
+      }
+      .store(in: &cancellableBag)
     
     viewModel?.output.isBookmarked.sink { [weak self] isBookmarked in
       self?.bookmarkButton.setBookmark(isBookmarked)
