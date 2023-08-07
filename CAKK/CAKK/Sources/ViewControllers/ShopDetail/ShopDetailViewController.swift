@@ -15,6 +15,14 @@ import Then
 import SafariServices
 
 
+/// 북마크 처리 상태를 `DetailVC` -> `MainVC` (이후 -> `ListVC` -> `ListCell`) 로 전달하기 위한 델리게이트
+protocol ShopDetailViewControllerDelegate: AnyObject {
+  func shopDetailViewController(_ viewController: ShopDetailViewController,
+                                didBookmarkStateChanged isBookmarked: Bool,
+                                of cakeShopID: Int)
+}
+
+
 final class ShopDetailViewController: UIViewController {
   
   
@@ -44,6 +52,8 @@ final class ShopDetailViewController: UIViewController {
       pageViewController.setViewControllers([destination], direction: direction, animated: true)
     }
   }
+  
+  weak var delegate: ShopDetailViewControllerDelegate?
   
   
   // MARK: - UI
@@ -382,8 +392,14 @@ final class ShopDetailViewController: UIViewController {
   private func bindIsBookmarked() {
     viewModel.output.isBookmarked
       .sink { [weak self] isBookmarked in
+        guard let self = self else { return }
+        let cakeShopID = viewModel.output.cakeShopDetail.value?.id ?? 0
+        
         let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
-        self?.bookmarkMenuButton.update(image: buttonImage)
+        bookmarkMenuButton.update(image: buttonImage)
+        delegate?.shopDetailViewController(self,
+                                           didBookmarkStateChanged: isBookmarked,
+                                           of: cakeShopID)
       }
       .store(in: &cancellables)
   }

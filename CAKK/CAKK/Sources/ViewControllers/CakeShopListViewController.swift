@@ -174,7 +174,21 @@ final class CakeShopListViewController: UIViewController {
     super.viewDidAppear(animated)
     showToolTip()
   }
-
+  
+  
+  // MARK: - Public Methods
+  
+  // id에 해당하는 셀에 북마크 상태를 적용함
+  func applyBookmarkStateToCell(of cakeShopID: Int, isBookmarked: Bool) {
+    guard let cakeShop = dataSource.snapshot(for: .cakeShop).items
+      .first(where: { $0.id == cakeShopID }),
+          let indexPath = dataSource.indexPath(for: cakeShop),
+          let cell = collectionView.cellForItem(at: indexPath) as? CakeShopCollectionCell else {
+      return
+    }
+    cell.bookmarkButton.setBookmark(isBookmarked)
+  }
+  
   
   // MARK: - Private
   
