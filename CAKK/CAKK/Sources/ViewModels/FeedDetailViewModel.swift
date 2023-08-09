@@ -14,7 +14,8 @@ final class FeedDetailViewModel {
   // MARK: - Properties
   
   struct Input {
-    let tapHeartButton = PassthroughSubject<Void, Never>()
+    let viewDidLoad = PassthroughSubject<Void, Never>()
+    let tapBookmarkButton = PassthroughSubject<Void, Never>()
     let tapVisitCakeShopButton = PassthroughSubject<Void, Never>()
   }
   
@@ -54,6 +55,7 @@ final class FeedDetailViewModel {
     bindShopName(input, output)
     bindImages(input, output)
     bindCakeShopDetail(input, output)
+    bindBookmark(input, output)
   }
   
   private func bindShopName(_ input: Input, _ output: Output) {
@@ -70,6 +72,47 @@ final class FeedDetailViewModel {
     input.tapVisitCakeShopButton
       .sink {
         output.isCakeShopDetailShown.send(cakeShopId)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindBookmark(_ input: Input, _ output: Output) {
+    let cakeShopId = feed.storeId
+    
+    input.viewDidLoad
+      .sink { [weak self] in
+        guard let self = self else { return }
+        let isBookmarked = self.realmStorage.load(id: self.feed.storeId, entityType: BookmarkEntity.self) != nil
+        output.isBookmarked.send(isBookmarked)
+      }
+      .store(in: &cancellableBag)
+    
+    input.tapBookmarkButton
+      .map { output.isBookmarked.value }
+      .sink { [weak self] isBookmarked in
+        guard let self = self else { return }
+        
+        if isBookmarked {
+          // 이미 북마크가 되어 있었으면 북마크에서 삭제
+          let successToRemove = realmStorage.remove(id: self.feed.storeId, entityType: BookmarkEntity.self)
+          if successToRemove {
+            output.isBookmarked.send(false)
+          }
+        } else {
+          // 북마크가 되어 있지 않았으면 북마크 추가
+          service.request(.fetchBookmark(id: cakeShopId), type: Bookmark.self)
+            .sink { completion in
+              print(completion)
+            }
+            receiveValue: { bookmark in
+              let successToSave = self.realmStorage.save(bookmark.toEntity())
+              
+              if successToSave {
+                output.isBookmarked.send(true)
+              }
+            }
+            .store(in: &cancellableBag)
+        }
       }
       .store(in: &cancellableBag)
   }

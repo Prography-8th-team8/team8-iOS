@@ -14,6 +14,10 @@ struct Bookmark: Decodable, Hashable {
   let location: String
   let imageUrls: [String]
   var isBookmarked: Bool = true
+  
+  enum CodingKeys: CodingKey {
+    case id, name, district, location, imageUrls
+  }
 }
 
 // MARK: - Model Mapping
