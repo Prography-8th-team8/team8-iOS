@@ -146,6 +146,13 @@ final class FeedDetailViewController: UIViewController {
     
     return UICollectionViewCompositionalLayout(section: section)
   }
+  private let districtChip = LabelChip().then {
+    $0.titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
+    $0.titleColor = R.color.black()!
+    $0.backgroundColor = .white
+    $0.layer.borderColor = R.color.gray_20()!.cgColor
+    $0.layer.borderWidth = 1
+  }
   
   
   // MARK: - Initializers
@@ -244,6 +251,13 @@ final class FeedDetailViewController: UIViewController {
         }
       }
       .store(in: &cancellableBag)
+    
+    viewModel.output
+      .district
+      .sink { [weak self] district in
+        self?.districtChip.title = district
+      }
+      .store(in: &cancellableBag)
   }
   
   
@@ -273,6 +287,7 @@ extension FeedDetailViewController {
     setupToolBarLayout()
     setupCollectionViewLayout()
     setupPagingButtonLayout()
+    setupDistrictChip()
   }
   
   private func setupBlurViewLayout() {
@@ -347,6 +362,14 @@ extension FeedDetailViewController {
       $0.centerY.equalToSuperview()
       $0.leading.equalToSuperview().inset(Metric.padding)
       $0.size.equalTo(Metric.pagingButtonSize)
+    }
+  }
+  
+  private func setupDistrictChip() {
+    view.addSubview(districtChip)
+    districtChip.snp.makeConstraints {
+      $0.top.equalTo(navigationView.snp.bottom).offset(20)
+      $0.trailing.equalToSuperview().inset(Metric.padding)
     }
   }
   
