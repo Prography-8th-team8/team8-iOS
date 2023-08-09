@@ -45,10 +45,8 @@ final class FeedCell: UICollectionViewCell {
   }
   
   private func configureImage(_ imageUrl: String) {
-    if imageView.image == nil {
-      let url = URL(string: imageUrl)
-      imageView.kf.setImage(with: url)
-    }
+    let url = URL(string: imageUrl)
+    imageView.kf.setImage(with: url)
   }
 }
 
