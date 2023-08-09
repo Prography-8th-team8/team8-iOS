@@ -24,6 +24,7 @@ final class FeedDetailViewModel {
     let isBookmarked = CurrentValueSubject<Bool, Never>(false)
     let imageUrls = CurrentValueSubject<[String], Never>([])
     let isCakeShopDetailShown = PassthroughSubject<Int, Never>()
+    let district = CurrentValueSubject<String, Never>("")
   }
   
   public let input: Input
@@ -54,6 +55,7 @@ final class FeedDetailViewModel {
   private func bind(_ input: Input, _ output: Output) {
     bindShopName(input, output)
     bindImages(input, output)
+    bindDistrict(input, output)
     bindCakeShopDetail(input, output)
     bindBookmark(input, output)
   }
@@ -64,6 +66,10 @@ final class FeedDetailViewModel {
   
   private func bindImages(_ input: Input, _ output: Output) {
     output.imageUrls.send([feed.imageUrl])
+  }
+  
+  private func bindDistrict(_ input: Input, _ output: Output) {
+    output.district.send(feed.district.koreanName)
   }
   
   private func bindCakeShopDetail(_ input: Input, _ output: Output) {
