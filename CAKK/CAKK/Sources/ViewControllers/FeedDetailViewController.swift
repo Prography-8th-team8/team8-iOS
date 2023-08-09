@@ -194,6 +194,13 @@ final class FeedDetailViewController: UIViewController {
         self?.dismiss(animated: true)
       }
       .store(in: &cancellableBag)
+    
+    visitShopButton
+      .tapPublisher
+      .sink { [weak self] _ in
+        self?.viewModel.input.tapVisitCakeShopButton.send(Void())
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -210,6 +217,22 @@ final class FeedDetailViewController: UIViewController {
         self?.applySnapshot(with: imageUrls)
       }
       .store(in: &cancellableBag)
+    
+    viewModel.output
+      .isCakeShopDetailShown
+      .sink { [weak self] cakeShopId in
+        self?.showCakeShopDetail(cakeShopId)
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  
+  // MARK: - Private
+  
+  private func showCakeShopDetail(_ id: Int) {
+    let vc = DIContainer.shared.makeShopDetailViewController(with: id)
+    vc.modalPresentationStyle = .fullScreen
+    present(vc, animated: true)
   }
 }
 
