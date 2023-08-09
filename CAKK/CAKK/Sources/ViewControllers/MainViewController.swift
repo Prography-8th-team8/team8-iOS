@@ -269,7 +269,7 @@ final class MainViewController: UIViewController {
         guard let self else { return }
         if let cakeShopId {
           self.cakeShopListFloatingPanel.move(to: .tip, animated: true)
-          self.showCakeShopDetailFloatingPanel(cakeShopId)
+          self.showCakeShopDetailFloatingPanel(cakeShopId.id)
         }
       }
       .store(in: &cancellableBag)

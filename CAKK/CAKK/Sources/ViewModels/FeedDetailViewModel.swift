@@ -15,12 +15,14 @@ final class FeedDetailViewModel {
   
   struct Input {
     let tapHeartButton = PassthroughSubject<Void, Never>()
+    let tapVisitCakeShopButton = PassthroughSubject<Void, Never>()
   }
   
   struct Output {
     let storeName = CurrentValueSubject<String, Never>("")
     let isBookmarked = CurrentValueSubject<Bool, Never>(false)
     let imageUrls = CurrentValueSubject<[String], Never>([])
+    let isCakeShopDetailShown = PassthroughSubject<Int, Never>()
   }
   
   public let input: Input
@@ -51,6 +53,7 @@ final class FeedDetailViewModel {
   private func bind(_ input: Input, _ output: Output) {
     bindShopName(input, output)
     bindImages(input, output)
+    bindCakeShopDetail(input, output)
   }
   
   private func bindShopName(_ input: Input, _ output: Output) {
@@ -59,5 +62,15 @@ final class FeedDetailViewModel {
   
   private func bindImages(_ input: Input, _ output: Output) {
     output.imageUrls.send([feed.imageUrl])
+  }
+  
+  private func bindCakeShopDetail(_ input: Input, _ output: Output) {
+    let cakeShopId = feed.storeId
+    
+    input.tapVisitCakeShopButton
+      .sink {
+        output.isCakeShopDetailShown.send(cakeShopId)
+      }
+      .store(in: &cancellableBag)
   }
 }
