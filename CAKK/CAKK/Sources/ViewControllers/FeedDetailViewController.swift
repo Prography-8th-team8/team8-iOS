@@ -160,9 +160,6 @@ final class FeedDetailViewController: UIViewController {
   init(viewModel: FeedDetailViewModel) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
-    
-    setup()
-    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -171,6 +168,14 @@ final class FeedDetailViewController: UIViewController {
   
   
   // MARK: - LifeCycle
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setup()
+    bind()
+    
+    viewModel.input.viewDidLoad.send(Void())
+  }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
