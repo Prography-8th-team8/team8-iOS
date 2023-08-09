@@ -35,8 +35,8 @@ final class FeedDetailViewController: UIViewController {
     static let visitCakeShopButtonRadius = 12.f
     static let visitCakeShopButtonHeight = 56.f
     
-    static let heartButtonCornerRadius = 12.f
-    static let heartButtonSize = 56.f
+    static let bookmarkButtonCornerRadius = 12.f
+    static let bookmarkButtonSize = 56.f
     
     static let pagingButtonSize = 38.f
   }
@@ -94,18 +94,18 @@ final class FeedDetailViewController: UIViewController {
     $0.setTitleColor(R.color.white()?.withAlphaComponent(0.2), for: .highlighted)
     $0.layer.cornerRadius = Metric.visitCakeShopButtonRadius
   }
-  private let heartButton = UIButton().then {
+  private let bookmarkButton = UIButton().then {
     $0.backgroundColor = .white
     $0.setImage(R.image.heart(), for: .normal)
     $0.layer.borderWidth = 1
     $0.layer.borderColor = R.color.gray_10()!.cgColor
-    $0.layer.cornerRadius = Metric.heartButtonCornerRadius
+    $0.layer.cornerRadius = Metric.bookmarkButtonCornerRadius
     $0.imageEdgeInsets = .init(common: 14)
     $0.tintColor = R.color.gray_40()
   }
   private var toolBarHeightConstraint: Constraint?
   private var visitShopButtonBottomConstraint: Constraint?
-  private var heartButtonBottomConstraint: Constraint?
+  private var bookmarkButtonBottomConstraint: Constraint?
   
   private let nextImageButton = UIButton().then {
     $0.isHidden = true
@@ -201,6 +201,15 @@ final class FeedDetailViewController: UIViewController {
         self?.viewModel.input.tapVisitCakeShopButton.send(Void())
       }
       .store(in: &cancellableBag)
+    
+    bookmarkButton
+      .tapPublisher
+      .throttle(for: .seconds(1.5), scheduler: DispatchQueue.main
+                , latest: false)
+      .sink { [weak self] _ in
+        self?.viewModel.input.tapBookmarkButton.send(Void())
+      }
+      .store(in: &cancellableBag)
   }
   
   private func bindOutput() {
@@ -222,6 +231,17 @@ final class FeedDetailViewController: UIViewController {
       .isCakeShopDetailShown
       .sink { [weak self] cakeShopId in
         self?.showCakeShopDetail(cakeShopId)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .isBookmarked
+      .sink { [weak self] isBookmarked in
+        if isBookmarked {
+          self?.bookmarkButton.setImage(R.image.heart_filled(), for: .normal)
+        } else {
+          self?.bookmarkButton.setImage(R.image.heart(), for: .normal)
+        }
       }
       .store(in: &cancellableBag)
   }
@@ -289,18 +309,18 @@ extension FeedDetailViewController {
       $0.height.equalTo(Metric.toolBarHeight)
     }
     
-    toolBar.addSubview(heartButton)
-    heartButton.snp.makeConstraints {
+    toolBar.addSubview(bookmarkButton)
+    bookmarkButton.snp.makeConstraints {
       $0.trailing.equalToSuperview().inset(Metric.padding)
-      $0.size.equalTo(Metric.heartButtonSize)
+      $0.size.equalTo(Metric.bookmarkButtonSize)
       visitShopButtonBottomConstraint = $0.bottom.equalToSuperview().inset(Metric.toolBarBottomPadding).constraint
     }
     
     toolBar.addSubview(visitShopButton)
     visitShopButton.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.padding)
-      heartButtonBottomConstraint = $0.bottom.equalToSuperview().inset(Metric.toolBarBottomPadding).constraint
-      $0.trailing.equalTo(heartButton.snp.leading).inset(-8)
+      bookmarkButtonBottomConstraint = $0.bottom.equalToSuperview().inset(Metric.toolBarBottomPadding).constraint
+      $0.trailing.equalTo(bookmarkButton.snp.leading).inset(-8)
       $0.height.equalTo(Metric.visitCakeShopButtonHeight)
     }
   }
@@ -350,7 +370,7 @@ extension FeedDetailViewController {
       $0.leading.trailing.bottom.equalToSuperview()
       $0.height.equalTo(Metric.toolBarHeight + view.safeAreaInsets.bottom)
     }
-    heartButtonBottomConstraint?.update(inset: Metric.toolBarBottomPadding + view.safeAreaInsets.bottom)
+    bookmarkButtonBottomConstraint?.update(inset: Metric.toolBarBottomPadding + view.safeAreaInsets.bottom)
     visitShopButtonBottomConstraint?.update(inset: Metric.toolBarBottomPadding + view.safeAreaInsets.bottom)
   }
   
