@@ -26,15 +26,26 @@ extension UIImageView {
     }
   }
   
-  func setDownsampledImage(url: URL?, size: DownSamplingSize = .small, placeholder: Placeholder? = nil) {
+  /// 다운샘플링 한 이미지를 이미지뷰에 지정하고, 캐시에 저장합니다.
+  ///
+  /// 캐시 키가 다르기 때문에 다운샘플링 되지 않은 원본 이미지를 지정하려면 기존 `kf.setImage` 를 사용하면 따로 처리됩니다.
+  func setDownsampledImage(with url: URL?,
+                           size: DownSamplingSize = .small,
+                           placeholder: Placeholder? = nil,
+                           completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) {
+    guard let url else { return }
+    let cacheKey = "\(url.absoluteString)-downsampled-\(size)"
+    let resource = ImageResource(downloadURL: url, cacheKey: cacheKey)
+    
     self.kf.setImage(
-      with: url,
+      with: resource,
       placeholder: placeholder,
       options: [
         .processor(size.processor),
         .scaleFactor(UIScreen.main.scale),
         .cacheOriginalImage
-      ]
+      ],
+      completionHandler: completionHandler
     )
   }
 }
