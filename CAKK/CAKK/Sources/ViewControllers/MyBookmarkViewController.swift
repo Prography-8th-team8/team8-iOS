@@ -126,6 +126,12 @@ final class MyBookmarkViewController: UIViewController {
   }
   
   private func bindInput(_ viewModel: ViewModel) {
+    collectionView.didSelectItemPublisher.sink { [weak self] indexPath in
+      guard let self = self,
+            let item = dataSource.itemIdentifier(for: indexPath) else { return }
+      showCakeShopDetail(item.id)
+    }
+    .store(in: &cancellables)
   }
   
   private func bindOutput(_ viewModel: ViewModel) {
@@ -136,6 +142,11 @@ final class MyBookmarkViewController: UIViewController {
     .store(in: &cancellables)
   }
   
+  private func showCakeShopDetail(_ id: Int) {
+    let viewController = DIContainer.shared.makeShopDetailViewController(with: id)
+    viewController.modalPresentationStyle = .fullScreen
+    present(viewController, animated: true)
+  }
 }
 
 
