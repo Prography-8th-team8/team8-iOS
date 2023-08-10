@@ -1,0 +1,12 @@
+{
+  "id": 5,
+  "name": "주케이크",
+  "district": "JUNG",
+  "location": "서울 중구 서애로 12-8",
+  "imageUrls": [
+    "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/86d746a5-e760-4567-af88-940a15dca95c.jpeg",
+    "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/42ada3d6-8ecb-4a2b-b60d-85e4325d4774.jpeg",
+    "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c64ce522-d6cd-4e85-9e50-4a74ddba6812.jpeg",
+    "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/374f3398-46aa-4aae-a22e-46a9876de5b1.jpeg"
+  ]
+}

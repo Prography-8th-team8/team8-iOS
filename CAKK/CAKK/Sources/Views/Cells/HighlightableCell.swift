@@ -12,8 +12,8 @@ class HighlightableCell: UICollectionViewCell {
   // MARK: - Constants
   
   enum Constant {
-    static let highlightDuration = 0.2.f
-    static let unhighlightDuration = 0.3.f
+    static let highlightDuration = 0.15.f
+    static let unhighlightDuration = 0.2.f
   }
   
   enum Metric {
@@ -22,7 +22,7 @@ class HighlightableCell: UICollectionViewCell {
   }
   
   
-  // MARK: - LifeCycles
+  // MARK: - Properties
   
   override var isHighlighted: Bool {
     didSet {
@@ -35,7 +35,7 @@ class HighlightableCell: UICollectionViewCell {
   }
 
   
-  // MARK: - Methods
+  // MARK: - Private
   
   private func highlightCell() {
     UIView.animate(withDuration: Constant.highlightDuration,

@@ -5,10 +5,11 @@
 //  Created by 이승기 on 2023/05/06.
 //
 
-import UIKit
+import Foundation
+
 import Combine
 
-class DistrictSelectionViewModel: ViewModelType {
+final class DistrictSelectionViewModel {
   
   // MARK: - Properties
   
@@ -21,47 +22,69 @@ class DistrictSelectionViewModel: ViewModelType {
     let selectedDistrictSection = PassthroughSubject<DistrictSection, Never>()
   }
   
-  private(set) var input: Input!
-  private(set) var output: Output!
+  let input: Input
+  let output: Output
   private var cancellableBag = Set<AnyCancellable>()
   
+  private let service: NetworkService<CakeAPI>
   
-  // MARK: - LifeCycles
   
-  init() {
-    setupInputOutput()
+  // MARK: - Initialization
+  
+  init(service: NetworkService<CakeAPI>) {
+    self.service = service
+    
+    self.input = Input()
+    self.output = Output()
+    
+    bind(input, output)
+    
     setupData()
   }
   
   
   // MARK: - Private
   
-  private func setupInputOutput() {
-    let input = Input()
-    let output = Output()
-    
+  private func bind(_ input: Input, _ output: Output) {
+    bindSelectDistrict(input, output)
+  }
+  
+  private func bindSelectDistrict(_ input: Input, _ output: Output) {
     input.selectDistrict
       .sink { indexPath in
         if let selectedDistrictSection = output.districtSections.value[safe: indexPath.row] {
           output.selectedDistrictSection.send(selectedDistrictSection)
         }
         
-        if let section = DistrictSection.section(rawValue: indexPath.row) {
-          DistrictUserDefaults.shared.updateSelected(districtSection: section)
+        if let section = DistrictSection.Section(rawValue: indexPath.row) {
+          DistrictUserDefault.shared.updateSelected(districtSection: section)
         }
       }
       .store(in: &cancellableBag)
-    
-    self.input = input
-    self.output = output
   }
   
   private func setupData() {
-    fetchDistrictSections()
+    loadDistricts()
   }
   
-  private func fetchDistrictSections() {
-    output.districtSections
-      .send(DistrictSection.section.allCases.map { $0.value() })
+  private func loadDistricts() {
+    service
+      .request(.fetchDistrictCounts, type: DistrictCountResponse.self)
+      .receive(on: DispatchQueue.main)
+      .map { districtCountResponse in
+        return DistrictSection.convert(from: districtCountResponse)
+      }
+      .sink { completion in
+        switch completion {
+        case .finished:
+          break
+        case .failure(let error):
+          print(error)
+        }
+      } receiveValue: { [weak self] districtSections in
+        self?.output.districtSections
+          .send(districtSections)
+      }
+      .store(in: &cancellableBag)
   }
 }

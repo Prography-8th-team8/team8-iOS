@@ -6,9 +6,10 @@
 //
 
 import UIKit
+
 import Combine
 
-class CakeShopPopUpView: UIView {
+class CakeShopPopUpView: UIControl {
   
   // MARK: - Constants
   
@@ -32,10 +33,10 @@ class CakeShopPopUpView: UIView {
     static let locationLabelTopPadding = 12.f
     static let locationLabelNumberOfLines = 3
     
-    static let cakeShopTypeStackViewSpacing = 4.f
+    static let cakeCategoryStackViewSpacing = 4.f
     
     static let shareButtonSize = 28.f
-    static let shareButtonImagePadding = 7.f
+    static let shareButtonImagePadding = 5.f
   }
   
   
@@ -75,22 +76,22 @@ class CakeShopPopUpView: UIView {
     $0.numberOfLines = Metric.locationLabelNumberOfLines
   }
   
-  private let cakeShopTypeStackView = UIStackView().then {
+  private let cakeCategoryStackView = UIStackView().then {
     $0.axis = .horizontal
-    $0.spacing = Metric.cakeShopTypeStackViewSpacing
+    $0.spacing = Metric.cakeCategoryStackViewSpacing
     $0.alignment = .leading
   }
   
   public let shareButton = UIButton().then {
     $0.tintColor = R.color.white()
     $0.backgroundColor = R.color.black()
-    $0.setImage(R.image.share_thick(), for: .normal)
+    $0.setImage(R.image.arrow_right_square(), for: .normal)
     $0.imageEdgeInsets = .init(common: Metric.shareButtonImagePadding)
     $0.layer.cornerRadius = Metric.shareButtonSize / 2
   }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(cakeShop: CakeShop) {
     self.cakeShop = cakeShop
@@ -118,7 +119,7 @@ class CakeShopPopUpView: UIView {
     setupStackViewDividerLayout()
     setupDistrictLabelLayout()
     setupLocationLabelLayout()
-    setupCakeShopTypeStackViewLayout()
+    setupCakeCategoryStackViewLayout()
   }
   
   private func setupShareButtonLayout() {
@@ -161,9 +162,9 @@ class CakeShopPopUpView: UIView {
     }
   }
   
-  private func setupCakeShopTypeStackViewLayout() {
-    addSubview(cakeShopTypeStackView)
-    cakeShopTypeStackView.snp.makeConstraints {
+  private func setupCakeCategoryStackViewLayout() {
+    addSubview(cakeCategoryStackView)
+    cakeCategoryStackView.snp.makeConstraints {
       $0.leading.bottom.equalToSuperview().inset(Metric.padding)
     }
   }
@@ -173,7 +174,7 @@ class CakeShopPopUpView: UIView {
     setupShopNameLabel()
     setupDistrictLabel()
     setupLocationLabel()
-    setupCakeShopTypeStackView()
+    setupCakeCategoryStackView()
   }
   
   private func setupBaseView() {
@@ -195,9 +196,9 @@ class CakeShopPopUpView: UIView {
     locationLabel.text = cakeShop.location
   }
   
-  private func setupCakeShopTypeStackView() {
-    cakeShopTypeStackView.subviews.forEach { $0.removeFromSuperview() }
-    let types = cakeShop.cakeShopTypes
+  private func setupCakeCategoryStackView() {
+    cakeCategoryStackView.subviews.forEach { $0.removeFromSuperview() }
+    let types = cakeShop.cakeCategories
     
     if types.isEmpty {
       let chip = LabelChip()
@@ -205,14 +206,14 @@ class CakeShopPopUpView: UIView {
       chip.isBackgroundSynced = false
       chip.titleColor = R.color.brown_100()
       chip.backgroundColor = R.color.brown_10()
-      cakeShopTypeStackView.addArrangedSubview(chip)
+      cakeCategoryStackView.addArrangedSubview(chip)
       return
     }
     
     for (index, type) in types.enumerated() {
       if index < 3 {
-        let chip = CakeShopTypeChip(type)
-        cakeShopTypeStackView.addArrangedSubview(chip)
+        let chip = CakeCategoryChipView(type)
+        cakeCategoryStackView.addArrangedSubview(chip)
       } else {
         // at the end of the loop
         if index == types.count - 1 {
@@ -224,7 +225,7 @@ class CakeShopPopUpView: UIView {
           supplementaryChip.titleColor = .white
           supplementaryChip.backgroundColor = .black
           
-          cakeShopTypeStackView.addArrangedSubview(supplementaryChip)
+          cakeCategoryStackView.addArrangedSubview(supplementaryChip)
         }
       }
     }
@@ -252,13 +253,15 @@ struct CakeShopPopUpView_Preview: PreviewProvider {
         createdAt: "",
         modifiedAt: "",
         name: "이름이름이름",
+        shareLink: "",
         city: "도봉구",
         district: .dobong,
         location: "주소주소주소",
         latitude: 0,
         longitude: 0,
-        cakeShopTypes: [.character, .figure, .flower],
-        url: ""))
+        thumbnail: "",
+        imageUrls: [],
+        cakeCategories: [.character, .figure, .flower]))
     }
     .frame(height: 158)
     .previewLayout(.sizeThatFits)

@@ -15,13 +15,13 @@ final class DetailSectionTitleView: UIView {
   // MARK: - UI
   
   private let keywordTitleLabel = UILabel().then {
-    $0.font = .pretendard(size: 20, weight: .bold)
+    $0.font = .pretendard(size: 18, weight: .bold)
     $0.text = "-"
   }
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
-  init(title: String, topMargin: CGFloat = 40, bottomMargin: CGFloat = 16) {
+  init(title: String, topMargin: CGFloat = 24, bottomMargin: CGFloat = 16) {
     super.init(frame: .zero)
     setup(title: title, topMargin: topMargin, bottomMargin: bottomMargin)
   }

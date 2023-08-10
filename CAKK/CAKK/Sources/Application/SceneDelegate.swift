@@ -27,12 +27,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     let window = UIWindow(windowScene: windowScene)
     
-    let mainViewController = DIContainer.shared.makeMainViewController(districts: [])
-    window.rootViewController = mainViewController
+    let tabBarController = TabBarController()
+    window.rootViewController = tabBarController
     window.makeKeyAndVisible()
+//    let mainViewController = DIContainer.shared.makeMainViewController()
+//    window.rootViewController = mainViewController
+    
     self.window = window
     
-    startSplash(on: mainViewController)
+    startSplash(on: tabBarController)
   }
   
   

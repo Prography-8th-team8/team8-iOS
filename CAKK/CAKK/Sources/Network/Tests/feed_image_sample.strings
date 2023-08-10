@@ -1,0 +1,1946 @@
+[
+    {
+        "storeId": 267,
+        "storeName": "꼬모케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/68a757f0-f782-442e-9f39-cd098b236fec.jpg"
+    },
+    {
+        "storeId": 128,
+        "storeName": "투투데이즈 케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/da3cf937-74eb-4b29-8dab-9f8d47e0f594.jpeg"
+    },
+    {
+        "storeId": 340,
+        "storeName": "파티셔리 마루",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5aeecd23-ee0a-4896-b4cd-1113b2ba3729.jpeg"
+    },
+    {
+        "storeId": 17,
+        "storeName": "미담케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f5c23267-994a-4155-9f3e-a49cced54a82.jpeg"
+    },
+    {
+        "storeId": 131,
+        "storeName": "로에케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5f7ceb38-cdfa-4e12-8c42-03d233606a04.jpeg"
+    },
+    {
+        "storeId": 304,
+        "storeName": "릿츠케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/145ca0f5-9e7d-4cae-aab0-467f340677c1.jpg"
+    },
+    {
+        "storeId": 304,
+        "storeName": "릿츠케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4c9e45b5-4ec2-4752-af86-486433077dac.jpg"
+    },
+    {
+        "storeId": 195,
+        "storeName": "르파씨",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4e2d1087-c31e-4b97-9de5-5259957f8b7d.jpg"
+    },
+    {
+        "storeId": 81,
+        "storeName": "비비케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8c69ee80-6224-4b61-8f79-63d0f5578ced.jpg"
+    },
+    {
+        "storeId": 264,
+        "storeName": "아코케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/066cab3a-cf53-42bd-ae5d-aff35bb0051d.jpg"
+    },
+    {
+        "storeId": 126,
+        "storeName": "또케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/638a993d-055f-4698-ad4b-64e08d9460c5.jpeg"
+    },
+    {
+        "storeId": 194,
+        "storeName": "쫀득당",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2d620976-60c6-4519-92ad-6de7e1bcfb7d.jpg"
+    },
+    {
+        "storeId": 128,
+        "storeName": "투투데이즈 케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a77937a0-6aa1-446d-8355-20fb07a73def.jpeg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/228f47b6-5a08-41e1-af23-fa1439f497bf.jpg"
+    },
+    {
+        "storeId": 132,
+        "storeName": "초초하우스",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5c21e48e-d925-4a12-bdf0-4a5df9929a4a.jpeg"
+    },
+    {
+        "storeId": 116,
+        "storeName": "밍글베이커리",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2aa7a7f8-5087-436f-8296-b3c678ed4415.jpeg"
+    },
+    {
+        "storeId": 251,
+        "storeName": "델리시아케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5c9a9442-86e5-4835-927e-49ff5b68aadd.jpg"
+    },
+    {
+        "storeId": 28,
+        "storeName": "레이네",
+        "district": "DONGJAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0c9e62b5-3d78-4608-bead-e71fe3f774d0.jpeg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f31a4066-fb10-4286-b1d9-c38cccca2773.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6c656b1f-fa22-4432-a454-ee15f818ccc7.jpg"
+    },
+    {
+        "storeId": 70,
+        "storeName": "딜릴리 케이크",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7330dee5-37c9-4f69-a014-9a4bde648efc.jpeg"
+    },
+    {
+        "storeId": 136,
+        "storeName": "스륵",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ecdc45de-b7a4-4ce6-8ac3-ad4d9947cfd7.jpeg"
+    },
+    {
+        "storeId": 340,
+        "storeName": "파티셔리 마루",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1725707a-8522-43c1-82d0-70d39ffe64b7.jpeg"
+    },
+    {
+        "storeId": 316,
+        "storeName": "데이지케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9e985400-730f-484f-8ca1-8641dfe1307c.jpg"
+    },
+    {
+        "storeId": 158,
+        "storeName": "플로리앙",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7eaed123-eeb3-4f72-a8cc-fffeb6230560.jpeg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/706ea76a-ef09-4d42-af18-0d9bf7090e78.jpg"
+    },
+    {
+        "storeId": 227,
+        "storeName": "디어무드 더모먼트",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a6a940d0-94ef-4551-b1fa-be9104cf03f1.jpg"
+    },
+    {
+        "storeId": 41,
+        "storeName": "써니해피데이",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b9aeeb86-710b-47ac-aea9-8fe1e1df0714.jpg"
+    },
+    {
+        "storeId": 158,
+        "storeName": "플로리앙",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2577c893-11ef-4545-8e47-2a61a4acc848.jpeg"
+    },
+    {
+        "storeId": 184,
+        "storeName": "멜팅피피",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/03a21b08-7b91-45d3-a670-39f7a9908ea9.jpg"
+    },
+    {
+        "storeId": 267,
+        "storeName": "꼬모케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3f0b8217-2e20-4ff3-bba8-c7285dc241ee.jpg"
+    },
+    {
+        "storeId": 239,
+        "storeName": "프롬마틸다",
+        "district": "GANGSEO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/78ae16f8-f535-42e1-a725-173dd25176a3.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/25368988-8dbd-4b17-aa91-d9589b8f4acf.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ce7a9b70-b152-4da0-932e-4427da3506e6.jpg"
+    },
+    {
+        "storeId": 337,
+        "storeName": "오롯스튜디오",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f7ea9257-4131-4650-9055-beaebfebb411.jpg"
+    },
+    {
+        "storeId": 269,
+        "storeName": "케이크를 부탁해 연신내역점",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6f38790d-6302-4e19-b467-970e67f38339.jpeg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/308b1c6d-356c-468a-a07f-03fbdf0c241e.jpg"
+    },
+    {
+        "storeId": 288,
+        "storeName": "무무대베이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/83afca90-0da1-4772-ac0b-225ded76d772.jpg"
+    },
+    {
+        "storeId": 194,
+        "storeName": "쫀득당",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/15c7458c-16ea-4696-9077-ee6ccc622660.jpg"
+    },
+    {
+        "storeId": 57,
+        "storeName": "채이크",
+        "district": "GANGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7c54347c-c7a2-4026-beff-343aa528d2ed.jpeg"
+    },
+    {
+        "storeId": 293,
+        "storeName": "멜로디 케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4c1108e3-6df4-4b15-b4fd-30a81b965b87.jpg"
+    },
+    {
+        "storeId": 337,
+        "storeName": "오롯스튜디오",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/35774869-3a3a-45b2-93fd-201a89964295.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c9676854-7e41-4f82-b2b1-816121383ef8.jpg"
+    },
+    {
+        "storeId": 46,
+        "storeName": "세이커리",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e1577b5f-5046-4d4b-9741-482c12398e49.jpg"
+    },
+    {
+        "storeId": 165,
+        "storeName": "서커스래빗",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d4a47e2d-cf69-4527-950c-79dc2db82851.jpg"
+    },
+    {
+        "storeId": 283,
+        "storeName": "포싵",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/770b48bb-4dd8-4466-84c9-1c420d5ca541.jpg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/aea08edc-c349-4671-91b1-a8a95f048fcf.jpg"
+    },
+    {
+        "storeId": 297,
+        "storeName": "비비디팩토리",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b2a5316b-e631-4628-b25d-c6190a5d7a4f.jpg"
+    },
+    {
+        "storeId": 162,
+        "storeName": "Avec",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7187709c-1698-4f2b-af9b-38ad11730f3f.jpeg"
+    },
+    {
+        "storeId": 162,
+        "storeName": "Avec",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3f8bdfe8-f81f-423a-8771-9a23003dc62a.jpeg"
+    },
+    {
+        "storeId": 184,
+        "storeName": "멜팅피피",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/17209888-72cc-4f4e-8718-5b7d937d1b56.jpg"
+    },
+    {
+        "storeId": 121,
+        "storeName": "족제비제과",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/290a8b2f-f0d3-4f37-a3d1-547da8326817.jpeg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1fd7ca71-f266-48c9-9dc7-a7fffd0c2946.jpg"
+    },
+    {
+        "storeId": 265,
+        "storeName": "해피케이크샵",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a7251aea-b1fc-457b-b8c3-67cdfe73455b.jpg"
+    },
+    {
+        "storeId": 57,
+        "storeName": "채이크",
+        "district": "GANGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/87907171-a789-479a-9710-3fd902d33221.jpeg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e471a308-e385-485f-a7b0-37d274b4cb83.jpg"
+    },
+    {
+        "storeId": 132,
+        "storeName": "초초하우스",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d4f1650b-369b-4129-bd67-afff705b6514.jpeg"
+    },
+    {
+        "storeId": 50,
+        "storeName": "구뜨케이크",
+        "district": "DOBONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/dda2f1e9-a964-4f17-b12a-05408833bdeb.jpeg"
+    },
+    {
+        "storeId": 328,
+        "storeName": "쏙티",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/370634f9-5963-433a-89b4-44e31080c6da.jpg"
+    },
+    {
+        "storeId": 20,
+        "storeName": "버터뭉",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a970128a-f3f9-4f9c-a717-c8251775aab1.jpeg"
+    },
+    {
+        "storeId": 251,
+        "storeName": "델리시아케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cd708be5-b7d9-4fe8-85af-8f46eb93adbb.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ac1e0ca0-2927-40f9-b1f0-b654e5690db4.jpg"
+    },
+    {
+        "storeId": 148,
+        "storeName": "고요케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e189f93f-2bde-45ad-a69c-95dbb707a922.jpg"
+    },
+    {
+        "storeId": 336,
+        "storeName": "포스트케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/876ab7b0-97e0-493a-b996-7380562811a6.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c79d0c64-0878-4926-b510-5b3e58f1c131.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/fc7d8396-c840-43f0-a404-5618d4c605c9.jpg"
+    },
+    {
+        "storeId": 17,
+        "storeName": "미담케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b7e77b29-f710-4272-8cca-394ac317b831.jpeg"
+    },
+    {
+        "storeId": 136,
+        "storeName": "스륵",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ad314994-f116-4bea-a54c-78c31d1a8ac7.jpeg"
+    },
+    {
+        "storeId": 308,
+        "storeName": "플레플레",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/abf46ba0-fdc0-42b9-a99c-eba9661c2cd9.jpeg"
+    },
+    {
+        "storeId": 321,
+        "storeName": "잉큼",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0e040688-cc0a-4aa1-9a28-c3332f236258.jpeg"
+    },
+    {
+        "storeId": 36,
+        "storeName": "모리냥과자점",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e545832f-9870-4b3f-80bc-a4ed5a897230.jpg"
+    },
+    {
+        "storeId": 28,
+        "storeName": "레이네",
+        "district": "DONGJAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5f0719ef-895a-42f7-a71c-8740a8134615.jpeg"
+    },
+    {
+        "storeId": 81,
+        "storeName": "비비케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5cf66d85-f62d-4d1c-9ef3-3d1b5d95ae6a.jpg"
+    },
+    {
+        "storeId": 133,
+        "storeName": "비마이크림",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0c0478ac-8b06-4aaa-81fe-c2a757817734.jpeg"
+    },
+    {
+        "storeId": 227,
+        "storeName": "디어무드 더모먼트",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f459e9ec-9b5f-4a3d-8055-4d8f537a0be4.jpg"
+    },
+    {
+        "storeId": 195,
+        "storeName": "르파씨",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7eebb619-3479-4f86-928f-fa498b19dbb0.jpg"
+    },
+    {
+        "storeId": 87,
+        "storeName": "뉴띵케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/448dea82-352d-446e-bc87-88d20fccf00c.jpg"
+    },
+    {
+        "storeId": 121,
+        "storeName": "족제비제과",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/32f7930b-add4-437a-983f-3d56dfc25ebe.jpeg"
+    },
+    {
+        "storeId": 103,
+        "storeName": "버터스토리",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/45d111a1-1ea6-4976-b44c-fa42a7d7dfbf.jpeg"
+    },
+    {
+        "storeId": 340,
+        "storeName": "파티셔리 마루",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4cbfed7b-1583-443c-a4b7-499f80489a63.jpeg"
+    },
+    {
+        "storeId": 283,
+        "storeName": "포싵",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/10986949-c6fe-4cc6-8b7c-a7adcd8d4e79.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e5d1e57d-5868-46f3-a3a6-3b944cd6c2b7.jpeg"
+    },
+    {
+        "storeId": 36,
+        "storeName": "모리냥과자점",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0c805f38-f7fd-47de-90e2-4e4ac674352f.jpg"
+    },
+    {
+        "storeId": 337,
+        "storeName": "오롯스튜디오",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4f642d95-3d96-4353-ad9c-1b555c0fb61b.jpg"
+    },
+    {
+        "storeId": 28,
+        "storeName": "레이네",
+        "district": "DONGJAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/23917562-24ad-4775-8ef3-63c85c17247d.jpeg"
+    },
+    {
+        "storeId": 190,
+        "storeName": "잇더케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/bdb615f5-1bc5-42b7-a191-abc07fc03c30.jpg"
+    },
+    {
+        "storeId": 9,
+        "storeName": "레드제이케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0b09e40c-0211-43cd-aa83-f20fb2b50e23.jpeg"
+    },
+    {
+        "storeId": 133,
+        "storeName": "비마이크림",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/aea75a36-11e1-4fc2-acc9-fac670fa2a14.jpeg"
+    },
+    {
+        "storeId": 297,
+        "storeName": "비비디팩토리",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a7235284-5858-4a7e-9ef4-3fade0a66939.jpg"
+    },
+    {
+        "storeId": 75,
+        "storeName": "찜했당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6ac37f49-50e9-4ee8-a360-d632ed821c48.jpg"
+    },
+    {
+        "storeId": 183,
+        "storeName": "케익판다",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/928b06b3-375d-4bf5-a14a-6da15001347e.jpg"
+    },
+    {
+        "storeId": 308,
+        "storeName": "플레플레",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e267878d-f913-4dbe-b178-c83ddda225cd.jpeg"
+    },
+    {
+        "storeId": 280,
+        "storeName": "잇마이케이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9526e882-4373-48a6-b467-fe1c9fc38d97.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/67a19fe5-1b65-40b7-9c90-99ab3f3e1640.jpeg"
+    },
+    {
+        "storeId": 184,
+        "storeName": "멜팅피피",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8cf80367-e0b0-49c5-b989-9cc45bebdc20.jpg"
+    },
+    {
+        "storeId": 183,
+        "storeName": "케익판다",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a8fe7cb0-0412-4d92-a98f-bb3986f62a56.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a0ad7e3e-cf83-4941-8889-156bed803088.jpg"
+    },
+    {
+        "storeId": 107,
+        "storeName": "츄카츄카 케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4932c941-ae6f-49cd-8118-a3adb5713178.jpeg"
+    },
+    {
+        "storeId": 70,
+        "storeName": "딜릴리 케이크",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/891593b0-1ff6-461a-8fb8-8374da6e5cca.jpeg"
+    },
+    {
+        "storeId": 173,
+        "storeName": "색채",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9838c5f5-e715-448b-b942-d919519f79af.jpg"
+    },
+    {
+        "storeId": 126,
+        "storeName": "또케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2106e995-4737-4fd0-94b0-cc8646630ee2.jpeg"
+    },
+    {
+        "storeId": 107,
+        "storeName": "츄카츄카 케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/98f50eb5-aaf7-484e-9173-9f9a06970132.jpeg"
+    },
+    {
+        "storeId": 183,
+        "storeName": "케익판다",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/252a52f2-0da2-4cc6-bbfa-137345db69a3.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/faae7832-79ac-4043-9327-a407e7e8aea6.jpg"
+    },
+    {
+        "storeId": 197,
+        "storeName": "케익공방 2호점",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/20df4f06-18f0-49ba-b6e0-8eafedc121a8.jpeg"
+    },
+    {
+        "storeId": 140,
+        "storeName": "아로케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9ef2eaec-cbd7-4dc3-a161-307085be1c1b.jpeg"
+    },
+    {
+        "storeId": 108,
+        "storeName": "로코케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cccb1161-c189-4d21-9aa4-5e9a7f0a4d19.jpeg"
+    },
+    {
+        "storeId": 231,
+        "storeName": "케이크케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c6d9e11e-142f-4717-902f-56359ea8fd63.jpg"
+    },
+    {
+        "storeId": 195,
+        "storeName": "르파씨",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/fa6df288-c33e-428b-b58c-a0a802eb3d42.jpg"
+    },
+    {
+        "storeId": 41,
+        "storeName": "써니해피데이",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/334d60e6-7a77-4c13-9bd9-9e05bece6b17.jpg"
+    },
+    {
+        "storeId": 148,
+        "storeName": "고요케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7c80785e-5a7b-414e-8d01-ef8187f16693.jpg"
+    },
+    {
+        "storeId": 20,
+        "storeName": "버터뭉",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/42ee76a2-8be7-4a34-8faa-4d01c19c478e.jpeg"
+    },
+    {
+        "storeId": 227,
+        "storeName": "디어무드 더모먼트",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b290f501-d41b-47b9-8a05-82bc2c63d25d.jpg"
+    },
+    {
+        "storeId": 288,
+        "storeName": "무무대베이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e35ee9a0-bfca-4735-8523-da4d74f9af72.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7a2ae023-507f-4485-a31c-94da1551435c.jpeg"
+    },
+    {
+        "storeId": 167,
+        "storeName": "벨케이크",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/002687dd-a5f6-4be6-b3da-6a7b44f95e6e.jpg"
+    },
+    {
+        "storeId": 36,
+        "storeName": "모리냥과자점",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a9164119-0513-4800-b221-e79f799291f2.jpg"
+    },
+    {
+        "storeId": 261,
+        "storeName": "플랑케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/206b24e7-ffaf-4396-ab7c-09575e885d1a.jpg"
+    },
+    {
+        "storeId": 321,
+        "storeName": "잉큼",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8539e958-5111-4834-8f1a-d5ce66498f1f.jpg"
+    },
+    {
+        "storeId": 103,
+        "storeName": "버터스토리",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2c32aba5-00f2-4a2f-8b60-de92857c75f3.jpeg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/638142c5-27dc-427b-9a4c-1dd3bd773f0c.jpg"
+    },
+    {
+        "storeId": 9,
+        "storeName": "레드제이케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8ab1da0e-ea35-4361-8623-c1b0d99817e8.jpeg"
+    },
+    {
+        "storeId": 84,
+        "storeName": "언제나케이크 공릉점",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4c80ccc8-1f47-4dc8-8080-0485052838a6.jpg"
+    },
+    {
+        "storeId": 165,
+        "storeName": "서커스래빗",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/054455da-3b49-4b28-a12c-030d6cf35755.jpg"
+    },
+    {
+        "storeId": 340,
+        "storeName": "파티셔리 마루",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/da550ffc-7c20-478c-a406-875ac3a8b8da.jpeg"
+    },
+    {
+        "storeId": 46,
+        "storeName": "세이커리",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/deb16a58-09e3-43a2-bb38-9e828105d3ba.jpg"
+    },
+    {
+        "storeId": 75,
+        "storeName": "찜했당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/59a7b492-e32f-4974-b9cb-d21d3d6c328a.jpg"
+    },
+    {
+        "storeId": 316,
+        "storeName": "데이지케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/27f32414-886b-49f6-980a-792ec95cffe7.jpg"
+    },
+    {
+        "storeId": 190,
+        "storeName": "잇더케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6752393d-f4ef-44b9-aa4f-a32bab5ac05e.jpg"
+    },
+    {
+        "storeId": 12,
+        "storeName": "줄리케이크아틀리에",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d3634679-d0ce-4730-83e4-b6aa12009028.jpeg"
+    },
+    {
+        "storeId": 50,
+        "storeName": "구뜨케이크",
+        "district": "DOBONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b214e600-af60-4b57-8915-a3e3f2620744.jpeg"
+    },
+    {
+        "storeId": 28,
+        "storeName": "레이네",
+        "district": "DONGJAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5b30fc16-276f-49b8-bc53-6cbd8efed2fe.jpeg"
+    },
+    {
+        "storeId": 136,
+        "storeName": "스륵",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/79460969-fbf8-41ba-bc90-fb2b301eb01a.jpeg"
+    },
+    {
+        "storeId": 92,
+        "storeName": "미소한가득 케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4422b43b-e218-46f2-802e-10588f9e7fef.jpeg"
+    },
+    {
+        "storeId": 92,
+        "storeName": "미소한가득 케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/20aebef0-d857-4b5b-8d17-0165a477b494.jpeg"
+    },
+    {
+        "storeId": 103,
+        "storeName": "버터스토리",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7e4f75ca-c4ab-499c-9574-f7be7cbd3866.jpeg"
+    },
+    {
+        "storeId": 70,
+        "storeName": "딜릴리 케이크",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/39a5bd03-a316-4406-b5f2-e98590a08478.jpeg"
+    },
+    {
+        "storeId": 126,
+        "storeName": "또케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/03777a33-2895-4a98-a635-1f0a9bd52b48.jpeg"
+    },
+    {
+        "storeId": 288,
+        "storeName": "무무대베이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0aed9bcc-f955-4f78-8da6-0bfb299cec20.jpg"
+    },
+    {
+        "storeId": 268,
+        "storeName": "동그리케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d51f3e66-fead-468a-a124-eeb2ad064bd1.jpg"
+    },
+    {
+        "storeId": 131,
+        "storeName": "로에케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cf66e8c5-7b78-4040-8f95-9961d50fd7f3.jpeg"
+    },
+    {
+        "storeId": 79,
+        "storeName": "감구당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6e971950-c27b-49ef-acbb-2269916b0b0e.jpg"
+    },
+    {
+        "storeId": 261,
+        "storeName": "플랑케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1b8e92d3-60d6-4020-ba14-93ff2909345a.jpg"
+    },
+    {
+        "storeId": 190,
+        "storeName": "잇더케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/afe2c285-193a-433c-af3e-4f1e6aae42bd.jpg"
+    },
+    {
+        "storeId": 328,
+        "storeName": "쏙티",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/738cd9f6-dd15-4e91-b19e-73176858417e.jpg"
+    },
+    {
+        "storeId": 21,
+        "storeName": "마마이케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0dad8de0-f2b8-45fb-9b83-6e88b3696e9c.jpeg"
+    },
+    {
+        "storeId": 142,
+        "storeName": "이상한나라의제과점",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1fe8f192-bbd6-4d72-ae26-0347c96cfb91.jpeg"
+    },
+    {
+        "storeId": 121,
+        "storeName": "족제비제과",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d856847c-318e-4ab6-ae98-9597de8101aa.jpeg"
+    },
+    {
+        "storeId": 269,
+        "storeName": "케이크를 부탁해 연신내역점",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3db60617-abb3-4018-80c5-ca033b25f5ab.jpeg"
+    },
+    {
+        "storeId": 270,
+        "storeName": "우움케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/92c6c9a9-2886-420b-9033-c34f0beaadb1.jpg"
+    },
+    {
+        "storeId": 150,
+        "storeName": "해피베어데이",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/78c136f9-e70b-489a-9b96-d6c6e8929845.jpeg"
+    },
+    {
+        "storeId": 186,
+        "storeName": "챱챱케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/62d3fc72-5923-4ab5-8f7c-04c381cd431b.jpg"
+    },
+    {
+        "storeId": 308,
+        "storeName": "플레플레",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/11070632-d6ab-4b38-945f-5c363464432e.jpeg"
+    },
+    {
+        "storeId": 133,
+        "storeName": "비마이크림",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e48b7544-d7ba-4610-b49a-b7b296ccd86b.jpeg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3aa04835-da49-4851-b362-74be9c1492dc.jpg"
+    },
+    {
+        "storeId": 14,
+        "storeName": "때가이르매",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e15fb386-d266-441e-bce0-a8d50d5e0309.jpeg"
+    },
+    {
+        "storeId": 108,
+        "storeName": "로코케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/96d508d9-0a5c-4cab-a7ec-0b5b0afb554f.jpeg"
+    },
+    {
+        "storeId": 268,
+        "storeName": "동그리케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f2c1e206-7a1d-4ec9-afdb-87d3aad6c1bb.jpg"
+    },
+    {
+        "storeId": 251,
+        "storeName": "델리시아케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a21a8d55-905e-4e7e-a9fa-f70422e50b67.jpg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2e02115d-2872-40ee-9f1f-0bebd84dcd5f.jpg"
+    },
+    {
+        "storeId": 239,
+        "storeName": "프롬마틸다",
+        "district": "GANGSEO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/50068d4f-f752-401f-aa96-c7b247ccd936.jpg"
+    },
+    {
+        "storeId": 158,
+        "storeName": "플로리앙",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0c1ebf64-1733-4ebe-8b55-c66f973be2b0.jpeg"
+    },
+    {
+        "storeId": 116,
+        "storeName": "밍글베이커리",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/986f56f9-7dcc-41a4-9d54-45d1901b140e.jpeg"
+    },
+    {
+        "storeId": 41,
+        "storeName": "써니해피데이",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a6d50f71-5b46-421f-85ff-29317fc50a6e.jpg"
+    },
+    {
+        "storeId": 84,
+        "storeName": "언제나케이크 공릉점",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e6b0a2d6-9b9d-4091-80bb-19cd6ea80f9d.jpg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6fc811b8-60f5-4314-84c3-c8b54bb1c937.jpg"
+    },
+    {
+        "storeId": 261,
+        "storeName": "플랑케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/83dc1f70-b6f7-4596-b751-f113c2b73f2d.jpg"
+    },
+    {
+        "storeId": 115,
+        "storeName": "디어케키",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8b6f3495-0a11-45c9-b97f-d90c3bc63ac9.jpeg"
+    },
+    {
+        "storeId": 142,
+        "storeName": "이상한나라의제과점",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3572f230-4281-4d67-bfa1-3222e3cad830.jpeg"
+    },
+    {
+        "storeId": 90,
+        "storeName": "블레싱쿠키",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/eb7ba0b8-8307-43d9-8a8c-72411f8c65ce.jpeg"
+    },
+    {
+        "storeId": 336,
+        "storeName": "포스트케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0556d3b3-6f6b-4614-a8ec-f15f9593c987.jpg"
+    },
+    {
+        "storeId": 12,
+        "storeName": "줄리케이크아틀리에",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8bc77caa-d5c0-463a-91c8-d4c1da9130ce.jpeg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/23af49c3-4db8-42a9-9deb-a5aaea2c24d9.jpg"
+    },
+    {
+        "storeId": 9,
+        "storeName": "레드제이케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f26fe985-c10e-463c-8793-4fffe13ae2ef.jpeg"
+    },
+    {
+        "storeId": 269,
+        "storeName": "케이크를 부탁해 연신내역점",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0a2daaba-4008-446a-ae88-ad412b852a05.jpeg"
+    },
+    {
+        "storeId": 5,
+        "storeName": "주케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c64ce522-d6cd-4e85-9e50-4a74ddba6812.jpeg"
+    },
+    {
+        "storeId": 21,
+        "storeName": "마마이케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/22170f9f-f047-4ddd-b789-10652bfc2258.jpeg"
+    },
+    {
+        "storeId": 5,
+        "storeName": "주케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/374f3398-46aa-4aae-a22e-46a9876de5b1.jpeg"
+    },
+    {
+        "storeId": 87,
+        "storeName": "뉴띵케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/37993bdb-f37b-4aa7-9f2e-b9222854c3ff.jpg"
+    },
+    {
+        "storeId": 45,
+        "storeName": "사계절디저트",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/960fe155-4d60-4378-9b43-c067051df15c.jpeg"
+    },
+    {
+        "storeId": 194,
+        "storeName": "쫀득당",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9fe9c19e-8511-43a1-a26d-96f07f367ac6.jpg"
+    },
+    {
+        "storeId": 87,
+        "storeName": "뉴띵케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c1ef4284-fc10-4bd5-ba46-7b0f8edb925d.jpg"
+    },
+    {
+        "storeId": 123,
+        "storeName": "새기다케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a4a1cc3d-8395-4650-9473-e3adfa5d43b6.jpeg"
+    },
+    {
+        "storeId": 197,
+        "storeName": "케익공방 2호점",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8cf470bf-62b5-4294-a283-0d2056e06cde.jpeg"
+    },
+    {
+        "storeId": 244,
+        "storeName": "키친마이위시케이크",
+        "district": "YANGCHEON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c15b68a9-853c-4de0-bf47-ccc1ce6a57da.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4ddc9cde-4509-450c-a23f-e21104c40367.jpg"
+    },
+    {
+        "storeId": 270,
+        "storeName": "우움케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/49dc4a74-f64f-4c8e-b7e2-71c203ce1b74.jpg"
+    },
+    {
+        "storeId": 186,
+        "storeName": "챱챱케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9751bdb0-8e9e-469b-8556-b288028b732e.jpg"
+    },
+    {
+        "storeId": 336,
+        "storeName": "포스트케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cc1fd231-3269-487d-af3b-65714ca6b316.jpg"
+    },
+    {
+        "storeId": 57,
+        "storeName": "채이크",
+        "district": "GANGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1cec17f3-a269-4458-985a-4567d258d11f.jpeg"
+    },
+    {
+        "storeId": 297,
+        "storeName": "비비디팩토리",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/9aaed3ff-be7d-4b45-a46f-fdc90a9b91bd.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f1434bf3-3a0f-462f-9bdb-251bfe6f2f6a.jpeg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d1b992e8-0b98-437a-bcd9-9fd0caf034eb.jpg"
+    },
+    {
+        "storeId": 140,
+        "storeName": "아로케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8767fb4c-f9d8-4aec-994c-43c167ead323.jpg"
+    },
+    {
+        "storeId": 127,
+        "storeName": "딜라이트디케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/48ea73c6-973b-490d-a4c1-f6f97855df4b.jpeg"
+    },
+    {
+        "storeId": 79,
+        "storeName": "감구당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1ef622fc-154d-4787-844f-00cafd964078.jpg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8a92db02-70a4-4c60-a77d-58f524dbbd26.jpg"
+    },
+    {
+        "storeId": 142,
+        "storeName": "이상한나라의제과점",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a91f77fd-e044-4281-96ab-712f6d13c758.jpeg"
+    },
+    {
+        "storeId": 195,
+        "storeName": "르파씨",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/200086c0-85c1-4df9-a286-bb90009e0e36.jpg"
+    },
+    {
+        "storeId": 283,
+        "storeName": "포싵",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5f41dc6a-5235-40f5-a7a5-2f1c1662843d.jpg"
+    },
+    {
+        "storeId": 14,
+        "storeName": "때가이르매",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f2434a59-f88a-45c2-960a-20d35172c702.jpeg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/aa9e984f-fcc2-49f7-ad3f-32f3918985ae.jpg"
+    },
+    {
+        "storeId": 244,
+        "storeName": "키친마이위시케이크",
+        "district": "YANGCHEON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/91fee6cb-85c6-481e-a659-36281d13df6d.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1d7e7e04-bc94-4262-8789-ff3fd6f79e26.jpg"
+    },
+    {
+        "storeId": 46,
+        "storeName": "세이커리",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/553c3a69-c779-4f55-848d-e2173399b601.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/37656d5d-03e2-41fe-87da-24a18c8f6923.jpg"
+    },
+    {
+        "storeId": 165,
+        "storeName": "서커스래빗",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d7bb9299-b0c9-4ac2-8ecf-bc2c2262ad18.jpg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4d060841-d012-4bff-8000-302a0f462501.jpg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/15df8d9f-d3b7-4368-8099-a1893550de74.jpg"
+    },
+    {
+        "storeId": 136,
+        "storeName": "스륵",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a1f72ef7-8c06-4423-86b6-caf92b81708b.jpeg"
+    },
+    {
+        "storeId": 115,
+        "storeName": "디어케키",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6ed9d8d1-84b7-4d9f-9088-dd86cc107ade.jpeg"
+    },
+    {
+        "storeId": 173,
+        "storeName": "색채",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8fb00a30-da0b-48ce-9684-b64c234cf120.jpg"
+    },
+    {
+        "storeId": 123,
+        "storeName": "새기다케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8f3a8d58-0dd2-4b8f-9aa4-70422e7682ce.jpeg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/58e253a9-258c-4380-bca3-8b083b2a52f2.jpg"
+    },
+    {
+        "storeId": 255,
+        "storeName": "새론케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f0dbc980-2acc-4378-b153-006cdc7a42fc.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f5e0f577-c356-40ca-9368-470b4daca296.jpg"
+    },
+    {
+        "storeId": 5,
+        "storeName": "주케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/42ada3d6-8ecb-4a2b-b60d-85e4325d4774.jpeg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/92923714-6b53-4052-a51d-28a946c746ad.jpeg"
+    },
+    {
+        "storeId": 102,
+        "storeName": "씨에이크",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/388c54b7-36a7-4113-972a-377c0f966cd4.jpeg"
+    },
+    {
+        "storeId": 107,
+        "storeName": "츄카츄카 케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2a22b159-0838-4fae-b932-7a7986073865.jpeg"
+    },
+    {
+        "storeId": 183,
+        "storeName": "케익판다",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6d37abc7-5c1e-4d97-ab10-ab71d653ebfb.jpg"
+    },
+    {
+        "storeId": 167,
+        "storeName": "벨케이크",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d5200a41-6066-4d6e-837e-c5af7675a990.jpg"
+    },
+    {
+        "storeId": 264,
+        "storeName": "아코케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f24143f8-5f89-438e-a329-ed7b341a0899.jpg"
+    },
+    {
+        "storeId": 148,
+        "storeName": "고요케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/262dbe7f-4824-4100-a807-190d29cafca8.jpg"
+    },
+    {
+        "storeId": 194,
+        "storeName": "쫀득당",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/05f36a54-339d-4818-8e9c-ed874e8ed5b4.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c81ab3ec-56c6-4293-929f-c8d28a089990.jpg"
+    },
+    {
+        "storeId": 136,
+        "storeName": "스륵",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2bf47d4e-2fda-481f-a084-e9f060f36f01.jpeg"
+    },
+    {
+        "storeId": 264,
+        "storeName": "아코케이크",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/55939f1c-7f54-42dd-8c74-e0000aa01fcf.jpg"
+    },
+    {
+        "storeId": 127,
+        "storeName": "딜라이트디케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/29f188e4-60bb-4343-ad98-35b474bd056c.jpeg"
+    },
+    {
+        "storeId": 162,
+        "storeName": "Avec",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/bc261895-aa7f-468e-bde1-ba145cc47657.jpg"
+    },
+    {
+        "storeId": 186,
+        "storeName": "챱챱케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8065730f-9c62-4488-8e53-62274c06738c.jpg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5756e6e1-f37f-4d2f-a389-2554d33bb838.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4d3e203f-0481-431e-8fa7-9a4de6cfca2b.jpeg"
+    },
+    {
+        "storeId": 115,
+        "storeName": "디어케키",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/79d8e3db-357d-44ae-9c22-644846eaaacf.jpeg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/43c0b486-68ff-4752-87f9-acf368b8c44f.jpg"
+    },
+    {
+        "storeId": 195,
+        "storeName": "르파씨",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ea135bd7-f9da-4f28-8f43-bffce70bbfcd.jpg"
+    },
+    {
+        "storeId": 267,
+        "storeName": "꼬모케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b1e9b728-72be-496a-aa14-ec330337e586.jpg"
+    },
+    {
+        "storeId": 259,
+        "storeName": "꼰모베르",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7d2888f7-4488-4ee7-b205-0a0b5ecb6591.jpg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/96e07a7a-2381-4ecc-bf64-3cd81ba44c4e.jpg"
+    },
+    {
+        "storeId": 39,
+        "storeName": "파인데이케이크",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0ea4a14e-a06e-45f1-996e-f8b3b2765b99.jpg"
+    },
+    {
+        "storeId": 304,
+        "storeName": "릿츠케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0060524e-86d9-46a1-9a74-45a2599d1c6f.jpg"
+    },
+    {
+        "storeId": 186,
+        "storeName": "챱챱케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cb5cafe4-359c-446c-b6ee-45a7f9386f18.jpg"
+    },
+    {
+        "storeId": 140,
+        "storeName": "아로케이크",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f048f38d-691b-4d1f-9ea6-e3537b048258.jpeg"
+    },
+    {
+        "storeId": 45,
+        "storeName": "사계절디저트",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a0303d1c-b09f-48d1-b88a-7e7591036b07.jpg"
+    },
+    {
+        "storeId": 190,
+        "storeName": "잇더케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7fd06a77-6dec-4f77-8d94-52eaff5956e9.jpg"
+    },
+    {
+        "storeId": 150,
+        "storeName": "해피베어데이",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d0f3cd90-db6d-4684-9600-e9f47246095a.jpeg"
+    },
+    {
+        "storeId": 21,
+        "storeName": "마마이케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b8d13497-2696-4c85-b3cc-76b86ee6653b.jpeg"
+    },
+    {
+        "storeId": 12,
+        "storeName": "줄리케이크아틀리에",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e9893e4f-3ea9-406d-9cfc-150dfa719207.jpeg"
+    },
+    {
+        "storeId": 217,
+        "storeName": "카페 달꼬미",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/49301194-92f6-4a5f-888d-2cc9a2fed1d4.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ad04e254-b8ac-4ab6-af3d-9d06f2f42b3d.jpg"
+    },
+    {
+        "storeId": 280,
+        "storeName": "잇마이케이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b402f64e-8050-4952-9b88-303fe78adb87.jpg"
+    },
+    {
+        "storeId": 20,
+        "storeName": "버터뭉",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ff7770ee-0b84-481a-a20f-2be07d4e401c.jpeg"
+    },
+    {
+        "storeId": 92,
+        "storeName": "미소한가득 케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/65442086-89c8-4b43-9ddf-ee1cc47de66b.jpeg"
+    },
+    {
+        "storeId": 231,
+        "storeName": "케이크케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ff7187ce-089d-45ee-9244-12389b62c68e.jpg"
+    },
+    {
+        "storeId": 184,
+        "storeName": "멜팅피피",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/eae878e4-e2c1-473a-bd9e-5238347a04a7.jpg"
+    },
+    {
+        "storeId": 128,
+        "storeName": "투투데이즈 케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a9acddd8-ad8b-44ce-907d-89a4baf507b2.jpeg"
+    },
+    {
+        "storeId": 226,
+        "storeName": "스윗써머",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e67a8d41-9f05-4b41-9af2-e3200812fcc9.jpeg"
+    },
+    {
+        "storeId": 159,
+        "storeName": "모래시",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ea0007b2-59a1-4dde-b838-5ae619784677.jpg"
+    },
+    {
+        "storeId": 127,
+        "storeName": "딜라이트디케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/965686b8-cf3b-4728-a6c4-dc51b304c650.jpeg"
+    },
+    {
+        "storeId": 186,
+        "storeName": "챱챱케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5eb524ef-3fb0-4b49-bfad-d97a52d3e86c.jpg"
+    },
+    {
+        "storeId": 102,
+        "storeName": "씨에이크",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/65bb4901-e817-4d39-83da-82a382680be5.jpeg"
+    },
+    {
+        "storeId": 20,
+        "storeName": "버터뭉",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/94cc3db9-1f7b-47be-a031-a92843c1d7c2.jpeg"
+    },
+    {
+        "storeId": 14,
+        "storeName": "때가이르매",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/50e015f8-2235-4aa0-9f63-ddcfa3407432.jpeg"
+    },
+    {
+        "storeId": 244,
+        "storeName": "키친마이위시케이크",
+        "district": "YANGCHEON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/02ee6eae-5726-4944-be06-bfaf88b7d6ea.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/79f82705-51be-43ca-b1b1-12c58202cfdb.jpg"
+    },
+    {
+        "storeId": 226,
+        "storeName": "스윗써머",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/85a7ca39-4a15-49f8-8b38-0fd4bbde0a77.jpeg"
+    },
+    {
+        "storeId": 5,
+        "storeName": "주케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/86d746a5-e760-4567-af88-940a15dca95c.jpeg"
+    },
+    {
+        "storeId": 81,
+        "storeName": "비비케이크",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/15f61151-423c-45a0-a7c1-b9c3c79ef718.jpg"
+    },
+    {
+        "storeId": 259,
+        "storeName": "꼰모베르",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/cf6b3795-dbb9-4ec7-9de3-a46592df9c86.jpg"
+    },
+    {
+        "storeId": 197,
+        "storeName": "케익공방 2호점",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0daf2df2-1e75-4223-a512-6193706710bf.jpeg"
+    },
+    {
+        "storeId": 270,
+        "storeName": "우움케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d1f7f9fc-045e-4365-bf99-3da67af8f877.jpg"
+    },
+    {
+        "storeId": 39,
+        "storeName": "파인데이케이크",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/908752c3-fd37-440e-be2d-ae3510d6b49d.jpg"
+    },
+    {
+        "storeId": 231,
+        "storeName": "케이크케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/56b014ee-bf7a-4a7b-b0c3-a8361c54c6b5.jpg"
+    },
+    {
+        "storeId": 116,
+        "storeName": "밍글베이커리",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8c282477-8ab9-4760-adf3-9e9a01a234ca.jpeg"
+    },
+    {
+        "storeId": 150,
+        "storeName": "해피베어데이",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/1cb6b472-da04-457b-bc19-4d858b454bb1.jpeg"
+    },
+    {
+        "storeId": 75,
+        "storeName": "찜했당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e244fffb-40b9-4ee7-9c47-01644f11b964.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/03d73422-7d59-456e-9af0-6e5e343a86a4.jpg"
+    },
+    {
+        "storeId": 50,
+        "storeName": "구뜨케이크",
+        "district": "DOBONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ad05e317-29b9-4e8d-a78c-be6f19570970.jpeg"
+    },
+    {
+        "storeId": 39,
+        "storeName": "파인데이케이크",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4981bfd0-88d3-4e55-8afb-5e282e47c3eb.jpg"
+    },
+    {
+        "storeId": 17,
+        "storeName": "미담케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/446646f5-1a21-458c-84cf-549d187ea95e.jpeg"
+    },
+    {
+        "storeId": 280,
+        "storeName": "잇마이케이크",
+        "district": "SEODAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2204d64d-a5e9-4393-8b1a-6f6b79743ace.jpg"
+    },
+    {
+        "storeId": 316,
+        "storeName": "데이지케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ac7edd74-6805-4cb1-adfc-c5de93633136.jpg"
+    },
+    {
+        "storeId": 14,
+        "storeName": "때가이르매",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/da39a72d-1c33-4cd9-b25d-1b6c4fa6af75.jpeg"
+    },
+    {
+        "storeId": 268,
+        "storeName": "동그리케이크",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b488a942-fc59-4242-a421-f3bb19c45128.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/be547299-f1ea-4e74-8623-86e7103a7f72.jpg"
+    },
+    {
+        "storeId": 15,
+        "storeName": "판타노",
+        "district": "JONGNO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/87977b92-d21c-4b69-89a5-773a30c92fc5.jpeg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/187c6de7-310c-4706-8dd5-091d065ceaf6.jpg"
+    },
+    {
+        "storeId": 131,
+        "storeName": "로에케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8a3a5ef0-5108-44d0-93e1-563d05b4346b.jpeg"
+    },
+    {
+        "storeId": 84,
+        "storeName": "언제나케이크 공릉점",
+        "district": "NOWON",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a3ae4c66-2a74-40e8-9615-b69a2715bef4.jpg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6bfd02f1-02eb-47b8-aff3-811d66678e5b.jpg"
+    },
+    {
+        "storeId": 167,
+        "storeName": "벨케이크",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c81eeea0-fd8e-4512-9709-70dfaeff40a1.jpg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b82d5467-38ae-4737-95b7-9fe8a56694d3.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/d528425d-187b-42cf-af10-a29e1a6a4ab1.jpg"
+    },
+    {
+        "storeId": 128,
+        "storeName": "투투데이즈 케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/464e6471-96d5-49bb-94ee-758ee989f88d.jpeg"
+    },
+    {
+        "storeId": 328,
+        "storeName": "쏙티",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/db485d0a-faa9-424a-906e-edae0f371d5c.jpg"
+    },
+    {
+        "storeId": 159,
+        "storeName": "모래시",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a308772f-42bb-4fe3-9198-3c0ceb73f6d2.jpg"
+    },
+    {
+        "storeId": 108,
+        "storeName": "로코케이크",
+        "district": "JUNGNANG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/0c35bcf4-4452-4a11-9f41-343d4a72a47c.jpeg"
+    },
+    {
+        "storeId": 45,
+        "storeName": "사계절디저트",
+        "district": "GWANAK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/82b52d9d-7a62-4911-9c25-6d2feadcb840.jpeg"
+    },
+    {
+        "storeId": 12,
+        "storeName": "줄리케이크아틀리에",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c76e20a4-0e4b-4031-97ff-137d4f12829f.jpeg"
+    },
+    {
+        "storeId": 190,
+        "storeName": "잇더케이크",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b2045544-1270-44e1-a628-20f2f0ee6d65.jpg"
+    },
+    {
+        "storeId": 183,
+        "storeName": "케익판다",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/b2390b9f-56ae-4da7-b387-3bdbfe9015ae.jpg"
+    },
+    {
+        "storeId": 17,
+        "storeName": "미담케이크",
+        "district": "YONGSAN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/7d7c9bda-5c95-44b0-a27d-ae11c7e9ef5b.jpeg"
+    },
+    {
+        "storeId": 239,
+        "storeName": "프롬마틸다",
+        "district": "GANGSEO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/86f53612-342a-49a3-9096-5f1f90b09c5e.jpg"
+    },
+    {
+        "storeId": 126,
+        "storeName": "또케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c023ddf1-c34e-4519-be09-8eac3f22b726.jpeg"
+    },
+    {
+        "storeId": 21,
+        "storeName": "마마이케이크",
+        "district": "JUNG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/73418066-4a57-43b6-9654-1a6053aa7b45.jpeg"
+    },
+    {
+        "storeId": 265,
+        "storeName": "해피케이크샵",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/6f2480bd-62e7-4a69-99f9-4249ef740898.jpg"
+    },
+    {
+        "storeId": 154,
+        "storeName": "스낵빌리지",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/3049b876-b6ac-44b6-aa2f-50ee0c3157ff.jpg"
+    },
+    {
+        "storeId": 102,
+        "storeName": "씨에이크",
+        "district": "SEONGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a56e5622-7c81-4b12-a667-eba7bf42f2f6.jpeg"
+    },
+    {
+        "storeId": 192,
+        "storeName": "오즈룸",
+        "district": "SEOCHO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/c9aefca8-50eb-41a3-adab-497d6919533e.jpg"
+    },
+    {
+        "storeId": 173,
+        "storeName": "색채",
+        "district": "SONGPA",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/4552fbb9-c5df-40d5-a438-812f241ee599.jpg"
+    },
+    {
+        "storeId": 115,
+        "storeName": "디어케키",
+        "district": "DONGDAEMUN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e41757e6-1106-4e72-b5e5-0586bc8f2106.jpeg"
+    },
+    {
+        "storeId": 132,
+        "storeName": "초초하우스",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e14001d0-ffe6-4ca2-82e3-cf371fdaaa63.jpeg"
+    },
+    {
+        "storeId": 321,
+        "storeName": "잉큼",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/ebb7899d-b4f7-42fd-ab32-0bf2b39450fc.jpeg"
+    },
+    {
+        "storeId": 255,
+        "storeName": "새론케이크",
+        "district": "YEONGDEUNGPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/8f6c0400-35c6-4917-b43d-719e6b52147f.jpg"
+    },
+    {
+        "storeId": 293,
+        "storeName": "멜로디 케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/5a6a0720-4bc6-430a-a335-b63f0bfbf8d1.jpg"
+    },
+    {
+        "storeId": 123,
+        "storeName": "새기다케이크",
+        "district": "GWANGJIN",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/e420c9ab-9ef1-4698-a796-e4f2c1e8f991.jpeg"
+    },
+    {
+        "storeId": 293,
+        "storeName": "멜로디 케이크",
+        "district": "MAPO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/69f275b2-e062-4399-b438-d77a3a33bc4c.jpg"
+    },
+    {
+        "storeId": 265,
+        "storeName": "해피케이크샵",
+        "district": "GURO",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/77eb13d9-e3b2-48cc-bf62-35a71f0783b4.jpg"
+    },
+    {
+        "storeId": 159,
+        "storeName": "모래시",
+        "district": "GANGDONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/87a92dc3-0bcf-4ebf-88a1-c674eda5a956.jpg"
+    },
+    {
+        "storeId": 222,
+        "storeName": "강남고망고케이크",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/f5f1b385-48dd-4456-840a-2103743e1278.jpg"
+    },
+    {
+        "storeId": 79,
+        "storeName": "감구당",
+        "district": "SEONGBUK",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/85c70ab7-f78f-45c7-9b88-9cf5459ec112.jpg"
+    },
+    {
+        "storeId": 269,
+        "storeName": "케이크를 부탁해 연신내역점",
+        "district": "EUNPYEONG",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/2b67d486-f663-4f7c-96a8-9cf9c167d774.jpeg"
+    },
+    {
+        "storeId": 214,
+        "storeName": "화이티코",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/61f6b1c9-344e-4e61-a75b-58809aafb261.jpg"
+    },
+    {
+        "storeId": 215,
+        "storeName": "파타티파타타",
+        "district": "GANGNAM",
+        "imageUrl": "https://bucket-8th-team8.s3.ap-northeast-2.amazonaws.com/cakk/store/a3999120-7364-4856-8e0b-d8b303b19f7c.jpg"
+    }
+]

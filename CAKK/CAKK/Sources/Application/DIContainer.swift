@@ -5,7 +5,7 @@
 //  Created by Mason Kim on 2023/05/19.
 //
 
-import Foundation
+import UIKit
 
 final class DIContainer {
   
@@ -16,7 +16,8 @@ final class DIContainer {
   
   // MARK: - Properties
   
-  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .stub)
+  private let networkService: NetworkService<CakeAPI> = NetworkService(type: .server, isLogEnabled: false)
+  private let realmStorage: RealmStorageProtocol = RealmStorage()
   
   // MARK: - DI Factory Methods
   
@@ -24,23 +25,60 @@ final class DIContainer {
     return SplashViewController()
   }
   
-  func makeMainViewController(districts: [District]) -> MainViewController {
-    let viewModel = MainViewModel(districts: districts, service: networkService)
-    return MainViewController(viewModel: viewModel)
+  func makeMainViewController() -> UINavigationController {
+    let viewModel = MainViewModel(service: networkService, storage: realmStorage)
+    let controller = MainViewController(viewModel: viewModel)
+    return UINavigationController(rootViewController: controller)
   }
   
   func makeDistrictSelectionController() -> DistrictSelectionViewController {
-    let viewModel = DistrictSelectionViewModel()
+    let viewModel = DistrictSelectionViewModel(service: networkService)
     return DistrictSelectionViewController(viewModel: viewModel)
   }
   
-  func makeShopDetailViewController(with cakeShop: CakeShop) -> ShopDetailViewController {
-    let viewModel = ShopDetailViewModel(cakeShop: cakeShop, service: networkService)
+  func makeShopDetailViewController(with cakeShopID: Int) -> ShopDetailViewController {
+    let viewModel = ShopDetailViewModel(cakeShopID: cakeShopID,
+                                        service: networkService,
+                                        realmStorage: realmStorage)
     return ShopDetailViewController(viewModel: viewModel)
   }
   
-  func makeCakeShopListViewController(initialCakeShops: [CakeShop]) -> CakeShopListViewController {
-    let viewModel = CakeShopListViewModel(initialCakeShops: initialCakeShops, service: networkService)
-    return CakeShopListViewController(viewModel: viewModel)
+  func makeCakeShopListViewController(mainViewModel: MainViewModel) -> CakeShopListViewController {
+    return CakeShopListViewController(viewModel: mainViewModel)
+  }
+  
+  func makeFilterViewController(viewModel: FilterViewModel) -> FilterViewController {
+    let viewModel = FilterViewModel()
+    return FilterViewController(viewModel: viewModel)
+  }
+  
+  func makeCakeShopCollectionCellModel(cakeShop: CakeShop) -> CakeShopCollectionCellModel {
+    let viewModel = CakeShopCollectionCellModel(cakeShop: cakeShop,
+                                                service: networkService,
+                                                realmStorage: realmStorage)
+    return viewModel
+  }
+  
+  func makeMyBookmarkViewController() -> MyBookmarkViewController {
+    let viewModel = MyBookmarkViewModel(realmStorage: realmStorage)
+    return MyBookmarkViewController(viewModel: viewModel)
+  }
+  
+  func makeMyBookmarkCellViewModel(bookmark: Bookmark) -> MyBookmarkCellViewModel {
+    let viewModel = MyBookmarkCellViewModel(bookmark: bookmark,
+                                            realmStorage: realmStorage)
+    return viewModel
+  }
+  
+  func makeFeedViewController() -> FeedViewController {
+    let viewModel = FeedViewModel(service: networkService)
+    return FeedViewController(viewModel: viewModel)
+  }
+  
+  func makeFeedDetailViewController(feed: Feed) -> FeedDetailViewController {
+    let viewModel = FeedDetailViewModel(feed: feed,
+                                        service: networkService,
+                                        storage: realmStorage)
+    return FeedDetailViewController(viewModel: viewModel)
   }
 }

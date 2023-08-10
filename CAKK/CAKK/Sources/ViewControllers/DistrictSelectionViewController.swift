@@ -7,12 +7,12 @@
 
 import UIKit
 
+import Combine
+
 import SnapKit
 import Then
 
-import Combine
-
-class DistrictSelectionViewController: UIViewController {
+final class DistrictSelectionViewController: UIViewController {
   
   // MARK: - Constants
   
@@ -22,8 +22,38 @@ class DistrictSelectionViewController: UIViewController {
     
     static let descriptionLabelTopPadding = 12.f
     
+    static let collectionViewCornerRadius = 20.f
     static let collectionViewTopPadding = 40.f
     static let collectionViewBottomInset = 20.f
+  }
+  
+  // MARK: - Types
+  
+  typealias ViewModel = DistrictSelectionViewModel
+  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
+  
+  enum Section {
+    case regionSelector
+  }
+  
+  // MARK: - Properties
+  
+  private let viewModel: ViewModel
+  private lazy var dataSource: DataSource = makeDataSource()
+  private var cancellableBag = Set<AnyCancellable>()
+  
+  // MARK: - UI
+  
+  private lazy var collectionView = UICollectionView(frame: .zero,
+                                                     collectionViewLayout: collectionViewLayout).then {
+    $0.delaysContentTouches = false
+    $0.register(RegionPickerCollectionCell.self,
+                forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
+    $0.backgroundColor = .clear
+    $0.alwaysBounceVertical = false
+    $0.layer.cornerRadius = Metric.collectionViewCornerRadius
+    $0.showsVerticalScrollIndicator = false
+    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
   }
   
   private var collectionViewLayout: UICollectionViewCompositionalLayout {
@@ -45,29 +75,9 @@ class DistrictSelectionViewController: UIViewController {
     return UICollectionViewCompositionalLayout(section: section)
   }
   
-  
-  // MARK: - Types
-  
-  typealias ViewModel = DistrictSelectionViewModel
-  typealias DataSource = UICollectionViewDiffableDataSource<Section, DistrictSection>
-  
-  
-  // MARK: - Properties
-  
-  private let viewModel: ViewModel
-  private lazy var dataSource: DataSource = makeDataSource()
-  private var cancellableBag = Set<AnyCancellable>()
-  
   private let regionPickerCellRegistration = UICollectionView.CellRegistration<RegionPickerCollectionCell, DistrictSection> { cell, _, item in
     cell.configure(item)
   }
-  
-  enum Section {
-    case regionSelector
-  }
-  
-  
-  // MARK: - UI
   
   private let titleLabel = UILabel().then {
     $0.text = "내게 맞는 케이크샵은 어디에 있을까요?"
@@ -82,18 +92,9 @@ class DistrictSelectionViewController: UIViewController {
     $0.textColor = .black.withAlphaComponent(0.6)
     $0.textAlignment = .left
   }
-  private lazy var collectionView = UICollectionView(frame: .zero,
-                                                     collectionViewLayout: collectionViewLayout).then {
-    $0.delaysContentTouches = false
-    $0.register(RegionPickerCollectionCell.self, forCellWithReuseIdentifier: RegionPickerCollectionCell.identifier)
-    $0.backgroundColor = .clear
-    $0.alwaysBounceVertical = false
-    $0.showsVerticalScrollIndicator = false
-    $0.contentInset = .init(top: 0, left: 0, bottom: Metric.collectionViewBottomInset, right: 0)
-  }
   
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(viewModel: ViewModel) {
     self.viewModel = viewModel
@@ -104,74 +105,17 @@ class DistrictSelectionViewController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
+  // MARK: - LifeCycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-  }
-  
-  // MARK: - Public
-  
-  // MARK: - Private
-  
-  private func setup() {
-    setupLayout()
-    setupView()
     bind()
   }
   
-  // Setup Layouts
-  private func setupLayout() {
-    setupTitleLabelLayout()
-    setupDescriptionLabelLayout()
-    setupCollectionViewLayout()
-  }
   
-  private func setupTitleLabelLayout() {
-    view.addSubview(titleLabel)
-    titleLabel.snp.makeConstraints {
-      $0.top.equalTo(view.layoutMarginsGuide.snp.top).inset(Metric.topPadding)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
-    }
-  }
-  
-  private func setupDescriptionLabelLayout() {
-    view.addSubview(descriptionLabel)
-    descriptionLabel.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(Metric.descriptionLabelTopPadding)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
-    }
-  }
-  
-  private func setupCollectionViewLayout() {
-    view.addSubview(collectionView)
-    collectionView.snp.makeConstraints {
-      $0.top.equalTo(descriptionLabel.snp.bottom).offset(Metric.collectionViewTopPadding)
-      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
-      $0.bottom.equalToSuperview()
-    }
-  }
-  
-  // Setup Views
-  private func setupView() {
-    setupBaseView()
-  }
-  
-  private func setupBaseView() {
-    view.backgroundColor = .white
-  }
-  
-  private func makeDataSource() -> DataSource {
-    return DataSource(
-      collectionView: collectionView,
-      cellProvider: { collectionView, indexPath, item in
-        let cell = collectionView.dequeueConfiguredReusableCell(
-          using: self.regionPickerCellRegistration,
-          for: indexPath,
-          item: item)
-        cell.configure(item)
-        return cell
-      })
-  }
+  // MARK: - Private
   
   // Bind
   private func bind() {
@@ -214,6 +158,71 @@ class DistrictSelectionViewController: UIViewController {
   }
 }
 
+
+// MARK: - UI & Layout
+
+extension DistrictSelectionViewController {
+  
+  private func setup() {
+    setupLayout()
+    setupView()
+  }
+  
+  // Setup Layouts
+  private func setupLayout() {
+    setupTitleLabelLayout()
+    setupDescriptionLabelLayout()
+    setupCollectionViewLayout()
+  }
+  
+  private func setupTitleLabelLayout() {
+    view.addSubview(titleLabel)
+    titleLabel.snp.makeConstraints {
+      $0.top.equalTo(view.layoutMarginsGuide.snp.top).inset(Metric.topPadding)
+      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+    }
+  }
+  
+  private func setupDescriptionLabelLayout() {
+    view.addSubview(descriptionLabel)
+    descriptionLabel.snp.makeConstraints {
+      $0.top.equalTo(titleLabel.snp.bottom).offset(Metric.descriptionLabelTopPadding)
+      $0.leading.trailing.equalToSuperview().inset(Metric.padding)
+    }
+  }
+  
+  private func setupCollectionViewLayout() {
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints {
+      $0.top.equalTo(descriptionLabel.snp.bottom).offset(Metric.collectionViewTopPadding)
+      $0.leading.trailing.equalToSuperview().inset(10)
+      $0.bottom.equalToSuperview()
+    }
+  }
+  
+  // Setup Views
+  private func setupView() {
+    setupBaseView()
+  }
+  
+  private func setupBaseView() {
+    view.backgroundColor = .white
+  }
+  
+  private func makeDataSource() -> DataSource {
+    return DataSource(
+      collectionView: collectionView,
+      cellProvider: { collectionView, indexPath, item in
+        let cell = collectionView.dequeueConfiguredReusableCell(
+          using: self.regionPickerCellRegistration,
+          for: indexPath,
+          item: item)
+        cell.configure(item)
+        return cell
+      })
+  }
+}
+
 // MARK: - Preview
 
 #if canImport(SwiftUI) && DEBUG
@@ -221,7 +230,7 @@ import SwiftUI
 
 struct OnboardingViewControllerPreview: PreviewProvider {
   static var previews: some View {
-    DistrictSelectionViewController(viewModel: .init()).toPreview()
+    DIContainer.shared.makeDistrictSelectionController().toPreview()
       .ignoresSafeArea()
   }
 }

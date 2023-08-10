@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Swap 3.png",
+      "filename" : "refresh@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Swap 32.png",
+      "filename" : "refresh@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Swap 33.png",
+      "filename" : "refresh@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

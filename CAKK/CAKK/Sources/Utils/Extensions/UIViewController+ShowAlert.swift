@@ -8,10 +8,13 @@
 import UIKit
 
 extension UIViewController {
-  func showFailAlert(with title: String) {
+  func showFailAlert(with title: String,
+                     completion: (() -> Void)? = nil) {
     let alert = UIAlertController(title: title,
                                   message: nil, preferredStyle: .alert)
-    let confirmAction = UIAlertAction(title: "확인", style: .default)
+    let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+      completion?()
+    }
     alert.addAction(confirmAction)
     
     present(alert, animated: true)

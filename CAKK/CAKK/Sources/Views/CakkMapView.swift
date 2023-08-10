@@ -11,50 +11,44 @@ import NMapsMap
 
 final class CakkMapView: NMFNaverMapView {
   
+  
+  // MARK: - Constants
+  
   private enum MarkerImage {
-    static let pin = NMFOverlayImage(image: R.image.map_pin() ?? .checkmark)
-    static let selectedPin = NMFOverlayImage(image: R.image.map_pin_selected() ?? .checkmark)
+    static let pin = NMFOverlayImage(image: R.image.pin_cake_black()!)
+    static let selectedPin = NMFOverlayImage(image: R.image.pin_cake_pink()!)
   }
   
+  // MARK: - Types
+  
+  typealias ViewModel = MainViewModel
+  
+  
   // MARK: - Properties
+  
+  private weak var viewModel: MainViewModel?
   
   private var cancellableBag = Set<AnyCancellable>()
   private var markers: [NMFMarker] = []
   private var selectedMarker: NMFMarker? // 마지막으로 선택된 마커
   
-  // 마커 선택, 해제 시의 동작 closure 바인딩
-  var didTappedMarker: ((CakeShop) -> Void)?
-  var didUnselectMarker: (() -> Void)?
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  init(viewModel: ViewModel) {
+    self.viewModel = viewModel
+    super.init(frame: .zero)
     
     setupMapView()
+    bind(viewModel)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Public
   
-  public func bind(to viewModel: CakeShopListViewModel) {
-    viewModel.output.cakeShops
-      .sink { [weak self] cakeShops in
-        guard let self = self else { return }
-        self.updateMarkers(with: cakeShops)
-      }
-      .store(in: &cancellableBag)
-    
-    viewModel.output.presentCakeShopDetail
-      .sink { [weak self] cakeShop in
-        guard let self = self else { return }
-        self.selectMarker(of: cakeShop)
-      }
-      .store(in: &cancellableBag)
-  }
+  // MARK: - Public
   
   public func unselectMarker() {
     selectedMarker?.iconImage = MarkerImage.pin
@@ -67,7 +61,8 @@ final class CakkMapView: NMFNaverMapView {
     }
     
     let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-    cameraUpdate.animation = .easeIn
+    cameraUpdate.animationDuration = 0.6
+    cameraUpdate.animation = .easeOut
     mapView.moveCamera(cameraUpdate)
   }
   
@@ -78,12 +73,33 @@ final class CakkMapView: NMFNaverMapView {
     moveCamera(location, zoomLevel: nil)
   }
   
+  
   // MARK: - Private
+  
+  private func bind(_ viewModel: ViewModel?) {
+    guard let viewModel else { return }
+    
+    viewModel.output.cakeShops
+      .sink { [weak self] cakeShops in
+        guard let self = self else { return }
+        self.updateMarkers(with: cakeShops)
+      }
+      .store(in: &cancellableBag)
+    
+    viewModel.output
+      .selectedCakeShop
+      .sink { [weak self] selectedCakeShop in
+        if let selectedCakeShop {
+          self?.selectMarker(of: selectedCakeShop)
+        }
+      }
+      .store(in: &cancellableBag)
+  }
   
   private func setupMapView() {
     mapView.touchDelegate = self
     showZoomControls = false
-    mapView.logoAlign = .leftTop
+    mapView.logoAlign = .rightBottom
     mapView.positionMode = .normal
   }
   
@@ -102,6 +118,8 @@ final class CakkMapView: NMFNaverMapView {
     marker.mapView = mapView
     marker.iconImage = MarkerImage.pin
     marker.userInfo = [cakeShop.id: cakeShop]
+    marker.captionText = cakeShop.name
+    marker.isHideCollidedCaptions = true
     setupMarkerTouchHandler(marker, position: position, cakeShop: cakeShop)
     return marker
   }
@@ -112,7 +130,7 @@ final class CakkMapView: NMFNaverMapView {
       guard let self else { return false }
       
       self.selectMarker(marker)
-      self.didTappedMarker?(cakeShop)
+      self.viewModel?.input.selectCakeShopMarker.send(cakeShop)
       
       return true
     }
@@ -154,12 +172,13 @@ final class CakkMapView: NMFNaverMapView {
   }
 }
 
+
 // MARK: - NMFMapViewTouchDelegate
 
 extension CakkMapView: NMFMapViewTouchDelegate {
   // 맵뷰 마커가 아닌 다른 영역 선택 시 해당 마커를 해제하기 위함
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
     unselectMarker()
-    didUnselectMarker?()
+    viewModel?.output.selectedCakeShop.send(nil)
   }
 }

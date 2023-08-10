@@ -7,13 +7,13 @@
 
 import UIKit
 
+import CoreLocation
+
 import Then
 import SnapKit
 import Lottie
 
-import CoreLocation
-
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
   
   // MARK: - Constants
   
@@ -22,41 +22,48 @@ class SplashViewController: UIViewController {
     static let description = "위치 기반 스마트한 케이크샵 검색"
     static let animationName = "grid_animation"
   }
-
+  
   enum Metric {
     static let descriptionLabelBottomMargin = 24.f
     static let gridAnimationSpacing = -18.f
-    static let logoStackViewSpacing = 20.f
-
-    static let descriptionLabelFontSize = 16.f
-    static let descriptionLabelInset = 12.f
+    static let logoStackViewSpacing = 28.f
+    
+    static let subtitleLabelFontSize = 16.f
+    static let subtitleLabelVerticalInset = 12.f
+    static let subtitleLabelHorizontalInset = 21.f
   }
   
   
   // MARK: - UI
   
   private var gridAnimations = [LottieAnimationView]()
-  private var animationStackView = UIStackView().then {
+  private lazy var animationStackView = UIStackView().then {
     $0.spacing = Metric.gridAnimationSpacing
     $0.axis = .vertical
     $0.distribution = .fillEqually
   }
-  private var logoStackView = UIStackView().then {
+  private let logoStackView = UIStackView().then {
     $0.axis = .vertical
     $0.spacing = Metric.logoStackViewSpacing
   }
-  private var descriptionContainerView = UIView().then {
-    $0.backgroundColor = .white.withAlphaComponent(0.2)
+  private let subtitleContainerView = UIView().then {
     $0.layer.cornerRadius = 20
+    $0.alpha = 0
+    $0.clipsToBounds = true
   }
-  private var descriptionLabel = UILabel().then {
-    $0.font = .pretendard(size: Metric.descriptionLabelFontSize, weight: .bold)
+  private let subtitleLabel = UILabel().then {
+    $0.font = .pretendard(size: Metric.subtitleLabelFontSize, weight: .bold)
     $0.text = Constants.description
     $0.textColor = .white
   }
-  private var logoImageView = UIImageView().then {
+  private let logoImageView = UIImageView().then {
     $0.image = R.image.logo()
     $0.contentMode = .scaleAspectFill
+    $0.transform = .init(scaleX: 0, y: 0)
+  }
+  private let blurView = UIVisualEffectView().then { view in
+    let blurEffect = UIBlurEffect(style: .light)
+    view.effect = blurEffect
   }
   
   
@@ -82,25 +89,56 @@ class SplashViewController: UIViewController {
   }
   
   public func playAnimations() {
+    playGridAnimation()
+    playLogoAnimation()
+    playSubTitleAnimation()
+  }
+  
+  public func stopAnimations() {
+    stopGridAnimation()
+  }
+  
+
+  // MARK: - Private
+  
+  private func playGridAnimation() {
     gridAnimations.forEach { animationView in
       animationView.play()
     }
   }
   
-  public func stopAnimations() {
+  private func stopGridAnimation() {
     gridAnimations.forEach { animationView in
       animationView.stop()
     }
   }
   
+  private func playLogoAnimation() {
+    UIView.animate(withDuration: 0.7,
+                   delay: 0,
+                   usingSpringWithDamping: 0.7,
+                   initialSpringVelocity: 0.7) {
+      self.logoImageView.transform = .init(scaleX: 1, y: 1)
+    }
+  }
   
-  // MARK: - Private
+  private func playSubTitleAnimation() {
+    UIView.animate(withDuration: 0.5) {
+      self.subtitleContainerView.alpha = 1
+    }
+  }
+}
+
+// MARK: - UI & Layout
+
+extension SplashViewController {
   
   private func setup() {
     setupLayout()
     setupView()
   }
   
+  // Layout
   private func setupLayout() {
     setupAnimationStackViewLayout()
     setupAnimationViewLayout()
@@ -109,7 +147,8 @@ class SplashViewController: UIViewController {
     setupLogoImageViewLayout()
     
     setupDescriptionContainerViewLayout()
-    setupDescriptionLabelLayout()
+    setupSubTitleContainerBlurLayout()
+    setupSubtitleLabelLayout()
   }
   
   private func setupAnimationStackViewLayout() {
@@ -145,16 +184,25 @@ class SplashViewController: UIViewController {
   }
   
   private func setupDescriptionContainerViewLayout() {
-    logoStackView.addArrangedSubview(descriptionContainerView)
+    logoStackView.addArrangedSubview(subtitleContainerView)
   }
   
-  private func setupDescriptionLabelLayout() {
-    descriptionContainerView.addSubview(descriptionLabel)
-    descriptionLabel.snp.makeConstraints {
-      $0.edges.equalToSuperview().inset(Metric.descriptionLabelInset)
+  private func setupSubTitleContainerBlurLayout() {
+    subtitleContainerView.addSubview(blurView)
+    blurView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
     }
   }
-
+  
+  private func setupSubtitleLabelLayout() {
+    subtitleContainerView.addSubview(subtitleLabel)
+    subtitleLabel.snp.makeConstraints {
+      $0.verticalEdges.equalToSuperview().inset(Metric.subtitleLabelVerticalInset)
+      $0.horizontalEdges.equalToSuperview().inset(Metric.subtitleLabelHorizontalInset)
+    }
+  }
+  
+  // View
   private func setupView() {
     setupBaseView()
   }
@@ -171,11 +219,9 @@ import SwiftUI
 
 struct SplashViewPreview: PreviewProvider {
   static var previews: some View {
-    UIViewPreview {
-      let splashViewController = SplashViewController()
-      return splashViewController.view
-    }
-    .ignoresSafeArea()
+    SplashViewController()
+      .toPreview()
+      .ignoresSafeArea()
   }
 }
 #endif

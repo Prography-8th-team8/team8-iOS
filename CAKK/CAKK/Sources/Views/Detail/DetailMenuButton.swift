@@ -15,10 +15,12 @@ final class DetailMenuButton: UIButton {
   // MARK: - UI
   
   let menuTitleLabel = UILabel().then {
-    $0.font = .pretendard()
+    $0.font = .pretendard(size: 12)
+    $0.textColor = R.color.gray_80()
     $0.isUserInteractionEnabled = false
   }
   let menuImageView = UIImageView().then {
+    $0.tintColor = .black
     $0.isUserInteractionEnabled = false
     $0.contentMode = .scaleAspectFit
   }
@@ -26,13 +28,14 @@ final class DetailMenuButton: UIButton {
   private lazy var stackView = UIStackView(
     arrangedSubviews: [menuImageView, menuTitleLabel]
   ).then {
+    $0.isUserInteractionEnabled = false
     $0.axis = .vertical
     $0.alignment = .center
     $0.distribution = .fill
     $0.spacing = 8
   }
   
-  // MARK: - LifeCycle
+  // MARK: - Initialization
   
   init(image: UIImage?, title: String) {
     super.init(frame: .zero)

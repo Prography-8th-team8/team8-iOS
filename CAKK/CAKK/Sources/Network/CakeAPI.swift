@@ -8,13 +8,24 @@
 import Moya
 import Alamofire
 
+import NMapsGeometry
+
 enum CakeAPI {
-  case fetchCakeShopList(districts: [District])
+  case fetchCakeShopsByDistricts(
+    _ districts: [District],
+    categories: [CakeCategory],
+    page: Int)
+  case fetchCakeShopsByBounds(
+    _ bounds: NMGLatLngBounds,
+    categories: [CakeCategory],
+    page: Int)
   case fetchDistrictCounts
   case fetchCakeShopDetail(id: Int)
   /// numberOfPosts을 지정하지 않으면 포스팅 갯수의 기본값은 3임
-  case fetchBlogReviews(id: Int, numberOfPosts: Int? = nil)
-  case fetchCakeShopImage(id: Int)
+  case fetchBlogReviews(id: Int, numberOfPosts: Int = 3)
+  case fetchCakeCategory(id: Int)
+  case fetchFeed(page: Int)
+  case fetchBookmark(id: Int)
 }
 
 extension CakeAPI: TargetType {
@@ -24,16 +35,29 @@ extension CakeAPI: TargetType {
   
   var path: String {
     switch self {
-    case .fetchCakeShopList:
+    case .fetchCakeShopsByDistricts:
       return "/list"
+      
+    case .fetchCakeShopsByBounds:
+      return "/reload"
+      
     case .fetchDistrictCounts:
       return "/district/count"
+      
     case .fetchCakeShopDetail(id: let id):
       return "/\(id)"
-    case .fetchBlogReviews(id: let id):
+      
+    case .fetchBlogReviews(id: let id, numberOfPosts: _):
       return "/\(id)/blog"
-    case .fetchCakeShopImage(id: let id):
-      return "/image/\(id)"
+    
+    case .fetchCakeCategory(id: let id):
+      return "/\(id)/type"
+      
+    case .fetchFeed:
+      return "/feed"
+      
+    case .fetchBookmark(id: let id):
+      return "/\(id)/bookmark"
     }
   }
   
@@ -46,11 +70,34 @@ extension CakeAPI: TargetType {
   
   var task: Moya.Task {
     switch self {
-    case .fetchCakeShopList(let districts):
+    case .fetchCakeShopsByDistricts(let districts, let categories, let page):
+      let districtsString = districts
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      let categoriesString = categories
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      
       let parameters: Parameters = [
-        "district": districts
-          .map { $0.rawValue.uppercased() }
-          .joined(separator: ",")
+        "district": districtsString,
+        "storeTypes": categoriesString,
+        "page": page
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchCakeShopsByBounds(let bounds, let categories, let page):
+      let categoriesString = categories
+        .map { $0.rawValue }
+        .joined(separator: ",")
+      
+      let parameters: Parameters = [
+        "southwestLatitude": bounds.southWestLat,
+        "southwestLongitude": bounds.southWestLng,
+        "northeastLatitude": bounds.northEastLat,
+        "northeastLongitude": bounds.northEastLng,
+        "storeTypes": categoriesString,
+        "page": page
       ]
       let encoding = URLEncoding(destination: .queryString)
       return .requestParameters(parameters: parameters, encoding: encoding)
@@ -62,14 +109,21 @@ extension CakeAPI: TargetType {
       return .requestPlain
       
     case .fetchBlogReviews(id: _, numberOfPosts: let numberOfPosts):
-      if let numberOfPosts = numberOfPosts {
-        let parameters: Parameters = ["num": numberOfPosts]
-        let encoding = URLEncoding(destination: .queryString)
-        return .requestParameters(parameters: parameters, encoding: encoding)
-      }
-      return .requestPlain
+      let parameters: Parameters = ["num": numberOfPosts]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
       
-    case .fetchCakeShopImage:
+    case .fetchCakeCategory:
+      return .requestPlain
+    
+    case .fetchFeed(let page):
+      let parameters: Parameters = [
+        "page": page
+      ]
+      let encoding = URLEncoding(destination: .queryString)
+      return .requestParameters(parameters: parameters, encoding: encoding)
+      
+    case .fetchBookmark:
       return .requestPlain
     }
   }
@@ -81,18 +135,29 @@ extension CakeAPI: TargetType {
   /// Moya Provider의 Stub Closure 에서 호출되는 SampleData
   var sampleData: Data {
     switch self {
-    case .fetchCakeShopList:
+    case .fetchCakeShopsByDistricts:
       return SampleData.cakeShopListData
+      
+    case .fetchCakeShopsByBounds:
+      return SampleData.cakeShopListData
+      
     case .fetchDistrictCounts:
       return SampleData.districtCountData
+      
     case .fetchCakeShopDetail:
       return SampleData.cakeShopDetailData
+      
     case .fetchBlogReviews:
       return SampleData.blogPostsData
       
-    // TODO: 샵 이미지는 아직 명세 정해지지 않음
-    case .fetchCakeShopImage:
-      return Data()
+    case .fetchCakeCategory:
+      return SampleData.cakeCategoryData
+      
+    case .fetchFeed:
+      return SampleData.feedData
+      
+    case .fetchBookmark:
+      return SampleData.bookmarkData
     }
   }
 }
