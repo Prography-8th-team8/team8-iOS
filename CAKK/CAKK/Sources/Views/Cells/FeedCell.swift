@@ -46,7 +46,7 @@ final class FeedCell: UICollectionViewCell {
   
   private func configureImage(_ imageUrl: String) {
     let url = URL(string: imageUrl)
-    imageView.kf.setImage(with: url)
+    imageView.setDownsampledImage(url: url)
   }
 }
 

@@ -39,7 +39,7 @@ final class CakeImageCell: UICollectionViewCell {
   
   public func configure(imageURL: String) {
     guard let url = URL(string: imageURL) else { return }
-    imageView.kf.setImage(with: url)
+    imageView.setDownsampledImage(url: url)
   }
   
   
