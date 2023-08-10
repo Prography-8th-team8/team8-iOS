@@ -26,7 +26,7 @@ final class FeedDetailViewController: UIViewController {
   enum Metric {
     static let padding = 16.f
     
-    static let closeButtonSize = 22.f
+    static let closeButtonSize = 38.f
     static let navigationViewHeight = 52.f
     
     static let toolBarHeight = 104.f
@@ -319,6 +319,7 @@ extension FeedDetailViewController {
     closeButton.snp.makeConstraints {
       closeButtonCenterYConstraint = $0.centerY.equalToSuperview().constraint
       $0.trailing.equalToSuperview().inset(Metric.padding)
+      $0.size.equalTo(Metric.closeButtonSize)
     }
   }
   
