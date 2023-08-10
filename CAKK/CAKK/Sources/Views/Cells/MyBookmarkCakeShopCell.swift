@@ -112,6 +112,11 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
     $0.backgroundColor = R.color.gray_10()
   }
   
+  private let noCakePhotoImageView = UIImageView().then {
+    $0.image = R.image.nophoto()
+    $0.contentMode = .scaleAspectFill
+  }
+  
   
   // MARK: - Initialization
   
@@ -127,6 +132,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     cancellableBag = .init()
+    configureNoCakeImage(isShowing: false)
   }
   
   
@@ -166,6 +172,11 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   private func configureCakeShopImage(_ bookmark: Bookmark) {
     cakeImageStackView.subviews.forEach { $0.removeFromSuperview() }
     
+    guard bookmark.imageUrls.isEmpty == false else {
+      configureNoCakeImage(isShowing: true)
+      return
+    }
+    
     bookmark.imageUrls.compactMap { [weak self] imageUrl in
       guard let self = self else { return nil }
       
@@ -190,6 +201,12 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
     .forEach { imageView in
       cakeImageStackView.addArrangedSubview(imageView)
     }
+  }
+  
+  private func configureNoCakeImage(isShowing: Bool) {
+    let isHidden = !isShowing
+    cakeImageScrollView.isHidden = !isHidden
+    noCakePhotoImageView.isHidden = isHidden
   }
   
   private func showImageViewer(_ imageUrl: String) {
@@ -240,6 +257,7 @@ extension MyBookmarkCakeShopCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
+    setupNoCakePhotoImageViewLayout()
   }
   
   private func setupHeader() {
@@ -287,6 +305,16 @@ extension MyBookmarkCakeShopCell {
       $0.bottom.leading.trailing.equalToSuperview()
       $0.height.equalTo(1)
     }
+  }
+  
+  private func setupNoCakePhotoImageViewLayout() {
+    contentView.addSubview(noCakePhotoImageView)
+    noCakePhotoImageView.snp.makeConstraints {
+      $0.top.equalTo(headerStackView.snp.bottom).offset(32)
+      $0.horizontalEdges.bottom.equalToSuperview().inset(Metric.padding)
+      $0.height.equalTo(Metric.cakeImageSize)
+    }
+    noCakePhotoImageView.isHidden = true
   }
   
   private func setupView() {

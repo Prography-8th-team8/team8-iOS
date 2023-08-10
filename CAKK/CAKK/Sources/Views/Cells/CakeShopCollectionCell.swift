@@ -129,6 +129,11 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     $0.backgroundColor = R.color.gray_10()
   }
   
+  private let noCakePhotoImageView = UIImageView().then {
+    $0.image = R.image.nophoto()
+    $0.contentMode = .scaleAspectFill
+  }
+  
   
   // MARK: - Initialization
   
@@ -144,6 +149,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     cancellableBag = .init()
+    configureNoCakeImage(isShowing: false)
   }
   
   
@@ -260,8 +266,9 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     // ❌ 이미지 없는 경우 -> 가짜 이미지 하나 뿌려줌
     var imageUrls = imageUrls
     
-    if imageUrls.isEmpty {
-      imageUrls.append("")
+    guard imageUrls.isEmpty == false else {
+      configureNoCakeImage(isShowing: true)
+      return
     }
     
     // 이미지 추가
@@ -290,6 +297,12 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     .forEach { imageView in
       cakeImageStackView.addArrangedSubview(imageView)
     }
+  }
+  
+  private func configureNoCakeImage(isShowing: Bool) {
+    let isHidden = !isShowing
+    cakeImageScrollView.isHidden = !isHidden
+    noCakePhotoImageView.isHidden = isHidden
   }
   
   private func showImageViewer(_ imageUrl: String) {
@@ -345,6 +358,7 @@ extension CakeShopCollectionCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
+    setupNoCakePhotoImageViewLayout()
   }
   
   private func setBookmarkImageViewLayout() {
@@ -420,6 +434,16 @@ extension CakeShopCollectionCell {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(Metric.dividerHeight)
     }
+  }
+  
+  private func setupNoCakePhotoImageViewLayout() {
+    contentView.addSubview(noCakePhotoImageView)
+    noCakePhotoImageView.snp.makeConstraints {
+      $0.top.equalTo(cakeCategoryStackView.snp.bottom).offset(32)
+      $0.horizontalEdges.bottom.equalToSuperview().inset(Metric.padding)
+      $0.height.equalTo(Metric.cakeImageSize)
+    }
+    noCakePhotoImageView.isHidden = true
   }
   
   // Setup View
