@@ -3,7 +3,7 @@ PODS:
   - BadgeSwift (8.0.0)
   - CombineCocoa (0.4.1)
   - EasyTipView (2.1.0)
-  - FloatingPanel (2.6.1)
+  - FloatingPanel (2.6.5)
   - Hero (1.6.2)
   - Kingfisher (7.6.2)
   - lottie-ios (4.1.3)
@@ -15,16 +15,16 @@ PODS:
   - NMapsMap (3.16.2):
     - NMapsGeometry
   - R.swift (7.3.2)
-  - Realm (10.40.2):
-    - Realm/Headers (= 10.40.2)
-  - Realm/Headers (10.40.2)
-  - RealmSwift (10.40.2):
-    - Realm (= 10.40.2)
+  - Realm (10.42.0):
+    - Realm/Headers (= 10.42.0)
+  - Realm/Headers (10.42.0)
+  - RealmSwift (10.42.0):
+    - Realm (= 10.42.0)
   - SkeletonView (1.30.4)
   - SnapKit (5.6.0)
   - SwiftLint (0.50.3)
   - Then (3.0.0)
-  - ToastPiston (0.1.0)
+  - ToastPiston (0.1.2)
 
 DEPENDENCIES:
   - BadgeSwift (~> 8.0)
@@ -42,7 +42,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.6.0)
   - SwiftLint (~> 0.50.3)
   - Then (~> 3.0.0)
-  - ToastPiston (from `https://github.com/WallabyStuff/ToastPiston`)
+  - ToastPiston (~> 0.1.2)
 
 SPEC REPOS:
   trunk:
@@ -64,22 +64,14 @@ SPEC REPOS:
     - SnapKit
     - SwiftLint
     - Then
-
-EXTERNAL SOURCES:
-  ToastPiston:
-    :git: https://github.com/WallabyStuff/ToastPiston
-
-CHECKOUT OPTIONS:
-  ToastPiston:
-    :commit: 11035081255c16c97f16fde63c3c1f37b3bc227b
-    :git: https://github.com/WallabyStuff/ToastPiston
+    - ToastPiston
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   BadgeSwift: a81547ffde1f462bb5fc02e3fa3fdcbc1b888354
   CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
   EasyTipView: a92b6edc377b81c5ac18e9fd35d5ee78e9409488
-  FloatingPanel: de6bb891912ede28da7b1140f7b583c474fec28a
+  FloatingPanel: cd924b71f05f14586260e83b3b52edbf5eb73340
   Hero: c69009dbc9e2f0472e081adc644dba05fcedae72
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   lottie-ios: d0954d3150061f662ed0adf96ef98d7421864c47
@@ -87,14 +79,14 @@ SPEC CHECKSUMS:
   NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
   NMapsMap: aaa64717249b06ae82c3a3addb3a01f0e33100ab
   R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
-  Realm: 731e86d9388287b18e36b0beb2493fc4845ce8a2
-  RealmSwift: c2a1059ba52e1e08467b1253b1d4ab354ef3177b
+  Realm: 490aad28f1360e58fc22256d5d686d3a36525346
+  RealmSwift: f6a9b56d747bbdd7931de1835896c5f024b6898a
   SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 77f7cb2b9bb81ab4a12fcc86448ba3f11afa50c6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
-  ToastPiston: 35fbcf44c5e74ae7a1ca1fbacf68708d8002b713
+  ToastPiston: 85135d46b6606700deb0adaacdc1cf08935e6fce
 
-PODFILE CHECKSUM: f38f25db43bb249893a0d823a05ba2b7fa26565f
+PODFILE CHECKSUM: 5b7625d9fa6b63bd9ff6e8b69cdc107211b90ae6
 
 COCOAPODS: 1.12.1
