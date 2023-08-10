@@ -257,6 +257,7 @@ extension MyBookmarkCakeShopCell {
     setupCakeImageScrollView()
     setupCakeImageStackView()
     setupDividerLayout()
+    setupNoCakePhotoImageViewLayout()
   }
   
   private func setupHeader() {
