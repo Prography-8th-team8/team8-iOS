@@ -60,7 +60,7 @@ class UIControlImageView: UIControl {
   
   public func setImage(urlString: String, placeholder: UIImage? = nil) {
     let url = URL(string: urlString)
-    imageView.setDownsampledImage(url: url, placeholder: placeholder)
+    imageView.setDownsampledImage(with: url, placeholder: placeholder)
   }
   
   public func setupCornerRadius(_ radius: CGFloat) {
