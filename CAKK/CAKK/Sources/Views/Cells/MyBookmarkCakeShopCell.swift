@@ -43,7 +43,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  private var viewModel: MyBookmarkCellViewModel?
+  private var viewModel: MyBookmarkCellViewModel!
   
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -148,18 +148,38 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   // MARK: - Private
   
   private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
     bookmarkButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
-        print("tap!")
-        self?.viewModel?.input.tapBookmarkButton.send()
+        self?.viewModel.input.tapBookmarkButton.send()
       }
       .store(in: &cancellableBag)
-    
-    viewModel?.output.isBookmarked.sink { [weak self] isBookmarked in
+  }
+  
+  private func bindOutput() {
+    viewModel.output
+      .isBookmarked
+      .sink { [weak self] isBookmarked in
       self?.bookmarkButton.setBookmark(isBookmarked)
     }
     .store(in: &cancellableBag)
+    
+    viewModel.output
+      .showBookmarkToast
+      .sink { [weak self] isBookmarked in
+        let vc = self?.findParentViewController()
+        if isBookmarked {
+          vc?.showPistonToast(title: "북마크한 케이크샵에서 삭제되었습니다.")
+        } else {
+          vc?.showPistonToast(title: "케이크샵을 저장했어요!")
+        }
+      }
+      .store(in: &cancellableBag)
   }
   
   private func configure(_ bookmark: Bookmark) {
