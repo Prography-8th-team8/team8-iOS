@@ -300,18 +300,11 @@ final class CakeShopListViewController: UIViewController {
     }()
     
     if isFirstOpen && locationAuthorized {
-      var preferences = EasyTipView.Preferences()
-      preferences.drawing.font = .systemFont(ofSize: 13, weight: .semibold)
-      preferences.drawing.foregroundColor = .white
-      preferences.drawing.backgroundColor = .black
-      preferences.drawing.arrowPosition = .top
-      preferences.drawing.cornerRadius = 14
-      
       EasyTipView.show(
         forView: self.changeDistrictButton,
         withinSuperview: self.view,
         text: "지역별로 케이크샵을 모아봤어요!",
-        preferences: preferences,
+        preferences: .cakkToolTipPreferences(.top),
         delegate: nil)
     }
     

@@ -14,6 +14,7 @@ import Combine
 import CombineCocoa
 
 import Hero
+import EasyTipView
 
 final class FeedDetailViewController: UIViewController {
   
@@ -191,6 +192,11 @@ final class FeedDetailViewController: UIViewController {
     configureLayout()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    showToolTip()
+  }
+  
   
   // MARK: - Bindings
   
@@ -272,6 +278,15 @@ final class FeedDetailViewController: UIViewController {
     let vc = DIContainer.shared.makeShopDetailViewController(with: id)
     vc.modalPresentationStyle = .fullScreen
     present(vc, animated: true)
+  }
+  
+  private func showToolTip() {
+    EasyTipView.show(
+      forView: self.visitShopButton,
+      withinSuperview: self.view,
+      text: "이 가게가 궁금하다면? ",
+      preferences: .cakkToolTipPreferences(.bottom),
+      delegate: nil)
   }
 }
 
