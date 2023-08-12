@@ -83,6 +83,10 @@ final class MyBookmarkViewController: UIViewController {
     $0.isHidden = true
   }
   
+  private lazy var refreshControl = UIRefreshControl().then {
+    collectionView.refreshControl = $0
+  }
+  
   
   // MARK: - Initialization
   
@@ -123,12 +127,28 @@ final class MyBookmarkViewController: UIViewController {
       showCakeShopDetail(item.id)
     }
     .store(in: &cancellables)
+    
+    refreshControl.isRefreshingPublisher.sink { isRefreshed in
+      guard isRefreshed else { return }
+      DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+        viewModel.input.viewWillAppear.send()
+        self.refreshControl.endRefreshing()
+      }
+    }
+    .store(in: &cancellables)
   }
   
   private func bindOutput(_ viewModel: ViewModel) {
     viewModel.output.bookmarks.sink { [weak self] bookmarks in
-      self?.applySnapshot(with: bookmarks)
-      self?.emptyStateView.isHidden = !bookmarks.isEmpty
+      guard let self = self else { return }
+      self.applySnapshot(with: bookmarks)
+      self.emptyStateView.isHidden = !bookmarks.isEmpty
+      
+//      if refreshControl.isRefreshing {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+//          self.refreshControl.endRefreshing()
+//        }
+//      }
     }
     .store(in: &cancellables)
   }
