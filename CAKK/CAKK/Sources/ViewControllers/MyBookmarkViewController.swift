@@ -65,22 +65,13 @@ final class MyBookmarkViewController: UIViewController {
   }()
   
   private let titleLabel = PaddingLabel(top: 10, left: 20, bottom: 10).then {
-    $0.text = "마이페이지"
+    $0.text = "내가 찜한 케이크샵"
     $0.font = .pretendard(size: 20, weight: .bold)
     $0.textColor = .black
     $0.addBorder(to: .bottom, color: R.color.gray_5(), width: 1)
   }
   
-  private let headerLabel = PaddingLabel(top: 24, left: 20, bottom: 16).then {
-    $0.text = "북마크한 케이크샵"
-    $0.font = .pretendard(size: 18)
-    $0.textColor = R.color.gray_80()
-    $0.addBorder(to: .bottom, color: R.color.gray_10(), width: 1)
-  }
-  
-  private lazy var headerStackView = UIStackView(arrangedSubviews: [
-    titleLabel, headerLabel
-  ]).then {
+  private lazy var headerStackView = UIStackView(arrangedSubviews: [titleLabel]).then {
     $0.axis = .vertical
   }
   
@@ -90,6 +81,10 @@ final class MyBookmarkViewController: UIViewController {
     title: "북마크한 케이크샵이 없어요"
   ).then {
     $0.isHidden = true
+  }
+  
+  private lazy var refreshControl = UIRefreshControl().then {
+    collectionView.refreshControl = $0
   }
   
   
@@ -132,12 +127,28 @@ final class MyBookmarkViewController: UIViewController {
       showCakeShopDetail(item.id)
     }
     .store(in: &cancellables)
+    
+    refreshControl.isRefreshingPublisher.sink { isRefreshed in
+      guard isRefreshed else { return }
+      DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+        viewModel.input.viewWillAppear.send()
+        self.refreshControl.endRefreshing()
+      }
+    }
+    .store(in: &cancellables)
   }
   
   private func bindOutput(_ viewModel: ViewModel) {
     viewModel.output.bookmarks.sink { [weak self] bookmarks in
-      self?.applySnapshot(with: bookmarks)
-      self?.emptyStateView.isHidden = !bookmarks.isEmpty
+      guard let self = self else { return }
+      self.applySnapshot(with: bookmarks)
+      self.emptyStateView.isHidden = !bookmarks.isEmpty
+      
+//      if refreshControl.isRefreshing {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+//          self.refreshControl.endRefreshing()
+//        }
+//      }
     }
     .store(in: &cancellables)
   }

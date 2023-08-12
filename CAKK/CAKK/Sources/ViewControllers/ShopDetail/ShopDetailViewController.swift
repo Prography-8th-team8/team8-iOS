@@ -150,9 +150,7 @@ final class ShopDetailViewController: UIViewController {
   
   
   // 케이크 이미지 뷰컨트롤러
-  private lazy var cakeImagesViewController = CakeImagesViewController(
-    viewModel: viewModel,
-    collectionViewLayout: UICollectionViewFlowLayout())
+  private lazy var cakeImagesViewController = CakeImagesViewController(viewModel: viewModel)
   
   // 블로그 포스트 뷰컨트롤러
   private lazy var blogPostsViewController = BlogPostsViewController(
