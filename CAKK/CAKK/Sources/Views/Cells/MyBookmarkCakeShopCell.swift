@@ -203,7 +203,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
       let imageView = UIControlImageView()
       imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
       imageView.setImage(urlString: imageUrl,
-                         placeholder: R.image.no_img_landscape())
+                         placeholder: R.image.no_img_square())
       
       imageView.snp.makeConstraints {
         $0.size.equalTo(Metric.cakeImageSize)

@@ -277,7 +277,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     imageUrls.map { imageUrl in
       let imageView = UIControlImageView()
       imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
-      imageView.setImage(urlString: imageUrl, placeholder: R.image.no_img_landscape())
+      imageView.setImage(urlString: imageUrl, placeholder: R.image.no_img_square())
       
       // Image size
       imageView.snp.makeConstraints {
