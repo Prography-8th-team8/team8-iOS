@@ -15,7 +15,7 @@ import SnapKit
 import Then
 
 
-final class CakeImagesViewController: UICollectionViewController {
+final class CakeImagesViewController: UIViewController {
   
   
   // MARK: - Types
@@ -35,6 +35,29 @@ final class CakeImagesViewController: UICollectionViewController {
   
   private var cancellables = Set<AnyCancellable>()
   
+  lazy var collectionView = UICollectionView(frame: .zero,
+                                             collectionViewLayout: layout)
+  
+  private var layout: UICollectionViewCompositionalLayout {
+    let itemSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1),
+      heightDimension: .fractionalHeight(1))
+    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+    
+    let groupSize = NSCollectionLayoutSize(
+      widthDimension: .fractionalWidth(1),
+      heightDimension: .fractionalWidth(1 / 3))
+    let group = NSCollectionLayoutGroup.horizontal(
+      layoutSize: groupSize,
+      subitem: item,
+      count: 3)
+    group.interItemSpacing = .fixed(3)
+    
+    let section = NSCollectionLayoutSection(group: group)
+    section.interGroupSpacing = 3
+    return UICollectionViewCompositionalLayout(section: section)
+  }
+  
   
   // MARK: - UI Components
   
@@ -47,9 +70,9 @@ final class CakeImagesViewController: UICollectionViewController {
   
   // MARK: - Initialization
   
-  init(viewModel: ShopDetailViewModel, collectionViewLayout: UICollectionViewLayout) {
+  init(viewModel: ShopDetailViewModel) {
     self.viewModel = viewModel
-    super.init(collectionViewLayout: collectionViewLayout)
+    super.init(nibName: nil, bundle: nil)
   }
   
   required init?(coder: NSCoder) {
@@ -64,17 +87,6 @@ final class CakeImagesViewController: UICollectionViewController {
     setup()
     bind()
   }
-
-  // 아이패드 레이아웃 호환을 위해 bounds가 변경될 때 마다 새롭게 잡아주도록 함
-  // (플로팅 패널의 사이즈가 전체를 덮지 않을 수 있기에)
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-    layout.minimumInteritemSpacing = 3
-    let width = view.bounds.width / 3 - 5
-    layout.itemSize = CGSize(width: width, height: width)
-  }
   
   
   // MARK: - Setups
@@ -88,12 +100,7 @@ final class CakeImagesViewController: UICollectionViewController {
   // MARK: - Bind
   
   private func bind() {
-    bindInput()
     bindOutput()
-  }
-  
-  private func bindInput() {
-    
   }
   
   private func bindOutput() {
@@ -116,7 +123,6 @@ final class CakeImagesViewController: UICollectionViewController {
   func cakeImageURL(of indexPath: IndexPath) -> String? {
     return dataSource.itemIdentifier(for: indexPath)
   }
-  
 }
 
 
@@ -125,7 +131,15 @@ final class CakeImagesViewController: UICollectionViewController {
 extension CakeImagesViewController {
   
   private func setupLayout() {
+    setupCollectionViewLayout()
     setupEmptyStateViewLayout()
+  }
+  
+  private func setupCollectionViewLayout() {
+    view.addSubview(collectionView)
+    collectionView.snp.makeConstraints { make in
+      make.edges.equalToSuperview()
+    }
   }
   
   private func setupEmptyStateViewLayout() {
