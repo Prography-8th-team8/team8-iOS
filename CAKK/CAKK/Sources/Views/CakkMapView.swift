@@ -155,6 +155,7 @@ final class CakkMapView: NMFNaverMapView {
       return
     }
     
+    marker.zIndex = max(markers.count, (selectedMarker?.zIndex ?? 0) + 1)
     selectMarker(marker)
   }
   
