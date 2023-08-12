@@ -100,6 +100,11 @@ final class CakeImagesViewController: UICollectionViewController {
     viewModel.output.cakeShopDetail
       .sink { [weak self] shopDetail in
         guard let imageUrls = shopDetail?.imageUrls else { return }
+        guard imageUrls.isEmpty == false else {
+          self?.emptyStateView.isHidden = false
+          return
+        }
+
         self?.applySnapshot(with: imageUrls)
       }
       .store(in: &cancellables)
