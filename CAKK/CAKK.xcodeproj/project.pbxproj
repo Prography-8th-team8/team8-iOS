@@ -19,6 +19,7 @@
 		8E1C94932A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C94922A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift */; };
 		8E1C94952A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C94942A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift */; };
 		8E1C98432A0EB7C300CF57E5 /* HighlightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */; };
+		8E1DABAD2A8767950069C800 /* EasyTipView+CakkToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DABAC2A8767950069C800 /* EasyTipView+CakkToolTip.swift */; };
 		8E32CEA329CEE8FC00905FD6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */; };
 		8E33EC1329F7F04600931195 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EC1229F7F04600931195 /* UIViewPreview.swift */; };
 		8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33EE2129F8E97C00931195 /* CapsuleView.swift */; };
@@ -160,6 +161,7 @@
 		8E1C94922A529A7E009F6803 /* CakeShopDetailFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		8E1C94942A529AC7009F6803 /* CakeShopDetailFloatingPanelLandscapeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CakeShopDetailFloatingPanelLandscapeLayout.swift; sourceTree = "<group>"; };
 		8E1C98422A0EB7C300CF57E5 /* HighlightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableCell.swift; sourceTree = "<group>"; };
+		8E1DABAC2A8767950069C800 /* EasyTipView+CakkToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EasyTipView+CakkToolTip.swift"; sourceTree = "<group>"; };
 		8E32CEA229CEE8FC00905FD6 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		8E33EC1229F7F04600931195 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		8E33EE2129F8E97C00931195 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */,
 				B4484B372A76631900B37EFC /* UIViewController+ShowPopUp.swift */,
 				B4592E352A84738B00A6B366 /* UIImageView+DownSampling.swift */,
+				8E1DABAC2A8767950069C800 /* EasyTipView+CakkToolTip.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,
 				8E9E192929CEDD4F00CFF157 /* SceneDelegate.swift in Sources */,
+				8E1DABAD2A8767950069C800 /* EasyTipView+CakkToolTip.swift in Sources */,
 				B4F5CDC529DAF99B00AE4F66 /* UITableView+Register.swift in Sources */,
 				8E3FF2E82A0E408800865E36 /* CakkView.swift in Sources */,
 				8E33EE2229F8E97C00931195 /* CapsuleView.swift in Sources */,
