@@ -53,6 +53,9 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  /// 해당 상세 뷰컨이 전체보기로 띄워졌는지 판단 (PistonToast를 어떤 방식으로 띄울지 결정하기 위함) 
+  var isFullState: Bool = false
+  
   weak var delegate: ShopDetailViewControllerDelegate?
   
   
@@ -389,17 +392,36 @@ final class ShopDetailViewController: UIViewController {
   
   private func bindIsBookmarked() {
     viewModel.output.isBookmarked
+      .dropFirst()
       .sink { [weak self] isBookmarked in
         guard let self = self else { return }
         let cakeShopID = viewModel.output.cakeShopDetail.value?.id ?? 0
         
-        let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
-        bookmarkMenuButton.update(image: buttonImage)
-        delegate?.shopDetailViewController(self,
-                                           didBookmarkStateChanged: isBookmarked,
-                                           of: cakeShopID)
+        delegate?.shopDetailViewController(
+          self,
+          didBookmarkStateChanged: isBookmarked,
+          of: cakeShopID)
+        
+        if isFullState {
+          showPiston(isBookmarked: isBookmarked)
+        }
       }
       .store(in: &cancellables)
+    
+    viewModel.output.isBookmarked
+      .sink { [weak self] isBookmarked in
+        let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
+        self?.bookmarkMenuButton.update(image: buttonImage)
+      }
+      .store(in: &cancellables)
+  }
+  
+  private func showPiston(isBookmarked: Bool) {
+    if isBookmarked {
+      showPistonToast(title: "케이크샵을 저장했어요!")
+    } else {
+      showPistonToast(title: "북마크한 케이크샵에서 삭제되었습니다.")
+    }
   }
 }
 

@@ -143,18 +143,13 @@ final class MyBookmarkViewController: UIViewController {
       guard let self = self else { return }
       self.applySnapshot(with: bookmarks)
       self.emptyStateView.isHidden = !bookmarks.isEmpty
-      
-//      if refreshControl.isRefreshing {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-//          self.refreshControl.endRefreshing()
-//        }
-//      }
     }
     .store(in: &cancellables)
   }
   
   private func showCakeShopDetail(_ id: Int) {
     let viewController = DIContainer.shared.makeShopDetailViewController(with: id)
+    viewController.isFullState = true
     viewController.modalPresentationStyle = .fullScreen
     present(viewController, animated: true)
   }

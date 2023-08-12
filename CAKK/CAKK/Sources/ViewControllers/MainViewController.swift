@@ -584,6 +584,12 @@ extension MainViewController: ShopDetailViewControllerDelegate {
       .contentViewController as? CakeShopListViewController else { return }
     
     viewController.applyBookmarkStateToCell(of: cakeShopID, isBookmarked: isBookmarked)
+    
+    if isBookmarked {
+      showPistonToast(title: "케이크샵을 저장했어요!")
+    } else {
+      showPistonToast(title: "북마크한 케이크샵에서 삭제되었습니다.")
+    }
   }
 }
 
