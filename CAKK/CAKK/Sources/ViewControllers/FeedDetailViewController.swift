@@ -276,6 +276,7 @@ final class FeedDetailViewController: UIViewController {
   
   private func showCakeShopDetail(_ id: Int) {
     let vc = DIContainer.shared.makeShopDetailViewController(with: id)
+    vc.isFullState = true
     vc.modalPresentationStyle = .fullScreen
     present(vc, animated: true)
   }
