@@ -18,7 +18,7 @@ class MyBookmarkCellViewModel {
   }
   
   struct Output {
-    let isBookmarked = CurrentValueSubject<Bool, Never>(false)
+    let isBookmarked = CurrentValueSubject<Bool, Never>(true)
     let showBookmarkToast = PassthroughSubject<Bool, Never>()
   }
   
