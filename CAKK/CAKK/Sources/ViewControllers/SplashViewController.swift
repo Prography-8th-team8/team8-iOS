@@ -61,9 +61,9 @@ final class SplashViewController: UIViewController {
     $0.contentMode = .scaleAspectFill
     $0.transform = .init(scaleX: 0, y: 0)
   }
-  private let blurView = UIVisualEffectView().then { view in
-    let blurEffect = UIBlurEffect(style: .light)
-    view.effect = blurEffect
+  private let descriptionContainerView = UIView().then {
+    $0.backgroundColor = .white
+    $0.alpha = 0.15
   }
   
   
@@ -188,8 +188,8 @@ extension SplashViewController {
   }
   
   private func setupSubTitleContainerBlurLayout() {
-    subtitleContainerView.addSubview(blurView)
-    blurView.snp.makeConstraints {
+    subtitleContainerView.addSubview(descriptionContainerView)
+    descriptionContainerView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
   }
