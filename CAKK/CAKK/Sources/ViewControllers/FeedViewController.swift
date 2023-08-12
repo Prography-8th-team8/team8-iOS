@@ -15,7 +15,7 @@ final class FeedViewController: UIViewController {
   // MARK: - Constants
   
   enum Metric {
-    static let collectionViewSpacing = 7.f
+    static let collectionViewSpacing = 3.f
   }
   
   
@@ -44,7 +44,7 @@ final class FeedViewController: UIViewController {
   lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
     let screenWidth = UIScreen.main.bounds.size.width
-    let spacing: CGFloat = 7
+    let spacing = Metric.collectionViewSpacing
 
     var itemWidth: CGFloat = 0
     var itemCount: CGFloat = 3 // default itemCount, adjust as per requirement
