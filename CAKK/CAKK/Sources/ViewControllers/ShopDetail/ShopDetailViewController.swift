@@ -494,7 +494,7 @@ extension ShopDetailViewController {
   }
   
   private func setupHeaderBackgroundView() {
-    view.addSubview(headerBackgroundView)
+    view.insertSubview(headerBackgroundView, at: 0)
     headerBackgroundView.snp.makeConstraints {
       $0.top.equalTo(infoStackContainerView)
       $0.horizontalEdges.equalToSuperview()
