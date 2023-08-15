@@ -367,14 +367,22 @@ final class MainViewController: UIViewController {
       }
     } else {
       // update camera inset
-      cakkMapView.mapView.contentInset = .init(
-        top: view.safeAreaInsets.top,
-        left: 0,
-        bottom: floatingPanelHeight - view.safeAreaInsets.bottom,
-        right: 0)
-      
-      // Update refresh button position
-      moveRefreshButtonPosition(leftInset: 0)
+      let cakeShopListMinY = cakeShopListFloatingPanel.surfaceView.frame.minY
+      let cakeShopDetailMinY = cakeShopDetailFloatingPanel.surfaceView.frame.minY
+      let minimumMinYPosition: CGFloat = 200
+
+      // 최대 없데이트 할 수 있는 카메라 inset이 최소 높이 200을 넘지 않도록 하여 constraint 깨지는 문제 방지.
+      if cakeShopListMinY > minimumMinYPosition &&
+          cakeShopDetailMinY > minimumMinYPosition {
+        cakkMapView.mapView.contentInset = .init(
+          top: view.safeAreaInsets.top,
+          left: 0,
+          bottom: floatingPanelHeight - view.safeAreaInsets.bottom,
+          right: 0)
+        
+        // Update refresh button position
+        moveRefreshButtonPosition(leftInset: 0)
+      }
     }
   }
   

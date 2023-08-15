@@ -70,18 +70,14 @@ final class BlogPostCell: HighlightableCell {
     setupStackViewLayout()
     
     stackView.addArrangedSubview(bloggerNamePostDateLabel)
-    stackView.setCustomSpacing(14, after: bloggerNamePostDateLabel)
-    
     stackView.addArrangedSubview(titleLabel)
-    stackView.setCustomSpacing(10, after: titleLabel)
-    
     stackView.addArrangedSubview(contentLabel)
   }
   
   private func setupStackViewLayout() {
-    addSubview(stackView)
+    contentView.addSubview(stackView)
     stackView.snp.makeConstraints {
-      $0.verticalEdges.equalToSuperview().inset(20)
+      $0.verticalEdges.equalToSuperview().inset(24)
       $0.horizontalEdges.equalToSuperview()
     }
   }
@@ -92,7 +88,7 @@ final class BlogPostCell: HighlightableCell {
       attributes: [.font: UIFont.pretendard(size: 12, weight: .bold)])
     
     let separatorAttrString = NSAttributedString(
-      string: " ∙ ",
+      string: " ・ ",
       attributes: [.font: UIFont.pretendard(size: 12, weight: .bold),
                    .foregroundColor: R.color.gray_20() ?? .gray])
     

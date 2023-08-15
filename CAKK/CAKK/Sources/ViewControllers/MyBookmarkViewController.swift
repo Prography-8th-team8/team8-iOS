@@ -53,7 +53,7 @@ final class MyBookmarkViewController: UIViewController {
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1.0),
-      heightDimension: .estimated(160))
+      heightDimension: .estimated(208))
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
     let group = NSCollectionLayoutGroup.vertical(
