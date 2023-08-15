@@ -283,7 +283,7 @@ extension MyBookmarkCakeShopCell {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.padding)
-      $0.top.equalToSuperview().inset(20)
+      $0.top.equalToSuperview().inset(Metric.padding)
       $0.trailing.equalTo(bookmarkButton.snp.leading)
     }
     
@@ -329,9 +329,8 @@ extension MyBookmarkCakeShopCell {
   private func setupNoCakePhotoImageViewLayout() {
     contentView.addSubview(noCakePhotoImageView)
     noCakePhotoImageView.snp.makeConstraints {
-      $0.top.equalTo(headerStackView.snp.bottom).offset(32)
-      $0.horizontalEdges.bottom.equalToSuperview().inset(Metric.padding)
-      $0.height.equalTo(Metric.cakeImageSize)
+      $0.verticalEdges.equalTo(cakeImageScrollView)
+      $0.horizontalEdges.equalTo(cakeImageScrollView).inset(Metric.padding)
     }
     noCakePhotoImageView.isHidden = true
   }
