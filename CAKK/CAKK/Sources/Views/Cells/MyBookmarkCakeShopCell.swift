@@ -171,12 +171,11 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
     
     viewModel.output
       .showBookmarkToast
-      .sink { [weak self] isBookmarked in
-        let vc = self?.findParentViewController()
+      .sink { isBookmarked in
         if isBookmarked {
-          vc?.showPistonToast(title: "북마크한 케이크샵에서 삭제되었습니다.")
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
         } else {
-          vc?.showPistonToast(title: "케이크샵을 저장했어요!")
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
         }
       }
       .store(in: &cancellableBag)

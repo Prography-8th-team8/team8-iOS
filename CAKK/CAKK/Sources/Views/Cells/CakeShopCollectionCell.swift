@@ -175,7 +175,15 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     bookmarkButton
       .tapPublisher
       .sink { _ in
+        // 북마크 저장
         viewModel.input.tapBookmarkButton.send(Void())
+        
+        // 북마크 저장 토스트 피드백
+        if viewModel.output.isBookmarked.value {
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
+        } else {
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
+        }
       }
       .store(in: &cancellableBag)
   }

@@ -21,6 +21,7 @@ final class TabBarController: UITabBarController {
   private func setupTabBar() {
     setupTabBarAppearance()
     setupTabBarViewControllers()
+    setupToastManager()
   }
   
   private func setupTabBarAppearance() {
@@ -49,5 +50,9 @@ final class TabBarController: UITabBarController {
     bookmarkVC.tabBarItem = .init(title: "북마크", image: R.image.heart()!, tag: 2)
     
     viewControllers = [mainVC, feedVC, bookmarkVC]
+  }
+  
+  private func setupToastManager() {
+    ToastManager.shared.setTargetViewController(self)
   }
 }

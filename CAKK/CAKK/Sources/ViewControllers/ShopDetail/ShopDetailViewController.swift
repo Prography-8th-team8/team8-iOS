@@ -326,7 +326,15 @@ final class ShopDetailViewController: UIViewController {
     bookmarkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
-        self?.viewModel.input.tapBookmarkButton.send()
+        guard let self else { return }
+        self.viewModel.input.tapBookmarkButton.send()
+        
+        // 북마크 저장 토스트 피드백
+        if self.viewModel.output.isBookmarked.value {
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
+        } else {
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
+        }
       }
       .store(in: &cancellables)
   }
