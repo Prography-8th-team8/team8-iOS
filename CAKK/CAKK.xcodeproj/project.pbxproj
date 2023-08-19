@@ -48,6 +48,7 @@
 		8E84BC902A90C7F7007BB0DD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */; };
 		8E84BC942A90D294007BB0DD /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC932A90D294007BB0DD /* TabCoordinator.swift */; };
 		8E84BC962A90D78E007BB0DD /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */; };
+		8E84BC982A90DD88007BB0DD /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -186,6 +187,7 @@
 		8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC932A90D294007BB0DD /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */,
 				8E84BC932A90D294007BB0DD /* TabCoordinator.swift */,
 				8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */,
+				8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				B41EF0552A34E63C0068843B /* UICollectionView+RegisterDequeue.swift in Sources */,
 				8EAB811F2A46141F00D9FA41 /* FilterViewModel.swift in Sources */,
 				B4F5CDC929DAFA9300AE4F66 /* CakeShopCollectionCell.swift in Sources */,
+				8E84BC982A90DD88007BB0DD /* FeedCoordinator.swift in Sources */,
 				B41D30922A2CD2B60092A0BD /* Array+SafeIndex.swift in Sources */,
 				B455C4362A07EB2F00FB8403 /* District.swift in Sources */,
 				8E9E192729CEDD4F00CFF157 /* AppDelegate.swift in Sources */,

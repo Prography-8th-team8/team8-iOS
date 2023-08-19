@@ -1,5 +1,5 @@
 //
-//  MainCoordinator.swift
+//  FeedCoordinator.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/08/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MainCoordinator: Coordinator {
+final class FeedCoordinator: Coordinator {
   
   // MARK: - Properties
   
@@ -29,10 +29,8 @@ final class MainCoordinator: Coordinator {
   // MARK: - Methods
   
   func start() {
-    let networkService = NetworkService<CakeAPI>(type: serviceType, isLogEnabled: false)
-    let realmStorage: RealmStorageProtocol = RealmStorage()
-    let viewModel = MainViewModel(service: networkService, storage: realmStorage)
-    let vc = MainViewController(viewModel: viewModel)
+    let viewModel = FeedViewModel(service: NetworkService<CakeAPI>(type: serviceType, isLogEnabled: false))
+    let vc = FeedViewController(viewModel: viewModel)
   }
 }
 
