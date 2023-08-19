@@ -14,14 +14,17 @@ final class MainCoordinator: Coordinator {
   
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
+  var tabBarController: UITabBarController
   let serviceType: NetworkServiceType
   
   
   // MARK: - Initializers
   
   init(navigationController: UINavigationController,
+       tabBarController: UITabBarController,
        serviceType: NetworkServiceType) {
     self.navigationController = navigationController
+    self.tabBarController = tabBarController
     self.serviceType = serviceType
   }
   
@@ -33,5 +36,12 @@ final class MainCoordinator: Coordinator {
     let realmStorage: RealmStorageProtocol = RealmStorage()
     let viewModel = MainViewModel(service: networkService, storage: realmStorage)
     let vc = MainViewController(viewModel: viewModel)
+    vc.tabBarItem = .init(title: "홈", image: R.image.home()!, tag: 0)
+    
+    if tabBarController.viewControllers == nil {
+      tabBarController.viewControllers = [vc]
+    } else {
+      tabBarController.viewControllers?.append(vc)
+    }
   }
 }

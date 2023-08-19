@@ -14,14 +14,17 @@ final class BookmarkCoordinator: Coordinator {
   
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
+  let tabBarController: UITabBarController
   let storage: RealmStorageProtocol
   
   
   // MARK: - Initializers
   
   init(navigationController: UINavigationController,
+       tabBarController: UITabBarController,
        storage: RealmStorageProtocol) {
     self.navigationController = navigationController
+    self.tabBarController = tabBarController
     self.storage = storage
   }
   
@@ -31,6 +34,12 @@ final class BookmarkCoordinator: Coordinator {
   func start() {
     let viewModel = MyBookmarkViewModel(realmStorage: storage)
     let vc = MyBookmarkViewController(viewModel: viewModel)
+    vc.tabBarItem = .init(title: "북마크", image: R.image.heart()!, tag: 2)
+    
+    if tabBarController.viewControllers == nil {
+      tabBarController.viewControllers = [vc]
+    } else {
+      tabBarController.viewControllers?.append(vc)
+    }
   }
 }
-

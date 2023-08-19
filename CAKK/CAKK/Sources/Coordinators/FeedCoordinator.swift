@@ -14,14 +14,17 @@ final class FeedCoordinator: Coordinator {
   
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
+  let tabBarController: UITabBarController
   let serviceType: NetworkServiceType
   
   
   // MARK: - Initializers
   
   init(navigationController: UINavigationController,
+       tabBarController: UITabBarController,
        serviceType: NetworkServiceType) {
     self.navigationController = navigationController
+    self.tabBarController = tabBarController
     self.serviceType = serviceType
   }
   
@@ -31,6 +34,12 @@ final class FeedCoordinator: Coordinator {
   func start() {
     let viewModel = FeedViewModel(service: NetworkService<CakeAPI>(type: serviceType, isLogEnabled: false))
     let vc = FeedViewController(viewModel: viewModel)
+    vc.tabBarItem = .init(title: "피드", image: R.image.magnifying_glass()!, tag: 1)
+    
+    if tabBarController.viewControllers == nil {
+      tabBarController.viewControllers = [vc]
+    } else {
+      tabBarController.viewControllers?.append(vc)
+    }
   }
 }
-

@@ -34,12 +34,35 @@ final class TabCoordinator: Coordinator {
   
   func start() {
     let tabBarController = TabBarController()
+    tabBarController.navigationController?.setNavigationBarHidden(true, animated: false)
+    self.tabBarController = tabBarController
     
     navigationController.pushViewController(tabBarController, animated: false)
-    
     window.rootViewController = navigationController
     window.makeKeyAndVisible()
     
-    self.tabBarController = tabBarController
+    // Main coordinator
+    let mainCoordinator = MainCoordinator(
+      navigationController: navigationController,
+      tabBarController: tabBarController,
+      serviceType: serviceType)
+    childCoordinators.append(mainCoordinator)
+    mainCoordinator.start()
+    
+    // Feed coordinator
+    let feedCoordinator = FeedCoordinator(
+      navigationController: navigationController,
+      tabBarController: tabBarController,
+      serviceType: serviceType)
+    childCoordinators.append(feedCoordinator)
+    feedCoordinator.start()
+    
+    // Bookmark coordinator
+    let bookmarkCoordinator = BookmarkCoordinator(
+      navigationController: navigationController,
+      tabBarController: tabBarController,
+      storage: RealmStorage())
+    childCoordinators.append(bookmarkCoordinator)
+    bookmarkCoordinator.start()
   }
 }
