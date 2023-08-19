@@ -65,6 +65,7 @@ final class TabCoordinator: Coordinator {
     let bookmarkCoordinator = BookmarkCoordinator(
       navigationController: navigationController,
       tabBarController: tabBarController,
+      serviceType: serviceType,
       storage: RealmStorage())
     childCoordinators.append(bookmarkCoordinator)
     bookmarkCoordinator.start()
