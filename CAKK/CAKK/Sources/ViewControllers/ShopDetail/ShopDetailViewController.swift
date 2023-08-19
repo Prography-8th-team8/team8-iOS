@@ -54,7 +54,7 @@ final class ShopDetailViewController: UIViewController {
   }
   
   /// 해당 상세 뷰컨이 전체보기로 띄워졌는지 판단 (PistonToast를 어떤 방식으로 띄울지 결정하기 위함) 
-  var isFullState: Bool = false
+  var isFullState: Bool = false // TODO: - ToastManager로 빠졌기 때문에 삭제 검토 필요
   
   weak var delegate: ShopDetailViewControllerDelegate?
   

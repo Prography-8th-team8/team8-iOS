@@ -54,6 +54,8 @@ final class FeedDetailViewController: UIViewController {
   
   // MARK: - Properties
   
+  public var coordinator: FeedDetailCoordinator?
+  
   private let viewModel: FeedDetailViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -248,7 +250,7 @@ final class FeedDetailViewController: UIViewController {
     viewModel.output
       .isCakeShopDetailShown
       .sink { [weak self] cakeShopId in
-        self?.showCakeShopDetail(cakeShopId)
+        self?.coordinator?.eventOccurred(event: .showShopDetail(id: cakeShopId))
       }
       .store(in: &cancellableBag)
     
@@ -273,13 +275,6 @@ final class FeedDetailViewController: UIViewController {
   
   
   // MARK: - Private
-  
-  private func showCakeShopDetail(_ id: Int) {
-    let vc = DIContainer.shared.makeShopDetailViewController(with: id)
-    vc.isFullState = true
-    vc.modalPresentationStyle = .fullScreen
-    present(vc, animated: true)
-  }
   
   private func showToolTip() {
     EasyTipView.show(

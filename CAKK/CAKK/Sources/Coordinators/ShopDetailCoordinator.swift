@@ -43,6 +43,10 @@ final class ShopDetailCoordinator: Coordinator {
                                         service: networkService,
                                         realmStorage: storage)
     let vc = ShopDetailViewController(viewModel: viewModel)
+    vc.isFullState = true
+    vc.modalPresentationStyle = .fullScreen
+    navigationController.viewControllers.last?.dismiss(animated: true)
+    navigationController.present(vc, animated: true)
   }
   
   func eventOccurred(event: ShopDetailCoordinator.event) { }

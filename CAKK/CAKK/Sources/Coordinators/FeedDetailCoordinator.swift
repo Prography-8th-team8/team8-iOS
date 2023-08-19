@@ -12,7 +12,9 @@ final class FeedDetailCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  enum event: CoordinatorEvent { }
+  enum event: CoordinatorEvent {
+    case showShopDetail(id: Int)
+  }
   
   var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
@@ -40,9 +42,20 @@ final class FeedDetailCoordinator: Coordinator {
                                         service: service,
                                         storage: RealmStorage())
     let vc = FeedDetailViewController(viewModel: viewModel)
+    vc.coordinator = self
     vc.modalPresentationStyle = .overFullScreen
     navigationController.present(vc, animated: true)
   }
   
-  func eventOccurred(event: FeedDetailCoordinator.event) { }
+  func eventOccurred(event: FeedDetailCoordinator.event) {
+    switch event {
+    case .showShopDetail(let id):
+      let shopDetailCoordinator = ShopDetailCoordinator(
+        navigationController: navigationController,
+        cakeShopID: id,
+        serviceType: serviceType,
+        storage: RealmStorage())
+      shopDetailCoordinator.start()
+    }
+  }
 }
