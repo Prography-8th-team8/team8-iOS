@@ -49,6 +49,7 @@
 		8E84BC942A90D294007BB0DD /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC932A90D294007BB0DD /* TabCoordinator.swift */; };
 		8E84BC962A90D78E007BB0DD /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */; };
 		8E84BC982A90DD88007BB0DD /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */; };
+		8E84BC9A2A90DEA5007BB0DD /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -188,6 +189,7 @@
 		8E84BC932A90D294007BB0DD /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				8E84BC932A90D294007BB0DD /* TabCoordinator.swift */,
 				8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */,
 				8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */,
+				8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1000,6 +1003,7 @@
 				8E02B7822A057DD3003AE7AF /* DistrictSelectionViewModel.swift in Sources */,
 				8EAB811B2A45DCA800D9FA41 /* FilterButton.swift in Sources */,
 				8EAB81212A46148B00D9FA41 /* FilteredCategoryUserDefault.swift in Sources */,
+				8E84BC9A2A90DEA5007BB0DD /* BookmarkCoordinator.swift in Sources */,
 				8E84BC962A90D78E007BB0DD /* MainCoordinator.swift in Sources */,
 				B49BC9292A0BCDE4009BD434 /* UIView+Border.swift in Sources */,
 				B49F0C9229E69C5D001BB296 /* UIScrollView+Scroll.swift in Sources */,
