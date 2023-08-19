@@ -51,6 +51,7 @@
 		8E84BC982A90DD88007BB0DD /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */; };
 		8E84BC9A2A90DEA5007BB0DD /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */; };
 		8E84BC9C2A90DF4B007BB0DD /* ShopDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */; };
+		8E84BCA22A912BAD007BB0DD /* FeedDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BCA12A912BAD007BB0DD /* FeedDetailCoordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -192,6 +193,7 @@
 		8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailCoordinator.swift; sourceTree = "<group>"; };
+		8E84BCA12A912BAD007BB0DD /* FeedDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailCoordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				8E84BC932A90D294007BB0DD /* TabCoordinator.swift */,
 				8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */,
 				8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */,
+				8E84BCA12A912BAD007BB0DD /* FeedDetailCoordinator.swift */,
 				8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */,
 				8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */,
 			);
@@ -925,6 +928,7 @@
 				B4FB8E842A0F7DA600DBF193 /* ShopDetailViewModel.swift in Sources */,
 				8EB7E9912A7696B2008EEFE4 /* Feed.swift in Sources */,
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
+				8E84BCA22A912BAD007BB0DD /* FeedDetailCoordinator.swift in Sources */,
 				B4592E362A84738B00A6B366 /* UIImageView+DownSampling.swift in Sources */,
 				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
 				8E84BC942A90D294007BB0DD /* TabCoordinator.swift in Sources */,

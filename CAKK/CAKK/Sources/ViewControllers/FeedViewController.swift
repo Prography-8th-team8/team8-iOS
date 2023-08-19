@@ -30,6 +30,8 @@ final class FeedViewController: UIViewController {
   
   // MARK: - Properties
   
+  public var coordinator: FeedCoordinator?
+  
   private let viewModel: FeedViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -161,7 +163,7 @@ final class FeedViewController: UIViewController {
     viewModel.output
       .showFeedDetail
       .sink { [weak self] feed in
-        self?.presentFeedDetail(feed)
+        self?.coordinator?.eventOccurred(event: .tapFeed(feed))
       }
       .store(in: &cancellableBag)
   }
@@ -172,12 +174,6 @@ final class FeedViewController: UIViewController {
   private func updateCollectionViewLayout() {
     collectionView.collectionViewLayout.invalidateLayout()
     collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
-  }
-  
-  private func presentFeedDetail(_ feed: Feed) {
-    let vc = DIContainer.shared.makeFeedDetailViewController(feed: feed)
-    vc.modalPresentationStyle = .overFullScreen
-    present(vc, animated: true)
   }
 }
 

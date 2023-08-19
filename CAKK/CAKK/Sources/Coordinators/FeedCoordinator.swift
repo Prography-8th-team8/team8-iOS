@@ -12,7 +12,9 @@ final class FeedCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  enum event: CoordinatorEvent { }
+  enum event: CoordinatorEvent {
+    case tapFeed(_ feed: Feed)
+  }
   
   var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
@@ -36,6 +38,7 @@ final class FeedCoordinator: Coordinator {
   func start() {
     let viewModel = FeedViewModel(service: NetworkService<CakeAPI>(type: serviceType, isLogEnabled: false))
     let vc = FeedViewController(viewModel: viewModel)
+    vc.coordinator = self
     vc.tabBarItem = .init(title: "피드", image: R.image.magnifying_glass()!, tag: 1)
     
     if tabBarController.viewControllers == nil {
@@ -45,5 +48,14 @@ final class FeedCoordinator: Coordinator {
     }
   }
   
-  func eventOccurred(event: FeedCoordinator.event) { }
+  func eventOccurred(event: FeedCoordinator.event) {
+    switch event {
+    case .tapFeed(let feed):
+      let feedDetailCoordinator = FeedDetailCoordinator(
+        navigationController: navigationController,
+        feed: feed,
+        serviceType: serviceType)
+      feedDetailCoordinator.start()
+    }
+  }
 }
