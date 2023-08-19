@@ -50,6 +50,7 @@
 		8E84BC962A90D78E007BB0DD /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */; };
 		8E84BC982A90DD88007BB0DD /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */; };
 		8E84BC9A2A90DEA5007BB0DD /* BookmarkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */; };
+		8E84BC9C2A90DF4B007BB0DD /* ShopDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -190,6 +191,7 @@
 		8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCoordinator.swift; sourceTree = "<group>"; };
+		8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailCoordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				8E84BC952A90D78E007BB0DD /* MainCoordinator.swift */,
 				8E84BC972A90DD88007BB0DD /* FeedCoordinator.swift */,
 				8E84BC992A90DEA5007BB0DD /* BookmarkCoordinator.swift */,
+				8E84BC9B2A90DF4B007BB0DD /* ShopDetailCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
 				B4F3B8D32A5430BD00AB7585 /* UnderlineSegmentedControl.swift in Sources */,
 				B4F3B8D72A5432BD00AB7585 /* BlogPostsViewController.swift in Sources */,
+				8E84BC9C2A90DF4B007BB0DD /* ShopDetailCoordinator.swift in Sources */,
 				B403C9152A8088DA008BF24B /* Bookmark.swift in Sources */,
 				8EB7E9972A76A776008EEFE4 /* FeedCell.swift in Sources */,
 				B455C42E2A07E79400FB8403 /* DistrictCountResponse.swift in Sources */,

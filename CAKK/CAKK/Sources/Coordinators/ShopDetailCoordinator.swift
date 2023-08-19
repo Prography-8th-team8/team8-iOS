@@ -1,5 +1,5 @@
 //
-//  MainCoordinator.swift
+//  ShopDetailCoordinator.swift
 //  CAKK
 //
 //  Created by 이승기 on 2023/08/19.
@@ -8,21 +8,28 @@
 
 import UIKit
 
-final class MainCoordinator: Coordinator {
+final class ShopDetailCoordinator: Coordinator {
   
   // MARK: - Properties
   
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
+  
+  let cakeShopID: Int
   let serviceType: NetworkServiceType
+  let storage: RealmStorageProtocol
   
   
   // MARK: - Initializers
   
   init(navigationController: UINavigationController,
-       serviceType: NetworkServiceType) {
+       cakeShopID: Int,
+       serviceType: NetworkServiceType,
+       storage: RealmStorageProtocol) {
     self.navigationController = navigationController
+    self.cakeShopID = cakeShopID
     self.serviceType = serviceType
+    self.storage = storage
   }
   
   
@@ -30,8 +37,9 @@ final class MainCoordinator: Coordinator {
   
   func start() {
     let networkService = NetworkService<CakeAPI>(type: serviceType, isLogEnabled: false)
-    let realmStorage: RealmStorageProtocol = RealmStorage()
-    let viewModel = MainViewModel(service: networkService, storage: realmStorage)
-    let vc = MainViewController(viewModel: viewModel)
+    let viewModel = ShopDetailViewModel(cakeShopID: cakeShopID,
+                                        service: networkService,
+                                        realmStorage: storage)
+    let vc = ShopDetailViewController(viewModel: viewModel)
   }
 }
