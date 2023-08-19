@@ -15,18 +15,18 @@ final class TabCoordinator: Coordinator {
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
   var tabBarController: UITabBarController?
-  
   let window: UIWindow
-  let networkService: NetworkService<CakeAPI> = NetworkService(type: .server, isLogEnabled: false)
-  let realmStorage: RealmStorageProtocol = RealmStorage()
+  let serviceType: NetworkServiceType
   
   
   // MARK: - Initializers
   
   init(_ window: UIWindow,
-       navigationController: UINavigationController) {
+       navigationController: UINavigationController,
+       serviceType: NetworkServiceType) {
     self.window = window
     self.navigationController = navigationController
+    self.serviceType = serviceType
   }
   
   

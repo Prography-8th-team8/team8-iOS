@@ -21,6 +21,7 @@ final class AppCoordinator: Coordinator {
   var childCoordinators: [Coordinator] = []
   var navigationController: UINavigationController
   let window: UIWindow
+  let serviceType: NetworkServiceType = .server
   
   
   // MARK: - Initializers
@@ -38,7 +39,8 @@ final class AppCoordinator: Coordinator {
   // MARK: - Methods
   
   func start() {
-    let tabBarCoordinator = TabCoordinator(window, navigationController: navigationController)
+    let tabBarCoordinator = TabCoordinator(window, navigationController: navigationController, serviceType: serviceType)
+    childCoordinators.append(tabBarCoordinator)
     tabBarCoordinator.start()
     startSplash(on: navigationController)
   }
