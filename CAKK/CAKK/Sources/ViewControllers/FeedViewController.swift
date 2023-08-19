@@ -163,7 +163,7 @@ final class FeedViewController: UIViewController {
     viewModel.output
       .showFeedDetail
       .sink { [weak self] feed in
-        self?.coordinator?.eventOccurred(event: .tapFeed(feed))
+        self?.coordinator?.eventOccurred(event: .showFeedDetail(feed))
       }
       .store(in: &cancellableBag)
   }

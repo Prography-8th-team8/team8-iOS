@@ -13,7 +13,7 @@ final class FeedCoordinator: Coordinator {
   // MARK: - Properties
   
   enum event: CoordinatorEvent {
-    case tapFeed(_ feed: Feed)
+    case showFeedDetail(_ feed: Feed)
   }
   
   var childCoordinators: [any Coordinator] = []
@@ -50,7 +50,7 @@ final class FeedCoordinator: Coordinator {
   
   func eventOccurred(event: FeedCoordinator.event) {
     switch event {
-    case .tapFeed(let feed):
+    case .showFeedDetail(let feed):
       let feedDetailCoordinator = FeedDetailCoordinator(
         navigationController: navigationController,
         feed: feed,
