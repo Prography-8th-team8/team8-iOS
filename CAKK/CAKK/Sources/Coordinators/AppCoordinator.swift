@@ -18,7 +18,9 @@ final class AppCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent { }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   let window: UIWindow
   let serviceType: NetworkServiceType = .server
@@ -57,4 +59,6 @@ final class AppCoordinator: Coordinator {
       }
     }
   }
+  
+  func eventOccurred(event: AppCoordinator.event) { }
 }

@@ -12,7 +12,9 @@ final class ShopDetailCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent { }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   
   let cakeShopID: Int
@@ -42,4 +44,6 @@ final class ShopDetailCoordinator: Coordinator {
                                         realmStorage: storage)
     let vc = ShopDetailViewController(viewModel: viewModel)
   }
+  
+  func eventOccurred(event: ShopDetailCoordinator.event) { }
 }

@@ -12,7 +12,9 @@ final class MainCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent { }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   var tabBarController: UITabBarController
   let serviceType: NetworkServiceType
@@ -44,4 +46,6 @@ final class MainCoordinator: Coordinator {
       tabBarController.viewControllers?.append(vc)
     }
   }
+  
+  func eventOccurred(event: MainCoordinator.event) { }
 }

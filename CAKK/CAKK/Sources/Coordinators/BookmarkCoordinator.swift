@@ -12,7 +12,9 @@ final class BookmarkCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent { }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   let tabBarController: UITabBarController
   let storage: RealmStorageProtocol
@@ -42,4 +44,6 @@ final class BookmarkCoordinator: Coordinator {
       tabBarController.viewControllers?.append(vc)
     }
   }
+  
+  func eventOccurred(event: FeedCoordinator.event) { }
 }

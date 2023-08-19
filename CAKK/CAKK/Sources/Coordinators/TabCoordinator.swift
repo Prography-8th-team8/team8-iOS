@@ -12,7 +12,11 @@ final class TabCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent {
+    
+  }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   var tabBarController: UITabBarController?
   let window: UIWindow
@@ -65,4 +69,6 @@ final class TabCoordinator: Coordinator {
     childCoordinators.append(bookmarkCoordinator)
     bookmarkCoordinator.start()
   }
+  
+  func eventOccurred(event: TabCoordinator.event) { }
 }

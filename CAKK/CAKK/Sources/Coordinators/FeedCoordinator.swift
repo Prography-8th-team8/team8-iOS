@@ -12,7 +12,9 @@ final class FeedCoordinator: Coordinator {
   
   // MARK: - Properties
   
-  var childCoordinators: [Coordinator] = []
+  enum event: CoordinatorEvent { }
+  
+  var childCoordinators: [any Coordinator] = []
   var navigationController: UINavigationController
   let tabBarController: UITabBarController
   let serviceType: NetworkServiceType
@@ -42,4 +44,6 @@ final class FeedCoordinator: Coordinator {
       tabBarController.viewControllers?.append(vc)
     }
   }
+  
+  func eventOccurred(event: FeedCoordinator.event) { }
 }

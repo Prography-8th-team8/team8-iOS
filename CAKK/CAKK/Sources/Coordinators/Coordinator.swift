@@ -9,8 +9,13 @@ import UIKit
 
 protocol Coordinator {
   
-  var childCoordinators: [Coordinator] { get set }
+  associatedtype eventType
+  
+  var childCoordinators: [any Coordinator] { get set }
   var navigationController: UINavigationController { get set }
   
   func start()
+  func eventOccurred(event: eventType)
 }
+
+protocol CoordinatorEvent { }
