@@ -45,6 +45,8 @@
 		8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E18022A7028F700ADA360 /* TabBarController.swift */; };
 		8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */; };
 		8E84BC8E2A90C7AC007BB0DD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */; };
+		8E84BC902A90C7F7007BB0DD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */; };
+		8E84BC942A90D294007BB0DD /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC932A90D294007BB0DD /* TabCoordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -180,6 +182,8 @@
 		8E6E18022A7028F700ADA360 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Symmetric.swift"; sourceTree = "<group>"; };
 		8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		8E84BC932A90D294007BB0DD /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 			isa = PBXGroup;
 			children = (
 				8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */,
+				8E84BC8F2A90C7F7007BB0DD /* AppCoordinator.swift */,
+				8E84BC932A90D294007BB0DD /* TabCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -908,6 +914,7 @@
 				B43889B52A15B21700476BFC /* CakkMapView.swift in Sources */,
 				B4592E362A84738B00A6B366 /* UIImageView+DownSampling.swift in Sources */,
 				8E533A282A2C7E9300C56A55 /* CoordinatesUserDefault.swift in Sources */,
+				8E84BC942A90D294007BB0DD /* TabCoordinator.swift in Sources */,
 				8E46DFA52A7A56EB0090C1C5 /* FeedDetailViewController.swift in Sources */,
 				B4484B362A765A2100B37EFC /* PopUpViewController.swift in Sources */,
 				B466E5792A4EA52F0081E0BD /* BookmarkEntity.swift in Sources */,
@@ -954,6 +961,7 @@
 				8EB978DF2A28CAA700932757 /* CakeShopPopUpView.swift in Sources */,
 				8E94D5BD2A8BA01B00B5FB52 /* ToastManager.swift in Sources */,
 				B403C91B2A80F031008BF24B /* MyBookmarkCellViewModel.swift in Sources */,
+				8E84BC902A90C7F7007BB0DD /* AppCoordinator.swift in Sources */,
 				B4F5CDC729DAF9BC00AE4F66 /* ReusableView.swift in Sources */,
 				8E0137AB2A2F3C5A00EA3807 /* CakeShopListFloatingPanelLayout.swift in Sources */,
 				B41EF0532A34D2050068843B /* String+RemovingHTMLTags.swift in Sources */,
