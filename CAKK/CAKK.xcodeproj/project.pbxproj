@@ -44,6 +44,7 @@
 		8E628CB02A2843CD00DDA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */; };
 		8E6E18032A7028F700ADA360 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E18022A7028F700ADA360 /* TabBarController.swift */; };
 		8E8384762A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */; };
+		8E84BC8E2A90C7AC007BB0DD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */; };
 		8E907A492A5FD58E00914A4E /* FloatingPanelNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */; };
 		8E907A4D2A5FE57C00914A4E /* UIView+CustomSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */; };
 		8E907A732A6107B300914A4E /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E907A722A6107B300914A4E /* ImageViewerViewController.swift */; };
@@ -178,6 +179,7 @@
 		8E628CAF2A2843CD00DDA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8E6E18022A7028F700ADA360 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8E8384752A69C59600C2F595 /* UIEdgeInsets+Symmetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Symmetric.swift"; sourceTree = "<group>"; };
+		8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8E907A482A5FD58E00914A4E /* FloatingPanelNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelNavigationBar.swift; sourceTree = "<group>"; };
 		8E907A4C2A5FE57C00914A4E /* UIView+CustomSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CustomSkeleton.swift"; sourceTree = "<group>"; };
 		8E907A722A6107B300914A4E /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +407,14 @@
 			path = FloatingPanelLayout;
 			sourceTree = "<group>";
 		};
+		8E84BC8C2A90C79B007BB0DD /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				8E84BC8D2A90C7AC007BB0DD /* Coordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		8E9E191A29CEDD4F00CFF157 = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +452,7 @@
 				B466E5732A4EA2DB0081E0BD /* Storage */,
 				8E32CE9B29CEE2DF00905FD6 /* Views */,
 				8E9E193C29CEDDDE00CFF157 /* ViewControllers */,
+				8E84BC8C2A90C79B007BB0DD /* Coordinators */,
 				B4FB8E7F2A0F700800DBF193 /* ViewModels */,
 				8E9E193D29CEDDE700CFF157 /* Models */,
 				8E32CE9E29CEE5F100905FD6 /* Utils */,
@@ -883,6 +894,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E84BC8E2A90C7AC007BB0DD /* Coordinator.swift in Sources */,
 				8EB7B7A929F7C05200D3F5BF /* UIFont+Pretendard.swift in Sources */,
 				B4F3B8D32A5430BD00AB7585 /* UnderlineSegmentedControl.swift in Sources */,
 				B4F3B8D72A5432BD00AB7585 /* BlogPostsViewController.swift in Sources */,
