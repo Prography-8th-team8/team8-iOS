@@ -175,7 +175,7 @@ extension ImageViewerViewController {
   
   private func setupImageView() {
     let url = URL(string: imageUrl)
-    imageView.kf.setImage(with: url) { [weak self] result in
+    imageView.kf.setImage(with: url, options: [.forceTransition, .transition(.fade(0.4))]) { [weak self] result in
       guard let self else { return }
       self.stopLoading()
       
