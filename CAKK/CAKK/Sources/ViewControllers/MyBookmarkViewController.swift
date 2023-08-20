@@ -34,6 +34,8 @@ final class MyBookmarkViewController: UIViewController {
   
   // MARK: - Properties
   
+  public var coordinator: BookmarkCoordinator?
+  
   private let viewModel: ViewModel
   private var cancellables = Set<AnyCancellable>()
   
@@ -109,7 +111,13 @@ final class MyBookmarkViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     viewModel.input.viewWillAppear.send()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
   }
   
   
@@ -124,7 +132,7 @@ final class MyBookmarkViewController: UIViewController {
     collectionView.didSelectItemPublisher.sink { [weak self] indexPath in
       guard let self = self,
             let item = dataSource.itemIdentifier(for: indexPath) else { return }
-      showCakeShopDetail(item.id)
+      self.coordinator?.eventOccurred(event: .showShopDetail(bookmark: item))
     }
     .store(in: &cancellables)
     
@@ -145,13 +153,6 @@ final class MyBookmarkViewController: UIViewController {
       self.emptyStateView.isHidden = !bookmarks.isEmpty
     }
     .store(in: &cancellables)
-  }
-  
-  private func showCakeShopDetail(_ id: Int) {
-    let viewController = DIContainer.shared.makeShopDetailViewController(with: id)
-    viewController.isFullState = true
-    viewController.modalPresentationStyle = .fullScreen
-    present(viewController, animated: true)
   }
 }
 

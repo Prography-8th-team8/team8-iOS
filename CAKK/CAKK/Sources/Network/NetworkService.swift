@@ -13,6 +13,11 @@ protocol NetworkServiceProtocol: AnyObject {
   func request<T: Decodable>(_ target: API, type: T.Type) -> AnyPublisher<T, Error>
 }
 
+enum NetworkServiceType {
+  case server
+  case stub
+}
+
 /// 각 API에 따른 요청을 처리하는 네트워크 서비스
 ///
 /// 사용 예시
@@ -22,11 +27,6 @@ protocol NetworkServiceProtocol: AnyObject {
 ///  .sink(receiveCompletion: , receiveValue: )
 /// ```
 final class NetworkService<Target: TargetType>: NetworkServiceProtocol {
-  
-  enum NetworkServiceType {
-    case server
-    case stub
-  }
   
   // MARK: - Properties
   
