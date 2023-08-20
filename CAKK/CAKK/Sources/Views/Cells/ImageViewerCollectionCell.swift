@@ -64,13 +64,13 @@ class ImageViewerCollectionCell: UICollectionViewCell {
     startLoading()
     
     let url = URL(string: imageUrl)
-    imageView.kf.setImage(with: url) { [weak self] result in
+    imageView.kf.setImage(with: url, options: [.forceTransition, .transition(.fade(0.4))]) { [weak self] result in
       self?.stopLoading()
       
       do {
         try result.get()
       } catch {
-        self?.showFilaureLabel()
+        self?.showFailureLabel()
       }
     }
   }
@@ -85,7 +85,7 @@ class ImageViewerCollectionCell: UICollectionViewCell {
     loadingView.stopAnimating()
   }
   
-  private func showFilaureLabel() {
+  private func showFailureLabel() {
     failureLabel.removeFromSuperview()
     contentView.addSubview(failureLabel)
     failureLabel.snp.makeConstraints {
