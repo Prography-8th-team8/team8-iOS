@@ -175,8 +175,15 @@ extension ImageViewerViewController {
   
   private func setupImageView() {
     let url = URL(string: imageUrl)
-    imageView.kf.setImage(with: url) { [weak self] _ in
-      self?.stopLoading()
+    imageView.kf.setImage(with: url) { [weak self] result in
+      guard let self else { return }
+      self.stopLoading()
+      
+      do {
+        try result.get()
+      } catch {
+        self.imageView.image = R.image.no_img_square()
+      }
     }
     
     // hero
