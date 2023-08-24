@@ -65,7 +65,7 @@
 # 기술 설명
 
 ### MVVM + input output pattern (with combine)
-![app_architecture](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/6ab6801b-27a7-4267-9f48-348dd9a63fb3)
+![app_architecture](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/83ddc00b-af8a-4e3c-9c46-08396d9fdc5a)
 > MVVM 구조에 input output 패턴을 combine으로 구현하여 관리하고 있어요.
 <br>
 
@@ -79,7 +79,7 @@
 
 ### 스플래시 로직
 *Legacy*
-![splash_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/9adab1af-6337-4bc4-8ad8-b343b908511a)
+![splash_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/059e5ca6-8616-4414-ac55-011107151d21)
 > 기존에 Splash를 처음 진입하는 ViewController에서 UIView 형태로 보여줬다가 사라지는 애니메이션을 구현해 줬었어요.
 > 이렇게 했던 이유는 자연스럽게 Splash를 띄우고 fade out 시키면서 Splash를 제거하기 위함 이었죠.
 > 그런데 SplashView가 메모리에서 잘 해지되지 않는 문제도 있었고, 초기 진입하는 뷰컨트롤러에서 SplashView를 직접 띄워줘야하기 때문에 재사용성이 많이 떨어졌었죠🥹
@@ -96,13 +96,13 @@
 
 ### MainViewModel 구조 개선
 *Legacy*
-![architecture_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/7e58f588-2a74-437e-9edd-f8c4bc70ce32)
+![architecture_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/e46eb348-c61f-4158-82f9-c40200187f8c)
 > 기존에 CakeShopList 에서 아이템이 선택 됐을 때 handler를 통해서 MainViewcontroller에서 미리 정의했던 함수를 실행 시켰었어요.
 > 그런데 이렇게 하니까 MainVC의 로직이 너무 복잡해지고 MapView, CakeShopListVC, ShopDetailVC 사이의 의존성이 강해졌었죠.
 > 객체간 의존성이 강해지면서 자연스럽게 관리하기가 어려워졌고 유지보수하기 까다로웠었어요.
 
 *New*
-![architecture_new](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/ef85724a-ae93-49da-bd48-4e8605c33ae0)
+![architecture_new](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/63c00e81-48ef-40cc-bc11-53dd1ba43bd6)
 > 그래서 CakeShopListVC의 ViewModel인 CakeShopListViewModel을 따로 만들어서 관리하지 않고 MainViewModel을 그대로 사용했어요!
 > 어차피 마커와 샵 리스트의 아이템들은 따로 분리해서 받지 않고 서버로부터 받아온 [CakeShop] 배열을 가지고 마커도 보여주고 리스트도 뿌려줬기 때문에 이런 뷰모델 재상용이 가능했었죠.
 > (만약 마커 데이터, 리스트 데이터 분리해서 가져오면 MainViewModel을 서브 뷰모델로 가지고 있는 CakeShopListViewModel을 만들었을 것임)
