@@ -74,7 +74,7 @@
 
 > 스플래시 
 
-![splash_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/1dc4132a-99e9-422e-933c-3fda23d88c2f)
+![splash_legacy](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/9adab1af-6337-4bc4-8ad8-b343b908511a)
 
 ![splash_new](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/f5f55221-119d-4f34-9e78-bc848ab0ad24)
 
