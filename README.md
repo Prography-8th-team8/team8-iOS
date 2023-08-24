@@ -102,7 +102,7 @@
 > 객체간 의존성이 강해지면서 자연스럽게 관리하기가 어려워졌고 유지보수하기 까다로웠었어요.
 
 *New*
-![architecture_new](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/63c00e81-48ef-40cc-bc11-53dd1ba43bd6)
+![architecture_new](https://github.com/Prography-8th-team8/team8-iOS/assets/63496607/ddd8820c-0b42-4842-b34f-872de9273da2)
 > 그래서 CakeShopListVC의 ViewModel인 CakeShopListViewModel을 따로 만들어서 관리하지 않고 MainViewModel을 그대로 사용했어요!
 > 어차피 마커와 샵 리스트의 아이템들은 따로 분리해서 받지 않고 서버로부터 받아온 [CakeShop] 배열을 가지고 마커도 보여주고 리스트도 뿌려줬기 때문에 이런 뷰모델 재상용이 가능했었죠.
 > (만약 마커 데이터, 리스트 데이터 분리해서 가져오면 MainViewModel을 서브 뷰모델로 가지고 있는 CakeShopListViewModel을 만들었을 것임)
