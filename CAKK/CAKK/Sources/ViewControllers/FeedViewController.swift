@@ -15,7 +15,7 @@ final class FeedViewController: UIViewController {
   // MARK: - Constants
   
   enum Metric {
-    static let collectionViewSpacing = 7.f
+    static let collectionViewSpacing = 3.f
   }
   
   
@@ -30,6 +30,8 @@ final class FeedViewController: UIViewController {
   
   // MARK: - Properties
   
+  public var coordinator: FeedCoordinator?
+  
   private let viewModel: FeedViewModel
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -41,10 +43,21 @@ final class FeedViewController: UIViewController {
   
   // MARK: - UI
   
+  private let titleLabel = PaddingLabel(top: 10, left: 20, bottom: 10).then {
+    $0.text = "Feed"
+    $0.font = .pretendard(size: 20, weight: .bold)
+    $0.textColor = .black
+    $0.addBorder(to: .bottom, color: R.color.gray_5(), width: 1)
+  }
+  private lazy var navigationView = UIStackView(arrangedSubviews: [titleLabel]).then {
+    $0.axis = .vertical
+    $0.backgroundColor = .white
+  }
+  
   lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
   private var collectionViewLayout: UICollectionViewCompositionalLayout = {
     let screenWidth = UIScreen.main.bounds.size.width
-    let spacing: CGFloat = 7
+    let spacing = Metric.collectionViewSpacing
 
     var itemWidth: CGFloat = 0
     var itemCount: CGFloat = 3 // default itemCount, adjust as per requirement
@@ -99,6 +112,11 @@ final class FeedViewController: UIViewController {
     bind()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: false)
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
@@ -145,7 +163,7 @@ final class FeedViewController: UIViewController {
     viewModel.output
       .showFeedDetail
       .sink { [weak self] feed in
-        self?.presentFeedDetail(feed)
+        self?.coordinator?.eventOccurred(event: .showFeedDetail(feed))
       }
       .store(in: &cancellableBag)
   }
@@ -157,12 +175,6 @@ final class FeedViewController: UIViewController {
     collectionView.collectionViewLayout.invalidateLayout()
     collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
   }
-  
-  private func presentFeedDetail(_ feed: Feed) {
-    let vc = DIContainer.shared.makeFeedDetailViewController(feed: feed)
-    vc.modalPresentationStyle = .overFullScreen
-    present(vc, animated: true)
-  }
 }
 
 
@@ -172,20 +184,44 @@ extension FeedViewController {
   
   private func setup() {
     setupLayout()
+    setupBaseView()
     setupData()
   }
   
   // Layout
+  
   private func setupLayout() {
+    setupNavigationViewLayout()
     setupCollectionViewLayout()
+  }
+  
+  private func setupNavigationViewLayout() {
+    view.addSubview(navigationView)
+    navigationView.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+      $0.horizontalEdges.equalToSuperview()
+    }
   }
   
   private func setupCollectionViewLayout() {
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
+      $0.top.equalTo(navigationView.snp.bottom)
+      $0.leading.trailing.bottom.equalToSuperview()
     }
   }
+  
+  // View
+  
+  private func setupView() {
+    setupBaseView()
+  }
+  
+  private func setupBaseView() {
+    view.backgroundColor = .white
+  }
+  
+  // Data
   
   private func setupData() {
     setupFeedData()

@@ -130,7 +130,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
   }
   
   private let noCakePhotoImageView = UIImageView().then {
-    $0.image = R.image.nophoto()
+    $0.image = R.image.no_img_landscape()
     $0.contentMode = .scaleAspectFill
   }
   
@@ -175,7 +175,15 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     bookmarkButton
       .tapPublisher
       .sink { _ in
+        // 북마크 저장
         viewModel.input.tapBookmarkButton.send(Void())
+        
+        // 북마크 저장 토스트 피드백
+        if viewModel.output.isBookmarked.value {
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
+        } else {
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
+        }
       }
       .store(in: &cancellableBag)
   }
@@ -277,7 +285,7 @@ final class CakeShopCollectionCell: UICollectionViewCell {
     imageUrls.map { imageUrl in
       let imageView = UIControlImageView()
       imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
-      imageView.setImage(urlString: imageUrl, placeholder: R.image.thumbnail_placeholder())
+      imageView.setImage(urlString: imageUrl, placeholder: R.image.no_img_square())
       
       // Image size
       imageView.snp.makeConstraints {

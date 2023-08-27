@@ -20,7 +20,7 @@ final class TabBarController: UITabBarController {
   
   private func setupTabBar() {
     setupTabBarAppearance()
-    setupTabBarViewControllers()
+    setupToastManager()
   }
   
   private func setupTabBarAppearance() {
@@ -38,16 +38,7 @@ final class TabBarController: UITabBarController {
     }
   }
   
-  private func setupTabBarViewControllers() {
-    let mainVC = DIContainer.shared.makeMainViewController()
-    mainVC.tabBarItem = .init(title: "홈", image: R.image.home()!, tag: 0)
-    
-    let feedVC = DIContainer.shared.makeFeedViewController()
-    feedVC.tabBarItem = .init(title: "피드", image: R.image.magnifying_glass()!, tag: 1)
-    
-    let bookmarkVC = DIContainer.shared.makeMyBookmarkViewController()
-    bookmarkVC.tabBarItem = .init(title: "북마크", image: R.image.heart()!, tag: 2)
-    
-    viewControllers = [mainVC, feedVC, bookmarkVC]
+  private func setupToastManager() {
+    ToastManager.shared.setTargetViewController(self)
   }
 }

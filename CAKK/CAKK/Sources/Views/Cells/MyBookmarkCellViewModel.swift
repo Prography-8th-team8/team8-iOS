@@ -18,7 +18,8 @@ class MyBookmarkCellViewModel {
   }
   
   struct Output {
-    let isBookmarked = CurrentValueSubject<Bool, Never>(false)
+    let isBookmarked = CurrentValueSubject<Bool, Never>(true)
+    let showBookmarkToast = PassthroughSubject<Bool, Never>()
   }
   
   let input: Input
@@ -46,6 +47,7 @@ class MyBookmarkCellViewModel {
   
   private func bind(_ input: Input, _ output: Output) {
     bindBookmark(input, output)
+    bindBookmarkToast(input, output)
   }
 
   private func bindBookmark(_ input: Input, _ output: Output) {
@@ -72,6 +74,15 @@ class MyBookmarkCellViewModel {
             output.isBookmarked.send(true)
           }
         }
+      }
+      .store(in: &cancellableBag)
+  }
+  
+  private func bindBookmarkToast(_ input: Input, _ output: Output) {
+    input.tapBookmarkButton
+      .sink { _ in
+        let isBookmarked = output.isBookmarked.value
+        output.showBookmarkToast.send(!isBookmarked)
       }
       .store(in: &cancellableBag)
   }

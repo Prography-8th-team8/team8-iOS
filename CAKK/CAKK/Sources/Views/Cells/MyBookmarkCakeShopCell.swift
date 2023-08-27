@@ -43,7 +43,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   
   // MARK: - Properties
   
-  private var viewModel: MyBookmarkCellViewModel?
+  private var viewModel: MyBookmarkCellViewModel!
   
   private var cancellableBag = Set<AnyCancellable>()
   
@@ -113,7 +113,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   }
   
   private let noCakePhotoImageView = UIImageView().then {
-    $0.image = R.image.nophoto()
+    $0.image = R.image.no_img_landscape()
     $0.contentMode = .scaleAspectFill
   }
   
@@ -148,18 +148,37 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
   // MARK: - Private
   
   private func bind() {
+    bindInput()
+    bindOutput()
+  }
+  
+  private func bindInput() {
     bookmarkButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] _ in
-        print("tap!")
-        self?.viewModel?.input.tapBookmarkButton.send()
+        self?.viewModel.input.tapBookmarkButton.send()
       }
       .store(in: &cancellableBag)
-    
-    viewModel?.output.isBookmarked.sink { [weak self] isBookmarked in
+  }
+  
+  private func bindOutput() {
+    viewModel.output
+      .isBookmarked
+      .sink { [weak self] isBookmarked in
       self?.bookmarkButton.setBookmark(isBookmarked)
     }
     .store(in: &cancellableBag)
+    
+    viewModel.output
+      .showBookmarkToast
+      .sink { isBookmarked in
+        if isBookmarked {
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
+        } else {
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
+        }
+      }
+      .store(in: &cancellableBag)
   }
   
   private func configure(_ bookmark: Bookmark) {
@@ -183,7 +202,7 @@ final class MyBookmarkCakeShopCell: UICollectionViewCell {
       let imageView = UIControlImageView()
       imageView.setupCornerRadius(Metric.cakeImageCornerRadius)
       imageView.setImage(urlString: imageUrl,
-                         placeholder: R.image.thumbnail_placeholder())
+                         placeholder: R.image.no_img_square())
       
       imageView.snp.makeConstraints {
         $0.size.equalTo(Metric.cakeImageSize)
@@ -264,7 +283,7 @@ extension MyBookmarkCakeShopCell {
     contentView.addSubview(headerStackView)
     headerStackView.snp.makeConstraints {
       $0.leading.equalToSuperview().inset(Metric.padding)
-      $0.top.equalToSuperview().inset(20)
+      $0.top.equalToSuperview().inset(Metric.padding)
       $0.trailing.equalTo(bookmarkButton.snp.leading)
     }
     
@@ -310,9 +329,8 @@ extension MyBookmarkCakeShopCell {
   private func setupNoCakePhotoImageViewLayout() {
     contentView.addSubview(noCakePhotoImageView)
     noCakePhotoImageView.snp.makeConstraints {
-      $0.top.equalTo(headerStackView.snp.bottom).offset(32)
-      $0.horizontalEdges.bottom.equalToSuperview().inset(Metric.padding)
-      $0.height.equalTo(Metric.cakeImageSize)
+      $0.verticalEdges.equalTo(cakeImageScrollView)
+      $0.horizontalEdges.equalTo(cakeImageScrollView).inset(Metric.padding)
     }
     noCakePhotoImageView.isHidden = true
   }

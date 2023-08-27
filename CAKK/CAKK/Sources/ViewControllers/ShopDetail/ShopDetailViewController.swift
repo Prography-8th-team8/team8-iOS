@@ -53,6 +53,9 @@ final class ShopDetailViewController: UIViewController {
     }
   }
   
+  /// 해당 상세 뷰컨이 전체보기로 띄워졌는지 판단 (PistonToast를 어떤 방식으로 띄울지 결정하기 위함) 
+  var isFullState: Bool = false // TODO: - ToastManager로 빠졌기 때문에 삭제 검토 필요
+  
   weak var delegate: ShopDetailViewControllerDelegate?
   
   
@@ -150,9 +153,7 @@ final class ShopDetailViewController: UIViewController {
   
   
   // 케이크 이미지 뷰컨트롤러
-  private lazy var cakeImagesViewController = CakeImagesViewController(
-    viewModel: viewModel,
-    collectionViewLayout: UICollectionViewFlowLayout())
+  private lazy var cakeImagesViewController = CakeImagesViewController(viewModel: viewModel)
   
   // 블로그 포스트 뷰컨트롤러
   private lazy var blogPostsViewController = BlogPostsViewController(
@@ -325,7 +326,15 @@ final class ShopDetailViewController: UIViewController {
     bookmarkMenuButton.tapPublisher
       .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
       .sink { [weak self] in
-        self?.viewModel.input.tapBookmarkButton.send()
+        guard let self else { return }
+        self.viewModel.input.tapBookmarkButton.send()
+        
+        // 북마크 저장 토스트 피드백
+        if self.viewModel.output.isBookmarked.value {
+          ToastManager.shared.showToast(message: "케이크샵을 저장했어요!")
+        } else {
+          ToastManager.shared.showToast(message: "북마크한 케이크샵에서 삭제되었습니다.")
+        }
       }
       .store(in: &cancellables)
   }
@@ -391,17 +400,36 @@ final class ShopDetailViewController: UIViewController {
   
   private func bindIsBookmarked() {
     viewModel.output.isBookmarked
+      .dropFirst()
       .sink { [weak self] isBookmarked in
         guard let self = self else { return }
         let cakeShopID = viewModel.output.cakeShopDetail.value?.id ?? 0
         
-        let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
-        bookmarkMenuButton.update(image: buttonImage)
-        delegate?.shopDetailViewController(self,
-                                           didBookmarkStateChanged: isBookmarked,
-                                           of: cakeShopID)
+        delegate?.shopDetailViewController(
+          self,
+          didBookmarkStateChanged: isBookmarked,
+          of: cakeShopID)
+        
+        if isFullState {
+          showPiston(isBookmarked: isBookmarked)
+        }
       }
       .store(in: &cancellables)
+    
+    viewModel.output.isBookmarked
+      .sink { [weak self] isBookmarked in
+        let buttonImage = isBookmarked ? R.image.heart_filled() : R.image.heart()
+        self?.bookmarkMenuButton.update(image: buttonImage)
+      }
+      .store(in: &cancellables)
+  }
+  
+  private func showPiston(isBookmarked: Bool) {
+    if isBookmarked {
+      showPistonToast(title: "케이크샵을 저장했어요!")
+    } else {
+      showPistonToast(title: "북마크한 케이크샵에서 삭제되었습니다.")
+    }
   }
 }
 
@@ -466,7 +494,7 @@ extension ShopDetailViewController {
   }
   
   private func setupHeaderBackgroundView() {
-    view.addSubview(headerBackgroundView)
+    view.insertSubview(headerBackgroundView, at: 0)
     headerBackgroundView.snp.makeConstraints {
       $0.top.equalTo(infoStackContainerView)
       $0.horizontalEdges.equalToSuperview()
