@@ -30,7 +30,7 @@ enum CakeAPI {
 
 extension CakeAPI: TargetType {
   var baseURL: URL {
-    return URL(string: "http://15.165.196.34:8081/api/store")!
+    return URL(string: "http://3.39.95.150:8081/api/store")!
   }
   
   var path: String {
